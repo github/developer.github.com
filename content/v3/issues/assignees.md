@@ -1,22 +1,20 @@
 ---
-title: Issue Assignees | GitHub API
+title: Issue Assignees
 ---
 
 # Assignees
 
-* TOC
 {:toc}
 
 ## List assignees
 
-This call lists all the available assignees (owner + collaborators) to which
-issues may be assigned.
+This call lists all the [available assignees][] to which issues may be assigned.
 
     GET /repos/:owner/:repo/assignees
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## Check assignee
@@ -35,3 +33,5 @@ If the given `assignee` login belongs to an assignee for the repository, a
 Otherwise a `404` status code is returned.
 
 <%= headers 404 %>
+
+[available assignees]: https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/

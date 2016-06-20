@@ -1,0 +1,26 @@
+#!/bin/sh
+# Usage: script/test
+# Run test suite
+#
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+[ -z "$DEBUG" ] || set -x
+
+export RACK_ROOT=$(cd "$(dirname $0)"/.. && pwd)
+
+export RAILS_ENV="test" RACK_ENV="test"
+
+if [ -z "$TRAVIS" ]; then
+  script/bootstrap
+fi
+
+echo "===> Running tests..."
+
+if [ -n "$CI" ]; then
+  xvfb-run -a bundle exec rake test
+else
+  bundle exec rake test
+fi

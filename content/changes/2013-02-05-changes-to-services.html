@@ -1,0 +1,34 @@
+---
+kind: change
+title: Upcoming Changes to GitHub Services
+created_at: 2013-02-05
+author_name: technoweenie
+---
+
+We are finishing up a new GitHub Services backend, dubbed "Hookshot", to
+increase the speed and reliability of our delivered payloads.  We are doing
+what we can to make this a seamless transition for everyone.  However, there
+are a few notable changes.
+
+* There is a new [Meta API endpoint](http://developer.github.com/v3/meta/)
+listing the current public IPs that hooks originate from.
+
+* We're removing the AMQP service from GitHub. It hasn't worked in quite some
+time, and the code it uses doesn't work in our background workers.
+
+* We're also instituting a new guideline to improve the reliability and
+maintainability of services in the future. As of today, all new services must
+accept an unmodified payload over HTTP. Any service that does not will be
+rejected. To see an example of an acceptable service, check out [Code Climate][codeclimate].
+Notice their service simply accepts HTTP POST from GitHub unmodified. For an
+example of a service that won't be accepted after today, check out [Campfire][cf]. It
+uses other Ruby gems and contains custom logic to transform the GitHub payload
+to Campfire messages.  Existing hooks will keep working (don't worry 37signals, we
+:heart: Campfire).
+
+We're making these changes because we want to focus on the reliability of the
+core Services backend for everyone.  Maintaining custom logic and libraries for
+over 100 services is taking too much of this focus away.
+
+[codeclimate]: https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb
+[cf]: https://github.com/github/github-services/blob/master/lib/services/campfire.rb

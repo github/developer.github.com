@@ -1,0 +1,19 @@
+---
+kind: change
+title: Some Hookshot Issues
+created_at: 2013-02-13T11:00:00
+author_name: technoweenie
+---
+
+We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
+been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
+the private IP addresses of our nodes in the 10.*.*.* range.
+
+If your web hook servers are on EC2 and are missing hooks from GitHub due to
+an IP restriction, we recommend the following:
+
+1. Remove the IP white list.
+2. Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.
+
+We're currently working on solving this problem.  Hit up [support@github.com](mailto:support@github.com)
+if you have any questions.

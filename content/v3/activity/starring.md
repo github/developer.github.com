@@ -1,10 +1,9 @@
 ---
-title: Starring | GitHub API
+title: Starring
 ---
 
 # Starring
 
-* TOC
 {:toc}
 
 Repository Starring is a feature that lets users bookmark repositories.  Stars
@@ -15,10 +14,10 @@ Watching](/v3/activity/watching).
 ### Starring vs. Watching
 
 In August 2012, we [changed the way watching
-works](https://github.com/blog/1204-notifications-stars) on GitHub.  Many API
+works](https://github.com/blog/1204-notifications-stars) on {{ site.data.variables.product.product_name }}.  Many API
 client applications may be using the original "watcher" endpoints for accessing
 this data. You can now start using the "star" endpoints instead (described
-below). Check out the [Watcher API Change post](/changes/2012-9-5-watcher-api/)
+below). Check out the [Watcher API Change post](/changes/2012-09-05-watcher-api/)
 for more details.
 
 ## List Stargazers
@@ -30,11 +29,20 @@ for more details.
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
+### Alternative response with star creation timestamps
+
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
+
+    Accept: application/vnd.github.v3.star+json
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:stargazer_with_timestamps) { |hash| [hash] } %>
+
 ## List repositories being starred
 
 List repositories being starred by a user.
 
-    GET /users/:user/starred
+    GET /users/:username/starred
 
 List repositories being starred by the authenticated user.
 
@@ -42,16 +50,24 @@ List repositories being starred by the authenticated user.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `sort`|`string` | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). Default: `created`
 `direction`|`string` | One of `asc` (ascending) or `desc` (descending). Default: `desc`
-
 
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
+
+### Alternative response with star creation timestamps
+
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
+
+    Accept: application/vnd.github.v3.star+json
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:starred_repo) { |hash| [hash] } %>
 
 ## Check if you are starring a repository
 
@@ -72,6 +88,8 @@ Requires for the user to be authenticated.
 Requires for the user to be authenticated.
 
     PUT /user/starred/:owner/:repo
+
+<%= fetch_content(:put_content_length) %>
 
 ### Response
 

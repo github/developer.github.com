@@ -1,26 +1,12 @@
 ---
-title: Deployments | GitHub API
+title: Deployments
 ---
 
 # Deployments
 
-* TOC
 {:toc}
 
-<div class="alert">
-  <p>
-    The Deployments API is currently available for developers to preview.
-    During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/2014-01-09-preview-the-new-deployments-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.cannonball-preview+json</pre>
-  </p>
-</div>
-
-Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
+Deployments are a request for a specific ref (branch, SHA, tag) to be deployed.
 GitHub then dispatches deployment events that external services can listen for
 and act on. This enables developers and organizations to build loosely-coupled
 tooling around deployments, without having to worry about implementation
@@ -44,7 +30,7 @@ made.
 
 Below is a simple sequence diagram for how these interactions would work.
 
-<pre>
+```
 +---------+             +--------+            +-----------+        +-------------+
 | Tooling |             | GitHub |            | 3rd Party |        | Your Server |
 +---------+             +--------+            +-----------+        +-------------+
@@ -69,15 +55,15 @@ Below is a simple sequence diagram for how these interactions would work.
      |                      |   Deployment Status   |                     |
      |                      |<----------------------|                     |
      |                      |                       |                     |
-</pre>
+```
 
 Keep in mind that GitHub is never actually accessing your servers. It's up to
-your 3rd party integration to interact with deployment events.
-This allows for [github-services](https://github.com/github/github-services)
-integrations as well as running your own systems depending on your use case.
-Multiple systems can listen for deployment events, and it's up to each of
-those systems to decide whether or not they're responsible for pushing the code
-out to your servers, building native code, etc.
+your 3rd party integration to interact with deployment events.  This allows for
+[GitHub integrations](https://github.com/integrations) as
+well as running your own systems depending on your use case.  Multiple systems
+can listen for deployment events, and it's up to each of those systems to
+decide whether or not they're responsible for pushing the code out to your
+servers, building native code, etc.
 
 Note that the `repo_deployment` [OAuth scope](/v3/oauth/#scopes) grants
 targeted access to Deployments and Deployment Statuses **without**
@@ -86,9 +72,16 @@ as well.
 
 ## List Deployments
 
-Users with pull access can view deployments for a repository:
+Simple filtering of deployments is available via query parameters:
 
     GET /repos/:owner/:repo/deployments
+
+Name | Type | Description
+-----|------|--------------
+`sha`|`string` | The SHA that was recorded at creation time. Default: `none`
+`ref`|`string` | The name of the ref. This can be a branch, tag, or SHA. Default: `none`
+`task`|`string` | The name of the task for the deployment. e.g. `deploy` or `deploy:migrations`. Default: `none`
+`environment`|`string` | The name of the environment that was deployed to. e.g. `staging` or `production`. Default: `none`
 
 ### Response
 
@@ -97,14 +90,16 @@ Users with pull access can view deployments for a repository:
 
 ## Create a Deployment
 
-If your repository is taking advantage of [commit statuses](/v3/repos/statuses),
-the API will reject requests that do not have a success status. (Your repository
-is not required to use commit statuses. If no commit statuses are present, the
-deployment will always be created.)
+Deployments offer a few configurable parameters with sane defaults.
 
-The `force` parameter can be used when you really just need a deployment to go
-out. In these cases, all checks are bypassed, and the deployment is created for
-the ref.
+The `ref` parameter can be any named branch, tag, or SHA. At GitHub we often
+deploy branches and verify them before we merge a pull request.
+
+The `environment` parameter allows deployments to be issued to different
+runtime environments. Teams often have multiple environments for verifying
+their applications, like 'production', 'staging', and 'qa'. This allows for
+easy tracking of which environments had deployments requested. The default
+environment is 'production'.
 
 The `auto_merge` parameter is used to ensure that the requested ref is not
 behind the repository's default branch. If the ref *is* behind the default
@@ -112,11 +107,23 @@ branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.
 
+By default, [commit statuses](/v3/repos/statuses) for every submitted context
+must be in a 'success' state. The `required_contexts` parameter allows you to
+specify a subset of contexts that must be "success", or to specify contexts
+that have not yet been submitted. You are not required to use commit statuses
+to deploy. If you do not require any contexts or create any commit statuses,
+the deployment will always succeed.
+
 The `payload` parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on
 when a deployment event is dispatched.
 
-Users with push access can create a deployment for a given ref:
+The `task` parameter is used by the deployment system to allow different
+execution paths. In the web world this might be 'deploy:migrations' to run
+schema changes on the system. In the compiled world this could be a flag to
+compile an application with debugging enabled.
+
+Users with `repo` or `repo_deployment` scopes can create a deployment for a given ref:
 
     POST /repos/:owner/:repo/deployments
 
@@ -124,24 +131,77 @@ Users with push access can create a deployment for a given ref:
 
 Name | Type | Description
 -----|------|--------------
-`ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
-`force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks. Default: `false`
+`ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or SHA.
+`task`|`string`| Optional parameter to specify a task to execute, e.g. `deploy` or `deploy:migrations`. Default: `deploy`
+`auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: `true`
+`required_contexts`|`Array`| Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts.
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
-`auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: `false`
+`environment`|`string` | Optional name for the target deployment environment (e.g., production, staging, qa). Default: `"production"`
 `description`|`string` | Optional short description. Default: `""`
+{% if page.version == 'dotcom' || page.version > 2.6 %} `transient_environment` | `boolean` | Optionally specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+{% if page.version == 'dotcom' || page.version > 2.6 %} `production_environment` | `boolean` | Optionally specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `"production"` and `false` otherwise. **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
 
-#### Example
+{% if page.version == 'dotcom' || page.version > 2.6 %}
+{{#tip}}
+
+The new `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post][blog-post] for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ant-man-preview+json
+```
+
+{{/tip}}
+
+{% endif %}
+
+#### Simple Example
+
+A simple example putting the user and room into the payload to notify back to
+chat networks.
 
 <%= json \
   :ref           => "topic-branch",
-  :payload       => "{\"environment\":\"production\",\"deploy_user\":\"atmos\",\"room_id\":123456}",
+  :payload       => "{\"user\":\"atmos\",\"room_id\":123456}",
   :description   => "Deploying my sweet branch"
 %>
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/1' %>
+### Successful response
+
+<%= headers 201, :Location => get_resource(:deployment)['url'] %>
 <%= json :deployment %>
+
+#### Advanced Example
+
+A more advanced example specifying required commit statuses and bypassing auto-merging.
+
+<%= json \
+  :ref               => "topic-branch",
+  :auto_merge        => false,
+  :payload           => "{\"user\":\"atmos\",\"room_id\":123456}",
+  :description       => "Deploying my sweet branch",
+  :required_contexts => ["ci/janky", "security/brakeman"]
+%>
+
+### Successful response
+
+<%= headers 201, :Location => get_resource(:deployment)['url'] %>
+<%= json :deployment %>
+
+### Merge conflict response
+
+This error happens when the `auto_merge` option is enabled and when the default branch (in this case `master`), can't be merged into the branch that's being deployed (in this case `topic-branch`), due to merge conflicts.
+
+<%= headers 409 %>
+<%= json({ :message => "Conflict merging master into topic-branch" }) %>
+
+### Failed commit status checks
+
+This error happens when the `required_contexts` parameter indicates that one or more contexts need to have a `success` status for the commit to be deployed, but one or more of the required contexts do not have a state of `success`.
+
+<%= headers 409 %>
+<%= json({ :message => "Conflict: Commit status checks failed for topic-branch." }) %>
 
 ## Update a Deployment
 
@@ -166,7 +226,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:deployment_status) { |h| [h] } %>
+<%= json(:deployment_status) { |h| h.delete("deployment"); [h] } %>
 
 ## Create a Deployment Status
 
@@ -178,9 +238,28 @@ Users with push access can create deployment statuses for a given deployment:
 
 Name | Type | Description
 -----|------|--------------
-`state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
+`state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, {% if page.version == 'dotcom' || page.version > 2.6 %} `inactive`, {% endif %}or `failure` **The `inactive` state requires a custom media type to be specified. Please see more in the alert below.**.
 `target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: `""`
-`description`|`string` | A short description of the status. Default: `""`
+{% if page.version == 'dotcom' || page.version > 2.6 %}`log_url`|`string` | This is functionally equivalent to `target_url`. We will continue accept `target_url` to support legacy uses, but we recommend modifying this to the new name to avoid confusion. Default: `""` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+`description`|`string` | A short description of the status. Maximum length of 140 characters. Default: `""`
+{% if page.version == 'dotcom' || page.version > 2.6 %}`environment_url`|`string`| Optionally set the URL for accessing your environment. Default: `""` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+{% if page.version == 'dotcom' || page.version > 2.6 %}`auto_inactive`|`boolean`| Optional parameter to add a new `inactive` status to all non-transient, non-production environment deployments with the same repository and environment name as the created status's deployment. Default: `true` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+
+{% if page.version == 'dotcom' || page.version > 2.6 %}
+
+{{#tip}}
+
+The new `inactive` state,  rename of the `target_url` parameter to `log_url` and new `environment_url` and `auto_inactive` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post][blog-post] for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ant-man-preview+json
+```
+
+{{/tip}}
+
+{% endif %}
 
 #### Example
 
@@ -192,7 +271,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/42/statuses/1' %>
+<%= headers 201, :Location => get_resource(:deployment_status)['url'] %>
 <%= json :deployment_status %>
+
+[blog-post]: /changes/2016-04-06-deployment-and-deployment-status-enhancements

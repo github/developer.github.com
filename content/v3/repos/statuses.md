@@ -1,10 +1,9 @@
 ---
-title: Statuses | GitHub API
+title: Statuses
 ---
 
 # Statuses
 
-* TOC
 {:toc}
 
 The Status API allows external services to mark commits with a success,
@@ -69,12 +68,12 @@ Users with pull access can view commit statuses for a given ref:
 
     GET /repos/:owner/:repo/commits/:ref/statuses
 
-<div class="alert">
-  <p>
-    This resource is also available via a legacy route:
-    <code>GET /repos/:owner/:repo/statuses/:ref</code>.
-  </p>
-</div>
+{{#tip}}
+
+This resource is also available via a legacy route:
+`GET /repos/:owner/:repo/statuses/:ref`.
+
+{{/tip}}
 
 Statuses are returned in reverse chronological order. The first status in the
 list will be the latest one.

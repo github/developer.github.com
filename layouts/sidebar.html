@@ -64,7 +64,9 @@
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
+          <% if @item[:version] == 'dotcom' %>
           <li><a href="/v3/orgs/migrations/">Migrations</a></li>
+          <% end %>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
@@ -114,14 +116,16 @@
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise <%= fetch_content(:latest_enterprise_version) %></a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise <%= config[:latest_enterprise_version] %></a></h3>
         <ul class="js-guides">
           <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
           <li><a href="/v3/enterprise/ldap/">LDAP</a></li>
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <% if @item[:version] == 'dotcom' or @item[:version] >= 2.3 %>
           <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
+          <% end %>
         </ul>
       </li>
     </ul>

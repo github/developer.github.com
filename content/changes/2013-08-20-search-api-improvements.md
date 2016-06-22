@@ -38,7 +38,7 @@ For example, when [searching for files that have "client" in their path][example
 ## Better Text Match Metadata
 
 Before today, the API applied HTML entity encoding to all `fragment` data.
-For example, imagine your search returns an issue like [rails/rails#11889][example-issue]:
+For example, imagine your search returns an issue like <a href="https://github.com/rails/rails/issues/11889" data-proofer-ignore>rails/rails#11889</a>:
 
 ![Example Issue Title](https://f.cloud.github.com/assets/2988/994632/a84f2888-09af-11e3-9417-4bd92f1f1ed6.png)
 
@@ -67,7 +67,6 @@ We appreciate everyone that has provided feedback so far. Please [keep it coming
 
 [contact]: https://github.com/contact?form[subject]=New+Search+API
 [code-text-matches]: /v3/search/#highlighting-code-search-results
-[example-issue]: https://github.com/rails/rails/issues/11889
 [example-path-search]: https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&type=Code
 [original-search-api-announcement]: /changes/2013-07-19-preview-the-new-search-api/
 [preview-period]: /changes/2013-07-19-preview-the-new-search-api/#preview-period

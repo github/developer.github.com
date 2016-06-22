@@ -1,10 +1,9 @@
 ---
-title: Organizations | GitHub API
+title: Organizations
 ---
 
 # Organizations
 
-* TOC
 {:toc}
 
 ## List your organizations

@@ -1,10 +1,9 @@
 ---
-title: Git Refs | GitHub API
+title: Git Refs
 ---
 
 # References
 
-* TOC
 {:toc}
 
 ## Get a Reference

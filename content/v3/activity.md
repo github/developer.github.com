@@ -1,5 +1,5 @@
 ---
-title: Activity | GitHub API
+title: Activity
 ---
 # Activity
 

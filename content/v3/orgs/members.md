@@ -1,40 +1,29 @@
 ---
-title: Organization Members | GitHub API
+title: Organization Members
 ---
 
 # Members
 
-* TOC
 {:toc}
 
 ## Members list
 
-List all users who are members of an organization. A member is a user that
-belongs to at least 1 team in the organization. If the authenticated user is
-also an owner of this organization then both concealed and public members will
+List all users who are members of an organization. If the authenticated user is
+also a member of this organization then both concealed and public members will
 be returned.
 
     GET /orgs/:org/members
 
-### Parameters {#audit-two-factor-auth}
+<a id="audit-two-factor-auth">
+
+### Parameters
 
 Name    | Type    | Description
 --------|---------|--------------
 `filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization owners.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
-`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `all`: All members of the organization, regardless of role.<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members. **This option requires a custom media type to be specified. Please see more in the alert below.**<br/><br/>Default: `all`
+`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `all`: All members of the organization, regardless of role.<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members.<br/><br/>Default: `all`
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
-
-<div class="alert">
-  <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.ironman-preview+json</pre>
-  </p>
-</div>
 
 ### Response
 
@@ -160,7 +149,7 @@ In order to create or update a user's membership with an organization, the authe
 
 Name  | Type   | Description
 ------|--------|--------------
-`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an owner of the organization.<br/> * `member` - The user will become a non-owner member of the organization. Use this only to demote an existing owner to a non-owner.
+`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an owner of the organization.<br/> * `member` - The user will become a non-owner member of the organization.
 
 ### Response if user was previously unaffiliated with organization
 

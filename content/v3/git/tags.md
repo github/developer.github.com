@@ -1,10 +1,9 @@
 ---
-title: Git Tags | GitHub API
+title: Git Tags
 ---
 
 # Tags
 
-* TOC
 {:toc}
 
 This tags API only deals with tag objects - so only annotated tags, not

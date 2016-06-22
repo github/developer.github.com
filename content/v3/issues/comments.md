@@ -1,10 +1,9 @@
 ---
-title: Issue Comments | GitHub API
+title: Issue Comments
 ---
 
 # Comments
 
-* TOC
 {:toc}
 
 The Issue Comments API supports listing, viewing, editing, and creating

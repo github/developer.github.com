@@ -1,10 +1,9 @@
 ---
-title: Git Commits | GitHub API
+title: Git Commits
 ---
 
 # Commits
 
-* TOC
 {:toc}
 
 ## Get a Commit

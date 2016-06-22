@@ -1,10 +1,9 @@
 ---
-title: Working with Comments | GitHub API
+title: Working with Comments
 ---
 
 # Working with Comments
 
-* TOC
 {:toc}
 
 For any Pull Request, GitHub provides three kinds of comment views:
@@ -29,20 +28,21 @@ We'll demonstrate fetching Pull Request comments by creating a Ruby script using
 The following code should help you get started accessing comments from a Pull Request
 using Octokit.rb:
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
 
-    client.issue_comments("octocat/Spoon-Knife", 1176).each do |comment|
-      username = comment[:user][:login]
-      post_date = comment[:created_at]
-      content = comment[:body]
+client.issue_comments("octocat/Spoon-Knife", 1176).each do |comment|
+  username = comment[:user][:login]
+  post_date = comment[:created_at]
+  content = comment[:body]
 
-      puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
-    end
+  puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
+end
+```
 
 Here, we're specifically calling out to the Issues API to get the comments (`issue_comments`),
 providing both the repository's name (`octocat/Spoon-Knife`), and the Pull Request ID
@@ -57,22 +57,23 @@ within a changed file. The endpoint URL for this discussion comes from [the Pull
 
 The following code fetches all the Pull Request comments made on files, given a single Pull Request number:
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
 
-    client.pull_request_comments("octocat/Spoon-Knife", 1176).each do |comment|
-      username = comment[:user][:login]
-      post_date = comment[:created_at]
-      content = comment[:body]
-      path = comment[:path]
-      position = comment[:position]
+client.pull_request_comments("octocat/Spoon-Knife", 1176).each do |comment|
+  username = comment[:user][:login]
+  post_date = comment[:created_at]
+  content = comment[:body]
+  path = comment[:path]
+  position = comment[:position]
 
-      puts "#{username} made a comment on #{post_date} for the file called #{path}, on line #{position}. It says:\n'#{content}'\n"
-    end
+  puts "#{username} made a comment on #{post_date} for the file called #{path}, on line #{position}. It says:\n'#{content}'\n"
+end
+```
 
 You'll notice that it's incredibly similar to the example above. The difference
 between this view and the Pull Request comment is the focus of the conversation.
@@ -88,20 +89,21 @@ they make use of [the commit comment API][commit comment API].
 To retrieve the comments on a commit, you'll want to use the SHA1 of the commit.
 In other words, you won't use any identifier related to the Pull Request. Here's an example:
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
 
-    client.commit_comments("octocat/Spoon-Knife", "cbc28e7c8caee26febc8c013b0adfb97a4edd96e").each do |comment|
-      username = comment[:user][:login]
-      post_date = comment[:created_at]
-      content = comment[:body]
+client.commit_comments("octocat/Spoon-Knife", "cbc28e7c8caee26febc8c013b0adfb97a4edd96e").each do |comment|
+  username = comment[:user][:login]
+  post_date = comment[:created_at]
+  content = comment[:body]
 
-      puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
-    end
+  puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
+end
+```
 
 Note that this API call will retrieve single line comments, as well as comments made
 on the entire commit.

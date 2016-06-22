@@ -1,5 +1,5 @@
 ---
-title: Miscellaneous | GitHub API
+title: Miscellaneous
 ---
 
 # Miscellaneous

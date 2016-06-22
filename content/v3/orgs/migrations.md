@@ -1,11 +1,20 @@
 ---
-title: Migrations | GitHub API
+title: Migrations
 ---
 
 # Migrations
 
-* TOC
 {:toc}
+
+{% if page.version != 'dotcom' %}
+
+{{#warning}}
+
+This API is not currently available on GitHub Enterprise.
+
+{{/warning}}
+
+{% endif %}
 
 {{#tip}}
 
@@ -27,6 +36,7 @@ Name    | Type    | Description
 --------|---------|--------------
 `repositories` | `array` of `strings` | **Required**. A list of arrays indicating which repositories should be migrated.
 `lock_repositories`|`boolean` | Indicates whether repositories should be locked (to prevent manipulation) while migrating data. Default: `false`.
+`exclude_attachments`|`boolean` | Indicates whether attachments should be excluded from the migration (to reduce migration archive file size). Default: `false`.
 
 ### Example
 

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Upcoming Change to Default Media Type
-created_at: 2014-01-07
 author_name: jasonrudolph
 ---
 
@@ -40,7 +38,9 @@ If you are affected by this change, we recommend that you:
 
 If you cannot update your application to depend on the v3 functionality by April 15[*](#cutover-test), you can just request the beta media type via the `Accept` header. Doing so will insulate you from this change.
 
-## Cutover test on March 12, 2014 {#cutover-test}
+<a id="cutover-test">
+
+## Cutover test on March 12, 2014
 
 To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.
 
@@ -58,5 +58,5 @@ If you have any questions, please [get in touch][contact]. We'll be happy to hel
 [differences]: /v3/versions/#differences-from-beta-version
 [libraries]: /libraries/
 [media]: /v3/media
-[request-a-media-type]: /v3/media/#beta-v3-and-the-future
+[request-a-media-type]: /v3/media/#request-specific-version
 [versions]: /v3/versions

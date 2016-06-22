@@ -1,10 +1,19 @@
 ---
-title: Activity | GitHub API
+title: Activity
 ---
 # Activity
 
-Serving up the 'social' in Social Coding™, the Activity APIs provide access to
+Serving up the 'social' in Social Coding, the Activity APIs provide access to
 notifications, subscriptions, and timelines.
+
+## [Events][]
+
+The [Events API][Events] is a read-only interface to all the [event
+types][types] that power the various activity streams on {{ site.data.variables.product.product_name }}.
+
+## [Feeds][]
+
+List of [Atom feeds][Feeds] available for the authenticated user.
 
 ## [Notifications][]
 
@@ -22,18 +31,9 @@ have no effect on notifications or the activity feed.
 [Watching a Repository][Watching] registers the user to receive notifications on new
 discussions, as well as events in the user's activity feed.
 
-## [Events][]
-
-The [Events API][Events] is a read-only interface to all the [event
-types][types] that power the various activity streams on GitHub.
-
-## [Feeds][]
-
-List of [Atom feeds][Feeds] available for the authenticating user.
-
-[Notifications]: /v3/activity/notifications/
-[Starring]: /v3/activity/starring/
-[Watching]: /v3/activity/watching/
 [Events]: /v3/activity/events/
 [types]: /v3/activity/events/types/
 [Feeds]: /v3/activity/feeds/
+[Notifications]: /v3/activity/notifications/
+[Starring]: /v3/activity/starring/
+[Watching]: /v3/activity/watching/

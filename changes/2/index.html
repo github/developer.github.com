@@ -44,7 +44,78 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-04-04-git-signing-api-preview/">
+      <div class="change" id="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">
+  <h2 class="title">
+<a id="--deployment-and-deploymentstatus-api-enhancements-preview-period" class="anchor" href="#--deployment-and-deploymentstatus-api-enhancements-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 6, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/tarebyte.png" alt="Avatar for tarebyte" data-proofer-ignore>
+      <a href="https://github.com/tarebyte" data-proofer-ignore>tarebyte</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've expanded our Deployments APIs to accommodate more powerful deployment practices and to lay the foundation for a more seamless integration of deployments within GitHub.</p>
+
+<h2>
+<a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to a live deployment</h2>
+
+<p>To enable easy access to a live version of a deployment, we've added an <code>environment_url</code> field to the Deployments API. This environment will be exposed as a link in the Pull Request timeline to enable users to directly access a running version of their code without leaving the context of their work.</p>
+
+<p><em>Note: To add some clarity, we've renamed the <code>target_url</code> field to <code>log_url</code>. We will continue accept <code>target_url</code> to support legacy uses, but we recommend modifying this to the new name to avoid confusion. Future API versions might not support <code>target_url</code></em>.</p>
+
+<h2>
+<a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inactive deployment status</h2>
+
+<p>We recognize that deployments in many common practices don't last forever. So, we've added a new <code>inactive</code> state to Deployment Statuses. You can use this state to communicate that a deployment is no longer active (e.g. something different has been deployed to the environment or the environment has been destroyed).</p>
+
+<h2>
+<a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"><span class="octicon octicon-link"></span></a>More information about environments</h2>
+
+<p>We've expanded our Deployments API to provide additional information about the environments associated with deployments.</p>
+
+<p>We've added a new <code>transient_environment</code> field to allow you to communicate that an environment is specific to a deployment and will no longer exist at some point in the future (e.g. a temporary testing environment like a <a href="https://devcenter.heroku.com/articles/github-integration-review-apps">Heroku Review App</a>). By pairing this with other additions, we can determine that an <code>inactive</code> deployment associated with a <code>transient_environment</code> has an <code>environment_url</code> that is no longer accessible.</p>
+
+<p>Similarly, we've added a new <code>production_environment</code> field to allow you to communicate that an environment is one with which end users directly interact. We automatically set <code>production_environment</code> to <code>true</code> if the value for <code>environment</code> is <code>"production"</code>.</p>
+
+<h2>
+<a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automatic creation of inactive statuses</h2>
+
+<p>Each time we receive a new successful deployment status, we automatically add a new <code>inactive</code> status to all previous deployments made within the relevant repository to the same environment (based on the value of <code>environment</code>) given the environment is both non-transient and non-production. You can opt out of this behavior by passing <code>false</code> with the new <code>auto_inactive</code> parameter.</p>
+
+<p>For example, if <code>feature-branch</code> within <code>https://github.com/user/repository</code> is deployed to an environment named <code>staging</code> (which is a non-transient, non-production environment) and <code>bugfix-branch</code> within <code>https://github.com/user/repository</code> is later deployed to an environment named <code>staging</code>, we would automatically create a new <code>inactive</code> status for the deployment associated with <code>feature-branch</code>.</p>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.</p>
+
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media/">media type</a> in the Accept header:</p>
+
+<pre><code>application/vnd.github.ant-man-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Take a look at <a href="https://developer.github.com/v3/repos/deployments/">the documentation</a> for full details. We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployment+and+DeploymentStatus+API+enhancements+preview+period">get in touch with us</a>!</p>
+</div>
+
+<div class="change" id="/changes/2016-04-04-git-signing-api-preview/">
   <h2 class="title">
 <a id="--preview-support-for-git-signing" class="anchor" href="#--preview-support-for-git-signing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing</a>
@@ -295,7 +366,7 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 <p>You can see an example of this API in a pull request to Homebrew/homebrew's updater: <a href="https://github.com/Homebrew/homebrew/pull/49219">https://github.com/Homebrew/homebrew/pull/49219</a>.</p>
 
 <h4>
-<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it-1" class="anchor" href="#how-can-i-try-it-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
 
 <p>To use this new API media type during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
@@ -382,7 +453,7 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 </pre>
 
 <h4>
-<a id="how-can-i-try-it-1" class="anchor" href="#how-can-i-try-it-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it-2" class="anchor" href="#how-can-i-try-it-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
 
 <p>Starting today, developers can preview these new API methods. To use them during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
@@ -465,7 +536,7 @@ curl "https://api.github.com/repos/github/hubot/branches/master" \
 </pre>
 
 <h4>
-<a id="how-can-i-try-it-2" class="anchor" href="#how-can-i-try-it-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it-3" class="anchor" href="#how-can-i-try-it-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
 
 <p>To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:</p>
@@ -476,69 +547,6 @@ curl "https://api.github.com/repos/github/hubot/branches/master" \
 <p>Take a look at <a href="/v3/repos/#enabling-and-disabling-branch-protection">the docs here</a>.</p>
 
 <p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+API+Preview">get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">
-  <h2 class="title">
-<a id="--ensure-your-app-is-ready-for-protected-branches" class="anchor" href="#--ensure-your-app-is-ready-for-protected-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    September 3, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/aroben.png" alt="Avatar for aroben" data-proofer-ignore>
-      <a href="https://github.com/aroben" data-proofer-ignore>aroben</a>
-  </li>
-</ul>
-</div>
-
-  <p>We’ve begun to <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">roll out Protected Branches</a> across GitHub. When you
-protect a branch in one of your repositories, you will be prevented from
-force pushing to that branch or deleting it. You can also configure required
-status checks for your protected branch. When configured, changing a branch to
-point at a new commit will fail unless that commit (or another commit with
-the same <a href="http://git-scm.com/book/en/v2/Git-Internals-Git-Objects#Tree-Objects">Git tree</a>) has a <a href="/v3/repos/statuses/">Status</a> in the <code>success</code> state for
-each required status check.</p>
-
-<p>These restrictions apply to branch manipulations performed via the GitHub API
-as well. So when you protect a branch, you will no longer be able to <a href="/v3/git/refs/#delete-a-reference">delete
-the branch</a> via the API or <a href="/v3/git/refs/#update-a-reference">update it</a> to point at a
-non-ancestor commit, even with <code>"force": true</code>. And if your branch has required
-status checks, you won’t be able to <a href="/v3/git/refs/#update-a-reference">update it</a> or <a href="/v3/pulls/#merge-a-pull-request-merge-button">merge pull
-requests</a> into that branch until <code>success</code> Statuses have been posted to
-the target commit for all required status checks.</p>
-
-<p>These restrictions are all represented by 422 errors:</p>
-
-<pre class="command-line">
-<span class="command">curl -i -H 'Authorization: token TOKEN' \</span>
-<span class="command">   -X DELETE https://api.github.com/repos/octocat/hubot/git/refs/heads/master</span>
-
-<span class="output">HTTP/1.1 422 Unprocessable Entity</span>
-<span class="output">{</span>
-<span class="output"> "message": "Cannot delete a protected branch",</span>
-<span class="output"> "documentation_url": "https://help.github.com/articles/about-protected-branches"</span>
-<span class="output">}</span>
-</pre>
-
-<p>Protected branches and required status checks are a great way to ensure your
-project’s conventions are followed. For example, you could write a Status
-integration that only posts a <code>success</code> Status when the pull request’s author
-has signed your project’s Contributor License Agreement. Or you could write one
-that only posts a <code>success</code> Status when three or more members of your
-<code>@initech/senior-engineers</code> team have left a comment saying they’ve reviewed
-the changes. If you configure these integrations as required status checks, you
-can be sure that these conditions have been satisfied before a pull request is
-merged. See our <a href="/guides/building-a-ci-server/">Status API guide</a> to learn how to create integrations
-like these.</p>
-
-<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+in+API+responses">let us know</a>.</p>
 
 <p></p>
 </div>
@@ -647,6 +655,8 @@ like these.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
@@ -660,8 +670,6 @@ like these.</p>
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
 </ul>
 

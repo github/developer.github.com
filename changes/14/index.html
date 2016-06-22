@@ -44,7 +44,51 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-10-14-rate-limit-changes/">
+      <div class="change" id="/changes/2012-10-17-org-members-redirection/">
+  <h2 class="title">
+<a id="--organization-members-resource-changes" class="anchor" href="#--organization-members-resource-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-10-17-org-members-redirection/">Organization Members Resource Changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 17, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra" data-proofer-ignore>
+      <a href="https://github.com/pezra" data-proofer-ignore>pezra</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Requesting the <a href="/v3/orgs/members/index.html#members-list">member list</a> of an
+organization of which you are not a member now redirects to the <a href="/v3/orgs/members/index.html#public-members-list">public members
+list</a>. Similarly, requests to
+<a href="/v3/orgs/members/index.html#check-membership">membership check</a> resources of
+an organization of which you are not a member are redirected to the equivalent
+<a href="/v3/orgs/members/index.html#check-public-membership">public membership check</a>.
+One exception to the latter case is that if you are checking about your own
+membership the request is not redirected. You are always allowed to know what
+organizations you belong to.</p>
+
+<p>The changes where made to clarify the purpose of these various resources. The
+<code>/orgs/:org/members</code> resources are intended for use by members of the
+organization in question. The <code>/orgs/:org/public_members</code> resources are for
+acquiring information about the public membership of organizations. If you are
+not a member you are not allowed to see private membership information so you
+should be using the public membership resources.</p>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Org%20members%20API">support@github.com</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-10-14-rate-limit-changes/">
   <h2 class="title">
 <a id="--rate-limit-changes-for-unauthenticated-requests" class="anchor" href="#--rate-limit-changes-for-unauthenticated-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-14-rate-limit-changes/">Rate limit changes for unauthenticated requests</a>
@@ -386,6 +430,8 @@ old API functionality.</s></p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
@@ -399,8 +445,6 @@ old API functionality.</s></p>
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
 </ul>
 

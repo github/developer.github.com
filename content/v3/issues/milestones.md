@@ -1,10 +1,9 @@
 ---
-title: Issue Milestones | GitHub API
+title: Issue Milestones
 ---
 
 # Milestones
 
-* TOC
 {:toc}
 
 ## List milestones for a repository
@@ -13,10 +12,10 @@ title: Issue Milestones | GitHub API
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
-`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
-`sort`|`string` | What to sort results by. Either `due_date` or `completeness`. Default: `due_date`
+`state`|`string` | The state of the milestone. Either `open`, `closed`, or `all`. Default: `open`
+`sort`|`string` | What to sort results by. Either `due_on` or `completeness`. Default: `due_on`
 `direction`|`string` | The direction of the sort. Either `asc` or `desc`. Default: `asc`
 
 
@@ -40,7 +39,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|---------------
 `title`|`string` | **Required**. The title of the milestone.
 `state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
@@ -50,17 +49,15 @@ Name | Type | Description
 #### Example
 
 <%= json \
-  :title => "String",
-  :state => "open or closed",
-  :description => "String",
+  :title => "v1.0",
+  :state => "open",
+  :description => "Tracking milestone for version 1.0",
   :due_on => "2012-10-09T23:39:01Z"
 %>
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/user/repo/milestones/1" %>
+<%= headers 201, :Location => get_resource(:milestone)['url'] %>
 <%= json :milestone %>
 
 ## Update a milestone
@@ -69,7 +66,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|---------------
 `title`|`string` | The title of the milestone.
 `state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
@@ -79,10 +76,10 @@ Name | Type | Description
 #### Example
 
 <%= json \
-  :title => "String",
-  :state => "open or closed",
-  :description => "String",
-  :due_on => "Time"
+  :title => "v1.0",
+  :state => "open",
+  :description => "Tracking milestone for version 1.0",
+  :due_on => "2012-10-09T23:39:01Z"
 %>
 
 ### Response
@@ -97,4 +94,3 @@ Name | Type | Description
 ### Response
 
 <%= headers 204 %>
-

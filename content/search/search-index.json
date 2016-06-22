@@ -1,0 +1,26 @@
+<%
+  #build the JSON tree
+  if @config[:audience]
+    @preface = "/enterprise/#{@config[:audience]}"
+  end
+  @output = []
+  @items.select { |item| !item.attributes[:hide_from_search] }.each do |item|
+    next if item[:filename].nil? || !item[:filename].end_with?('.md')
+    @path = item[:filename].split('/')[1..-1].join('/')[0..-4]
+    @path.chomp!('/index') if @path.end_with?('/index')
+
+    @output.push({
+        :title => "#{clean_for_json(item[:title])}",
+        :url   => "#{@preface}/#{@path}/",
+        :body  => "#{clean_for_json(item.compiled_content)}"
+      })
+  end
+%>
+<%=
+  #output the generated tree
+  if ENV['RACK_ENV'] == "production"
+    JSON.generate(@output.sort{|a, b| a[:title] <=> b[:title]})
+  else
+    JSON.pretty_generate(@output.sort{|a, b| a[:title] <=> b[:title]})
+  end
+%>

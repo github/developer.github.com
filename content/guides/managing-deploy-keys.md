@@ -58,7 +58,7 @@ See [our guide on Git automation with tokens][git-automation].
 
 ## Deploy keys
 
-A deploy key is an SSH key that is stored on your server and grants access to a single GitHub repository.  This key is attached directly to the repository instead of to a personal user account.
+A deploy key is an SSH key that is stored on your server and grants access to a single {{ site.data.variables.product.product_name }} repository.  This key is attached directly to the repository instead of to a personal user account.
 
 #### Pros
 
@@ -74,7 +74,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 #### Setup
 
 1. [Run the `ssh-keygen` procedure][generating-ssh-keys] on your server.
-2. In the top right corner of any GitHub page, click your profile photo.
+2. In the top right corner of any {{ site.data.variables.product.product_name }} page, click your profile photo.
    ![Sample of an avatar](https://github-images.s3.amazonaws.com/help/profile/top_right_avatar.png)
 3. On your profile page, click the **Repositories** tab, then click the name of your repository.
    ![Repository tab](https://github-images.s3.amazonaws.com/help/profile/profile_repositories_tab.png)
@@ -87,13 +87,21 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 ## Machine users
 
-If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
+If your server needs to access multiple repositories, you can choose to create a new {{ site.data.variables.product.product_name }} account and attach an SSH key that will be used exclusively for automation.  Since this {{ site.data.variables.product.product_name }} account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
+
+{% if page.version == 'dotcom' %}
 
 {{#tip}}
 
-**Tip:** Our [terms of service](https://help.github.com/articles/github-terms-of-service) do mention that *'Accounts registered by "bots" or other automated methods are not permitted.'* and that *'One person or legal entity may not maintain more than one free account.'*  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
+**Tip:** Our [terms of service][tos] state:
+
+> *Accounts registered by "bots" or other automated methods are not permitted.*
+
+This means that you cannot automate the creation of accounts. But if you want to create a single machine user for automating tasks such as deploy scripts in your project or organization, that is totally cool.
 
 {{/tip}}
+
+{% endif %}
 
 #### Pros
 
@@ -113,7 +121,7 @@ If your server needs to access multiple repositories, you can choose to create a
 
 [ssh-agent-forwarding]: /guides/using-ssh-agent-forwarding/
 [generating-ssh-keys]: https://help.github.com/articles/generating-ssh-keys
-[tos]: https://help.github.com/articles/github-terms-of-service
+[tos]: https://help.github.com/articles/github-terms-of-service/
 [git-automation]: https://help.github.com/articles/git-automation-with-oauth-tokens
 [collaborator]: https://help.github.com/articles/how-do-i-add-a-collaborator
 [team]: https://help.github.com/articles/adding-organization-members-to-a-team

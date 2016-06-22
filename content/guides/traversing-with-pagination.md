@@ -6,11 +6,11 @@ title: Traversing with Pagination
 
 {:toc}
 
-The GitHub API provides a vast wealth of information for developers to consume.
+The {{ site.data.variables.product.product_name }} API provides a vast wealth of information for developers to consume.
 Most of the time, you might even find that you're asking for _too much_ information,
 and in order to keep our servers happy, the API will automatically [paginate the requested items][pagination].
 
-In this guide, we'll make some calls to the GitHub Search API, and iterate over
+In this guide, we'll make some calls to the {{ site.data.variables.product.product_name }} Search API, and iterate over
 the results using pagination. You can find the complete source code for this project
 in the [platform-samples][platform samples] repository.
 
@@ -32,7 +32,7 @@ of an API call. For example, let's make a curl request to the search API, to fin
 out how many times Mozilla projects use the phrase `addClass`:
 
 ``` command-line
-$ curl -I "https://api.github.com/search/code?q=addClass+user:mozilla"
+$ curl -I "{{ site.data.variables.product.api_url_pre }}/search/code?q=addClass+user:mozilla"
 ```
 
 The `-I` parameter indicates that we only care about the headers, not the actual
@@ -241,7 +241,7 @@ clicked_results = client.search_code('addClass user:mozilla', :page => random_pa
 ```
 
 If we wanted to get fancy, we could also grab the previous and next pages, in
-order to generate links for back (`<<`) and foward (`>>`) elements:
+order to generate links for back (`<<`) and forward (`>>`) elements:
 
 ``` ruby
 prev_page_href = client.last_response.rels[:prev] ? client.last_response.rels[:prev].href : "(none)"

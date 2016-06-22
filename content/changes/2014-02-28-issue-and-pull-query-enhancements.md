@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Query enhancements for listing issues and pull requests
-created_at: 2014-02-28
 author_name: pengwynn
 ---
 We've made it even easier to list all [issues][] and [pull requests][] via the API.

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: API enhancements for working with organization permissions
-created_at: 2015-06-24
 author_name: jakeboxer
 ---
 

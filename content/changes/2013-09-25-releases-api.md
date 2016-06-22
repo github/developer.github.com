@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Releases API
-created_at: 2013-09-25
 author_name: technoweenie
 ---
 

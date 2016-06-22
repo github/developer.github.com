@@ -15,12 +15,8 @@ module GitHub
       str.gsub(/[[:space:]]+/, ' ').strip
     end
 
-    def escape_quoted_characters(str)
-      str.gsub('\\', '\\\\\\').gsub('"', '\"')
-    end
-
     def clean_for_json(str)
-      strip_html(squish(escape_quoted_characters(str)))
+      squish(strip_html(str))
     end
   end
 end

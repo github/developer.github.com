@@ -166,12 +166,12 @@ Everything else about the endpoint is the same as the rest of the API. For examp
 
 ### Input
 
-The raw file is uploaded to GitHub.  Set the content type appropriately, and the
+The raw file is uploaded to {{ site.data.variables.product.product_name }}.  Set the content type appropriately, and the
 asset's name and label in URI query parameters.
 
 Name | Type | Description
 -----|------|--------------
-`Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: `"application/zip"`. For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
+`Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: `"application/zip"`. For a list of acceptable types, refer this list of [media types][media type list].
 `name`|`string` | **Required**. The file name of the asset. This should be set in a URI query parameter.
 `label`|`string` | An alternate short description of the asset. Used in place of the filename. This should be set in a URI query parameter.
 
@@ -239,4 +239,5 @@ Name | Type | Description
 
 <%= headers 204 %>
 
+[media type list]: https://www.iana.org/assignments/media-types/media-types.xhtml
 [repo tags api]: /v3/repos/#list-tags

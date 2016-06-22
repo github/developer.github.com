@@ -51,8 +51,8 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | **Required**. The name of the label.
-`color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
+`name`|`string` | The name of the label.
+`color`|`string` | A 6 character hex code, without the leading `#`, identifying the color.
 
 
 <%= json :name => "bug", :color => "f29513" %>

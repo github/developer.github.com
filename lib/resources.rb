@@ -31,9 +31,16 @@ module GitHub
       }
 
       DefaultTimeFormat ||= "%B %-d, %Y".freeze
+      DATE_REGEXP = Regexp.compile(/(\d{4}-\d{1,2}-\d{1,2})/)
 
       def post_date(item)
         strftime item[:created_at]
+      end
+
+      def date_from_filename(filename)
+        date = DATE_REGEXP.match(filename)
+        return nil if date.nil?
+        date[1]
       end
 
       def strftime(time, format = DefaultTimeFormat)

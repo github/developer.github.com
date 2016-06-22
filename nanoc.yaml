@@ -12,7 +12,9 @@ pipeline_config:
   asset_root: https://a248.e.akamai.net/assets.github.com/images/icons
 
 versions:
-  - &latest_enterprise_version 2.4
+  - &latest_enterprise_version 2.6
+  - 2.5
+  - 2.4
   - 2.3
   - 2.2
   - 2.1
@@ -24,11 +26,15 @@ data_variables:
   -
     scope:
       path: ""
+      reps:
+        - :default
     values:
       version: "dotcom"
   -
     scope:
       path: "enterprise-(?!backports)"
+      reps:
+        - :default
     values:
       version: *latest_enterprise_version
 
@@ -36,23 +42,31 @@ page_variables:
   -
     scope:
       path: ''
+      reps:
+        - :default
     values:
       version: 'dotcom'
   -
     scope:
       path: 'changes'
+      reps:
+        - :default
     # exclude all blog posts from search
     values:
       hide_from_search: true
   -
     scope:
       path: 'integrations-directory'
+      reps:
+        - :default
     # exclude integrations-directory from search
     values:
       hide_from_search: true
   -
     scope:
-      path: "enterprise"
+      path: "enterprise/."
+      reps:
+        - :default
     values:
       version: *latest_enterprise_version
       is_enterprise_help: "true"
@@ -77,6 +91,7 @@ redirects:
   - /changes/2013-2-13-sortable-stars/: /changes/2013-02-14-sortable-stars/
   - /changes/2013-3-1-new-hookshot-coming/: /changes/2013-03-01-new-hookshot-coming/
   - /changes/2014-2-10-ping-event-for-webhooks/: /changes/2014-02-10-ping-event-for-webhooks/
+  - /v3/orgs/migrations/: /v3/migration/migrations/
 
 
 # The syntax to use for patterns in the Rules file. Can be either `"glob"`
@@ -126,3 +141,5 @@ data_sources:
     layouts_root: /
     encoding: utf-8
     identifier_type: full
+    reps:
+      - :default

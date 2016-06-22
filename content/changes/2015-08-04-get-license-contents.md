@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Get the contents of a repository’s license
-created_at: 2015-08-04
 author_name: benbalter
 ---
 

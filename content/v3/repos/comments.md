@@ -20,6 +20,27 @@ Comments are ordered by ascending ID.
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit_comment) { |h| [h] } %>
 
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-commits-comments"></a>
+
+  An additional `reactions` object in the commit comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :commit_comment_reaction_summary %>
+{% endif %}
+
 ## List comments for a single commit
 
     GET /repos/:owner/:repo/commits/:ref/comments
@@ -28,6 +49,27 @@ Comments are ordered by ascending ID.
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit_comment) { |h| [h] } %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-commit-comments"></a>
+
+  An additional `reactions` object in the commit comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :commit_comment_reaction_summary %>
+{% endif %}
 
 ## Create a commit comment
 
@@ -46,7 +88,7 @@ Name | Type | Description
 #### Example
 
 <%= json \
-  :body      => 'Nice change',
+  :body      => 'Great stuff',
   :path      => 'file1.txt',
   :position  => 4,
   :line      => nil
@@ -65,6 +107,27 @@ Name | Type | Description
 
 <%= headers 200 %>
 <%= json :commit_comment %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-commit-comment"></a>
+
+  An additional `reactions` object in the commit comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :commit_comment_reaction_summary %>
+{% endif %}
 
 ## Update a commit comment
 
@@ -86,7 +149,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json :commit_comment %>
+<%= json(:commit_comment) { |h| h.merge('body' => 'Nice change') } %>
 
 ## Delete a commit comment
 

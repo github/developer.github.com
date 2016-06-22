@@ -21,9 +21,11 @@ This only lists organizations that your authorization allows you to operate on i
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org) { |h| [h] } %>
 
+{% if page.version == 'dotcom' or page.version >= 2.3 %}
+
 ## List all organizations
 
-Lists all organizations, in the order that they were created on GitHub.
+Lists all organizations, in the order that they were created on {{ site.data.variables.product.product_name }}.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of
@@ -41,6 +43,8 @@ Name | Type | Description
 
 <%= headers 200, :pagination => { :next => 'https://api.github.com/organizations?since=135' } %>
 <%= json(:org) {|h| [h] } %>
+
+{% endif %}
 
 ## List user organizations
 

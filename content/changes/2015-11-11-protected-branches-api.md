@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Protected Branches API Preview Period
-created_at: 2015-11-11
 author_name: nakajima
 ---
 

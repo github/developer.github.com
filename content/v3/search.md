@@ -14,7 +14,7 @@ the way you think of performing a search on Google. It's designed to help you
 find the one result you're looking for (or maybe the few results you're looking
 for). Just like searching on Google, you sometimes want to see a few pages of
 search results so that you can find the item that best meets your needs. To
-satisfy that need, the GitHub Search API provides **up to 1,000 results for each
+satisfy that need, the {{ site.data.variables.product.product_name }} Search API provides **up to 1,000 results for each
 search**.
 
 ### Ranking search results
@@ -134,7 +134,7 @@ Due to the complexity of searching code, there are a few restrictions on how sea
 
 <ul>
 <li>Only the <em>default branch</em> is considered. In most cases, this will be the <code>master</code> branch.</li>
-<li>Only files smaller than 384 KB are searchable.</li>
+<li>Only files smaller than {% if page.version != 'dotcom' and page.version >= 2.2 %} 10 MB {% else %} 384 KB {% endif %} are searchable.</li>
 {% if page.version == 'dotcom' %}
 <li>You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=✓&q=language%3Ago&type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code"><code>amazing language:go</code></a> is.</li>
 {% endif %}
@@ -145,7 +145,7 @@ Due to the complexity of searching code, there are a few restrictions on how sea
 Name | Type | Description
 -----|------|--------------
 `q`|`string`| The search terms.
-`sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match.
+`sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the {{ site.data.variables.product.product_name }} search infrastructure. Default: results are sorted by best match.
 `order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
 The `q` search term can also contain any combination of the supported code search qualifiers as described by the in-browser [code search documentation](https://help.github.com/articles/searching-code/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
@@ -231,7 +231,7 @@ The `q` search term can also contain any combination of the supported issue sear
    With this qualifier you can restrict the search to issues (`issue`) or pull request (`pr`) only.
  * [`in`](https://help.github.com/articles/searching-issues#scope-the-search-fields)
    Qualifies which fields are searched. With this qualifier you can restrict the
-   search to just the title (`title`), body (`body`), comments (`comment`), or any combination of these.
+   search to just the title (`title`), body (`body`), comments (`comments`), or any combination of these.
  * [`author`](https://help.github.com/articles/searching-issues#search-by-the-author-of-an-issue-or-pull-request)
    Finds issues or pull requests created by a certain user.
  * [`assignee`](https://help.github.com/articles/searching-issues#search-by-the-assignee-of-an-issue-or-pull-request)

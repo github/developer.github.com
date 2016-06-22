@@ -1,23 +1,32 @@
 #!/bin/sh
-
 set -e
-export CC=gcc
+cd "$(dirname "$0")/.."
 
-command -v bundle >/dev/null 2>&1 || { echo >&2 "Bundler required but not found: gem install bundler"; exit 1; }
+if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
+  echo "==> Installing Homebrew dependencies…"
+  brew update >/dev/null
+  brew bundle check &>/dev/null || brew bundle
+
+  brew bootstrap-rbenv-ruby
+  brew bootstrap-nodenv-node
+fi
+
+if ! command -v bundle >/dev/null 2>&1; then
+  echo "Bundler required but not found: gem install bundler" >&2
+  exit 1
+fi
 
 echo "==> Installing gem dependencies…"
-
 if [ "$RACK_ENV" = "production" ]; then
   export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
-  bundle install --without development staging test benchmark --path vendor/cache --jobs 4 --local --deployment
+  export BUNDLE_JOBS=4
+  bundle install --without development staging test benchmark --path vendor/cache --local --deployment
 else
-  bundle check --path vendor/cache 2>&1 || {
+  bundle check --path vendor/cache 2>&1 || \
     bundle install --path vendor/cache
-  }
 fi
 
 echo "==> Installing npm dependencies…"
-
 if [ "$RACK_ENV" = "production" ]; then
   npm install --production
 else

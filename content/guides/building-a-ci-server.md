@@ -8,7 +8,7 @@ title: Building a CI server
 
 The [Status API][status API] is responsible for tying together commits with
 a testing service, so that every push you make can be tested and represented
-in a GitHub pull request.
+in a {{ site.data.variables.product.product_name }} pull request.
 
 This guide will use that API to demonstrate a setup that you can use.
 In our scenario, we will:
@@ -63,7 +63,7 @@ Great! Click on **Let me select individual events**, and select the following:
 * Status
 * Pull Request
 
-These are the events GitHub will send to our server whenever the relevant action
+These are the events {{ site.data.variables.product.product_name }} will send to our server whenever the relevant action
 occurs. Let's update our server to *just* handle the Pull Request scenario right now:
 
 ``` ruby
@@ -85,7 +85,7 @@ helpers do
 end
 ```
 
-What's going on? Every event that GitHub sends out attached a `X-GitHub-Event`
+What's going on? Every event that {{ site.data.variables.product.product_name }} sends out attached a `X-GitHub-Event`
 HTTP header. We'll only care about the PR events for now. From there, we'll
 take the payload of information, and return the title field. In an ideal scenario,
 our server would be concerned with every time a pull request is updated, not just
@@ -102,7 +102,7 @@ setting (and updating) CI statuses. Note that at any time you update your server
 you can click **Redeliver** to send the same payload. There's no need to make a
 new pull request every time you make a change!
 
-Since we're interacting with the GitHub API, we'll use [Octokit.rb][octokit.rb]
+Since we're interacting with the {{ site.data.variables.product.product_name }} API, we'll use [Octokit.rb][octokit.rb]
 to manage our interactions. We'll configure that client with
 [a personal access token][access token]:
 
@@ -116,7 +116,7 @@ before do
 end
 ```
 
-After that, we'll just need to update the pull request on GitHub to make clear
+After that, we'll just need to update the pull request on {{ site.data.variables.product.product_name }} to make clear
 that we're processing on the CI:
 
 ``` ruby
@@ -158,7 +158,7 @@ At GitHub, we:
 
 All of this communication is funneled back to our chat rooms. You don't need to
 build your own CI setup to use this example.
-You can always rely on [third-party services][integrations].
+You can always rely on [GitHub integrations][integrations].
 
 [deploy API]: /v3/repos/deployments/
 [status API]: /v3/repos/statuses/

@@ -103,13 +103,17 @@ module GitHub
       FETCH_SETTINGS ||= {
         "enterprise" => {
           "private_mode" => false,
+          "public_pages" => false,
+          "subdomain_isolation" => true,
+          "signup_enabled" => false,
           "github_hostname" => "ghe.local",
+          "identicons_host" => "dotcom",
+          "http_proxy" => nil,
           "auth_mode" => "default",
-          "storage_mode" => "rootfs",
+          "expire_sessions" => false,
           "admin_password" => nil,
           "configuration_id" => 1401777404,
           "configuration_run_count" => 4,
-          "package_version" => "11.10.332",
           "avatar" => {
             "enabled" => false,
             "uri" => ""
@@ -124,11 +128,12 @@ module GitHub
           "license" => {
             "seats" => 0,
             "evaluation" => false,
-            "expire_at" => "2015-04-27T00:00:00-07:00",
             "perpetual" => false,
             "unlimited_seating" => true,
             "support_key" => "ssh-rsa AAAAB3N....",
-            "ssh_allowed" => true
+            "ssh_allowed" => true,
+            "cluster_support" => false,
+            "expire_at" => "2016-04-27T00:00:00-07:00"
           },
           "github_ssl" => {
             "enabled" => false,
@@ -136,22 +141,45 @@ module GitHub
             "key" => nil
           },
           "ldap" => {
-            "host" => "",
-            "port" => "",
-            "base" => [
-
-            ],
-            "uid" => "",
-            "bind_dn" => "",
-            "password" => "",
+            "host" => nil,
+            "port" => 0,
+            "base" => [],
+            "uid" => nil,
+            "bind_dn" => nil,
+            "password" => nil,
             "method" => "Plain",
-            "user_groups" => [
-
-            ],
-            "admin_group" => ""
+            "search_strategy" => "detect",
+            "user_groups" => [],
+            "admin_group" => nil,
+            "virtual_attribute_enabled" => false,
+            "recursive_group_search" => false,
+            "posix_support" => true,
+            "user_sync_emails" => false,
+            "user_sync_keys" => false,
+            "user_sync_interval" => 4,
+            "team_sync_interval" => 4,
+            "sync_enabled" => false,
+            "reconciliation" => {
+              "user" => nil,
+              "org" => nil
+            },
+            "profile" => {
+              "uid" => "uid",
+              "name" => nil,
+              "mail" => nil,
+              "key" => nil
+            }
           },
           "cas" => {
-            "url" => ""
+            "url" => nil
+          },
+          "saml" => {
+            "sso_url" => nil,
+            "certificate" => nil,
+            "certificate_path" => nil,
+            "issuer" => nil,
+            "idp_initiated_sso" => false,
+            "disable_admin_demote" => false
           },
           "github_oauth" => {
             "client_id" => "12313412",
@@ -172,52 +200,45 @@ module GitHub
             "support_address" => "enterprise@github.com",
             "noreply_address" => "noreply@github.com"
           },
-          "dns" => {
-            "primary_nameserver" => "8.8.8.8",
-            "secondary_nameserver" => "8.8.4.4"
-          },
           "ntp" => {
-            "primary_server" => "0.ubuntu.pool.ntp.org",
-            "secondary_server" => "1.ubuntu.pool.ntp.org"
+            "primary_server" => "0.pool.ntp.org",
+            "secondary_server" => "1.pool.ntp.org"
           },
-          "timezone" => {
-            "identifier" => "UTC"
-          },
-          "device" => {
-            "path" => "/dev/xyz"
-          },
+          "timezone" => nil,
           "snmp" => {
             "enabled" => false,
             "community" => ""
           },
-          "rsyslog" => {
+          "syslog" => {
             "enabled" => false,
-            "server" => "",
-            "protocol_name" => "TCP"
+            "server" => nil,
+            "protocol_name" => "udp"
           },
-          "assets" => {
-            "storage" => "file",
-            "bucket" => nil,
-            "host_name" => nil,
-            "key_id" => nil,
-            "access_key" => nil
-          },
+          "assets" => nil,
           "pages" => {
             "enabled" => true
           },
           "collectd" => {
             "enabled" => false,
-            "server" => "",
-            "port" => "",
-            "encryption" => "",
-            "username" => "foo",
-            "password" => "bar"
-          }
+            "server" => nil,
+            "port" => 0,
+            "encryption" => nil,
+            "username" => nil,
+            "password" => nil
+          },
+          "mapping" => {
+            "enabled" => true,
+            "tileserver" => nil,
+            "basemap" => "company.map-qsz2zrvs",
+            "token" => nil
+          },
+          "load_balancer" => nil
         },
         "run_list" => [
-          "role[configure]"
+          "recipe[enterprise-configure]"
         ]
       }
+
 
       CHECK_MAINTENANCE_STATUS ||= {
         "status" =>  "scheduled",

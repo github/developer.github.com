@@ -1,7 +1,5 @@
 ---
-kind: change
 title: New example webhook payloads
-created_at: 2014-07-07
 author_name: kdaigle
 ---
 

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: When Does My Rate Limit Reset?
-created_at: 2013-07-02
 author_name: jasonrudolph
 ---
 

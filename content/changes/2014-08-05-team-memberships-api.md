@@ -1,7 +1,5 @@
 ---
-kind: change
 title: We're changing the way you add new members to your organization
-created_at: 2014-08-05
 author_name: jakeboxer
 ---
 

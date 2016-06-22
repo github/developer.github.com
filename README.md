@@ -1,4 +1,5 @@
-# developer.github.com
+# developer.github.com [![Build Status](https://travis-ci.org/github/developer.github.com.svg?branch=master)](https://travis-ci.org/github/developer.github.com)
+
 
 This is a GitHub API resource built with [Nanoc][nanoc].
 
@@ -95,6 +96,14 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 <%= json(:issue) { |hash| [hash] } %>
 ```
 
+There is also a rake task for generating JSON files from the sample responses in the documentation:
+
+``` sh
+$ rake generate_json_from_responses
+```
+
+The generated files will end up in *json-dump/*.
+
 ### Terminal blocks
 
 You can specify terminal blocks by using the `command-line` syntax highlighting.
@@ -116,9 +125,7 @@ For more information, see [the reference documentation](https://github.com/gjtor
 
 ## Deploy
 
-```sh
-$ bundle exec rake publish
-```
+Deployments happen automatically once a PR is merged into `master`. A tool called [Publisher](https://github.com/gjtorikian/publisher) takes the `master` branch, builds it using Nanoc, and publishes the content to `gh-pages`. Thus, any commit to `master` is automatically sent over to `gh-pages`, where it's picked up and served by GitHub Pages.
 
 ## Licenses
 

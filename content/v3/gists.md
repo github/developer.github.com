@@ -20,11 +20,11 @@ The Gist API provides up to one megabyte of content for each file in the gist. E
 
 If you need the full contents of the file, you can make a `GET` request to the URL specified by `raw_url`. Be aware that for files larger than ten megabytes, you'll need to clone the gist via the URL provided by `git_pull_url`.
 
-In addition to a specific file's contents being truncated, the entire files list may be trucated if the total number exceeds 300 files. If the top level `truncated` key is `true`, only the first 300 files have been returned in the files list. If you need to fetch all of the gist's files, you'll need to clone the gist via the URL provided by `git_pull_url`.
+In addition to a specific file's contents being truncated, the entire files list may be truncated if the total number exceeds 300 files. If the top level `truncated` key is `true`, only the first 300 files have been returned in the files list. If you need to fetch all of the gist's files, you'll need to clone the gist via the URL provided by `git_pull_url`.
 
-## List gists
+## List a user's gists
 
-List a user's gists:
+List public gists for the specified user:
 
     GET /users/:username/gists
 
@@ -33,9 +33,37 @@ return all public gists:
 
     GET /gists
 
-List all public gists:
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:gist) { |h| [h] } %>
+
+## List all public gists
+
+List all public gists sorted by most recently updated to least recently updated.
+
+Note: With pagination, you can fetch up to 200 [pages](/v3/#pagination).
 
     GET /gists/public
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:gist) { |h| [h] } %>
+
+## List starred gists
 
 List the authenticated user's starred gists:
 

@@ -68,7 +68,7 @@ Name | Type | Description
 
 ## Get all users
 
-Lists all users, in the order that they signed up on GitHub.
+Lists all users, in the order that they signed up on {{ site.data.variables.product.product_name }}.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of

@@ -2,21 +2,21 @@ module GitHub
   module Resources
     module Responses
       LICENSES ||= [
-        {"key"=>"agpl-3.0", "name"=>"GNU Affero GPL v3.0", "url"=>"https://api.github.com/licenses/agpl-3.0"},
-        {"key"=>"apache-2.0", "name"=>"Apache License 2.0", "url"=>"https://api.github.com/licenses/apache-2.0"},
-        {"key"=>"artistic-2.0", "name"=>"Artistic License 2.0", "url"=>"https://api.github.com/licenses/artistic-2.0"},
-        {"key"=>"bsd-2-clause", "name"=>"Simplified BSD", "url"=>"https://api.github.com/licenses/bsd-2-clause"},
-        {"key"=>"bsd-3-clause", "name"=>"New BSD", "url"=>"https://api.github.com/licenses/bsd-3-clause"},
-        {"key"=>"cc0", "name"=>"CC0 1.0 Universal", "url"=>"https://api.github.com/licenses/cc0"},
-        {"key"=>"epl-1.0", "name"=>"Eclipse Public License v1.0", "url"=>"https://api.github.com/licenses/epl-1.0"},
-        {"key"=>"gpl-2.0", "name"=>"GNU GPL v2.0", "url"=>"https://api.github.com/licenses/gpl-2.0"},
-        {"key"=>"gpl-3.0", "name"=>"GNU GPL v3.0", "url"=>"https://api.github.com/licenses/gpl-3.0"},
-        {"key"=>"isc", "name"=>"ISC license", "url"=>"https://api.github.com/licenses/isc"},
-        {"key"=>"lgpl-2.1", "name"=>"GNU LGPL v2.1", "url"=>"https://api.github.com/licenses/lgpl-2.1"},
-        {"key"=>"lgpl-3.0", "name"=>"GNU LGPL v3.0", "url"=>"https://api.github.com/licenses/lgpl-3.0"},
-        {"key"=>"mit", "name"=>"MIT License", "url"=>"https://api.github.com/licenses/mit"},
-        {"key"=>"mpl-2.0", "name"=>"Mozilla Public License 2.0", "url"=>"https://api.github.com/licenses/mpl-2.0"},
-        {"key"=>"unlicense", "name"=>"Public Domain (Unlicense)", "url"=>"https://api.github.com/licenses/unlicense"}
+        {"key"=>"mit", "name"=>"MIT License", "url"=>"https://api.github.com/licenses/mit", "featured"=>true},
+        {"key"=>"mpl-2.0", "name"=>"Mozilla Public License 2.0", "url"=>"https://api.github.com/licenses/mpl-2.0", "featured"=>false},
+        {"key"=>"gpl-3.0", "name"=>"GNU General Public License v3.0", "url"=>"https://api.github.com/licenses/gpl-3.0", "featured"=>true},
+        {"key"=>"lgpl-3.0", "name"=>"GNU Lesser General Public License v3.0", "url"=>"https://api.github.com/licenses/lgpl-3.0", "featured"=>false},
+        {"key"=>"unlicense", "name"=>"The Unlicense", "url"=>"https://api.github.com/licenses/unlicense", "featured"=>false},
+        {"key"=>"bsd-2-clause", "name"=>"BSD 2-clause \"Simplified\" License", "url"=>"https://api.github.com/licenses/bsd-2-clause", "featured"=>false},
+        {"key"=>"isc", "name"=>"ISC License", "url"=>"https://api.github.com/licenses/isc", "featured"=>false},
+        {"key"=>"lgpl-2.1", "name"=>"GNU Lesser General Public License v2.1", "url"=>"https://api.github.com/licenses/lgpl-2.1", "featured"=>false},
+        {"key"=>"gpl-2.0", "name"=>"GNU General Public License v2.0", "url"=>"https://api.github.com/licenses/gpl-2.0", "featured"=>false},
+        {"key"=>"apache-2.0", "name"=>"Apache License 2.0", "url"=>"https://api.github.com/licenses/apache-2.0", "featured"=>true},
+        {"key"=>"cc0-1.0", "name"=>"Creative Commons Zero v1.0 Universal", "url"=>"https://api.github.com/licenses/cc0-1.0", "featured"=>false},
+        {"key"=>"artistic-2.0", "name"=>"Artistic License 2.0", "url"=>"https://api.github.com/licenses/artistic-2.0", "featured"=>false},
+        {"key"=>"bsd-3-clause", "name"=>"BSD 3-clause \"New\" or \"Revised\" License", "url"=>"https://api.github.com/licenses/bsd-3-clause", "featured"=>false},
+        {"key"=>"agpl-3.0", "name"=>"GNU Affero General Public License v3.0", "url"=>"https://api.github.com/licenses/agpl-3.0", "featured"=>false},
+        {"key"=>"epl-1.0", "name"=>"Eclipse Public License 1.0", "url"=>"https://api.github.com/licenses/epl-1.0", "featured"=>false}
       ]
 
       MIT ||= {

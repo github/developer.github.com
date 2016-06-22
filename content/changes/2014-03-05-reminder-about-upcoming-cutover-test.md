@@ -1,7 +1,5 @@
 ---
-kind: change
 title: "Reminder: March 12 Cutover Test for Default Media Type"
-created_at: 2014-03-05
 author_name: jasonrudolph
 ---
 

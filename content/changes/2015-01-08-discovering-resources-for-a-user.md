@@ -1,7 +1,5 @@
 ---
-kind: change
 title: "New guide: Discovering resources for a user"
-created_at: 2015-01-08
 author_name: jasonrudolph
 ---
 

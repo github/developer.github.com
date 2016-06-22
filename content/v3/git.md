@@ -1,11 +1,11 @@
 ---
-title: Git Data | GitHub API
+title: Git Data
 ---
 
 # Git Data
 
 The Git Database API gives you access to read and write raw Git objects
-to your Git database on GitHub and to list and update your references
+to your Git database on {{ site.data.variables.product.product_name }} and to list and update your references
 (branch heads and tags).
 
 This basically allows you to reimplement a lot of Git functionality over

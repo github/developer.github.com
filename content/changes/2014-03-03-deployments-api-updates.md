@@ -1,7 +1,5 @@
 ---
-kind: change
 title: New Payload Format for Deployments
-created_at: 2014-03-03
 author_name: atmos
 ---
 

@@ -1,10 +1,9 @@
 ---
-title: Statuses | GitHub API
+title: Statuses
 ---
 
 # Statuses
 
-* TOC
 {:toc}
 
 The Status API allows external services to mark commits with a success,
@@ -45,7 +44,7 @@ Attempts to create more than 1000 statuses will result in a validation error.
 Name | Type | Description
 -----|------|--------------
 `state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
-`target_url`|`string` | The target URL to associate with this status.  This URL will be linked from the GitHub UI to allow users to easily see the 'source' of the Status.<br/>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:<br/>`http://ci.example.com/user/repo/build/sha`.
+`target_url`|`string` | The target URL to associate with this status.  This URL will be linked from the {{ site.data.variables.product.product_name }} UI to allow users to easily see the 'source' of the Status.<br/>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:<br/>`http://ci.example.com/user/repo/build/sha`.
 `description`|`string` | A short description of the status.
 `context`|`string` | A string label to differentiate this status from the status of other systems. Default: `"default"`
 
@@ -69,12 +68,12 @@ Users with pull access can view commit statuses for a given ref:
 
     GET /repos/:owner/:repo/commits/:ref/statuses
 
-<div class="alert">
-  <p>
-    This resource is also available via a legacy route:
-    <code>GET /repos/:owner/:repo/statuses/:ref</code>.
-  </p>
-</div>
+{{#tip}}
+
+This resource is also available via a legacy route:
+`GET /repos/:owner/:repo/statuses/:ref`.
+
+{{/tip}}
 
 Statuses are returned in reverse chronological order. The first status in the
 list will be the latest one.

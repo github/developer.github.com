@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Pagination changes for some resource lists
-created_at: 2014-03-18
 author_name: pengwynn
 ---
 
@@ -107,9 +105,9 @@ Here's the complete list of updated methods:
 [Gist commits]: /v3/gists/#list-gist-commits
 [Gist forks]: /v3/gists/#list-gist-forks
 [Git refs]: /v3/git/refs/#get-all-references
-[Repository collaborators]: /v3/repos/collaborators/#list
+[Repository collaborators]: /v3/repos/collaborators/#list-collaborators
 [Repository downloads]: /v3/repos/downloads/#list-downloads-for-a-repository
-[Repository keys]: /v3/repos/keys/#list
+[Repository keys]: /v3/repos/keys/#list-deploy-keys
 [Repository labels]: /v3/issues/labels/#list-all-labels-for-this-repository
 [Team repositories]: /v3/orgs/teams/#list-team-repos
 [User emails]: /v3/users/emails/#list-email-addresses-for-a-user

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Repository redirects are coming to API v3 in July
-created_at: 2015-05-26
 author_name: jasonrudolph
 ---
 

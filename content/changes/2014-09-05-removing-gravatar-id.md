@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Removing Gravatar ID from user payloads
-created_at: 2014-09-05
 author_name: mastahyeti
 ---
 

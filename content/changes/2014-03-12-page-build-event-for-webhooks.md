@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Page Build Event for Webhooks
-created_at: 2014-3-12
 author_name: benbalter
 ---
 

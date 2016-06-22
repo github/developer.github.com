@@ -1,10 +1,9 @@
 ---
-title: Comments | GitHub API
+title: Comments
 ---
 
 # Comments
 
-* TOC
 {:toc}
 
 ## List commit comments for a repository
@@ -18,17 +17,59 @@ Comments are ordered by ascending ID.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit_comment) { |h| [h] } %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-commits-comments"></a>
+
+  An additional `reactions` object in the commit comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :commit_comment_reaction_summary %>
+{% endif %}
 
 ## List comments for a single commit
 
-    GET /repos/:owner/:repo/commits/:sha/comments
+    GET /repos/:owner/:repo/commits/:ref/comments
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit_comment) { |h| [h] } %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-commit-comments"></a>
+
+  An additional `reactions` object in the commit comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :commit_comment_reaction_summary %>
+{% endif %}
 
 ## Create a commit comment
 
@@ -36,19 +77,18 @@ Comments are ordered by ascending ID.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
-`sha`|`string` | **Required**. The SHA of the commit to comment on.
 `body`|`string` | **Required**. The contents of the comment.
 `path`|`string` | Relative path of the file to comment on.
-`position`|`number` | Line index in the diff to comment on.
-`line`|`number` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.
+`position`|`integer` | Line index in the diff to comment on.
+`line`|`integer` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.
 
 
 #### Example
 
 <%= json \
-  :body      => 'Nice change',
+  :body      => 'Great stuff',
   :path      => 'file1.txt',
   :position  => 4,
   :line      => nil
@@ -56,7 +96,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/comments/1" %>
+<%= headers 201, :Location => get_resource(:commit_comment)['url'] %>
 <%= json :commit_comment %>
 
 ## Get a single commit comment
@@ -68,13 +108,34 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :commit_comment %>
 
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-commit-comment"></a>
+
+  An additional `reactions` object in the commit comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :commit_comment_reaction_summary %>
+{% endif %}
+
 ## Update a commit comment
 
     PATCH /repos/:owner/:repo/comments/:id
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The contents of the comment
 
@@ -88,7 +149,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json :commit_comment %>
+<%= json(:commit_comment) { |h| h.merge('body' => 'Nice change') } %>
 
 ## Delete a commit comment
 

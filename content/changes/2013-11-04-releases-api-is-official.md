@@ -1,13 +1,11 @@
 ---
-kind: change
 title: Releases API is Official
-created_at: 2013-11-04
 author_name: technoweenie
 ---
 
 Hot on the heels of the [Search API][search-api], the [Releases API][releases-api]
 is now officially part of GitHub API v3.  We now consider it stable for
-production use.  
+production use.
 
 ### Preview Media Type No Longer Needed
 

@@ -1,0 +1,126 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'fileutils'
+
+require 'nanoc'
+require 'yaml'
+require 'json'
+require 'active_support/core_ext/hash'
+
+Dir.glob('tasks/*.rake').each { |r| load r }
+
+start_message
+
+#################################################################
+##           Phase 1: Build the versioned content              ##
+#################################################################
+
+def build_the_versioned_content
+  config = YAML.load_file('nanoc.yaml')
+
+  # set page.version for every article to <CURR_VERSION>
+  defaults = config['page_variables']
+  defaults.first['values']['version'] = CURR_VERSION
+
+  yaml = """
+is_enterprise_help: true
+audience: #{CURR_VERSION}
+version: #{CURR_VERSION}
+latest_enterprise_version: &latest_enterprise_version #{CURR_VERSION}
+data_variables:
+  -
+    scope:
+      path: ''
+    values:
+      version: #{CURR_VERSION}
+  """
+
+  config_enterprise_admin = Tempfile.new('_config.enterprise.yml')
+  config_enterprise_admin.write(yaml.strip)
+  config_enterprise_admin.rewind
+  config_enterprise_admin.close
+
+  config_enterprise_admin = YAML.load_file(config_enterprise_admin.path)
+
+  versioned_config = symbolize_hash(config.deep_merge(config_enterprise_admin))
+
+  ent_scope_idx = versioned_config[:page_variables].find_index { |v| v[:scope][:path] == 'enterprise/.' }
+
+  versioned_config[:page_variables][ent_scope_idx][:values][:version] = CURR_VERSION
+
+  Nanoc::Int::SiteLoader.new.new_with_config(versioned_config).compile
+
+  puts `node_modules/gulp/bin/gulp.js assets`
+  fail unless $CHILD_STATUS.to_i == 0
+
+  versioned_config
+end
+
+#################################################################
+##          Phase 2: Rewrite the generated content             ##
+#################################################################
+
+def rewrite_generated_content
+  Dir.glob('output/**/*.html') do |f|
+    doc = Nokogiri::HTML.parse(File.read(f))
+    doc = rewrite_asset_paths(doc)
+    doc = rewrite_anchors(doc)
+    html = doc.to_html.to_s
+    html = rewrite_whitespace(html)
+    File.write(f, html)
+  end
+
+  Dir.glob('output/**/*.css') do |css_path|
+    rewrite_octicons_path(css_path)
+  end
+
+  search_json = File.read('output/search/search-index.json')
+  search_json = rewrite_whitespace(search_json)
+  File.write('output/search/search-index.json', search_json)
+end
+
+#################################################################
+##          Phase 3: Remove non-existent content               ##
+#################################################################
+
+def remove_nonexistent_content
+  # find all the valid files based on the sidebar links
+  v3_api_sidebar = File.open("#{VERSIONED_ENT_PATH}/v3/index.html") { |f| Nokogiri::XML(f) }
+  pages = []
+  v3_api_sidebar.css('#js-sidebar a').each do |a|
+    href = a['href']
+    next if href == '#' || !href.start_with?("/#{VERSIONED_ENT_PATH}/v3")
+    pages << href
+  end
+
+  # remove non-existent files from search index
+  search_json_path = "#{VERSIONED_ENT_PATH}/search/search-index.json"
+  search_json = JSON.parse(File.read(search_json_path))
+  kept_json = []
+  removed_files = []
+
+  search_json.each do |e|
+    url = e['url']
+    next if url.nil?
+    if pages.include?(url) || url !~ %r{^/#{VERSIONED_ENT_PATH}/v3/}
+      kept_json << e
+    else
+      removed_files << url[1..-1] # trim starting "/"
+    end
+  end
+
+  File.write(search_json_path, JSON.pretty_generate(kept_json))
+
+  # remove non-existent files from disk
+  removed_files.each { |f| FileUtils.rm_rf(f) }
+end
+
+prepare
+build_the_versioned_content
+rewrite_generated_content
+copy_to_destination
+remove_nonexistent_content
+cleanup
+
+puts 'All done!'

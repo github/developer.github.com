@@ -1,10 +1,9 @@
 ---
-title: Git Tags | GitHub API
+title: Git Tags
 ---
 
 # Tags
 
-* TOC
 {:toc}
 
 This tags API only deals with tag objects - so only annotated tags, not
@@ -39,9 +38,9 @@ Name | Type | Description
 `message`|`string`| The tag message
 `object`|`string`| The SHA of the git object this is tagging
 `type`|`string`| The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
-`tagger`|`hash`| A hash with information about the individual creating the tag.
+`tagger`|`object`| An object with information about the individual creating the tag.
 
-The `tagger` hash contains the following keys:
+The `tagger` object contains the following keys:
 
 Name | Type | Description
 -----|------|--------------
@@ -62,6 +61,61 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac" %>
+<%= headers 201, :Location => get_resource(:gittag)['url'] %>
 <%= json :gittag %>
+
+{% if page.version == 'dotcom' %}
+
+## Tag signature verification
+
+{{#tip}}
+
+Tag response objects including signature verification data are currently available for developers to preview.
+During the preview period, the object formats may change without advance notice.
+Please see the [blog post](/changes/2016-04-04-git-signing-api-preview) for full details.
+
+To receive signature verification data in tag objects you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+    application/vnd.github.cryptographer-preview
+
+{{/tip}}
+
+    GET /repos/:owner/:repo/git/tags/:sha
+
+### Response
+
+<%= headers 200 %>
+<%= json(:signed_gittag) %>
+
+### The `verification` object
+
+The response will include a `verification` field whose value is an object describing the result of verifying the tag's signature. The following fields are included in the `verification` object:
+
+Name | Type | Description
+-----|------|--------------
+`verified`|`boolean` | Does GitHub consider the signature in this tag to be verified?
+`reason`|`string` | The reason for `verified` value. Possible values and their meanings are enumerated in the table below.
+`signature`|`string` | The signature that was extracted from the tag.
+`payload`|`string` | The value that was signed.
+
+#### The `reason` field
+
+The following are possible `reason`s that may be included in the `verification` object:
+
+Value | Description
+------|------------
+`expired_key` | The key that made the signature is expired.
+`not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature.
+`gpgverify_error` | There was an error communicating with the signature-verification service.
+`gpgverify_unavailable` | The signature-verification service is currently unavailable.
+`unsigned` | The object does not include a signature.
+`unkown_signature_type` | A non-PGP signature was found in the tag.
+`no_user` | No user was associated with the `tagger` email address in the tag.
+`unverified_email` | The `tagger` email address in the tag was associated with a user, but the email address is not verified on her/his account.
+`bad_email` | The `tagger` email address in the tag is not included in the identities of the PGP key that made the signature.
+`unknown_key` | The key that made the signature has not been registered with any user's account.
+`malformed_signature` | There was an error parsing the signature.
+`invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature.
+`valid` | None of the above errors applied, so the signature is considered to be verified.
+
+{% endif %}

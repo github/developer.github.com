@@ -1,10 +1,9 @@
 ---
-title: Legacy Search | GitHub API
+title: Legacy Search
 ---
 
 # Legacy Search
 
-* TOC
 {:toc}
 
 This is a listing of the Legacy Search API features from API v2 that have been ported to API
@@ -12,15 +11,13 @@ v3. There should be no changes, other than the new URL and JSON output format.
 
 ### Legacy Search API is Deprecated
 
-<div class="alert">
-  <p>
-    The Legacy Search API (described below) is <a href="/v3/versions/#v3-deprecations">deprecated</a>
-    and is scheduled for removal in the next major version of the API.
+{{#warning}}
 
-    We recommend using the <a href="/v3/search/">v3 Search API</a> instead.
-    It contains new endpoints and much more functionality.
-  </p>
-</div>
+The Legacy Search API (described below) is <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for removal in the next major version of the API.
+
+We recommend using the <a href="/v3/search/">v3 Search API</a> instead. It contains new endpoints and much more functionality.
+
+{{/warning}}
 
 ## Search issues
 
@@ -85,7 +82,7 @@ Name | Type | Description
 This API call is added for compatibility reasons only. There's no guarantee
 that full email searches will always be available. The `@` character in the
 address must be left unencoded. Searches only against public email addresses
-(as configured on the user's GitHub profile).
+(as configured on the user's {{ site.data.variables.product.product_name }} profile).
 
     GET /legacy/user/email/:email
 

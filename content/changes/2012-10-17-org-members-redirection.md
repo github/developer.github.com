@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Organization Members Resource Changes
-created_at: 2012-10-17
 author_name: pezra
 ---
 

@@ -1,10 +1,10 @@
 ---
-title: Emojis | GitHub API
+title: Emojis
 ---
 
 # Emojis
 
-Lists all the emojis available to use on GitHub.
+Lists all the emojis available to use on {{ site.data.variables.product.product_name }}.
 
     GET /emojis
 

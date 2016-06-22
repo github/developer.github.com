@@ -91,7 +91,7 @@ When authenticating as a user, this endpoint will list all currently open reposi
 
 ## Decline a repository invitation
 
-  DELETE /user/repository_invitations/:invitation_id
+    DELETE /user/repository_invitations/:invitation_id
 
 ### Response
 

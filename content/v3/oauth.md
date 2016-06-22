@@ -1,14 +1,13 @@
 ---
-title: OAuth | GitHub API
+title: OAuth
 ---
 
 # OAuth
 
-* TOC
 {:toc}
 
-OAuth2 is a protocol that lets external apps request authorization to
-private details in a user's GitHub account without getting their
+OAuth2 is a protocol that lets external applications request authorization to
+private details in a user's {{ site.data.variables.product.product_name }} account without getting their
 password. This is preferred over [Basic Authentication](/v3/auth#basic-authentication) because tokens can
 be limited to specific types of data, and can be revoked by users at any
 time.
@@ -35,9 +34,10 @@ This is a description of the OAuth2 flow from 3rd party web sites.
 Name | Type | Description
 -----|------|--------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
-`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
-`scope`|`string` | A comma separated list of [scopes](#scopes). If not provided, `scope` defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.
+`redirect_uri`|`string` | The URL in your application where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
+`scope`|`string` | A space delimited list of [scopes](#scopes). If not provided, `scope` defaults to an empty list for users that have not authorized any scopes for the application. For users who have authorized scopes for the application, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the set of scopes the user has authorized for the application. For example, if a user has already performed the web flow twice and has authorized one token with `user` scope and another token with `repo` scope, a third web flow that does not provide a `scope` will receive a token with `user` and `repo` scope.
 `state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.
+`allow_signup`|`string` | Whether or not unauthenticated users will be offered an option to sign up for GitHub during the OAuth flow. The default is `true`. Use `false` in the case that a policy prohibits signups.
 
 ### 2. GitHub redirects back to your site
 
@@ -56,9 +56,9 @@ Name | Type | Description
 -----|------|---------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
-`code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
-`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
-`state`|`string` | The unguessable random string you optionally provided in [Step 1](#redirect-users-to-request-github-access).
+`code`|`string` | **Required**. The code you received as a response to [Step 1](#1-redirect-users-to-request-github-access).
+`redirect_uri`|`string` | The URL in your application where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
+`state`|`string` | The unguessable random string you optionally provided in [Step 1](#1-redirect-users-to-request-github-access).
 
 ### Response
 
@@ -79,6 +79,19 @@ header:
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
 
+#### Multiple tokens
+
+GitHub allows multiple tokens to exist for a user/application/scope combination.
+This can be used to create tokens for specific use cases. For example, your
+application might support one workflow that uses GitHub for sign in, and only
+requires basic user information. And, your application might support a different
+workflow that requires access to a user's private repositories. Using multiple
+tokens, your application can perform the web flow for each use case, requesting
+only the scopes needed. If a user only uses your application to sign in, they
+are never required to grant your application access to their private
+repositories. Note, there is a limit to the number of tokens that are issued per
+user/application/scope combination. If your application requests enough tokens
+to go over one of the limits, older tokens will stop working.
 
 #### Requested scopes vs. granted scopes
 
@@ -122,8 +135,9 @@ cleaner approach is to include it in the Authorization header
 
 For example, in curl you can set the Authorization header like this:
 
-{:.terminal}
-    curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+``` command-line
+curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+```
 
 ## Non-Web Application Flow
 
@@ -164,11 +178,12 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
-{:.terminal}
-    $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
-    HTTP/1.1 200 OK
-    X-OAuth-Scopes: repo, user
-    X-Accepted-OAuth-Scopes: user
+``` command-line
+$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
+HTTP/1.1 200 OK
+X-OAuth-Scopes: repo, user
+X-Accepted-OAuth-Scopes: user
+```
 
 `X-OAuth-Scopes` lists the scopes your token has authorized.
 `X-Accepted-OAuth-Scopes` lists the scopes that the action checks for.
@@ -181,7 +196,7 @@ Name | Description
 `user:email`| Grants read access to a user's email addresses.
 `user:follow`| Grants access to follow or unfollow other users.
 `public_repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public repositories and organizations. Also required for starring public repositories.
-`repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public and private repositories and organizations.
+`repo`| Grants read/write access to code, commit statuses, repository invitations, collaborators, and deployment statuses for public and private repositories and organizations.
 `repo_deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
 `repo:status`| Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses *without* granting access to the code.
 `delete_repo`| Grants access to delete adminable repositories.
@@ -197,13 +212,16 @@ Name | Description
 `read:public_key`| List and view details for public keys.
 `write:public_key`| Create, list, and view details for public keys.
 `admin:public_key`| Fully manage public keys.
+{% if page.version == 'dotcom' %}`read:gpg_key`| List and view details for GPG keys.{% endif %}
+{% if page.version == 'dotcom' %}`write:gpg_key`| Create, list, and view details for GPG keys.{% endif %}
+{% if page.version == 'dotcom' %}`admin:gpg_key`| Fully manage GPG keys.{% endif %}
 
 NOTE: Your application can request the scopes in the initial redirection. You
-can specify multiple scopes by separating them with a comma:
+can specify multiple scopes by separating them with a space:
 
     https://github.com/login/oauth/authorize?
       client_id=...&
-      scope=user,public_repo
+      scope=user%20public_repo
 
 ## Common errors for the authorization request
 
@@ -306,7 +324,7 @@ receive this error.
          :error_uri         => "https://developer.github.com/v3/oauth/#bad-verification-code"
 %>
 
-To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
+To solve this error, start the [OAuth process over from the beginning](#1-redirect-users-to-request-github-access)
 and get a new code.
 
 ## Directing users to review their access for an application
@@ -314,7 +332,7 @@ and get a new code.
 Users can review and revoke their application authorizations from the [settings
 screen within GitHub][authorized-apps]. A user's organizations [control whether
 an application can access organization data][org-app-policies]. Integrators can
-deep link to the authorization information for their particular app to let their
+deep link to the authorization information for their particular application to let their
 end users review these details.
 
 To build this link, you'll need your OAuth application's `client_id` you

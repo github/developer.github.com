@@ -1,7 +1,5 @@
 ---
-kind: change
 title: New Releases API methods
-created_at: 2015-02-18
 author_name: pengwynn
 ---
 

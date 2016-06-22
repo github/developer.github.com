@@ -1,10 +1,9 @@
 ---
-title: Git Blobs | GitHub API
+title: Git Blobs
 ---
 
 # Blobs
 
-* TOC
 {:toc}
 
 Blobs leverage [these custom media types](#custom-media-types). You can

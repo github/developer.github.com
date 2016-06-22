@@ -1,10 +1,9 @@
 ---
-title: Repositories | GitHub API
+title: Repositories
 ---
 
 # Repositories
 
-* TOC
 {:toc}
 
 ## List your repositories
@@ -68,7 +67,7 @@ Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of
 repositories.
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
 
 If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
 you will be able to list all repositories including private repositories.
@@ -79,7 +78,7 @@ Name | Type | Description
 -----|------|--------------
 `visibility`|`string`| To include private repositories as well set to `all`. Default: `public`
 
-{{/enterprise-only}}
+{% endif %}
 
     GET /repositories
 
@@ -255,6 +254,28 @@ List languages for the specified repository. The value on the right of a languag
 
     GET /repos/:owner/:repo/branches
 
+### Parameters
+
+Name | Type | Description
+-----|------|-------------
+`protected`|`string` | Set to `1` or `true` to only return protected branches.
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The `protected` parameter is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2015-11-11-protected-branches-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.loki-preview+json
+
+  The `protection` key will only be present in branch payloads if this header is passed.
+
+{{/tip}}
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
@@ -266,8 +287,84 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2015-11-11-protected-branches-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.loki-preview+json
+
+  The `protection` key will only be present in branch payloads if this header is passed.
+
+{{/tip}}
+
 <%= headers 200 %>
 <%= json(:branch) %>
+
+{% if page.version == 'dotcom' or page.version >= 2.5 %}
+
+## Enabling and disabling branch protection
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2015-11-11-protected-branches-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.loki-preview+json
+
+{{/tip}}
+
+Protecting a branch requires admin access.
+
+    PATCH /repos/:owner/:repo/branches/:branch
+
+### Input
+
+You need to pass a `protection` object.
+
+Name | Type | Description
+-----|------|-------------
+`enabled`|`boolean` | **Required**. Should this branch be protected or not
+`required_status_checks`|`object`| Configure required status checks here
+
+The `required_status_checks` object must have the following keys:
+
+Name | Type | Description
+-----|------|-------------
+`enforcement_level`|`string` | **Required**. Who required status checks apply to. Options are `off`, `non_admins` or `everyone`.
+`contexts`|`array` | **Required**. The list of status checks to require in order to merge into this branch
+
+The `enforcement_level` key can have the following values:
+
+Name  | Description
+------|------------
+`off` | Turn off required status checks for this branch.
+`non_admins` | Required status checks will be enforced for non-admins.
+`everyone` | Required status checks will be enforced for everyone (including admins).
+
+#### Example
+
+<%= json \
+  "protection" => {
+    "enabled" => true,
+    "required_status_checks" => {
+      "enforcement_level" => "everyone",
+      "contexts" => ["continuous-integration/travis-ci"]
+    }
+  }
+%>
+
+{% endif %}
 
 ## Delete a Repository
 

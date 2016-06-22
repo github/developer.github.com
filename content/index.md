@@ -1,6 +1,7 @@
 ---
 title: GitHub Developer
 layout: overview
+hide_from_search: true
 ---
 
 <div class="wrapper feature">
@@ -10,7 +11,7 @@ layout: overview
   </h1>
   <p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
   <a href="/v3/" class="button">Browse the documentation</a>
-  <img src="/shared/images/rocketship.png" class="rocketship" alt="Rocketship" />
+  <img src="/assets/images/rocketship.png" class="rocketship" alt="Rocketship" />
 </div>
 
 <div class="full-width dev-program-callout">

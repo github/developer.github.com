@@ -1,16 +1,10 @@
 ---
-title: Git Blobs | GitHub API
+title: Git Blobs
 ---
 
 # Blobs
 
-* TOC
 {:toc}
-
-Since blobs can be any arbitrary binary data, the input and responses
-for the blob API takes an encoding parameter that can be either `utf-8`
-or `base64`.  If your data cannot be losslessly sent as a UTF-8 string,
-you can base64 encode it.
 
 Blobs leverage [these custom media types](#custom-media-types). You can
 read more about the use of media types in the API [here](/v3/media/).
@@ -18,6 +12,8 @@ read more about the use of media types in the API [here](/v3/media/).
 ## Get a Blob
 
     GET /repos/:owner/:repo/git/blobs/:sha
+
+The `content` in the response will always be Base64 encoded.
 
 *Note*: This API supports blobs up to 100 megabytes in size.
 
@@ -30,14 +26,20 @@ read more about the use of media types in the API [here](/v3/media/).
 
     POST /repos/:owner/:repo/git/blobs
 
-### Input
+### Parameters
+
+Name | Type | Description
+-----|------|-------------
+`content`|`string` | **Required**. The new blob's content.
+`encoding`|`string` | The encoding used for `content`. Currently, `"utf-8"` and `"base64"` are supported. Default: `"utf-8"`.
+
+### Example Input
 
 <%= json :content => "Content of the blob", :encoding => "utf-8" %>
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" %>
+<%= headers 201, :Location => get_resource(:blob_after_create)['url'] %>
 <%= json :blob_after_create %>
 
 ## Custom media types

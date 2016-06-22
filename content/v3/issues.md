@@ -283,10 +283,10 @@ The `assignees` key will only be present in issue payloads if this header is pas
 {{/tip}}
 {% endif %}
 
-{% if page.version == 'dotcom' %}
-
+{% if page.version == 'dotcom' or page.version >= 2.6 %}
 ## Lock an issue
 
+{% if page.version == 2.6 %}
 {{#tip}}
 
   <a name="preview-period"></a>
@@ -300,6 +300,7 @@ The `assignees` key will only be present in issue payloads if this header is pas
       application/vnd.github.the-key-preview+json
 
 {{/tip}}
+{% endif %}
 
 Users with push access can lock an issue's conversation.
 
@@ -313,6 +314,7 @@ Users with push access can lock an issue's conversation.
 
 ## Unlock an issue
 
+{% if page.version == 2.6 %}
 {{#tip}}
 
   <a name="preview-period"></a>
@@ -326,6 +328,7 @@ Users with push access can lock an issue's conversation.
       application/vnd.github.the-key-preview+json
 
 {{/tip}}
+{% endif %}
 
 Users with push access can unlock an issue's conversation.
 

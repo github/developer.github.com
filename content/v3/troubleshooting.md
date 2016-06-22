@@ -20,7 +20,7 @@ To troubleshoot, ensure [you're authenticating correctly](/guides/getting-starte
 
 ## Why am I not seeing all my results?
 
-Most API calls accessing a list of resources (_e.g._, users, issues, _e.t.c._) support
+Most API calls accessing a list of resources (_e.g._, users, issues, _etc._) support
 pagination. If you're making requests and receiving an incomplete set of results, you're
 probably only seeing the first page. You'll need to request the remaining pages
 in order to get more results.

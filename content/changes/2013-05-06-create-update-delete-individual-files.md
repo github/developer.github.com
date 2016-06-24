@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Create, update, and delete individual files
-created_at: 2013-05-06
 author_name: ymendel
 ---
 

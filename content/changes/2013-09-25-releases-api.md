@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Releases API
-created_at: 2013-09-25
 author_name: technoweenie
 ---
 
@@ -11,38 +9,38 @@ This summer we made it easier to [release your software][blawg].  Today, you can
 This API is a little different due to the binary assets.  We use the `Accept` header for content negotiation when requesting
 a release asset.  Pass a standard API media type to get the API representation:
 
-<pre class="terminal">
+``` command-line
 $ curl -i -H "Authorization: token TOKEN" \
-     -H "Accept: application/vnd.github.manifold-preview" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+$     -H "Accept: application/vnd.github.manifold-preview" \
+$     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
-HTTP/1.1 200 OK
+> HTTP/1.1 200 OK
 
-{
-  "id": 123,
-  ...
-}
-</pre>
+> {
+>   "id": 123,
+>   ...
+> }
+```
 
 Pass "application/octet-stream" to download the binary content.
 
-<pre class="terminal">
+``` command-line
 $ curl -i -H "Authorization: token TOKEN" \
-     -H "Accept: application/octet-stream" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+$     -H "Accept: application/octet-stream" \
+$     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
-HTTP/1.1 302 Found
-</pre>
+> HTTP/1.1 302 Found
+```
 
 Uploads are handled by a single request to a companion "uploads.github.com" service.
 
-<pre class="terminal">
+``` command-line
 $ curl -H "Authorization: token TOKEN" \
      -H "Accept: application/vnd.github.manifold-preview" \
      -H "Content-Type: application/zip" \
      --data-binary @build/mac/package.zip \
      "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
-</pre>
+```
 
 ## Preview mode
 

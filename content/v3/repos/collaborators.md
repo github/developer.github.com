@@ -112,7 +112,7 @@ application/vnd.github.ironman-preview+json
 ### Response with preview media type
 
 <%= headers 201 %>
-<%= json(:repository_invitation) { |h| [h] } %>
+<%= json(:repository_invitation) %>
 
 ## Remove user as a collaborator
 

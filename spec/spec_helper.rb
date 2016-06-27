@@ -18,7 +18,7 @@ Dir.glob('tasks/*.rake').each { |r| load r}
 def posts
   return @posts if defined? @posts
 
-  diffable_files = `git diff -z --name-only --diff-filter=ACMRTUXB origin/master`.split("\0")
+  diffable_files = `git diff -z --name-only --diff-filter=ACRTUXB origin/master -- content/changes/`.split("\0")
 
   @posts = diffable_files.select do |filename|
     ext = File.extname(filename)

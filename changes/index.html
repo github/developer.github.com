@@ -44,7 +44,48 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-06-22-issue-locking-api-is-now-official/">
+      <div class="change" id="/changes/2016-06-27-protected-branches-api-update/">
+  <h2 class="title">
+<a id="--update-to-protected-branches-api-preview" class="anchor" href="#--update-to-protected-branches-api-preview" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 27, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/tma.png" alt="Avatar for tma" data-proofer-ignore>
+      <a href="https://github.com/tma" data-proofer-ignore>tma</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Over the past few months, we've made a few <a href="https://github.com/blog/2137-protected-branches-improvements">improvements</a> to the way <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">protected branches</a> work in our web interface. Today, we're modifying the protected branches API <a href="https://developer.github.com/changes/2015-11-11-protected-branches-api/">preview period</a> to include these improvements.</p>
+
+<p>Included in these API changes is the ability to allow organizations to specify which members and teams should be able to push to a protected branch, as well as providing a new setting for required status checks which will remove the requirement of a pull request to be up to date before merging.</p>
+
+<p>You'll notice a new endpoint structure. One set of endpoints for modifying the branch settings as a whole (<code>PATCH /repos/:owner/:repo/branches/:branch</code> has been updated to be <code>PUT /repos/:owner/:repo/branches/:branch/protection</code>), and a series of more granular endpoints to modify a subset of the branch protection settings.</p>
+
+<p><strong>This will be a breaking change for the protected branch API.</strong> The deprecated API endpoint will be removed when the protected branches API will leave the preview period. If you're trying out the old protected branches API, you'll need to update your code.</p>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.loki-preview+json
+</code></pre>
+
+<p>Take a look at <a href="/v3/repos/branches/">the docs here</a>. If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+API+Preview">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2016-06-22-issue-locking-api-is-now-official/">
   <h2 class="title">
 <a id="--issue-locking-and-unlocking-apis-are-now-official" class="anchor" href="#--issue-locking-and-unlocking-apis-are-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official</a>
@@ -64,14 +105,11 @@
 </ul>
 </div>
 
-<p></p>
-<p>We're making the <a href="/changes/2016-02-11-issue-locking-api/">Issue locking and unlocking APIs</a> part of the official GitHub API.</p>
+  <p>We're making the <a href="/changes/2016-02-11-issue-locking-api/">Issue locking and unlocking APIs</a> part of the official GitHub API.</p>
 
 <p>During the preview period you needed to provide the <code>application/vnd.github.the-key-preview+sha</code> preview media type in the <code>Accept</code> header to opt-in to the new endpoints. Now that the preview period has ended, you no longer need to specify this custom <a href="/v3/media/">media type</a>.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Issue+Locking+and+Unlocking+API">get in touch with us</a>!</p>
-
-<p></p>
 </div>
 
 <div class="change" id="/changes/2016-06-14-repository-invitations/">
@@ -94,8 +132,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We announced <a href="https://github.com/blog/2170-repository-invitations">repository invitation functionality</a> on May 23. Using the site, you can invite collaborators to work on your repository. Invitees will receive an email with the invitation and have the option to accept or decline.</p>
+  <p>We announced <a href="https://github.com/blog/2170-repository-invitations">repository invitation functionality</a> on May 23. Using the site, you can invite collaborators to work on your repository. Invitees will receive an email with the invitation and have the option to accept or decline.</p>
 
 <p>We have now have endpoints for managing repository invitations for both repository administrators and invitation recipients through the GitHub API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
@@ -502,34 +539,6 @@ curl -u username "https://api.github.com/applications/grants" \
 </ul>
 
 <p>Take a look at <a href="https://developer.github.com/webhooks/">the documentation</a> for full details. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Actions">get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">
-  <h2 class="title">
-<a id="--commit-reference-sha-1-api-is-now-official" class="anchor" href="#--commit-reference-sha-1-api-is-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 12, 2016
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mikemcquaid.png" alt="Avatar for mikemcquaid" data-proofer-ignore>
-      <a href="https://github.com/mikemcquaid" data-proofer-ignore>mikemcquaid</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We're making the <a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 API</a> part of the official GitHub API.</p>
-
-<p>During the preview period you needed to provide the <code>application/vnd.github.chitauri-preview+sha</code> preview media type in the <code>Accept</code> header to opt-in to the changes. Now that the preview period has ended the custom <a href="/v3/media/">media type</a> has changed to <code>application/vnd.github.v3.sha</code> (but the preview type will continue to work).</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Commit+Reference+SHA-1+API">get in touch with us</a>!</p>
 
 <p></p>
 </div>
@@ -627,6 +636,8 @@ curl -u username "https://api.github.com/applications/grants" \
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
@@ -640,8 +651,6 @@ curl -u username "https://api.github.com/applications/grants" \
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
 </ul>
 

@@ -44,7 +44,66 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">
+      <div class="change" id="/changes/2015-11-11-protected-branches-api/">
+  <h2 class="title">
+<a id="--protected-branches-api-preview-period" class="anchor" href="#--protected-branches-api-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    November 11, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/nakajima.png" alt="Avatar for nakajima" data-proofer-ignore>
+      <a href="https://github.com/nakajima" data-proofer-ignore>nakajima</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p><strong>UPDATE (2016-06-27):</strong> As <a href="/changes/2016-06-27-protected-branches-api-update/">announced</a>, there is an extended version of the protected branches API available. This older version will be removed once the new one becomes official.</p>
+
+<p>We're starting a preview period for the <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">protected branches</a> API. Protecting a branch prevents force-pushes to it as well as deleting it. You can also specify required status checks that are required to merge code into the branch.</p>
+
+<p>To protect a branch, make a <code>PATCH</code> request to the URL of the branch:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/repos/github/hubot/branches/master" \
+  -XPATCH \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.loki-preview" \
+  -d '{
+    "protection": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "everyone",
+        "contexts": [
+          "required-status"
+        ]
+      }
+    }
+  }'
+</pre>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.loki-preview+json
+</code></pre>
+
+<p>Take a look at <a href="/v3/repos/branches/">the docs here</a>.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+API+Preview">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">
   <h2 class="title">
 <a id="--ensure-your-app-is-ready-for-protected-branches" class="anchor" href="#--ensure-your-app-is-ready-for-protected-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches</a>
@@ -64,8 +123,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We’ve begun to <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">roll out Protected Branches</a> across GitHub. When you
+  <p>We’ve begun to <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">roll out Protected Branches</a> across GitHub. When you
 protect a branch in one of your repositories, you will be prevented from
 force pushing to that branch or deleting it. You can also configure required
 status checks for your protected branch. When configured, changing a branch to
@@ -497,62 +555,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 <p></p>
 </div>
 
-<div class="change" id="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">
-  <h2 class="title">
-<a id="--breaking-changes-to-organization-permissions-coming-on-june-24" class="anchor" href="#--breaking-changes-to-organization-permissions-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 10, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Back in January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">encouraged developers to update their applications</a> to prepare for <a href="/changes/2014-12-08-organization-permissions-api-preview/">upcoming API changes</a> related to managing organization members and repositories. In order to support the upcoming <a href="https://github.com/blog/2020-improved-organization-permissions/">improvements to organization permissions</a>, these changes will become official parts of GitHub API v3 on <strong>June 24</strong>.</p>
-
-<p>If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
-
-<h2>
-<a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>Breaking changes coming on June 24</h2>
-
-<p>If your application uses any of the following APIs, then you are affected by this change:</p>
-
-<ul>
-<li>APIs for managing your organization's admins through the Owners team</li>
-<li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API</li>
-<li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API</li>
-<li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API</li>
-</ul>
-
-<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">December's announcement</a> for full details on the changes.)</p>
-
-<p>In January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">announced a migration period</a> allowing API consumers to opt in to these changes. If you haven't already opted in to these changes, you still do so as described below. On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.</p>
-
-<h2>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
-
-<p>During these final days of the migration period, you can opt in to these changes using the following custom media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.moondragon+json
-</code></pre>
-
-<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -668,6 +670,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
@@ -681,8 +685,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
 </ul>
 

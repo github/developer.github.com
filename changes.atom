@@ -2,13 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-06-22T07:00:00Z</updated>
+  <updated>2016-06-27T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-06-27:/changes/2016-06-27-protected-branches-api-update/</id>
+    <title type="html">Update to Protected Branches API Preview</title>
+    <published>2016-06-27T07:00:00Z</published>
+    <updated>2016-06-27T07:00:00Z</updated>
+    <author>
+      <name>tma</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-06-27-protected-branches-api-update/"/>
+    <content type="html">&lt;p&gt;Over the past few months, we've made a few &lt;a href="https://github.com/blog/2137-protected-branches-improvements"&gt;improvements&lt;/a&gt; to the way &lt;a href="https://github.com/blog/2051-protected-branches-and-required-status-checks"&gt;protected branches&lt;/a&gt; work in our web interface. Today, we're modifying the protected branches API &lt;a href="https://developer.github.com/changes/2015-11-11-protected-branches-api/"&gt;preview period&lt;/a&gt; to include these improvements.&lt;/p&gt;
+
+&lt;p&gt;Included in these API changes is the ability to allow organizations to specify which members and teams should be able to push to a protected branch, as well as providing a new setting for required status checks which will remove the requirement of a pull request to be up to date before merging.&lt;/p&gt;
+
+&lt;p&gt;You'll notice a new endpoint structure. One set of endpoints for modifying the branch settings as a whole (&lt;code&gt;PATCH /repos/:owner/:repo/branches/:branch&lt;/code&gt; has been updated to be &lt;code&gt;PUT /repos/:owner/:repo/branches/:branch/protection&lt;/code&gt;), and a series of more granular endpoints to modify a subset of the branch protection settings.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This will be a breaking change for the protected branch API.&lt;/strong&gt; The deprecated API endpoint will be removed when the protected branches API will leave the preview period. If you're trying out the old protected branches API, you'll need to update your code.&lt;/p&gt;
+
+&lt;h4&gt;
+&lt;a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;How can I try it?&lt;/h4&gt;
+
+&lt;p&gt;To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.loki-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Take a look at &lt;a href="/v3/repos/branches/"&gt;the docs here&lt;/a&gt;. If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+API+Preview"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-06-22:/changes/2016-06-22-issue-locking-api-is-now-official/</id>
     <title type="html">Issue locking and unlocking APIs are now official</title>
@@ -701,7 +729,9 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
       <uri>https://github.com/technoweenie</uri>
     </author>
     <link rel="alternate" href="http://developer.github.com/changes/2015-11-11-protected-branches-api/"/>
-    <content type="html">&lt;p&gt;We're starting a preview period for the &lt;a href="https://github.com/blog/2051-protected-branches-and-required-status-checks"&gt;protected branches&lt;/a&gt; API. Protecting a branch prevents force-pushes to it as well as deleting it. You can also specify required status checks that are required to merge code into the branch.&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;strong&gt;UPDATE (2016-06-27):&lt;/strong&gt; As &lt;a href="/changes/2016-06-27-protected-branches-api-update/"&gt;announced&lt;/a&gt;, there is an extended version of the protected branches API available. This older version will be removed once the new one becomes official.&lt;/p&gt;
+
+&lt;p&gt;We're starting a preview period for the &lt;a href="https://github.com/blog/2051-protected-branches-and-required-status-checks"&gt;protected branches&lt;/a&gt; API. Protecting a branch prevents force-pushes to it as well as deleting it. You can also specify required status checks that are required to merge code into the branch.&lt;/p&gt;
 
 &lt;p&gt;To protect a branch, make a &lt;code&gt;PATCH&lt;/code&gt; request to the URL of the branch:&lt;/p&gt;
 
@@ -731,7 +761,7 @@ curl "https://api.github.com/repos/github/hubot/branches/master" \
 &lt;pre&gt;&lt;code&gt;application/vnd.github.loki-preview+json
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Take a look at &lt;a href="/v3/repos/#enabling-and-disabling-branch-protection"&gt;the docs here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Take a look at &lt;a href="/v3/repos/branches/"&gt;the docs here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+API+Preview"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
@@ -1059,46 +1089,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 &lt;p&gt;These IP addresses are used to &lt;a href="https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider/"&gt;configure A records with your DNS provider for GitHub Pages&lt;/a&gt;. These addresses have changed a few times in the past. This API always provides the current addresses so that you can automate the process of keeping your DNS records up to date.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+A+Records+Added+to+API"&gt;get in touch&lt;/a&gt;. We’ll be happy to help.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-06-10:/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/</id>
-    <title type="html">Breaking changes to organization permissions coming on June 24</title>
-    <published>2015-06-10T07:00:00Z</published>
-    <updated>2015-06-10T07:00:00Z</updated>
-    <author>
-      <name>jakeboxer</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/"/>
-    <content type="html">&lt;p&gt;Back in January, we &lt;a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/"&gt;encouraged developers to update their applications&lt;/a&gt; to prepare for &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;upcoming API changes&lt;/a&gt; related to managing organization members and repositories. In order to support the upcoming &lt;a href="https://github.com/blog/2020-improved-organization-permissions/"&gt;improvements to organization permissions&lt;/a&gt;, these changes will become official parts of GitHub API v3 on &lt;strong&gt;June 24&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;If your application relies on any of the affected functionality (described below), be sure to &lt;strong&gt;update your code before June 24&lt;/strong&gt; to account for these changes.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Breaking changes coming on June 24&lt;/h2&gt;
-
-&lt;p&gt;If your application uses any of the following APIs, then you are affected by this change:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;APIs for managing your organization's admins through the Owners team&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/repos/#list-your-repositories"&gt;List your repositories&lt;/a&gt; API&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/orgs/#list-user-organizations"&gt;List user organizations&lt;/a&gt; API&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If your application uses these APIs, we urge you to update your application as soon as possible. (Read &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;December's announcement&lt;/a&gt; for full details on the changes.)&lt;/p&gt;
-
-&lt;p&gt;In January, we &lt;a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/"&gt;announced a migration period&lt;/a&gt; allowing API consumers to opt in to these changes. If you haven't already opted in to these changes, you still do so as described below. On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Migration period&lt;/h2&gt;
-
-&lt;p&gt;During these final days of the migration period, you can opt in to these changes using the following custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.moondragon+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
   </entry>
 </feed>
 

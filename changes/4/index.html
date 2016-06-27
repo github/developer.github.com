@@ -44,7 +44,61 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-05-26-repository-redirects-are-coming/">
+      <div class="change" id="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">
+  <h2 class="title">
+<a id="--breaking-changes-to-organization-permissions-coming-on-june-24" class="anchor" href="#--breaking-changes-to-organization-permissions-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 10, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Back in January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">encouraged developers to update their applications</a> to prepare for <a href="/changes/2014-12-08-organization-permissions-api-preview/">upcoming API changes</a> related to managing organization members and repositories. In order to support the upcoming <a href="https://github.com/blog/2020-improved-organization-permissions/">improvements to organization permissions</a>, these changes will become official parts of GitHub API v3 on <strong>June 24</strong>.</p>
+
+<p>If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
+
+<h2>
+<a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>Breaking changes coming on June 24</h2>
+
+<p>If your application uses any of the following APIs, then you are affected by this change:</p>
+
+<ul>
+<li>APIs for managing your organization's admins through the Owners team</li>
+<li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API</li>
+<li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API</li>
+<li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API</li>
+</ul>
+
+<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">December's announcement</a> for full details on the changes.)</p>
+
+<p>In January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">announced a migration period</a> allowing API consumers to opt in to these changes. If you haven't already opted in to these changes, you still do so as described below. On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+
+<h2>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
+
+<p>During these final days of the migration period, you can opt in to these changes using the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon+json
+</code></pre>
+
+<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
+</div>
+
+<div class="change" id="/changes/2015-05-26-repository-redirects-are-coming/">
   <h2 class="title">
 <a id="--repository-redirects-are-coming-to-api-v3-in-july" class="anchor" href="#--repository-redirects-are-coming-to-api-v3-in-july" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-05-26-repository-redirects-are-coming/">Repository redirects are coming to API v3 in July</a>
@@ -361,7 +415,7 @@ media type.</p>
 <p>Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On April 20, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
 
 <h3>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h3>
 
 <p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
@@ -440,128 +494,6 @@ media type.</p>
 <p>Because of the change to <code>hashed_token</code>, we are extending the preview period by two weeks. If no additional changes are made during this extended preview period we will announce the end of the preview and beginning of the eight week migration period on February 17. The migration period will allow applications to opt in to these changes before they become an official part of the GitHub API v3.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>!</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">
-  <h2 class="title">
-<a id="--an-integrators-guide-to-organization-application-policies" class="anchor" href="#--an-integrators-guide-to-organization-application-policies" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">An integrator's guide to organization application policies</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    January 19, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>As we <a href="https://github.com/blog/1941-organization-approved-applications">announced over on the GitHub blog</a>, organization admins can now
-control how third-party applications access their organization data. Allowing
-admins to approve or deny applications will ultimately result in deeper trust
-and increase overall adoption of integrations within organizations on GitHub.</p>
-
-<p>As an integrator, here's what you need to know about organization application
-policies and how this feature could impact your application.</p>
-
-<h3>
-<a id="guiding-principles" class="anchor" href="#guiding-principles" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="guiding-principles" class="anchor" href="#guiding-principles" aria-hidden="true"><span class="octicon octicon-link"></span></a>Guiding principles</h3>
-
-<p>We've tried to strike the right balance between organization privacy and the
-user experience for integrators and end users. Organizations should be able to
-prevent applications they do not trust from accessing their organization data
-without creating a multitude of new edge cases for integrators.</p>
-
-<p>With that goal in mind, the feature works like this: <strong>if an organization's
-application policy prevents an application from accessing its resources, the
-API behaves as if the authenticating user is not a member of the
-organization</strong>. Specifically, this means an application authenticating on
-behalf of a user using OAuth will have:</p>
-
-<ul>
-<li>
-<strong>Read-only access to public resources.</strong> Organization-owned public
-repositories, issues, and other resources will be visible via the API and
-show up in resource listings, but mutating methods (<code>POST</code>, <code>PATCH</code>, <code>PUT</code>,
-and <code>DELETE</code>) will return status <code>403</code>.</li>
-<li>
-<strong>No access to private resources.</strong> Organization-owned private repositories,
-issues, and other resources will not be visible via the API and will not
-show up in resource <a href="/v3/issues/#list-issues">listings</a> that co-mingle public and private
-resources. Hooks for these private repositories are muted and will not be
-delivered as long as the application is restricted by the organization.</li>
-</ul>
-
-<p>Since applications should already handle the scenario where a user loses access
-to organization resources, this reduces the work integrators need to do.</p>
-
-<h3>
-<a id="checking-organization-access" class="anchor" href="#checking-organization-access" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="checking-organization-access" class="anchor" href="#checking-organization-access" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking organization access</h3>
-
-<p>As organization admins adopt application whitelists and restrict third-party
-application access to organization resources, your application may lose access
-to those resources. If an organization member is not aware of the new access
-policy, they may wonder why their private repositories or other resources no
-longer work or show up in your application.</p>
-
-<p>There are a couple ways to help troubleshoot access for your end users.</p>
-
-<ul>
-<li><p><strong>Via the GitHub UI.</strong> The simplest way to help end users understand how
-organization access policies affect their access to your application is to
-provide a link to <a href="https://help.github.com/articles/requesting-organization-approval-for-your-authorized-applications/">their authorization details</a>
-under their GitHub account settings as <a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application">described in the OAuth
-documentation</a>.</p></li>
-<li><p><strong>Via the API.</strong> For an even better user experience, <a href="/guides/discovering-resources-for-a-user/">use the
-API</a> to list which user organizations your application
-can access, and provide users with the link mentioned above to request
-access from their organization admins.</p></li>
-</ul>
-
-<h3>
-<a id="listing-accessible-organization-resources" class="anchor" href="#listing-accessible-organization-resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="listing-accessible-organization-resources" class="anchor" href="#listing-accessible-organization-resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listing accessible organization resources</h3>
-
-<p>In addition to checking access to a user's organizations, you'll want to ensure
-you're discovering their accessible resources in the most efficient way. Recent
-changes to the <a href="/v3/repos/#list-your-repositories">Repositories API</a> might reduce the API calls
-your application needs to make to find a user's repositories across all of
-their organization memberships.</p>
-
-<h3>
-<a id="ensuring-uninterrupted-ssh-access" class="anchor" href="#ensuring-uninterrupted-ssh-access" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="ensuring-uninterrupted-ssh-access" class="anchor" href="#ensuring-uninterrupted-ssh-access" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ensuring uninterrupted SSH access</h3>
-
-<p>Since applications should already handle the scenario where a user loses access
-to organization resources (e.g., when a user leaves an organization), this
-reduces the work integrators need to do. Keys created by OAuth applications (or
-those created before GitHub started tracking that information) will not have
-access to repositories owned by organizations that restrict third-party
-applications. If your application uses keys <strong>created before February 24,
-2014</strong>, you <a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">should replace those older keys</a> to ensure things keep
-running smoothly for your application.</p>
-
-<h3>
-<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>We're here to help</h3>
-
-<p>This is a big feature, and we're sure it will impact many of our integrators as
-organizations adopt third-party application restrictions. We also think it
-provides a huge net benefit for integrators as organizations choose to use
-OAuth integrations with more confidence.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Access+Policies+help+for+integrators">get in touch</a>.</p>
 
 <p></p>
 </div>
@@ -696,6 +628,8 @@ OAuth integrations with more confidence.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
@@ -709,8 +643,6 @@ OAuth integrations with more confidence.</p>
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
 </ul>
 

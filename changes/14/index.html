@@ -44,7 +44,45 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-10-17-org-members-redirection/">
+      <div class="change" id="/changes/2012-10-24-set-default-branch/">
+  <h2 class="title">
+<a id="--set-the-default-branch-for-a-repository" class="anchor" href="#--set-the-default-branch-for-a-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-10-24-set-default-branch/">Set the default branch for a repository</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 24, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>You can set the default branch for a repository to something other than 'master' from the GitHub repository admin screen:</p>
+
+<p><img src="/assets/images/posts/default-branch.png" alt="repo admin"></p>
+
+<p>Now, you can update this setting via the API. We've added a <code>default_branch</code> parameter to the <a href="/v3/repos/#edit">Edit Repository method</a>:</p>
+
+<pre class="command-line">
+<span class="command">curl -u pengwynn \</span>
+<span class="command">     -d '{"name": "octokit", "default_branch":"development"}' \</span>
+<span class="command">     https://api.github.com/repos/octokit/octokit.rb</span>
+</pre>
+
+<p>If you provide a branch name that hasn't been pushed to GitHub, we'll gracefully fall back to <code>'master'</code> or the first branch.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-10-17-org-members-redirection/">
   <h2 class="title">
 <a id="--organization-members-resource-changes" class="anchor" href="#--organization-members-resource-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-17-org-members-redirection/">Organization Members Resource Changes</a>
@@ -430,6 +468,8 @@ old API functionality.</s></p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
@@ -443,8 +483,6 @@ old API functionality.</s></p>
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
 </ul>
 

@@ -44,7 +44,41 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
+      <div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+<a id="--commit-statuses-now-available-for-branches-and-tags" class="anchor" href="#--commit-statuses-now-available-for-branches-and-tags" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca" data-proofer-ignore>
+      <a href="https://github.com/foca" data-proofer-ignore>foca</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="command-line">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
 <a id="--improved-support-for-submodules-in-the-repository-contents-api" class="anchor" href="#--improved-support-for-submodules-in-the-repository-contents-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -407,43 +441,6 @@ many of our users to make any changes whatsoever.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-01-08-new-user-scopes/">
-  <h2 class="title">
-<a id="--new-user-scopes" class="anchor" href="#--new-user-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-01-08-new-user-scopes/">New User scopes</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    January 8, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
-      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We've added a <a href="http://developer.github.com/v3/oauth/#scopes">few new user scopes</a> for 3rd party applications that want very
-specific user functionality.  The <code>user:email</code> scope gives apps read-only access
-to a user's private email addresses.  The <code>user:follow</code> scope lets a user
-follow and unfollow other users.</p>
-
-<p>This should help keep applications from requiring the <code>user</code> scope, which
-can be potentially dangerous.</p>
-
-<p>We also added a read-only endpoint to get a user's public SSH keys.</p>
-
-<pre><code>GET https://api.github.com/users/technoweenie/keys
-</code></pre>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -537,6 +534,8 @@ can be potentially dangerous.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
@@ -550,8 +549,6 @@ can be potentially dangerous.</p>
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
 </ul>
 

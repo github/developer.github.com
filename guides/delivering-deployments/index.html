@@ -73,9 +73,9 @@ the moment your code lands on <code>master</code>.</p>
 In our scenario, we will:</p>
 
 <ul>
-<li>Merge a Pull Request</li>
-<li>When the CI is finished, we'll set the Pull Request's status accordingly.</li>
-<li>When the Pull Request is merged, we'll run our deployment to our server.</li>
+<li>Merge a pull request</li>
+<li>When the CI is finished, we'll set the pull request's status accordingly.</li>
+<li>When the pull request is merged, we'll run our deployment to our server.</li>
 </ul>
 
 <p>Our CI system and host server will be figments of our imagination. They could be
@@ -111,7 +111,7 @@ Let's start with this:</p>
 to configure ngrok to start listening for that, too.</p>
 
 <p>In order for this server to work, we'll need to set a repository up with a webhook.
-The webhook should be configured to fire whenever a Pull Request is created, or merged.
+The webhook should be configured to fire whenever a pull request is created, or merged.
 Go ahead and create a repository you're comfortable playing around in. Might we
 suggest <a href="https://github.com/octocat/Spoon-Knife">@octocat's Spoon/Knife repository</a>?
 After that, you'll create a new webhook in your repository, feeding it the URL
@@ -130,7 +130,7 @@ Great! Click on <strong>Let me select individual events.</strong>, and select th
 </ul>
 
 <p>These are the events GitHub will send to our server whenever the relevant action
-occurs. We'll configure our server to <em>just</em> handle when Pull Requests are merged
+occurs. We'll configure our server to <em>just</em> handle when pull requests are merged
 right now:</p>
 
 <pre class="highlight highlight-ruby"><code><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>

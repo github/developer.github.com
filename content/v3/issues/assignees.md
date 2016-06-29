@@ -64,7 +64,7 @@ This call adds the users passed in the `assignees` key (as their logins) to the 
 ### Response
 
 <%= headers 201 %>
-<%= json(:issue_with_assignees) { |h| [h] } %>
+<%= json :issue_with_assignees %>
 
 ## Remove assignees from an Issue
 
@@ -93,4 +93,4 @@ This call removes the users passed in the `assignees` key (as their logins) from
 ### Response
 
 <%= headers 200 %>
-<%= json(:issue_with_assignees) { |h| [h] } %>
+<%= json :issue_with_assignees %>

@@ -22,6 +22,11 @@ module GitHub
         "created_at" => "2014-02-10T19:00:49Z",
         "updated_at" => "2014-02-10T19:00:51Z"
       }
+
+      PAGES_REQUEST_BUILD ||= {
+        "url" => "https://api.github.com/repos/github/developer.github.com/pages/builds/latest",
+        "status" => "queued"
+      }
     end
   end
 end

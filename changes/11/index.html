@@ -44,7 +44,65 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
+      <div class="change" id="/changes/2013-10-08-list-all-user-teams/">
+  <h2 class="title">
+<a id="--list-all-teams-for-the-authenticated-user" class="anchor" href="#--list-all-teams-for-the-authenticated-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-10-08-list-all-user-teams/">List all teams for the authenticated user</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 8, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
+the teams for the authenticated user across all organizations:</p>
+
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token [yours]" https://api.github.com/user/teams</span>
+
+<span class="output">[</span>
+<span class="output">  {</span>
+<span class="output">    "name": "Testing",</span>
+<span class="output">    "id": 396018,</span>
+<span class="output">    "slug": "testing",</span>
+<span class="output">   "permission": "pull",</span>
+<span class="output">   "url": "https://api.github.com/teams/396018",</span>
+<span class="output">   "members_url": "https://api.github.com/teams/396018/members{/member}",</span>
+<span class="output">   "repositories_url": "https://api.github.com/teams/396018/repos",</span>
+<span class="output">   "members_count": 1,</span>
+<span class="output">   "repos_count": 0,</span>
+<span class="output">   "organization": {</span>
+<span class="output">     "login": "dotfiles",</span>
+<span class="output">     "id": 1593590,</span>
+<span class="output">     "url": "https://api.github.com/orgs/dotfiles",</span>
+<span class="output">     "repos_url": "https://api.github.com/orgs/dotfiles/repos",</span>
+<span class="output">     "events_url": "https://api.github.com/orgs/dotfiles/events",</span>
+<span class="output">     "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",</span>
+<span class="output">     "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",</span>
+<span class="output">     "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"</span>
+<span class="output">   }</span>
+<span class="output"> },</span>
+<span class="output"> ...</span>
+<span class="output">]</span>
+</pre>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Teams+for+User">drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
   <h2 class="title">
 <a id="--oauth-changes-coming" class="anchor" href="#--oauth-changes-coming" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-04-oauth-changes-coming/">OAuth changes coming</a>
@@ -609,46 +667,6 @@ resources available to the authenticated user.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-05-06-repository-stats/">
-  <h2 class="title">
-<a id="--repository-statistics" class="anchor" href="#--repository-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/Caged.png" alt="Avatar for Caged" data-proofer-ignore>
-      <a href="https://github.com/Caged" data-proofer-ignore>Caged</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Today we're happy to open our <a href="/v3/repos/statistics">Repository Statistics API</a> to everyone.  We're using
-repository statistics to power <a href="https://github.com/github/linguist/graphs">our graphs</a>,
-but we can't wait to see what others can do with this information.</p>
-
-<p>Starting today, these resources are available to you:</p>
-
-<ul>
-<li><strong><a href="/v3/repos/statistics/#contributors">Contributors</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#commit-activity">Commit Activity</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#code-frequency">Code Frequency</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#participation">Participation</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#punch-card">Punch Card</a></strong></li>
-</ul>
-
-<p>Enjoy!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -753,6 +771,8 @@ but we can't wait to see what others can do with this information.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-07-06-github-pages-preiew-api/">Introducing the GitHub Pages preview API<br /><span class="date">July 6, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
@@ -766,8 +786,6 @@ but we can't wait to see what others can do with this information.</p>
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
 </ul>
 

@@ -44,7 +44,94 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-10-24-set-default-branch/">
+      <div class="change" id="/changes/2012-10-26-notifications-api/">
+  <h2 class="title">
+<a id="--notifications-api" class="anchor" href="#--notifications-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-10-26-notifications-api/">Notifications API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 26, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Now that the dust has settled around <a href="https://github.com/blog/1204-notifications-stars">Notifications and Stars</a>,
+we've unleashed all that <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2728.png" height="20" width="20" align="absmiddle"> in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
+view and mark notifications as read.</p>
+
+<h2>
+<a id="endpoint" class="anchor" href="#endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="endpoint" class="anchor" href="#endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Endpoint</h2>
+
+<p>The core notifications functionality is under the <code>/notifications</code> endpoint.
+You can look for unread notifications:</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/notifications</span>
+</pre>
+
+<p>You can filter these notifications to a single Repository:</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications</span>
+</pre>
+
+<p>You can mark them as read:</p>
+
+<pre class="command-line">
+<span class="comment"># all notifications</span>
+<span class="command">curl https://api.github.com/notifications \</span>
+<span class="command">   -X PUT -d '{"read": true}'</span>
+
+<span class="comment"># notifications for a single repository</span>
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications \</span>
+<span class="command">   -X PUT -d '{"read": true}'</span>
+</pre>
+
+<p>You can also modify subscriptions for a Repository or a single thread.</p>
+
+<pre class="command-line">
+<span class="comment"># subscription details for the thread (either an Issue or Commit)</span>
+<span class="command">curl https://api.github.com/notifications/threads/1/subscription</span>
+
+<span class="comment"># subscription details for a whole Repository.</span>
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/subscription</span>
+</pre>
+
+<h2>
+<a id="polling" class="anchor" href="#polling" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="polling" class="anchor" href="#polling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Polling</h2>
+
+<p>The Notifications API is optimized for polling by the last modified time:</p>
+
+<pre class="command-line">
+<span class="comment"># Add authentication to your requests</span>
+<span class="command">curl -I https://api.github.com/notifications</span>
+<span class="output">HTTP/1.1 200 OK</span>
+<span class="output">Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT</span>
+<span class="output">X-Poll-Interval: 60</span>
+
+<span class="comment"># Pass the Last-Modified header exactly</span>
+<span class="command">curl -I https://api.github.com/notifications</span>
+<span class="command">   -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"</span>
+<span class="output">HTTP/1.1 304 Not Modified</span>
+<span class="output">X-Poll-Interval: 60</span>
+</pre>
+
+<p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
+</div>
+
+<div class="change" id="/changes/2012-10-24-set-default-branch/">
   <h2 class="title">
 <a id="--set-the-default-branch-for-a-repository" class="anchor" href="#--set-the-default-branch-for-a-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-24-set-default-branch/">Set the default branch for a repository</a>
@@ -468,6 +555,8 @@ old API functionality.</s></p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-07-06-github-pages-preiew-api/">Introducing the GitHub Pages preview API<br /><span class="date">July 6, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
@@ -481,8 +570,6 @@ old API functionality.</s></p>
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
 </ul>
 

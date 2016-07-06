@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>API changes for Repository Invitations | GitHub Developer Guide</title>
+  <title>Introducing the GitHub Pages preview API | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,44 +44,66 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-06-14-repository-invitations/">
+      <div class="change" id="/changes/2016-07-06-github-pages-preiew-api/">
 <h2 class="title">
-  <a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations</a>
+  <a href="/changes/2016-07-06-github-pages-preiew-api/">Introducing the GitHub Pages preview API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    June 14, 2016
+    July 6, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/CoralineAda.png" alt="Avatar for CoralineAda" data-proofer-ignore/>
-      <a href="https://github.com/CoralineAda" data-proofer-ignore>CoralineAda</a>
+    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore/>
+      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
   </li>
 </ul>
 </div>
 
 
-<p>We announced <a href="https://github.com/blog/2170-repository-invitations">repository invitation functionality</a> on May 23. Using the site, you can invite collaborators to work on your repository. Invitees will receive an email with the invitation and have the option to accept or decline.</p>
+<p>We're introducing additional preview functionality to the <a href="/v3/repos/pages/">GitHub Pages API</a> to give developers better control over their GitHub Pages site.</p>
 
-<p>We have now have endpoints for managing repository invitations for both repository administrators and invitation recipients through the GitHub API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<h4>
+<a id="requesting-a-page-build" class="anchor" href="#requesting-a-page-build" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requesting a page build</h4>
 
-<pre><code>application/vnd.github.swamp-thing-preview
-</code></pre>
-
-<p>For example:</p>
+<p>You can now manually request a build of your GitHub Pages site without needing to push a new commit by making a <code>POST</code> request to the endpoint already available to see past builds. For example:</p>
 
 <pre class="command-line">
-curl "https://api.github.com/api/v3/repositories/1313/invitations" \
+curl "https://api.github.com/repositories/github/developer.github.com/pages/builds" \
+  -X POST
   -H 'Authorization: token TOKEN' \
-  -H "Accept: application/vnd.github.swamp-thing-preview" \
+  -H "Accept: application/vnd.github.mister-fantstic-preview" \
 </pre>
 
-<p>You can learn more about the new endpoints in the updated <a href="/v3/repos/collaborators">Collaborators</a> and new <a href="/v3/repos/invitations">Repository Invitations</a> documentation.</p>
+<h4>
+<a id="retrieving-a-sites-url" class="anchor" href="#retrieving-a-sites-url" aria-hidden="true"><span class="octicon octicon-link"></span></a>Retrieving a site's URL</h4>
 
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Repository+Invitations+API+Preview">let us know</a>.</p>
+<p>With the introduction of <a href="https://github.com/blog/2186-https-for-github-pages">HTTPS support for GitHub Pages sites</a>, it's important to know not just a site's custom domain, if it has one, but also if it has HTTPS enforcement enabled. The GitHub Pages API will now return an additional <code>html_url</code> field, which will include the computed absolute URL to the site.</p>
+
+<p>The resulting URL can be <code>https://username.github.io</code> (or <code>http://username.github.io</code>) for user sites without a custom domain, <code>https://username.gituhb.io/project</code> for project sites, or <code>http://example.com</code> for sites with custom domains, saving third-party applications the trouble of having to construct complicated URL logic based on the username, owner, and CNAME, as was previously necessary.</p>
+
+<p>For example, to request the HTML URL:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/repositories/github/developer.github.com/pages" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.mister-fantstic-preview" \
+</pre>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.mister-fantastic-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>For more information, take a look at <a href="/v3/repos/pages/">the docs here</a>, and if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+API+Preview">get in touch</a>.</p>
 </div>
 
     </div>

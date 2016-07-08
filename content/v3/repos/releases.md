@@ -196,10 +196,9 @@ This may leave an empty asset with a state of `"new"`.  It can be safely deleted
 
 {{#tip}}
 
-If you want to download the asset's binary content, pass a media type of
-`"application/octet-stream"`. The API will either redirect the client to the
-location, or stream it directly if possible.  API clients should handle both a
-`200` or `302` response.
+To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://developer.github.com/v3/media/#media-types).
+The API will either redirect the client to the location, or stream it directly if possible.
+API clients should handle both a `200` or `302` response.
 
 {{/tip}}
 

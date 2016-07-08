@@ -10,7 +10,7 @@ We're introducing additional preview functionality to the [GitHub Pages API](/v3
 You can now manually request a build of your GitHub Pages site without needing to push a new commit by making a `POST` request to the endpoint already available to see past builds. For example:
 
 ``` command-line
-curl "https://api.github.com/repositories/github/developer.github.com/pages/builds" \
+curl "https://api.github.com/repos/github/developer.github.com/pages/builds" \
   -X POST
   -H 'Authorization: token TOKEN' \
   -H "Accept: application/vnd.github.mister-fantstic-preview" \
@@ -25,7 +25,7 @@ The resulting URL can be `https://username.github.io` (or `http://username.githu
 For example, to request the HTML URL:
 
 ``` command-line
-curl "https://api.github.com/repositories/github/developer.github.com/pages" \
+curl "https://api.github.com/repos/github/developer.github.com/pages" \
   -H 'Authorization: token TOKEN' \
   -H "Accept: application/vnd.github.mister-fantstic-preview" \
 ```

@@ -72,7 +72,7 @@ The API will return a 401 "Bad credentials" response if the gists scope was give
 <a id="truncation" class="anchor" href="#truncation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Truncation</h2>
 <p>The Gist API provides up to one megabyte of content for each file in the gist. Each file returned for a gist through the API has a key called <code>truncated</code>. If <code>truncated</code> is <code>true</code>, the file is too large and only a portion of the contents were returned in <code>content</code>.</p>
 <p>If you need the full contents of the file, you can make a <code>GET</code> request to the URL specified by <code>raw_url</code>. Be aware that for files larger than ten megabytes, you'll need to clone the gist via the URL provided by <code>git_pull_url</code>.</p>
-<p>In addition to a specific file's contents being truncated, the entire files list may be trucated if the total number exceeds 300 files. If the top level <code>truncated</code> key is <code>true</code>, only the first 300 files have been returned in the files list. If you need to fetch all of the gist's files, you'll need to clone the gist via the URL provided by <code>git_pull_url</code>.</p>
+<p>In addition to a specific file's contents being truncated, the entire files list may be truncated if the total number exceeds 300 files. If the top level <code>truncated</code> key is <code>true</code>, only the first 300 files have been returned in the files list. If you need to fetch all of the gist's files, you'll need to clone the gist via the URL provided by <code>git_pull_url</code>.</p>
 <h2>
 <a id="list-a-users-gists" class="anchor" href="#list-a-users-gists" aria-hidden="true"><span class="octicon octicon-link"></span></a>List a user's gists</h2>
 <p>List public gists for the specified user:</p>
@@ -1128,7 +1128,6 @@ application/vnd.github.VERSION.base64
           <li><a href="/enterprise/2.2/v3/licenses/">Licenses</a></li>
           <li><a href="/enterprise/2.2/v3/markdown/">Markdown</a></li>
           <li><a href="/enterprise/2.2/v3/meta/">Meta</a></li>
-          <li><a href="/enterprise/2.2/v3/rate_limit/">Rate Limit</a></li>
         </ul>
 </li>
       <li class="js-topic">
@@ -1165,7 +1164,8 @@ application/vnd.github.VERSION.base64
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/repos/">Repositories</a>
 </h3>
         <ul class="js-guides">
-<li><a href="/enterprise/2.2/v3/repos/collaborators/">Collaborators</a></li>
+<li><a href="/enterprise/2.2/v3/repos/branches/">Branches</a></li>
+          <li><a href="/enterprise/2.2/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/enterprise/2.2/v3/repos/comments/">Comments</a></li>
           <li><a href="/enterprise/2.2/v3/repos/commits/">Commits</a></li>
           <li><a href="/enterprise/2.2/v3/repos/contents/">Contents</a></li>
@@ -1173,6 +1173,7 @@ application/vnd.github.VERSION.base64
           <li><a href="/enterprise/2.2/v3/repos/deployments/">Deployments</a></li>
           <li><a href="/enterprise/2.2/v3/repos/downloads/">Downloads</a></li>
           <li><a href="/enterprise/2.2/v3/repos/forks/">Forks</a></li>
+          <li><a href="/enterprise/2.2/v3/repos/invitations/">Invitations</a></li>
           <li><a href="/enterprise/2.2/v3/repos/merging/">Merging</a></li>
           <li><a href="/enterprise/2.2/v3/repos/pages/">Pages</a></li>
           <li><a href="/enterprise/2.2/v3/repos/releases/">Releases</a></li>

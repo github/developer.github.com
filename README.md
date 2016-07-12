@@ -46,6 +46,18 @@ Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you s
 
 [nanoc]: http://nanoc.ws/
 
+### Enterprise
+
+To generate the `/enterprise/` versions, use `script/enterprise-backport`:
+
+``` sh
+$ script/enterprise-backport 2.6
+$ mv -f enterprise output
+$ script/server
+```
+
+The above will need to be repeated anytime changes are made to `/enterprise` versioned documentation.
+
 ## Styleguide
 
 Not sure how to structure the docs?  Here's what the structure of the

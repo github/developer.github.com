@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Language" content="en-us">
 <meta http-equiv="imagetoolbar" content="false">
 <meta name="MSSmartTagsPreventParsing" content="true">
-<title>Admin Stats | GitHub Developer Guide</title>
+<title>Branches | GitHub Developer Guide</title>
 <link href="/enterprise/2.3/assets/stylesheets/application.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script src="/enterprise/2.3/assets/javascripts/application.js" type="text/javascript"></script>
 </head>
@@ -43,138 +43,7 @@
   <div id="wrapper">
     <div class="content">
       <h1>
-<a id="admin-stats" class="anchor" href="#admin-stats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Admin Stats</h1>
-<ul id="markdown-toc">
-<li><a href="#get-statistics" id="markdown-toc-get-statistics">Get statistics</a></li>
-</ul>
-<p>The Admin Stats API provides a variety of metrics about your installation. <em>It is only available to <a href="/enterprise/2.3/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>404</code> response if they try to access it.</p>
-<p>Prefix all the endpoints for this API with the following URL:</p>
-<pre class="command-line">
-http(s)://<em>hostname</em>/api/v3
-</pre>
-<h2>
-<a id="get-statistics" class="anchor" href="#get-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get statistics</h2>
-<h3>
-<a id="request" class="anchor" href="#request" aria-hidden="true"><span class="octicon octicon-link"></span></a>Request</h3>
-<pre><code>GET /enterprise/stats/:type
-</code></pre>
-<p>There are a variety of types to choose from:</p>
-<table>
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>issues</code></td>
-<td>The number of open and closed issues.</td>
-</tr>
-<tr>
-<td><code>hooks</code></td>
-<td>The number of active and inactive hooks.</td>
-</tr>
-<tr>
-<td><code>milestones</code></td>
-<td>The number of open and closed milestones.</td>
-</tr>
-<tr>
-<td><code>orgs</code></td>
-<td>The number of organizations, teams, team members, and disabled organizations.</td>
-</tr>
-<tr>
-<td><code>comments</code></td>
-<td>The number of comments on issues, pull requests, commits, and gists.</td>
-</tr>
-<tr>
-<td><code>pages</code></td>
-<td>The number of GitHub Pages sites.</td>
-</tr>
-<tr>
-<td><code>users</code></td>
-<td>The number of suspended and admin users.</td>
-</tr>
-<tr>
-<td><code>gists</code></td>
-<td>The number of private and public gists.</td>
-</tr>
-<tr>
-<td><code>pulls</code></td>
-<td>The number of merged, mergeable, and unmergeable pull requests.</td>
-</tr>
-<tr>
-<td><code>repos</code></td>
-<td>The number of organization-owned repositories, root repositories, forks, pushed commits, and wikis.</td>
-</tr>
-<tr>
-<td><code>all</code></td>
-<td>All of the statistics listed above.</td>
-</tr>
-</tbody>
-</table>
-<p>These statistics are cached and will be updated approximately every 10 minutes.</p>
-<h3>
-<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-<pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"repos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">212</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"root_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">194</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fork_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"org_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_pushes"</span><span class="p">:</span><span class="w"> </span><span class="mi">3082</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_wikis"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_hooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"active_hooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"inactive_hooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"orgs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_orgs"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"disabled_orgs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_teams"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_team_members"</span><span class="p">:</span><span class="w"> </span><span class="mi">314</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_users"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"admin_users"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"suspended_users"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"pulls"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merged_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mergeable_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"unmergeable_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"issues"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_issues"</span><span class="p">:</span><span class="w"> </span><span class="mi">179</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"open_issues"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"closed_issues"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"milestones"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_milestones"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"open_milestones"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"closed_milestones"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"gists"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">178</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"private_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">151</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"public_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_commit_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_gist_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_issue_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_pull_request_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<a id="branches" class="anchor" href="#branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Branches</h1>
     </div>
     <div id="js-sidebar" class="sidebar-shell">
   <div class="js-toggle-list sidebar-module expandable">

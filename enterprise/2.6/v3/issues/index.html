@@ -50,6 +50,8 @@
 <li><a href="#get-a-single-issue" id="markdown-toc-get-a-single-issue">Get a single issue</a></li>
 <li><a href="#create-an-issue" id="markdown-toc-create-an-issue">Create an issue</a></li>
 <li><a href="#edit-an-issue" id="markdown-toc-edit-an-issue">Edit an issue</a></li>
+<li><a href="#lock-an-issue" id="markdown-toc-lock-an-issue">Lock an issue</a></li>
+<li><a href="#unlock-an-issue" id="markdown-toc-unlock-an-issue">Unlock an issue</a></li>
 <li><a href="#custom-media-types" id="markdown-toc-custom-media-types">Custom media types</a></li>
 </ul>
 <p>Issues use <a href="#custom-media-types">these custom media types</a>. You can
@@ -586,7 +588,7 @@ X-RateLimit-Remaining: 4999
 <tr>
 <td><code>assignee</code></td>
 <td><code>string</code></td>
-<td>Login for the user that this issue should be assigned to. <em>NOTE: Only users with push access can set the assignee for new issues. The assignee is silently dropped otherwise.</em>
+<td>Login for the user that this issue should be assigned to. <em>NOTE: Only users with push access can set the assignee for new issues. The assignee is silently dropped otherwise. <strong>This field is <a href="https://developer.github.com/v3/versions/#v3-deprecations">deprecated</a>.</strong></em>
 </td>
 </tr>
 <tr>
@@ -603,6 +605,14 @@ X-RateLimit-Remaining: 4999
 <td>Labels to associate with this issue. <em>NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise.</em>
 </td>
 </tr>
+<tr>
+<td><code>assignees</code></td>
+<td>
+<code>array</code> of <code>strings</code>
+</td>
+<td>Logins for Users to assign to this issue. <em>NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise.</em>
+</td>
+</tr>
 </tbody>
 </table>
 <h4>
@@ -611,6 +621,27 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found a bug"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I'm having a problem with this."</span><span class="p">,</span><span class="w">
   </span><span class="nt">"assignee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"assignees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"milestone"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"bug"</span><span class="w">
@@ -775,7 +806,8 @@ X-RateLimit-Remaining: 4999
 <tr>
 <td><code>assignee</code></td>
 <td><code>string</code></td>
-<td>Login for the user that this issue should be assigned to.</td>
+<td>Login for the user that this issue should be assigned to. <strong>This field is <a href="https://developer.github.com/v3/versions/#v3-deprecations">deprecated</a>.</strong>
+</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -796,6 +828,14 @@ X-RateLimit-Remaining: 4999
 <td>Labels to associate with this issue. Pass one or more Labels to <em>replace</em> the set of Labels on this Issue. Send an empty array (<code>[]</code>) to clear all Labels from the Issue. <em>NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise.</em>
 </td>
 </tr>
+<tr>
+<td><code>assignees</code></td>
+<td>
+<code>array</code> of <code>strings</code>
+</td>
+<td>Logins for Users to assign to this issue. Pass one or more user logins to <em>replace</em> the set of assignees on this Issue. .Send an empty array (<code>[]</code>) to clear all assignees from the Issue. <em>NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise.</em>
+</td>
+</tr>
 </tbody>
 </table>
 <h4>
@@ -804,6 +844,27 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found a bug"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I'm having a problem with this."</span><span class="p">,</span><span class="w">
   </span><span class="nt">"assignee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"assignees"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"milestone"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"open"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -942,6 +1003,47 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h2>
+<a id="lock-an-issue" class="anchor" href="#lock-an-issue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lock an issue</h2>
+<div class="alert tip">
+<p><a name="preview-period"></a></p>
+<p>The API to lock an issue is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2016-02-11-issue-locking-api">blog post</a> for full details.</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.6/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>  application/vnd.github.the-key-preview+json
+</code></pre>
+</div>
+<p>Users with push access can lock an issue's conversation.</p>
+<pre><code>PUT /repos/:owner/:repo/issues/:number/lock
+</code></pre>
+<p>Note that you'll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see "<a href="/enterprise/2.6/v3/#http-verbs">HTTP verbs</a>."</p>
+<h3>
+<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<h2>
+<a id="unlock-an-issue" class="anchor" href="#unlock-an-issue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unlock an issue</h2>
+<div class="alert tip">
+<p><a name="preview-period"></a></p>
+<p>The API to unlock an issue is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2016-02-11-issue-locking-api">blog post</a> for full details.</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.6/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>  application/vnd.github.the-key-preview+json
+</code></pre>
+</div>
+<p>Users with push access can unlock an issue's conversation.</p>
+<pre><code>DELETE /repos/:owner/:repo/issues/:number/lock
+</code></pre>
+<h3>
+<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<h2>
 <a id="custom-media-types" class="anchor" href="#custom-media-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom media types</h2>
 <p>These are the supported media types for issues. You can read more about the
 use of media types in the API <a href="/enterprise/2.6/v3/media/">here</a>.</p>
@@ -1022,7 +1124,6 @@ application/vnd.github.VERSION.full+json
           <li><a href="/enterprise/2.6/v3/licenses/">Licenses</a></li>
           <li><a href="/enterprise/2.6/v3/markdown/">Markdown</a></li>
           <li><a href="/enterprise/2.6/v3/meta/">Meta</a></li>
-          <li><a href="/enterprise/2.6/v3/rate_limit/">Rate Limit</a></li>
         </ul>
 </li>
       <li class="js-topic">
@@ -1059,7 +1160,8 @@ application/vnd.github.VERSION.full+json
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.6/v3/repos/">Repositories</a>
 </h3>
         <ul class="js-guides">
-<li><a href="/enterprise/2.6/v3/repos/collaborators/">Collaborators</a></li>
+<li><a href="/enterprise/2.6/v3/repos/branches/">Branches</a></li>
+          <li><a href="/enterprise/2.6/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/enterprise/2.6/v3/repos/comments/">Comments</a></li>
           <li><a href="/enterprise/2.6/v3/repos/commits/">Commits</a></li>
           <li><a href="/enterprise/2.6/v3/repos/contents/">Contents</a></li>
@@ -1067,6 +1169,7 @@ application/vnd.github.VERSION.full+json
           <li><a href="/enterprise/2.6/v3/repos/deployments/">Deployments</a></li>
           <li><a href="/enterprise/2.6/v3/repos/downloads/">Downloads</a></li>
           <li><a href="/enterprise/2.6/v3/repos/forks/">Forks</a></li>
+          <li><a href="/enterprise/2.6/v3/repos/invitations/">Invitations</a></li>
           <li><a href="/enterprise/2.6/v3/repos/merging/">Merging</a></li>
           <li><a href="/enterprise/2.6/v3/repos/pages/">Pages</a></li>
           <li><a href="/enterprise/2.6/v3/repos/releases/">Releases</a></li>

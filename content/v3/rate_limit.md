@@ -2,6 +2,8 @@
 title: Rate Limit
 ---
 
+{% if page.version == 'dotcom' %}
+
 # Rate Limit
 
 The overview documentation describes the [rate limit rules](/v3/#rate-limiting).
@@ -49,3 +51,5 @@ version of the API.
 If you're writing new API client code (or updating your existing code), you
 should use the `"core"` object instead of the `"rate"` object. The `"core"` object
 contains the same information that is present in the `"rate"` object.
+
+{% endif %}

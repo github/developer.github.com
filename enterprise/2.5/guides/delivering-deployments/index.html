@@ -56,9 +56,9 @@ the moment your code lands on <code>master</code>.</p>
 <p>This guide will use that API to demonstrate a setup that you can use.
 In our scenario, we will:</p>
 <ul>
-<li>Merge a Pull Request</li>
-<li>When the CI is finished, we'll set the Pull Request's status accordingly.</li>
-<li>When the Pull Request is merged, we'll run our deployment to our server.</li>
+<li>Merge a pull request</li>
+<li>When the CI is finished, we'll set the pull request's status accordingly.</li>
+<li>When the pull request is merged, we'll run our deployment to our server.</li>
 </ul>
 <p>Our CI system and host server will be figments of our imagination. They could be
 Heroku, Amazon, or something else entirely. The crux of this guide will be setting up
@@ -83,7 +83,7 @@ Let's start with this:</p>
 <p>Start this server up. By default, Sinatra starts on port <code>4567</code>, so you'll want
 to configure ngrok to start listening for that, too.</p>
 <p>In order for this server to work, we'll need to set a repository up with a webhook.
-The webhook should be configured to fire whenever a Pull Request is created, or merged.
+The webhook should be configured to fire whenever a pull request is created, or merged.
 Go ahead and create a repository you're comfortable playing around in. Might we
 suggest <a href="https://github.com/octocat/Spoon-Knife">@octocat's Spoon/Knife repository</a>?
 After that, you'll create a new webhook in your repository, feeding it the URL
@@ -98,7 +98,7 @@ Great! Click on <strong>Let me select individual events.</strong>, and select th
 <li>Pull Request</li>
 </ul>
 <p>These are the events GitHub Enterprise will send to our server whenever the relevant action
-occurs. We'll configure our server to <em>just</em> handle when Pull Requests are merged
+occurs. We'll configure our server to <em>just</em> handle when pull requests are merged
 right now:</p>
 <pre class="highlight highlight-ruby"><code><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
   <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:payload</span><span class="p">])</span>
@@ -142,7 +142,7 @@ merged, and start paying attention to deployments:</p>
 <p>Deployments can have some metadata attached to them, in the form of a <code>payload</code>
 and a <code>description</code>. Although these values are optional, it's helpful to use
 for logging and representing information.</p>
-<p>When a new deployment is created, a completely separate event is trigged. That's
+<p>When a new deployment is created, a completely separate event is triggered. That's
 why we have a new <code>switch</code> case in the event handler for <code>deployment</code>. You can
 use this information to be notified when a deployment has been triggered.</p>
 <p>Deployments can take a rather long time, so we'll want to listen for various events,
@@ -151,7 +151,7 @@ such as when the deployment was created, and what state it's in.</p>
 the output. First, let's complete our <code>process_deployment</code> method:</p>
 <pre class="highlight highlight-ruby"><code><span class="k">def</span> <span class="nf">process_deployment</span>
   <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'payload'</span><span class="p">])</span>
-  <span class="c1"># you can send this information to your chat room, monitor, pager, e.t.c.</span>
+  <span class="c1"># you can send this information to your chat room, monitor, pager, etc.</span>
   <span class="nb">puts</span> <span class="s2">"Processing '</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'description'</span><span class="p">]</span><span class="si">}</span><span class="s2">' for </span><span class="si">#{</span><span class="n">payload</span><span class="p">[</span><span class="s1">'deploy_user'</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">payload</span><span class="p">[</span><span class="s1">'environment'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># simulate work</span>
   <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'repository'</span><span class="p">][</span><span class="s1">'full_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>

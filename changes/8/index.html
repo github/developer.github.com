@@ -44,7 +44,107 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-04-25-user-content-security/">
+      <div class="change" id="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">
+  <h2 class="title">
+<a id="--improved-pagination-for-the-repository-commits-api" class="anchor" href="#--improved-pagination-for-the-repository-commits-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 9, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak" data-proofer-ignore>
+      <a href="https://github.com/izuzak" data-proofer-ignore>izuzak</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>The <a href="/v3/repos/commits/">Repository Commits API</a> now supports an additional approach for paginating <a href="/v3/repos/commits/#list-commits-on-a-repository">commit lists</a>. As of today, this endpoint supports the "standard" <a href="/v3/#pagination"><code>page</code> and <code>per_page</code> parameters</a> for controlling pagination. This API now uses these parameters by default when constructing <a href="/v3/#pagination">page links</a>.</p>
+
+<h2>
+<a id="improved-results-and-increased-consistency" class="anchor" href="#improved-results-and-increased-consistency" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="improved-results-and-increased-consistency" class="anchor" href="#improved-results-and-increased-consistency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Improved results and increased consistency</h2>
+
+<p>This new approach improves the reliability of this endpoint, which on rare occasions skipped some commits during pagination. This enhancement also increases the overall consistency of the API, as all endpoints now paginate resource lists the same way.</p>
+
+<h2>
+<a id="old-parameters-still-supported" class="anchor" href="#old-parameters-still-supported" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="old-parameters-still-supported" class="anchor" href="#old-parameters-still-supported" aria-hidden="true"><span class="octicon octicon-link"></span></a>Old parameters still supported</h2>
+
+<p>The old way of paginating, using <code>top</code>, <code>last_sha</code>, and <code>per_page</code> parameters, is still supported in API v3, but it will be removed in the <a href="https://developer.github.com/v3/versions/#v3-deprecations">next major version of the API</a>. API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn't construct URLs for pages manually, but should use <a href="/guides/traversing-with-pagination/">page links provided by the <code>Link</code> header</a> in API responses.</p>
+
+<p>Since both the new and the old pagination parameters are still supported in API v3, API clients shouldn't notice any changes today. Still, if you notice any problems with this endpoint, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Commits+pagination+improvements">let us know</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-05-06-gist-api-now-truncating-large-files/">
+  <h2 class="title">
+<a id="--changes-to-gist-api-response-for-large-files" class="anchor" href="#--changes-to-gist-api-response-for-large-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/leongersing.png" alt="Avatar for leongersing" data-proofer-ignore>
+      <a href="https://github.com/leongersing" data-proofer-ignore>leongersing</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in <a href="/v3/gists/#detailed-gist-representation">Gist API responses</a>.</p>
+
+<h3>
+<a id="truncating-file-contents-larger-than-one-megabyte" class="anchor" href="#truncating-file-contents-larger-than-one-megabyte" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="truncating-file-contents-larger-than-one-megabyte" class="anchor" href="#truncating-file-contents-larger-than-one-megabyte" aria-hidden="true"><span class="octicon octicon-link"></span></a>Truncating file contents larger than one megabyte</h3>
+
+<p>The <a href="/v3/gists/#detailed-gist-representation">Gist API response</a> includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.</p>
+
+<p>To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won't notice any impact from this change.)</p>
+
+<h3>
+<a id="new-truncated-attribute" class="anchor" href="#new-truncated-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-truncated-attribute" class="anchor" href="#new-truncated-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New "truncated" attribute</h3>
+
+<p>The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new <code>truncated</code> attribute included as part of the file metadata. This Boolean attribute indicates whether the <code>content</code> value is truncated for this request.</p>
+
+<pre><code>{
+  files: {
+    "my_large_file.md": {
+      "size": 2097152,
+      "content": "Large content. Truncated at end of first megabyte. [...]",
+      "truncated": true,
+      "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
+      "type": "text/plain",
+      "language": "Markdown"
+    }
+  }
+}
+</code></pre>
+
+<h3>
+<a id="getting-the-full-content-for-truncated-files" class="anchor" href="#getting-the-full-content-for-truncated-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="getting-the-full-content-for-truncated-files" class="anchor" href="#getting-the-full-content-for-truncated-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting the full content for truncated files</h3>
+
+<p>We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the <code>raw_url</code> attribute, and you'll receive the complete content for that file. For larger files, you'll need to clone the gist locally via the <code>git_pull_url</code> to access the full file contents.</p>
+
+<p>If you have any questions, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files">get in touch</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-04-25-user-content-security/">
   <h2 class="title">
 <a id="--new-user-content-domains" class="anchor" href="#--new-user-content-domains" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-04-25-user-content-security/">New user content domains</a>
@@ -389,245 +489,6 @@ that point, this new API will be stable and suitable for production use.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-03-18-paginating-method-changes/">
-  <h2 class="title">
-<a id="--pagination-changes-for-some-resource-lists" class="anchor" href="#--pagination-changes-for-some-resource-lists" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-03-18-paginating-method-changes/">Pagination changes for some resource lists</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    March 18, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>In an effort to keep the API fast for everyone, we're enabling
-<a href="/v3/#pagination">pagination</a> on some API methods that previously did not support it.
-Beginning today, the methods below will paginate if you include <code>page</code> or
-<code>per_page</code> query parameters. Starting April 17th, 2014, these methods will
-<em>always</em> return <a href="/v3/#pagination">paginated results</a>. If you have any questions or
-run into trouble, feel free to <a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Pagination+changes">get in touch</a>.</p>
-
-<p>Here's the complete list of updated methods:</p>
-
-<h4>
-<a id="gist-comments" class="anchor" href="#gist-comments" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="gist-comments" class="anchor" href="#gist-comments" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/gists/comments/#list-comments-on-a-gist">Gist comments</a>
-</h4>
-
-<pre><code>GET /gists/:gist_id/comments
-</code></pre>
-
-<h4>
-<a id="gist-commits" class="anchor" href="#gist-commits" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="gist-commits" class="anchor" href="#gist-commits" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/gists/#list-gist-commits">Gist commits</a>
-</h4>
-
-<pre><code>GET /gists/:gist_id/commits
-</code></pre>
-
-<h4>
-<a id="gist-forks" class="anchor" href="#gist-forks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="gist-forks" class="anchor" href="#gist-forks" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/gists/#list-gist-forks">Gist forks</a>
-</h4>
-
-<pre><code>GET /gists/:gist_id/forks
-</code></pre>
-
-<h4>
-<a id="git-refs" class="anchor" href="#git-refs" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="git-refs" class="anchor" href="#git-refs" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/git/refs/#get-all-references">Git refs</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/git/refs
-</code></pre>
-
-<h4>
-<a id="issue-labels" class="anchor" href="#issue-labels" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="issue-labels" class="anchor" href="#issue-labels" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/issues/labels/#list-labels-on-an-issue">Issue labels</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/issues/:number/labels
-</code></pre>
-
-<h4>
-<a id="milestone-labels" class="anchor" href="#milestone-labels" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="milestone-labels" class="anchor" href="#milestone-labels" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone">Milestone labels</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/milestones/:id/labels
-</code></pre>
-
-<h4>
-<a id="organization-teams" class="anchor" href="#organization-teams" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="organization-teams" class="anchor" href="#organization-teams" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/orgs/teams/#list-teams">Organization teams</a>
-</h4>
-
-<pre><code>GET /orgs/:org/teams
-</code></pre>
-
-<h4>
-<a id="pull-request-commits" class="anchor" href="#pull-request-commits" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="pull-request-commits" class="anchor" href="#pull-request-commits" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/pulls/#list-commits-on-a-pull-request">Pull Request commits</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/pulls/:number/commits
-</code></pre>
-
-<h4>
-<a id="pull-request-files" class="anchor" href="#pull-request-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="pull-request-files" class="anchor" href="#pull-request-files" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/pulls/#list-pull-requests-files">Pull Request files</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/pulls/:number/files
-</code></pre>
-
-<h4>
-<a id="release-assets" class="anchor" href="#release-assets" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="release-assets" class="anchor" href="#release-assets" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/releases/#list-assets-for-a-release">Release assets</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/releases/:id/assets
-</code></pre>
-
-<h4>
-<a id="repository-collaborators" class="anchor" href="#repository-collaborators" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-collaborators" class="anchor" href="#repository-collaborators" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/collaborators/#list-collaborators">Repository collaborators</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/collaborators
-</code></pre>
-
-<h4>
-<a id="repository-contributors" class="anchor" href="#repository-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-contributors" class="anchor" href="#repository-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/#list-contributors">Repository contributors</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/contributors
-</code></pre>
-
-<h4>
-<a id="repository-branches" class="anchor" href="#repository-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-branches" class="anchor" href="#repository-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/branches/#list-branches">Repository branches</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/branches
-</code></pre>
-
-<h4>
-<a id="repository-downloads" class="anchor" href="#repository-downloads" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-downloads" class="anchor" href="#repository-downloads" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/downloads/#list-downloads-for-a-repository">Repository downloads</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/downloads
-</code></pre>
-
-<h4>
-<a id="repository-keys" class="anchor" href="#repository-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-keys" class="anchor" href="#repository-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/keys/#list-deploy-keys">Repository keys</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/keys
-</code></pre>
-
-<h4>
-<a id="repository-labels" class="anchor" href="#repository-labels" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-labels" class="anchor" href="#repository-labels" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/issues/labels/#list-all-labels-for-this-repository">Repository labels</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/labels
-</code></pre>
-
-<h4>
-<a id="repository-tags" class="anchor" href="#repository-tags" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-tags" class="anchor" href="#repository-tags" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/#list-tags">Repository tags</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/tags
-</code></pre>
-
-<h4>
-<a id="repository-teams" class="anchor" href="#repository-teams" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-teams" class="anchor" href="#repository-teams" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/repos/#list-teams">Repository teams</a>
-</h4>
-
-<pre><code>GET /repos/:owner/:repo/teams
-</code></pre>
-
-<h4>
-<a id="team-members" class="anchor" href="#team-members" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="team-members" class="anchor" href="#team-members" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/orgs/teams/#list-team-members">Team members</a>
-</h4>
-
-<pre><code>GET /teams/:id/members
-</code></pre>
-
-<h4>
-<a id="team-repositories" class="anchor" href="#team-repositories" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="team-repositories" class="anchor" href="#team-repositories" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/orgs/teams/#list-team-repos">Team repositories</a>
-</h4>
-
-<pre><code>GET /teams/:id/repos
-</code></pre>
-
-<h4>
-<a id="user-emails-v3-media-type-only" class="anchor" href="#user-emails-v3-media-type-only" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="user-emails-v3-media-type-only" class="anchor" href="#user-emails-v3-media-type-only" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/users/emails/#list-email-addresses-for-a-user">User emails</a> (v3 media type only)</h4>
-
-<pre><code>GET /user/emails
-</code></pre>
-
-<h4>
-<a id="user-keys" class="anchor" href="#user-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="user-keys" class="anchor" href="#user-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/v3/users/keys/#list-public-keys-for-a-user">User keys</a>
-</h4>
-
-<pre><code>GET /users/:user/keys
-GET /user/keys
-</code></pre>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2014-03-12-page-build-event-for-webhooks/">
-  <h2 class="title">
-<a id="--page-build-event-for-webhooks" class="anchor" href="#--page-build-event-for-webhooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-03-12-page-build-event-for-webhooks/">Page Build Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    March 12, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore>
-      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We've made it even easier to track the status of your <a href="http://pages.github.com/">GitHub Pages</a> builds. By subscribing to the new <a href="/v3/activity/events/types/#pagebuildevent"><code>page_build</code></a> event, your application will receive an event payload containing the results of each build. (As always, these builds occur automatically following each push to a GitHub Pages-enabled branch.)</p>
-
-<p>If you have a <a href="/webhooks/">webhook</a> with the <a href="https://github.com/blog/1778-webhooks-level-up">"send me everything" option</a> selected (or if you use the "<a href="/changes/2014-02-24-wildcard-event-for-webhooks/">wildcard event</a>" via the API), you will receive the <code>page_build</code> event after the next build of your GitHub Pages site. Alternatively, if you prefer to subscribe to specific event types, you can add to the new <code>page_build</code> event to your webhooks via your repository's webhook settings page or via the <a href="/v3/repos/hooks/">webhooks API</a>.</p>
-
-<p>For more information, be sure to check out our guide on <a href="/webhooks/">working with webhooks</a>. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+Page+Build+Event">drop us a line</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -758,6 +619,10 @@ GET /user/keys
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
+
+  <li><a href="/changes/2016-07-06-github-pages-preiew-api/">Introducing the GitHub Pages preview API<br /><span class="date">July 6, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
@@ -769,10 +634,6 @@ GET /user/keys
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
 </ul>
 

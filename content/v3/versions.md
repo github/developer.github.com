@@ -145,6 +145,11 @@ The recommendations below will help you prepare your application for the next ma
 
   Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the [Add or update team repository](/v3/orgs/teams/#add-or-update-team-repository) API will use for requests where no `permission` attribute is specified. To change the permission level for every repository on a team, use the [List team repositories](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, and then use the [Add or update team repository](/v3/orgs/teams/#add-or-update-team-repository) with a `permission` attribute to update each repository's permission separately.
 
+1. Issue attribute: assignee
+
+  Recommendation: Use the [`assignees`](https://developer.github.com/v3/issues/#create-an-issue) key instead, since issues can have more than one assignee. Alternatively, you can use the
+  [assignees](https://developer.github.com/v3/issues/assignees/) endpoints.
+
 <a id="beta">
 
 # beta (Deprecated)

@@ -38,21 +38,6 @@ Otherwise a `404` status code is returned.
 
 ## Add assignees to an Issue
 
-{{#tip}}
-
-<a name="preview-period"></a>
-
-This endpoint is currently available for developers to preview.
-During the preview period, the API may change without advance notice.
-Please see the [blog post](/changes/2016-5-27-multiple-assignees) for full details.
-
-To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
-
-    application/vnd.github.cerberus-preview+json
-
-{{/tip}}
-
-
 This call adds the users passed in the `assignees` key (as their logins) to the issue.
 
     POST /repos/:owner/:repo/issues/:number/assignees
@@ -64,23 +49,9 @@ This call adds the users passed in the `assignees` key (as their logins) to the 
 ### Response
 
 <%= headers 201 %>
-<%= json(:issue_with_assignees) { |h| [h] } %>
+<%= json :issue_with_assignees %>
 
 ## Remove assignees from an Issue
-
-{{#tip}}
-
-<a name="preview-period"></a>
-
-This endpoint is currently available for developers to preview.
-During the preview period, the API may change without advance notice.
-Please see the [blog post](/changes/2016-5-27-multiple-assignees) for full details.
-
-To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
-
-    application/vnd.github.cerberus-preview+json
-
-{{/tip}}
 
 This call removes the users passed in the `assignees` key (as their logins) from the issue.
 
@@ -93,4 +64,4 @@ This call removes the users passed in the `assignees` key (as their logins) from
 ### Response
 
 <%= headers 200 %>
-<%= json(:issue_with_assignees) { |h| [h] } %>
+<%= json :issue_with_assignees %>

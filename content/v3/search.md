@@ -25,6 +25,8 @@ is a computed value representing the relevance of an item relative to the other
 items in the result set. Multiple factors are combined to boost the most
 relevant item to the top of the result list.
 
+{% if page.version == 'dotcom' %}
+
 ### Rate limit
 
 The Search API has a custom rate limit. For requests using [Basic
@@ -35,6 +37,8 @@ to make up to 10 requests per minute.
 
 See the [rate limit documentation](/v3/#rate-limiting) for details on
 determining your current rate limit status.
+
+{% endif %}
 
 ### Timeouts and incomplete results
 

@@ -25,9 +25,7 @@ Name | Type | Description
 
 ### Response
 
-<%=
-  headers 200, :pagination => { :next => 'https://api.github.com/resource?page=2' }
-%>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit) { |h| [h] } %>
 
 ## Get a single commit

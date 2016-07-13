@@ -50,7 +50,7 @@ Name | Description
 [`gollum`][event-types-gollum] | Any time a Wiki page is updated.
 [`issue_comment`][event-types-issue_comment] | {% if page.version == 'dotcom' or page.version > 2.6 %}Any time a [comment on an issue](/v3/issues/comments/) is created, edited, or deleted.{% else %}Any time an [issue is commented on](/v3/issues/comments).{% endif %}
 [`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, or reopened.
-[`member`][event-types-member] | Any time a User is added as a collaborator to a non-Organization Repository.
+[`member`][event-types-member] | Any time a User is added as a collaborator to a Repository.
 [`membership`][event-types-membership] | Any time a User is added or removed from a team. **Organization hooks only**.
 [`page_build`][event-types-page_build] | Any time a Pages site is built or results in a failed build.
 [`public`][event-types-public] | Any time a Repository changes from private to public.

@@ -144,7 +144,11 @@ The user can publicize their own membership.
 
 ## Get organization membership
 
-{% if page.version == 'dotcom' or page.version >= 2.4 %}
+{% if page.version == 'dotcom' or page.version >= 2.6 %}
+
+In order to get a user's membership with an organization, the authenticated user must be an organization member.
+
+{% elsif page.version >= 2.4 %}
 
 In order to get a user's membership with an organization, the authenticated user must be an organization owner.
 

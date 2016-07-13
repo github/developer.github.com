@@ -33,10 +33,14 @@ organization's [GitHub Enterprise](https://enterprise.github.com/) installation.
 
 {% endif %}
 
+{% if page.version == 'dotcom' %}
+
 ## [Rate Limit][]
 
 The [Rate Limit API][Rate Limit] lets you check your current rate limit
 status at any time.
+
+{% endif %}
 
 ## [Licenses][]
 

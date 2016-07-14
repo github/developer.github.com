@@ -67,8 +67,10 @@ module GitHub
           end
         end
 
-        lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
-        lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
+        unless @config[:version] != 'dotcom'
+          lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
+          lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
+        end
 
         %(``` headers\n#{lines.join("\n")}\n```\n)
       end

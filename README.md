@@ -48,15 +48,13 @@ Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you s
 
 ### Enterprise
 
-To generate the `/enterprise/` versions, use `script/enterprise-backport`:
+To generate the `/enterprise` versions, pass in the Enterprise version to `script/server`. For example:
 
 ``` sh
-$ script/enterprise-backport 2.6
-$ mv -f enterprise output
-$ script/server
+$ script/server 2.6
 ```
 
-The above will need to be repeated anytime changes are made to `/enterprise` versioned documentation.
+Note that live reloading is not available for Enterprise documentation.
 
 ## Styleguide
 

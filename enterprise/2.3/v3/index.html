@@ -83,9 +83,6 @@ sent and received as JSON.</p>
 <span class="output">Status: 200 OK</span>
 <span class="output">ETag: "a00049ba79152d03380c34652f2cb612"</span>
 <span class="output">X-GitHub-Media-Type: github.v3</span>
-<span class="output">X-RateLimit-Limit: 5000</span>
-<span class="output">X-RateLimit-Remaining: 4987</span>
-<span class="output">X-RateLimit-Reset: 1350085394</span>
 <span class="output">Content-Length: 5</span>
 <span class="output">Cache-Control: max-age=0, private, must-revalidate</span>
 <span class="output">X-Content-Type-Options: nosniff</span>
@@ -430,9 +427,6 @@ has not changed, the server will return a <code>304 Not Modified</code>.</p>
 <span class="output">Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT</span>
 <span class="output">Status: 200 OK</span>
 <span class="output">Vary: Accept, Authorization, Cookie</span>
-<span class="output">X-RateLimit-Limit: 5000</span>
-<span class="output">X-RateLimit-Remaining: 4996</span>
-<span class="output">X-RateLimit-Reset: 1372700873</span>
 <span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/user -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"'</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 <span class="output">Cache-Control: private, max-age=60</span>
@@ -440,18 +434,12 @@ has not changed, the server will return a <code>304 Not Modified</code>.</p>
 <span class="output">Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT</span>
 <span class="output">Status: 304 Not Modified</span>
 <span class="output">Vary: Accept, Authorization, Cookie</span>
-<span class="output">X-RateLimit-Limit: 5000</span>
-<span class="output">X-RateLimit-Remaining: 4996</span>
-<span class="output">X-RateLimit-Reset: 1372700873</span>
 <span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/user -H "If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT"</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 <span class="output">Cache-Control: private, max-age=60</span>
 <span class="output">Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT</span>
 <span class="output">Status: 304 Not Modified</span>
 <span class="output">Vary: Accept, Authorization, Cookie</span>
-<span class="output">X-RateLimit-Limit: 5000</span>
-<span class="output">X-RateLimit-Remaining: 4996</span>
-<span class="output">X-RateLimit-Reset: 1372700873</span>
 </pre>
 <h2>
 <a id="cross-origin-resource-sharing" class="anchor" href="#cross-origin-resource-sharing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cross Origin Resource Sharing</h2>
@@ -466,7 +454,7 @@ HTML 5 Security Guide.</p>
 <span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3 -H "Origin: http://example.com"</span>
 HTTP/1.1 302 Found
 Access-Control-Allow-Origin: *
-Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP,  X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
 Access-Control-Allow-Credentials: true
 </pre>
 <p>This is what the CORS preflight request looks like:</p>
@@ -476,7 +464,7 @@ HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-GitHub-OTP, X-Requested-With
 Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
-Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP,  X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
 Access-Control-Max-Age: 86400
 Access-Control-Allow-Credentials: true
 </pre>
@@ -492,9 +480,6 @@ plus the relevant HTTP Header information.</p>
 <span class="output">/**/foo({</span>
 <span class="output">  "meta": {</span>
 <span class="output">    "status": 200,</span>
-<span class="output">    "X-RateLimit-Limit": "5000",</span>
-<span class="output">    "X-RateLimit-Remaining": "4966",</span>
-<span class="output">    "X-RateLimit-Reset": "1372700873",</span>
 <span class="output">    "Link": [ // pagination headers and other links</span>
 <span class="output">      ["https://api.github.com?page=2", {"rel": "next"}]</span>
 <span class="output">    ]</span>

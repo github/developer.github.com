@@ -78,8 +78,6 @@ Base64 encoded content. See <a href="#custom-media-types">media types</a> for re
 <h3>
 <a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span><span class="w">
@@ -139,8 +137,6 @@ All content types support <a href="#custom-media-types">a custom media type</a> 
 <h3>
 <a id="response-if-content-is-a-file" class="anchor" href="#response-if-content-is-a-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response if content is a file</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span><span class="w">
@@ -169,8 +165,6 @@ specified as "file". Logically, the value <em>should</em> be "submodule". This b
 exists in API v3 <a href="https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490">for backwards compatibility purposes</a>.
 In the next major version of the API, the type will be returned as "submodule".</p>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -212,8 +206,6 @@ X-RateLimit-Remaining: 4999
 <p>If the requested <code>:path</code> points to a symlink, and the symlink's target is a normal file in the repository, then the API responds with the content of the file (in the <a href="#response-if-content-is-a-file">format shown above</a>).</p>
 <p>Otherwise, the API responds with an object describing the symlink itself:</p>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"symlink"</span><span class="p">,</span><span class="w">
@@ -239,8 +231,6 @@ X-RateLimit-Remaining: 4999
 Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.</p>
 <p>If the submodule repository is not hosted on github.com, the Git URLs (<code>git_url</code> and <code>_links["git"]</code>) and the github.com URLs (<code>html_url</code> and <code>_links["html"]</code>) will have null values.</p>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"submodule"</span><span class="p">,</span><span class="w">
@@ -343,8 +333,6 @@ user's information is used.</p>
 <h3>
 <a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 201 Created
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -482,8 +470,6 @@ user's information is used.</p>
 <h3>
 <a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -614,8 +600,6 @@ user's information is used.</p>
 <h3>
 <a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -683,8 +667,6 @@ to make a second <code>GET</code> request.</p>
 <a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 302 Found
 Location: https://codeload.github.com/me/myprivate/legacy.zip/master?login=me&amp;token=thistokenexpires
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
 </code></pre>
 <p>To follow redirects with curl, use the <code>-L</code> switch:</p>
 <pre class="command-line">

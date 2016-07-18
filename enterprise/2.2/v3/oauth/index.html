@@ -53,7 +53,7 @@
 <li><a href="#common-errors-for-the-access-token-request" id="markdown-toc-common-errors-for-the-access-token-request">Common errors for the access token request</a></li>
 <li><a href="#directing-users-to-review-their-access-for-an-application" id="markdown-toc-directing-users-to-review-their-access-for-an-application">Directing users to review their access for an application</a></li>
 </ul>
-<p>OAuth2 is a protocol that lets external applications request authorization to
+<p>OAuth2 is a protocol that lets external apps request authorization to
 private details in a user's GitHub Enterprise account without getting their
 password. This is preferred over <a href="/enterprise/2.2/v3/auth#basic-authentication">Basic Authentication</a> because tokens can
 be limited to specific types of data, and can be revoked by users at any
@@ -90,12 +90,12 @@ for your own use or implement the web flow below to allow other users to authori
 <tr>
 <td><code>redirect_uri</code></td>
 <td><code>string</code></td>
-<td>The URL in your application where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
+<td>The URL in your app where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
 </tr>
 <tr>
 <td><code>scope</code></td>
 <td><code>string</code></td>
-<td>A space delimited list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list for users that have not authorized any scopes for the application. For users who have authorized scopes for the application, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the set of scopes the user has authorized for the application. For example, if a user has already performed the web flow twice and has authorized one token with <code>user</code> scope and another token with <code>repo</code> scope, a third web flow that does not provide a <code>scope</code> will receive a token with <code>user</code> and <code>repo</code> scope.</td>
+<td>A space delimited list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -148,7 +148,7 @@ has been created by a third party and the process should be aborted.</p>
 <tr>
 <td><code>redirect_uri</code></td>
 <td><code>string</code></td>
-<td>The URL in your application where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
+<td>The URL in your app where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -173,19 +173,6 @@ Accept: application/xml
   &lt;access_token&gt;e72e16c7e42f292c6912e7710c838347ae178b4a&lt;/access_token&gt;
 &lt;/OAuth&gt;
 </code></pre>
-<h4>
-<a id="multiple-tokens" class="anchor" href="#multiple-tokens" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multiple tokens</h4>
-<p>GitHub allows multiple tokens to exist for a user/application/scope combination.
-This can be used to create tokens for specific use cases. For example, your
-application might support one workflow that uses GitHub for sign in, and only
-requires basic user information. And, your application might support a different
-workflow that requires access to a user's private repositories. Using multiple
-tokens, your application can perform the web flow for each use case, requesting
-only the scopes needed. If a user only uses your application to sign in, they
-are never required to grant your application access to their private
-repositories. Note, there is a limit to the number of tokens that are issued per
-user/application/scope combination. If your application requests enough tokens
-to go over one of the limits, older tokens will stop working.</p>
 <h4>
 <a id="requested-scopes-vs-granted-scopes" class="anchor" href="#requested-scopes-vs-granted-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requested scopes vs. granted scopes</h4>
 <p>The <code>scope</code> attribute lists scopes attached to the token that were granted by
@@ -292,7 +279,7 @@ X-Accepted-OAuth-Scopes: user
 </tr>
 <tr>
 <td><code>repo</code></td>
-<td>Grants read/write access to code, commit statuses, repository invitations, collaborators, and deployment statuses for public and private repositories and organizations.</td>
+<td>Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public and private repositories and organizations.</td>
 </tr>
 <tr>
 <td><code>repo_deployment</code></td>
@@ -465,7 +452,7 @@ and get a new code.</p>
 <p>Users can review and revoke their application authorizations from the <a href="https://github.com/settings/applications#authorized">settings
 screen within GitHub</a>. A user's organizations <a href="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">control whether
 an application can access organization data</a>. Integrators can
-deep link to the authorization information for their particular application to let their
+deep link to the authorization information for their particular app to let their
 end users review these details.</p>
 <p>To build this link, you'll need your OAuth application's <code>client_id</code> you
 received from GitHub when you <a href="https://github.com/settings/developers">registered the application</a>.</p>
@@ -545,6 +532,7 @@ user, be sure to check out our <a href="/enterprise/2.2/guides/discovering-resou
           <li><a href="/enterprise/2.2/v3/licenses/">Licenses</a></li>
           <li><a href="/enterprise/2.2/v3/markdown/">Markdown</a></li>
           <li><a href="/enterprise/2.2/v3/meta/">Meta</a></li>
+          <li><a href="/enterprise/2.2/v3/rate_limit/">Rate Limit</a></li>
         </ul>
 </li>
       <li class="js-topic">
@@ -581,8 +569,7 @@ user, be sure to check out our <a href="/enterprise/2.2/guides/discovering-resou
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/repos/">Repositories</a>
 </h3>
         <ul class="js-guides">
-<li><a href="/enterprise/2.2/v3/repos/branches/">Branches</a></li>
-          <li><a href="/enterprise/2.2/v3/repos/collaborators/">Collaborators</a></li>
+<li><a href="/enterprise/2.2/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/enterprise/2.2/v3/repos/comments/">Comments</a></li>
           <li><a href="/enterprise/2.2/v3/repos/commits/">Commits</a></li>
           <li><a href="/enterprise/2.2/v3/repos/contents/">Contents</a></li>
@@ -590,7 +577,6 @@ user, be sure to check out our <a href="/enterprise/2.2/guides/discovering-resou
           <li><a href="/enterprise/2.2/v3/repos/deployments/">Deployments</a></li>
           <li><a href="/enterprise/2.2/v3/repos/downloads/">Downloads</a></li>
           <li><a href="/enterprise/2.2/v3/repos/forks/">Forks</a></li>
-          <li><a href="/enterprise/2.2/v3/repos/invitations/">Invitations</a></li>
           <li><a href="/enterprise/2.2/v3/repos/merging/">Merging</a></li>
           <li><a href="/enterprise/2.2/v3/repos/pages/">Pages</a></li>
           <li><a href="/enterprise/2.2/v3/repos/releases/">Releases</a></li>

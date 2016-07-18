@@ -60,12 +60,11 @@
 
 <ul id="markdown-toc">
 <li><a href="#get-information-about-a-pages-site" id="markdown-toc-get-information-about-a-pages-site">Get information about a Pages site</a></li>
-<li><a href="#request-a-page-build" id="markdown-toc-request-a-page-build">Request a page build</a></li>
 <li><a href="#list-pages-builds" id="markdown-toc-list-pages-builds">List Pages builds</a></li>
 <li><a href="#list-latest-pages-build" id="markdown-toc-list-latest-pages-build">List latest Pages build</a></li>
 </ul>
 
-<p>The GitHub Pages API retrieves information about your GitHub Pages configuration, and
+<p>The Pages API retrieves information about your GitHub Pages configuration, and
 the statuses of your builds. Information about the site and the builds can only be
 accessed by authenticated owners, even though the websites are public.</p>
 
@@ -74,8 +73,6 @@ accessed by authenticated owners, even though the websites are public.</p>
 <ul>
 <li>
 <code>null</code>, which means the site has yet to be built</li>
-<li>
-<code>queued</code>, which means the build has been requested but not yet begun</li>
 <li>
 <code>building</code>, which means the build is in progress</li>
 <li>
@@ -89,22 +86,6 @@ accessed by authenticated owners, even though the websites are public.</p>
 
 <pre><code>GET /repos/:owner/:repo/pages
 </code></pre>
-
-<div class="alert tip">
-
-<p><a name="preview-period"></a></p>
-
-<p>Additional functionality of the GitHub Pages API is currently available for developers to preview.
-  During the preview period, the API may change without advance notice.</p>
-
-<p>To access the additional functionality during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>  application/vnd.github.mister-fantastic-preview+json
-</code></pre>
-
-<p>When the <a href="#preview-period">preview flag</a> is passed, the response will contain an additional field, <code>html_url</code>, which will contain the absolute URL (with scheme) to the rendered site (e.g., <code>https://username.github.io</code>, or <code>http://example.com</code>).</p>
-
-</div>
 
 <h3>
 <a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
@@ -120,46 +101,6 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"built"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"cname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"developer.github.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"custom_404"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-
-<h2>
-<a id="request-a-page-build" class="anchor" href="#request-a-page-build" aria-hidden="true"><span class="octicon octicon-link"></span></a>Request a page build</h2>
-
-<pre><code>POST /repos/:owner/:repo/pages/builds
-</code></pre>
-
-<div class="alert tip">
-
-<p><a name="preview-period"></a></p>
-
-<p>This endpoint is currently available for developers to preview.
-  During the preview period, the API may change without advance notice.</p>
-
-<p>To access this endpoint during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>  application/vnd.github.mister-fantastic-preview+json
-</code></pre>
-
-</div>
-
-<p>You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.</p>
-
-<p>Build requests are limited to one concurrent build per repository and one concurrent build per requester. If you request a build while another is still in progress, the second request will be queued until the first completes.</p>
-
-<h3>
-<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/github/developer.github.com/pages/builds/latest"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"queued"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -330,9 +271,7 @@ X-RateLimit-Remaining: 4999
           <li><a href="/v3/licenses/">Licenses</a></li>
           <li><a href="/v3/markdown/">Markdown</a></li>
           <li><a href="/v3/meta/">Meta</a></li>
-          
           <li><a href="/v3/rate_limit/">Rate Limit</a></li>
-          
         </ul>
       </li>
       <li class="js-topic">

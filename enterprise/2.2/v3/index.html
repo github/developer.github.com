@@ -421,7 +421,9 @@ User-Agent: Awesome-Octocat-App
 <p>Most responses return an <code>ETag</code> header. Many responses also return a <code>Last-Modified</code> header. You can use the values
 of these headers to make subsequent requests to those resources using the
 <code>If-None-Match</code> and <code>If-Modified-Since</code> headers, respectively. If the resource
-has not changed, the server will return a <code>304 Not Modified</code>.</p>
+has not changed, the server will return a <code>304 Not Modified</code>. Also note: making
+a conditional request and receiving a 304 response does not count against your
+<a href="#rate-limiting">Rate Limit</a>, so we encourage you to use it whenever possible.</p>
 <pre class="command-line">
 <span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/user</span>
 <span class="output">HTTP/1.1 200 OK</span>
@@ -654,6 +656,7 @@ to create the git commit.</p>
           <li><a href="/enterprise/2.2/v3/licenses/">Licenses</a></li>
           <li><a href="/enterprise/2.2/v3/markdown/">Markdown</a></li>
           <li><a href="/enterprise/2.2/v3/meta/">Meta</a></li>
+          <li><a href="/enterprise/2.2/v3/rate_limit/">Rate Limit</a></li>
         </ul>
 </li>
       <li class="js-topic">
@@ -690,8 +693,7 @@ to create the git commit.</p>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/repos/">Repositories</a>
 </h3>
         <ul class="js-guides">
-<li><a href="/enterprise/2.2/v3/repos/branches/">Branches</a></li>
-          <li><a href="/enterprise/2.2/v3/repos/collaborators/">Collaborators</a></li>
+<li><a href="/enterprise/2.2/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/enterprise/2.2/v3/repos/comments/">Comments</a></li>
           <li><a href="/enterprise/2.2/v3/repos/commits/">Commits</a></li>
           <li><a href="/enterprise/2.2/v3/repos/contents/">Contents</a></li>
@@ -699,7 +701,6 @@ to create the git commit.</p>
           <li><a href="/enterprise/2.2/v3/repos/deployments/">Deployments</a></li>
           <li><a href="/enterprise/2.2/v3/repos/downloads/">Downloads</a></li>
           <li><a href="/enterprise/2.2/v3/repos/forks/">Forks</a></li>
-          <li><a href="/enterprise/2.2/v3/repos/invitations/">Invitations</a></li>
           <li><a href="/enterprise/2.2/v3/repos/merging/">Merging</a></li>
           <li><a href="/enterprise/2.2/v3/repos/pages/">Pages</a></li>
           <li><a href="/enterprise/2.2/v3/repos/releases/">Releases</a></li>

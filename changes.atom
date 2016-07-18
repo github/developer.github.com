@@ -2,80 +2,13 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-07-12T07:00:00Z</updated>
+  <updated>2016-06-27T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
-  <entry>
-    <id>tag:developer.github.com,2016-07-12:/changes/2016-07-12-ending-multiple-assignees-preview-period/</id>
-    <title type="html">Multiple Assignees API is now official</title>
-    <published>2016-07-12T07:00:00Z</published>
-    <updated>2016-07-12T07:00:00Z</updated>
-    <author>
-      <name>nakajima</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2016-07-12-ending-multiple-assignees-preview-period/"/>
-    <content type="html">&lt;p&gt;We're making &lt;a href="/changes/2016-5-27-multiple-assignees/"&gt;Multiple Assignees&lt;/a&gt; part of the official GitHub API.&lt;/p&gt;
-
-&lt;p&gt;During the preview period you needed to provide the &lt;code&gt;application/vnd.github.cerberus-preview&lt;/code&gt; preview media type in the &lt;code&gt;Accept&lt;/code&gt; header to opt-in to the changes. Now that the preview period has ended, you no longer need to specify this custom media type.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Multiple+Assignees+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2016-07-06:/changes/2016-07-06-github-pages-preiew-api/</id>
-    <title type="html">Introducing the GitHub Pages preview API</title>
-    <published>2016-07-06T07:00:00Z</published>
-    <updated>2016-07-06T07:00:00Z</updated>
-    <author>
-      <name>benbalter</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2016-07-06-github-pages-preiew-api/"/>
-    <content type="html">&lt;p&gt;We're introducing additional preview functionality to the &lt;a href="/v3/repos/pages/"&gt;GitHub Pages API&lt;/a&gt; to give developers better control over their GitHub Pages site.&lt;/p&gt;
-
-&lt;h4&gt;
-&lt;a id="requesting-a-page-build" class="anchor" href="#requesting-a-page-build" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Requesting a page build&lt;/h4&gt;
-
-&lt;p&gt;You can now manually request a build of your GitHub Pages site without needing to push a new commit by making a &lt;code&gt;POST&lt;/code&gt; request to the endpoint already available to see past builds. For example:&lt;/p&gt;
-
-&lt;pre class="command-line"&gt;
-curl "https://api.github.com/repos/github/developer.github.com/pages/builds" \
-  -X POST
-  -H 'Authorization: token TOKEN' \
-  -H "Accept: application/vnd.github.mister-fantstic-preview" \
-&lt;/pre&gt;
-
-&lt;h4&gt;
-&lt;a id="retrieving-a-sites-url" class="anchor" href="#retrieving-a-sites-url" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Retrieving a site's URL&lt;/h4&gt;
-
-&lt;p&gt;With the introduction of &lt;a href="https://github.com/blog/2186-https-for-github-pages"&gt;HTTPS support for GitHub Pages sites&lt;/a&gt;, it's important to know not just a site's custom domain, if it has one, but also if it has HTTPS enforcement enabled. The GitHub Pages API will now return an additional &lt;code&gt;html_url&lt;/code&gt; field, which will include the computed absolute URL to the site.&lt;/p&gt;
-
-&lt;p&gt;The resulting URL can be &lt;code&gt;https://username.github.io&lt;/code&gt; (or &lt;code&gt;http://username.github.io&lt;/code&gt;) for user sites without a custom domain, &lt;code&gt;https://username.gituhb.io/project&lt;/code&gt; for project sites, or &lt;code&gt;http://example.com&lt;/code&gt; for sites with custom domains, saving third-party applications the trouble of having to construct complicated URL logic based on the username, owner, and CNAME, as was previously necessary.&lt;/p&gt;
-
-&lt;p&gt;For example, to request the HTML URL:&lt;/p&gt;
-
-&lt;pre class="command-line"&gt;
-curl "https://api.github.com/repos/github/developer.github.com/pages" \
-  -H 'Authorization: token TOKEN' \
-  -H "Accept: application/vnd.github.mister-fantstic-preview" \
-&lt;/pre&gt;
-
-&lt;h4&gt;
-&lt;a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;How can I try it?&lt;/h4&gt;
-
-&lt;p&gt;To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.mister-fantastic-preview+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
-
-&lt;p&gt;For more information, take a look at &lt;a href="/v3/repos/pages/"&gt;the docs here&lt;/a&gt;, and if you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+API+Preview"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
   <entry>
     <id>tag:developer.github.com,2016-06-27:/changes/2016-06-27-protected-branches-api-update/</id>
     <title type="html">Update to Protected Branches API Preview</title>
@@ -116,7 +49,7 @@ curl "https://api.github.com/repos/github/developer.github.com/pages" \
     <link rel="alternate" href="http://developer.github.com/changes/2016-06-22-issue-locking-api-is-now-official/"/>
     <content type="html">&lt;p&gt;We're making the &lt;a href="/changes/2016-02-11-issue-locking-api/"&gt;Issue locking and unlocking APIs&lt;/a&gt; part of the official GitHub API.&lt;/p&gt;
 
-&lt;p&gt;During the preview period you needed to provide the &lt;code&gt;application/vnd.github.the-key-preview+json&lt;/code&gt; preview media type in the &lt;code&gt;Accept&lt;/code&gt; header to opt-in to the new endpoints. Now that the preview period has ended, you no longer need to specify this custom &lt;a href="/v3/media/"&gt;media type&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;During the preview period you needed to provide the &lt;code&gt;application/vnd.github.the-key-preview+sha&lt;/code&gt; preview media type in the &lt;code&gt;Accept&lt;/code&gt; header to opt-in to the new endpoints. Now that the preview period has ended, you no longer need to specify this custom &lt;a href="/v3/media/"&gt;media type&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Issue+Locking+and+Unlocking+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
   </entry>
@@ -140,9 +73,9 @@ curl "https://api.github.com/repos/github/developer.github.com/pages" \
 &lt;p&gt;For example:&lt;/p&gt;
 
 &lt;pre class="command-line"&gt;
-curl "https://api.github.com/repos/github/hubot/invitations" \
+curl "https://api.github.com/api/v3/repositories/1313/invitations" \
   -H 'Authorization: token TOKEN' \
-  -H "Accept: application/vnd.github.swamp-thing-preview"
+  -H "Accept: application/vnd.github.swamp-thing-preview" \
 &lt;/pre&gt;
 
 &lt;p&gt;You can learn more about the new endpoints in the updated &lt;a href="/v3/repos/collaborators"&gt;Collaborators&lt;/a&gt; and new &lt;a href="/v3/repos/invitations"&gt;Repository Invitations&lt;/a&gt; documentation.&lt;/p&gt;
@@ -1086,6 +1019,76 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 &lt;a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Send us your feedback&lt;/h2&gt;
 
 &lt;p&gt;We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2015-06-17:/changes/2015-06-17-organizations-endpoint/</id>
+    <title type="html">List all organizations</title>
+    <published>2015-06-17T07:00:00Z</published>
+    <updated>2015-06-17T07:00:00Z</updated>
+    <author>
+      <name>keavy</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-06-17-organizations-endpoint/"/>
+    <content type="html">&lt;p&gt;We've added a &lt;a href="/v3/orgs#list-all-organizations"&gt;new API method&lt;/a&gt; to list all organizations:&lt;/p&gt;
+
+&lt;pre class="command-line"&gt;
+&lt;span class="command"&gt;curl https://api.github.com/organizations&lt;/span&gt;
+
+&lt;span class="output"&gt;[&lt;/span&gt;
+&lt;span class="output"&gt;  {&lt;/span&gt;
+&lt;span class="output"&gt;    "login": "github",&lt;/span&gt;
+&lt;span class="output"&gt;    "id": 9919,&lt;/span&gt;
+&lt;span class="output"&gt;    "url": "https://api.github.com/orgs/github",&lt;/span&gt;
+&lt;span class="output"&gt;   "repos_url": "https://api.github.com/orgs/github/repos",&lt;/span&gt;
+&lt;span class="output"&gt;   "events_url": "https://api.github.com/orgs/github/events",&lt;/span&gt;
+&lt;span class="output"&gt;   "members_url": "https://api.github.com/orgs/github/members{/member}",&lt;/span&gt;
+&lt;span class="output"&gt;   "public_members_url": "https://api.github.com/orgs/github/public_members{/member}",&lt;/span&gt;
+&lt;span class="output"&gt;   "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=3",&lt;/span&gt;
+&lt;span class="output"&gt;    "description": "GitHub, the company."&lt;/span&gt;
+&lt;span class="output"&gt;  },&lt;/span&gt;
+&lt;span class="output"&gt;  ...&lt;/span&gt;
+&lt;span class="output"&gt;]&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Organizations"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2015-06-11:/changes/2015-06-11-pages-a-records/</id>
+    <title type="html">GitHub Pages' A Records Added to Meta API</title>
+    <published>2015-06-11T07:00:00Z</published>
+    <updated>2015-06-11T07:00:00Z</updated>
+    <author>
+      <name>leereilly</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-06-11-pages-a-records/"/>
+    <content type="html">&lt;p&gt;The &lt;a href="/v3/meta/"&gt;Meta API&lt;/a&gt; now includes the A record IP addresses for &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre class="command-line"&gt;
+&lt;span class="command"&gt;curl https://api.github.com/meta&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;pre class="highlight highlight-json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"verifiable_password_authentication"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"github_services_sha"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"23c6105183b626cf74c045f6d53af7a178bfdb4c"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"hooks"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"192.30.252.0/22"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"git"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"192.30.252.0/22"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"pages"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"192.30.252.153/32"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"192.30.252.154/32"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;These IP addresses are used to &lt;a href="https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider/"&gt;configure A records with your DNS provider for GitHub Pages&lt;/a&gt;. These addresses have changed a few times in the past. This API always provides the current addresses so that you can automate the process of keeping your DNS records up to date.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+A+Records+Added+to+API"&gt;get in touch&lt;/a&gt;. We’ll be happy to help.&lt;/p&gt;</content>
   </entry>
 </feed>
 

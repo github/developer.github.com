@@ -44,95 +44,7 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-02-05-changes-to-services/">
-  <h2 class="title">
-<a id="--upcoming-changes-to-github-services" class="anchor" href="#--upcoming-changes-to-github-services" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-02-05-changes-to-services/">Upcoming Changes to GitHub Services</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 5, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
-      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We are finishing up a new GitHub Services backend, dubbed "Hookshot", to
-increase the speed and reliability of our delivered payloads.  We are doing
-what we can to make this a seamless transition for everyone.  However, there
-are a few notable changes.</p>
-
-<ul>
-<li><p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
-listing the current public IPs that hooks originate from.</p></li>
-<li><p>We're removing the AMQP service from GitHub. It hasn't worked in quite some
-time, and the code it uses doesn't work in our background workers.</p></li>
-<li><p>We're also instituting a new guideline to improve the reliability and
-maintainability of services in the future. As of today, all new services must
-accept an unmodified payload over HTTP. Any service that does not will be
-rejected. To see an example of an acceptable service, check out <a href="https://github.com/github/github-services/blob/fbc0db24b8b7685b2058462181d928a5f2a0a448/lib/services/codeclimate.rb">Code Climate</a>.
-Notice their service simply accepts HTTP POST from GitHub unmodified. For an
-example of a service that won't be accepted after today, check out <a href="https://github.com/github/github-services/blob/fbc0db24b8b7685b2058462181d928a5f2a0a448/lib/services/campfire.rb">Campfire</a>. It
-uses other Ruby gems and contains custom logic to transform the GitHub payload
-to Campfire messages.  Existing hooks will keep working (don't worry 37signals, we
-<img class="emoji" title=":heart:" alt=":heart:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2764.png" height="20" width="20" align="absmiddle"> Campfire).</p></li>
-</ul>
-
-<p>We're making these changes because we want to focus on the reliability of the
-core Services backend for everyone.  Maintaining custom logic and libraries for
-over 100 services is taking too much of this focus away.</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">
-  <h2 class="title">
-<a id="--user-agent-mandatory-from-march-4th-2013" class="anchor" href="#--user-agent-mandatory-from-march-4th-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">User Agent mandatory from March 4th 2013</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    January 31, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/agh.png" alt="Avatar for agh" data-proofer-ignore>
-      <a href="https://github.com/agh" data-proofer-ignore>agh</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Following on from our <a href="http://developer.github.com/changes/2012-10-14-rate-limit-changes/">previous post</a>
-about requiring requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent header</a>
-we will soon be changing our API servers to return HTTP 403
-to any clients not providing a valid User Agent header.</p>
-
-<p>We will be making this change on Monday, March 4th 2013.</p>
-
-<p>Setting this helps us identify requests from you, and get in touch with people who are using
-the API in a way which causes disruption to GitHub. Most HTTP libraries and tools like cURL
-already provide a valid header for you, and allow you to customize it, so this will not require
-many of our users to make any changes whatsoever.</p>
-
-<p>If you have any questions or feedback, please drop us a line at
-<a href="mailto:support@github.com?subject=User%20Agent%20Requirement">support@github.com</a>.</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2013-01-08-new-user-scopes/">
+      <div class="change" id="/changes/2013-01-08-new-user-scopes/">
   <h2 class="title">
 <a id="--new-user-scopes" class="anchor" href="#--new-user-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-01-08-new-user-scopes/">New User scopes</a>
@@ -525,6 +437,125 @@ major change of the GitHub API.</p>
 <p></p>
 </div>
 
+<div class="change" id="/changes/2012-10-31-gist-comment-uris/">
+  <h2 class="title">
+<a id="--gist-comment-uris" class="anchor" href="#--gist-comment-uris" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-10-31-gist-comment-uris/">Gist comment URIs</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 31, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra" data-proofer-ignore>
+      <a href="https://github.com/pezra" data-proofer-ignore>pezra</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>The URIs of all gist comments are changing immediately. The new URI pattern for gist comments is <code>/gists/{gist-id}/comments/{id}</code>. (See <a href="/v3/gists/comments/">gist comments section of the docs</a> for more details.) This change is necessary because the auto-incremented ids of gist comments are easy to guess. This predictability allows anyone to view comments on private Gists with relative ease. Obviously, comments on private gists should be just as private as the gist itself.</p>
+
+<p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
+
+<p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-10-26-notifications-api/">
+  <h2 class="title">
+<a id="--notifications-api" class="anchor" href="#--notifications-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-10-26-notifications-api/">Notifications API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 26, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Now that the dust has settled around <a href="https://github.com/blog/1204-notifications-stars">Notifications and Stars</a>,
+we've unleashed all that <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2728.png" height="20" width="20" align="absmiddle"> in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
+view and mark notifications as read.</p>
+
+<h2>
+<a id="endpoint" class="anchor" href="#endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="endpoint" class="anchor" href="#endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Endpoint</h2>
+
+<p>The core notifications functionality is under the <code>/notifications</code> endpoint.
+You can look for unread notifications:</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/notifications</span>
+</pre>
+
+<p>You can filter these notifications to a single Repository:</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications</span>
+</pre>
+
+<p>You can mark them as read:</p>
+
+<pre class="command-line">
+<span class="comment"># all notifications</span>
+<span class="command">curl https://api.github.com/notifications \</span>
+<span class="command">   -X PUT -d '{"read": true}'</span>
+
+<span class="comment"># notifications for a single repository</span>
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications \</span>
+<span class="command">   -X PUT -d '{"read": true}'</span>
+</pre>
+
+<p>You can also modify subscriptions for a Repository or a single thread.</p>
+
+<pre class="command-line">
+<span class="comment"># subscription details for the thread (either an Issue or Commit)</span>
+<span class="command">curl https://api.github.com/notifications/threads/1/subscription</span>
+
+<span class="comment"># subscription details for a whole Repository.</span>
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/subscription</span>
+</pre>
+
+<h2>
+<a id="polling" class="anchor" href="#polling" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="polling" class="anchor" href="#polling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Polling</h2>
+
+<p>The Notifications API is optimized for polling by the last modified time:</p>
+
+<pre class="command-line">
+<span class="comment"># Add authentication to your requests</span>
+<span class="command">curl -I https://api.github.com/notifications</span>
+<span class="output">HTTP/1.1 200 OK</span>
+<span class="output">Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT</span>
+<span class="output">X-Poll-Interval: 60</span>
+
+<span class="comment"># Pass the Last-Modified header exactly</span>
+<span class="command">curl -I https://api.github.com/notifications</span>
+<span class="command">   -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"</span>
+<span class="output">HTTP/1.1 304 Not Modified</span>
+<span class="output">X-Poll-Interval: 60</span>
+</pre>
+
+<p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
+
+<p></p>
+</div>
+
 <div class="paginate-container">
   
 
@@ -607,10 +638,6 @@ major change of the GitHub API.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
-  <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-07-06-github-pages-preiew-api/">Introducing the GitHub Pages preview API<br /><span class="date">July 6, 2016</span></a></li>
-
   <li><a href="/changes/2016-06-27-protected-branches-api-update/">Update to Protected Branches API Preview<br /><span class="date">June 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
@@ -622,6 +649,10 @@ major change of the GitHub API.</p>
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
+
+  <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
+
+  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
 </ul>
 

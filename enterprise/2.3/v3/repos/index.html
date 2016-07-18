@@ -56,6 +56,8 @@
 <li><a href="#list-languages" id="markdown-toc-list-languages">List languages</a></li>
 <li><a href="#list-teams" id="markdown-toc-list-teams">List Teams</a></li>
 <li><a href="#list-tags" id="markdown-toc-list-tags">List Tags</a></li>
+<li><a href="#list-branches" id="markdown-toc-list-branches">List Branches</a></li>
+<li><a href="#get-branch" id="markdown-toc-get-branch">Get Branch</a></li>
 <li><a href="#delete-a-repository" id="markdown-toc-delete-a-repository">Delete a Repository</a></li>
 </ul>
 <h2>
@@ -1333,13 +1335,149 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <h2>
+<a id="list-branches" class="anchor" href="#list-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>List Branches</h2>
+<pre><code>GET /repos/:owner/:repo/branches
+</code></pre>
+<h3>
+<a id="parameters-6" class="anchor" href="#parameters-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code>protected</code></td>
+<td><code>string</code></td>
+<td>Set to <code>1</code> or <code>true</code> to only return protected branches.</td>
+</tr></tbody>
+</table>
+<div class="alert tip">
+<p><a name="preview-period"></a></p>
+<p>The <code>protected</code> parameter is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2015-11-11-protected-branches-api">blog post</a> for full details.</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.3/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>  application/vnd.github.loki-preview+json
+</code></pre>
+<p>The <code>protection</code> key will only be present in branch payloads if this header is passed.</p>
+</div>
+<h3>
+<a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"protection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"required_status_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"enforcement_level"</span><span class="p">:</span><span class="w"> </span><span class="s2">"off"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="get-branch" class="anchor" href="#get-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Branch</h2>
+<pre><code>GET /repos/:owner/:repo/branches/:branch
+</code></pre>
+<h3>
+<a id="response-10" class="anchor" href="#response-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<div class="alert tip">
+<p><a name="preview-period"></a></p>
+<p>The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2015-11-11-protected-branches-api">blog post</a> for full details.</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.3/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>  application/vnd.github.loki-preview+json
+</code></pre>
+<p>The <code>protection</code> key will only be present in branch payloads if this header is passed.</p>
+</div>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"protection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"required_status_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enforcement_level"</span><span class="p">:</span><span class="w"> </span><span class="s2">"off"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-03-06T15:06:50-08:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@nowhere.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b4eecafa9be2f2006ce1b709d6857b07069b4608"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/b4eecafa9be2f2006ce1b709d6857b07069b4608"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"committer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-03-06T15:06:50-08:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@nowhere.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">583231</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"parents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"553c2077f0edc3d5dc5d17262f6aa498e69d6f8e"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/553c2077f0edc3d5dc5d17262f6aa498e69d6f8e"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"762941318ee16e59dabbacb1b4049eec22f0d303"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/762941318ee16e59dabbacb1b4049eec22f0d303"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"committer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">583231</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat/Hello-World/tree/master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2>
 <a id="delete-a-repository" class="anchor" href="#delete-a-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete a Repository</h2>
 <p>Deleting a repository requires admin access.  If OAuth is used, the
 <code>delete_repo</code> scope is required.</p>
 <pre><code>DELETE /repos/:owner/:repo
 </code></pre>
 <h3>
-<a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-11" class="anchor" href="#response-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999
@@ -1416,6 +1554,7 @@ X-RateLimit-Remaining: 4999
           <li><a href="/enterprise/2.3/v3/licenses/">Licenses</a></li>
           <li><a href="/enterprise/2.3/v3/markdown/">Markdown</a></li>
           <li><a href="/enterprise/2.3/v3/meta/">Meta</a></li>
+          <li><a href="/enterprise/2.3/v3/rate_limit/">Rate Limit</a></li>
         </ul>
 </li>
       <li class="js-topic">
@@ -1452,8 +1591,7 @@ X-RateLimit-Remaining: 4999
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.3/v3/repos/">Repositories</a>
 </h3>
         <ul class="js-guides">
-<li><a href="/enterprise/2.3/v3/repos/branches/">Branches</a></li>
-          <li><a href="/enterprise/2.3/v3/repos/collaborators/">Collaborators</a></li>
+<li><a href="/enterprise/2.3/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/enterprise/2.3/v3/repos/comments/">Comments</a></li>
           <li><a href="/enterprise/2.3/v3/repos/commits/">Commits</a></li>
           <li><a href="/enterprise/2.3/v3/repos/contents/">Contents</a></li>
@@ -1461,7 +1599,6 @@ X-RateLimit-Remaining: 4999
           <li><a href="/enterprise/2.3/v3/repos/deployments/">Deployments</a></li>
           <li><a href="/enterprise/2.3/v3/repos/downloads/">Downloads</a></li>
           <li><a href="/enterprise/2.3/v3/repos/forks/">Forks</a></li>
-          <li><a href="/enterprise/2.3/v3/repos/invitations/">Invitations</a></li>
           <li><a href="/enterprise/2.3/v3/repos/merging/">Merging</a></li>
           <li><a href="/enterprise/2.3/v3/repos/pages/">Pages</a></li>
           <li><a href="/enterprise/2.3/v3/repos/releases/">Releases</a></li>

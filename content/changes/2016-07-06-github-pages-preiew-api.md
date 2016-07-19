@@ -13,7 +13,7 @@ You can now manually request a build of your GitHub Pages site without needing t
 curl "https://api.github.com/repos/github/developer.github.com/pages/builds" \
   -X POST
   -H 'Authorization: token TOKEN' \
-  -H "Accept: application/vnd.github.mister-fantstic-preview" \
+  -H "Accept: application/vnd.github.mister-fantastic-preview" \
 ```
 
 #### Retrieving a site's URL
@@ -27,7 +27,7 @@ For example, to request the HTML URL:
 ``` command-line
 curl "https://api.github.com/repos/github/developer.github.com/pages" \
   -H 'Authorization: token TOKEN' \
-  -H "Accept: application/vnd.github.mister-fantstic-preview" \
+  -H "Accept: application/vnd.github.mister-fantastic-preview" \
 ```
 
 #### How can I try it?

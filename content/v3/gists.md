@@ -48,7 +48,7 @@ Name | Type | Description
 
 List all public gists sorted by most recently updated to least recently updated.
 
-Note: With pagination, you can fetch up to 200 [pages](/v3/#pagination).
+Note: With [pagination](/v3/#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
 
     GET /gists/public
 

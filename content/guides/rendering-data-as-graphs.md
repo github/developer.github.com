@@ -2,7 +2,7 @@
 title: Rendering Data as Graphs
 ---
 
-# Rendering Data as Graphs
+# Rendering Data as Graphs!
 
 {:toc}
 

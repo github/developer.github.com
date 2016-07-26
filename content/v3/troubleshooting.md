@@ -44,5 +44,14 @@ should be prepared to answer technical questions about your goal and your planne
 dreams with the current rate limit (but don't worry, we'll help you out).
 
 {% endif %}
+## Why does the api always return "Problems parsing JSON"
+when doing a PUT request to the GitHub api (specifically repository contents)    
+the request must be in `https`, not `http`. If it is in http then the api will always return 
+```Json
+{
+  "message":"Problems parsing JSON",
+  "documentation_url":"https://developer.github.com/v3/repos/contents/"
+}
+```
 
 [oap-guide]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/

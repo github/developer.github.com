@@ -2,7 +2,7 @@
 title: Building a CI server
 ---
 
-# Building a CI server
+# Building a CI server!
 
 {:toc}
 

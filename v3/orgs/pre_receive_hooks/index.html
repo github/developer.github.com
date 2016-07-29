@@ -5,7 +5,9 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Admin Stats | GitHub Developer Guide</title>
+  <title>Organization Pre-receive Hooks | GitHub Developer Guide</title>
+  
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
   <link href="/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -22,8 +24,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        
-        <li>Enterprise 2.6</li>
         
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/program/" class="nav-developers">Developers</a></li>
@@ -56,13 +56,32 @@
   <div id="wrapper">
     <div class="content">
       <h1>
-<a id="admin-stats" class="anchor" href="#admin-stats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Admin Stats</h1>
+<a id="organization-pre-receive-hooks-enterprise" class="anchor" href="#organization-pre-receive-hooks-enterprise" aria-hidden="true"><span class="octicon octicon-link"></span></a>Organization Pre-receive Hooks (Enterprise)</h1>
+
+<div class="alert tip">
+
+<p><a name="preview-period"></a></p>
+
+<p>APIs for managing pre-receive hooks are currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.</p>
+
+<p>To access the API you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>  application/vnd.github.eye-scream-preview
+</code></pre>
+
+</div>
 
 <ul id="markdown-toc">
-<li><a href="#get-statistics" id="markdown-toc-get-statistics">Get statistics</a></li>
+<li><a href="#object-attributes" id="markdown-toc-object-attributes">Object attributes</a></li>
+<li><a href="#list-pre-receive-hooks" id="markdown-toc-list-pre-receive-hooks">List pre-receive hooks</a></li>
+<li><a href="#get-a-single-pre-receive-hook" id="markdown-toc-get-a-single-pre-receive-hook">Get a single pre-receive hook</a></li>
+<li><a href="#update-pre-receive-hook-enforcement" id="markdown-toc-update-pre-receive-hook-enforcement">Update pre-receive hook enforcement</a></li>
+<li><a href="#remove-enforcment-overrides-for-a-pre-receive-hook" id="markdown-toc-remove-enforcment-overrides-for-a-pre-receive-hook">Remove enforcment overrides for a pre-receive hook</a></li>
 </ul>
 
-<p>The Admin Stats API provides a variety of metrics about your installation. <em>It is only available to <a href="/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>404</code> response if they try to access it.</p>
+<p>The Organization Pre-receive Hooks API allows you to view and modify 
+enforcement of the pre-receive hooks that are available to an organization.</p>
 
 <p>Prefix all the endpoints for this API with the following URL:</p>
 
@@ -71,72 +90,110 @@ http(s)://<em>hostname</em>/api/v3
 </pre>
 
 <h2>
-<a id="get-statistics" class="anchor" href="#get-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get statistics</h2>
-
-<h3>
-<a id="request" class="anchor" href="#request" aria-hidden="true"><span class="octicon octicon-link"></span></a>Request</h3>
-
-<pre><code>GET /enterprise/stats/:type
-</code></pre>
-
-<p>There are a variety of types to choose from:</p>
+<a id="object-attributes" class="anchor" href="#object-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Object attributes</h2>
 
 <table>
 <thead>
 <tr>
+<th>Name</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>issues</code></td>
-<td>The number of open and closed issues.</td>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>The name of the hook.</td>
 </tr>
 <tr>
-<td><code>hooks</code></td>
-<td>The number of active and inactive hooks.</td>
+<td><code>enforcement</code></td>
+<td><code>string</code></td>
+<td>The state of enforcement for the hook on this repository.</td>
 </tr>
 <tr>
-<td><code>milestones</code></td>
-<td>The number of open and closed milestones.</td>
+<td><code>allow_downstream_configuration</code></td>
+<td><code>boolean</code></td>
+<td>Whether repositories can override enforcement.</td>
 </tr>
 <tr>
-<td><code>orgs</code></td>
-<td>The number of organizations, teams, team members, and disabled organizations.</td>
-</tr>
-<tr>
-<td><code>comments</code></td>
-<td>The number of comments on issues, pull requests, commits, and gists.</td>
-</tr>
-<tr>
-<td><code>pages</code></td>
-<td>The number of GitHub Pages sites.</td>
-</tr>
-<tr>
-<td><code>users</code></td>
-<td>The number of suspended and admin users.</td>
-</tr>
-<tr>
-<td><code>gists</code></td>
-<td>The number of private and public gists.</td>
-</tr>
-<tr>
-<td><code>pulls</code></td>
-<td>The number of merged, mergeable, and unmergeable pull requests.</td>
-</tr>
-<tr>
-<td><code>repos</code></td>
-<td>The number of organization-owned repositories, root repositories, forks, pushed commits, and wikis.</td>
-</tr>
-<tr>
-<td><code>all</code></td>
-<td>All of the statistics listed above.</td>
+<td><code>configuration_url</code></td>
+<td><code>string</code></td>
+<td>URL for the endpoint where enforcement is set.</td>
 </tr>
 </tbody>
 </table>
 
-<p>These statistics are cached and will be updated approximately every 10 minutes.</p>
+<p>Possible values for <em>enforcement</em> are <code>enabled</code>, <code>disabled</code> and<code>testing</code>. <code>disabled</code> indicates the pre-receive hook will not run. <code>enabled</code> indicates it will run and reject 
+any pushes that result in a non-zero status. <code>testing</code> means the script will run but will not cause any pushes to be rejected.</p>
+
+<p><code>configuration_url</code> may be a link to this endpoint or this hook's global 
+configuration. Only site admins are able to access the global configuration.</p>
+
+<h2>
+<a id="list-pre-receive-hooks" class="anchor" href="#list-pre-receive-hooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>List pre-receive hooks</h2>
+
+<p>List all pre-receive hooks that are enabled or testing for this 
+organization as well as any disabled hooks that can be configured at the
+organization level. Globally disabled pre-receive hooks that do not allow
+downstream configuration are not listed.</p>
+
+<pre><code>GET /orgs/:org/pre-receive-hooks
+</code></pre>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check Commits"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enforcement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"configuration_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.example.com/api/v3/admin/pre-receive-hooks/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"allow_downstream_configuration"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-a-single-pre-receive-hook" class="anchor" href="#get-a-single-pre-receive-hook" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get a single pre-receive hook</h2>
+
+<pre><code>GET /orgs/:org:pre-receive-hooks/:id
+</code></pre>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check Commits"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enforcement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"configuration_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.example.com/api/v3/admin/pre-receive-hooks/42"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"allow_downstream_configuration"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="update-pre-receive-hook-enforcement" class="anchor" href="#update-pre-receive-hook-enforcement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update pre-receive hook enforcement</h2>
+
+<p>For pre-receive hooks which are allowed to be configured at the org level, you can set 
+<code>enforcement</code> and <code>allow_downstream_configuration</code></p>
+
+<pre><code>PATCH /orgs/:org/pre-receive-hooks/:id
+</code></pre>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"enforcement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"allow_downstream_configuration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 
 <h3>
 <a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
@@ -146,60 +203,33 @@ http(s)://<em>hostname</em>/api/v3
 
 
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"repos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">212</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"root_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">194</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fork_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"org_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_pushes"</span><span class="p">:</span><span class="w"> </span><span class="mi">3082</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_wikis"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_hooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"active_hooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"inactive_hooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"orgs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_orgs"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"disabled_orgs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_teams"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_team_members"</span><span class="p">:</span><span class="w"> </span><span class="mi">314</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_users"</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"admin_users"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"suspended_users"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"pulls"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merged_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mergeable_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"unmergeable_pulls"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"issues"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_issues"</span><span class="p">:</span><span class="w"> </span><span class="mi">179</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"open_issues"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"closed_issues"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"milestones"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_milestones"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"open_milestones"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"closed_milestones"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"gists"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">178</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"private_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">151</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"public_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_commit_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_gist_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_issue_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_pull_request_comments"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check Commits"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enforcement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"configuration_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.example.com/api/v3/orgs/octocat/pre-receive-hooks/42"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"allow_downstream_configuration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="remove-enforcment-overrides-for-a-pre-receive-hook" class="anchor" href="#remove-enforcment-overrides-for-a-pre-receive-hook" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove enforcment overrides for a pre-receive hook</h2>
+
+<p>Removes any overrides for this hook at the org level for this org.</p>
+
+<pre><code>DELETE /orgs/:org/pre-receive-hooks/:id
+</code></pre>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check Commits"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enforcement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"configuration_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.example.com/api/v3/admin/pre-receive-hooks/42"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"allow_downstream_configuration"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -255,6 +285,16 @@ http(s)://<em>hostname</em>/api/v3
           <li><a href="/v3/issues/labels/">Labels</a></li>
           <li><a href="/v3/issues/milestones/">Milestones</a></li>
           
+          <li><a href="/v3/issues/timeline/">Timeline</a></li>
+          
+        </ul>
+      </li>
+      
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/migration/">Migration</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/migration/migrations/">Migrations</a></li>
+          <li><a href="/v3/migration/source_imports/">Source Imports</a></li>
         </ul>
       </li>
       
@@ -266,6 +306,8 @@ http(s)://<em>hostname</em>/api/v3
           <li><a href="/v3/licenses/">Licenses</a></li>
           <li><a href="/v3/markdown/">Markdown</a></li>
           <li><a href="/v3/meta/">Meta</a></li>
+          
+          <li><a href="/v3/rate_limit/">Rate Limit</a></li>
           
         </ul>
       </li>
@@ -331,6 +373,8 @@ http(s)://<em>hostname</em>/api/v3
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
           <li><a href="/v3/users/keys/">Git SSH Keys</a></li>
+          
+          <li><a href="/v3/users/gpg_keys/">GPG Keys</a></li>
           
           <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>

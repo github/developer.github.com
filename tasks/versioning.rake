@@ -131,3 +131,7 @@ def cleanup
   FileUtils.rm_rf "#{VERSIONED_ENT_PATH}/assets/vendor"
   FileUtils.rm_rf "#{VERSIONED_ENT_PATH}/assets/images"
 end
+
+def keep?
+  ARGV.include?('--keep')
+end

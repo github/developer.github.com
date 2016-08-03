@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title>Branches | GitHub Developer Guide</title>
+<link href="/enterprise/2.7/assets/stylesheets/application.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script src="/enterprise/2.7/assets/javascripts/application.js" type="text/javascript"></script>
+</head>
+<body class="api ">
+<div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.7/">GitHub:Developer</a>
+      <ul class="nav">
+<li>Enterprise 2.7</li>
+        <li><a href="/enterprise/2.7/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.7/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results"></ul>
+</li>
+      </ul>
+</div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+  <div class="sub-nav">
+    <h2><a href="/enterprise/2.7/v3/">API</a></h2>
+    <ul>
+<li><a href="/enterprise/2.7/v3/" class="active">Reference</a></li>
+      <li><a href="/enterprise/2.7/webhooks/">Webhooks</a></li>
+      <li><a href="/enterprise/2.7/guides/">Guides</a></li>
+      <li><a href="/enterprise/2.7/libraries/">Libraries</a></li>
+    </ul>
+</div>
+  <div id="wrapper">
+    <div class="content">
+      <h1>
+<a id="branches" class="anchor" href="#branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Branches</h1>
+<ul id="markdown-toc">
+<li><a href="#list-branches" id="markdown-toc-list-branches">List Branches</a></li>
+<li><a href="#get-branch" id="markdown-toc-get-branch">Get Branch</a></li>
+<li><a href="#get-branch-protection" id="markdown-toc-get-branch-protection">Get branch protection</a></li>
+<li><a href="#update-branch-protection" id="markdown-toc-update-branch-protection">Update branch protection</a></li>
+<li><a href="#remove-branch-protection" id="markdown-toc-remove-branch-protection">Remove branch protection</a></li>
+<li><a href="#get-required-status-checks-of-protected-branch" id="markdown-toc-get-required-status-checks-of-protected-branch">Get required status checks of protected branch</a></li>
+<li><a href="#update-required-status-checks-of-protected-branch" id="markdown-toc-update-required-status-checks-of-protected-branch">Update required status checks of protected branch</a></li>
+<li><a href="#remove-required-status-checks-of-protected-branch" id="markdown-toc-remove-required-status-checks-of-protected-branch">Remove required status checks of protected branch</a></li>
+<li><a href="#list-required-status-checks-contexts-of-protected-branch" id="markdown-toc-list-required-status-checks-contexts-of-protected-branch">List required status checks contexts of protected branch</a></li>
+<li><a href="#replace-required-status-checks-contexts-of-protected-branch" id="markdown-toc-replace-required-status-checks-contexts-of-protected-branch">Replace required status checks contexts of protected branch</a></li>
+<li><a href="#add-required-status-checks-contexts-of-protected-branch" id="markdown-toc-add-required-status-checks-contexts-of-protected-branch">Add required status checks contexts of protected branch</a></li>
+<li><a href="#remove-required-status-checks-contexts-of-protected-branch" id="markdown-toc-remove-required-status-checks-contexts-of-protected-branch">Remove required status checks contexts of protected branch</a></li>
+<li><a href="#get-restrictions-of-protected-branch" id="markdown-toc-get-restrictions-of-protected-branch">Get restrictions of protected branch</a></li>
+<li><a href="#remove-restrictions-of-protected-branch" id="markdown-toc-remove-restrictions-of-protected-branch">Remove restrictions of protected branch</a></li>
+<li><a href="#list-team-restrictions-of-protected-branch" id="markdown-toc-list-team-restrictions-of-protected-branch">List team restrictions of protected branch</a></li>
+<li><a href="#replace-team-restrictions-of-protected-branch" id="markdown-toc-replace-team-restrictions-of-protected-branch">Replace team restrictions of protected branch</a></li>
+<li><a href="#add-team-restrictions-of-protected-branch" id="markdown-toc-add-team-restrictions-of-protected-branch">Add team restrictions of protected branch</a></li>
+<li><a href="#remove-team-restrictions-of-protected-branch" id="markdown-toc-remove-team-restrictions-of-protected-branch">Remove team restrictions of protected branch</a></li>
+<li><a href="#list-user-restrictions-of-protected-branch" id="markdown-toc-list-user-restrictions-of-protected-branch">List user restrictions of protected branch</a></li>
+<li><a href="#replace-user-restrictions-of-protected-branch" id="markdown-toc-replace-user-restrictions-of-protected-branch">Replace user restrictions of protected branch</a></li>
+<li><a href="#add-user-restrictions-of-protected-branch" id="markdown-toc-add-user-restrictions-of-protected-branch">Add user restrictions of protected branch</a></li>
+<li><a href="#remove-user-restrictions-of-protected-branch" id="markdown-toc-remove-user-restrictions-of-protected-branch">Remove user restrictions of protected branch</a></li>
+</ul>
+<div class="alert tip">
+<p><a name="preview-period"></a></p>
+<p>The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2016-06-27-protected-branches-api-update">blog post</a> for full details.</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.7/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>  application/vnd.github.loki-preview+json
+</code></pre>
+</div>
+<h2>
+<a id="list-branches" class="anchor" href="#list-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>List Branches</h2>
+<pre><code>GET /repos/:owner/:repo/branches
+</code></pre>
+<h3>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code>protected</code></td>
+<td><code>boolean</code></td>
+<td>Set to <code>true</code> to only return protected branches</td>
+</tr></tbody>
+</table>
+<div class="alert tip">
+<p><a name="preview-period"></a></p>
+<p>The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2016-06-27-protected-branches-api-update">blog post</a> for full details.</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.7/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>  application/vnd.github.loki-preview+json
+</code></pre>
+<p>The <code>protected</code> key will only be present in branch payloads if this header is passed.</p>
+</div>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"protected"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"protection_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="get-branch" class="anchor" href="#get-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Branch</h2>
+<pre><code>GET /repos/:owner/:repo/branches/:branch
+</code></pre>
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<div class="alert tip">
+<p><a name="preview-period"></a></p>
+<p>The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2016-06-27-protected-branches-api-update">blog post</a> for full details.</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.7/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>  application/vnd.github.loki-preview+json
+</code></pre>
+<p>The <code>protected</code> key will only be present in branch payloads if this header is passed.</p>
+</div>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-03-06T15:06:50-08:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@nowhere.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b4eecafa9be2f2006ce1b709d6857b07069b4608"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/b4eecafa9be2f2006ce1b709d6857b07069b4608"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"committer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-03-06T15:06:50-08:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@nowhere.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">583231</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"parents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"553c2077f0edc3d5dc5d17262f6aa498e69d6f8e"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/553c2077f0edc3d5dc5d17262f6aa498e69d6f8e"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"762941318ee16e59dabbacb1b4049eec22f0d303"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/762941318ee16e59dabbacb1b4049eec22f0d303"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"committer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">583231</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat/Hello-World/tree/master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"protected"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"protection_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="get-branch-protection" class="anchor" href="#get-branch-protection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get branch protection</h2>
+<pre><code>GET /repos/:owner/:repo/branches/:branch/protection
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required_status_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"include_admins"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"contexts_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks/contexts"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"restrictions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"users_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions/users"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"teams_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions/teams"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"teams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Justice League"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"justice-league"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great team."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"repositories_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/repos"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="update-branch-protection" class="anchor" href="#update-branch-protection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update branch protection</h2>
+<p>Protecting a branch requires admin access.</p>
+<pre><code>PUT /repos/:owner/:repo/branches/:branch/protection
+</code></pre>
+<h3>
+<a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+<p>You can pass two objects: <code>required_status_checks</code> and <code>restrictions</code>. Both can have the value <code>null</code> for disabled.</p>
+<p>The <code>required_status_checks</code> object must have the following keys:</p>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>include_admins</code></td>
+<td><code>boolean</code></td>
+<td>
+<strong>Required</strong>. Enforce required status checks for repository administrators.</td>
+</tr>
+<tr>
+<td><code>strict</code></td>
+<td><code>boolean</code></td>
+<td>
+<strong>Required</strong>. Require branches to be up to date before merging.</td>
+</tr>
+<tr>
+<td><code>contexts</code></td>
+<td><code>array</code></td>
+<td>
+<strong>Required</strong>. The list of status checks to require in order to merge into this branch</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>restrictions</code> object must have the following keys:</p>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>users</code></td>
+<td><code>array</code></td>
+<td>The list of user <code>login</code>s with push access</td>
+</tr>
+<tr>
+<td><code>teams</code></td>
+<td><code>array</code></td>
+<td>The list of team <code>slug</code>s with push access</td>
+</tr>
+</tbody>
+</table>
+<div class="alert tip">
+<ul>
+<li>Teams and users <code>restrictions</code> are only available for organization-owned repositories.</li>
+<li>The list of users and teams in total is limited to 100 items.</li>
+</ul>
+</div>
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"required_status_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"include_admins"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"restrictions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"octocat"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"teams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"justice-league"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required_status_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"include_admins"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"contexts_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks/contexts"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"restrictions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"users_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions/users"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"teams_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions/teams"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"teams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Justice League"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"justice-league"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great team."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"repositories_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/repos"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="remove-branch-protection" class="anchor" href="#remove-branch-protection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove branch protection</h2>
+<pre><code>DELETE /repos/:owner/:repo/branches/:branch/protection
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
+</code></pre>
+<h2>
+<a id="get-required-status-checks-of-protected-branch" class="anchor" href="#get-required-status-checks-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get required status checks of protected branch</h2>
+<pre><code>GET /repos/:owner/:repo/branches/:branch/protection/required_status_checks
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"include_admins"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"contexts_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks/contexts"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="update-required-status-checks-of-protected-branch" class="anchor" href="#update-required-status-checks-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update required status checks of protected branch</h2>
+<p>Updating required status checks requires admin access and branch protection to be enabled.</p>
+<pre><code>PATCH /repos/:owner/:repo/branches/:branch/protection/required_status_checks
+</code></pre>
+<h3>
+<a id="parameters-2" class="anchor" href="#parameters-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+<p>The object passed can have the following keys:</p>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>include_admins</code></td>
+<td><code>boolean</code></td>
+<td>Enforce required status checks for repository administrators.</td>
+</tr>
+<tr>
+<td><code>strict</code></td>
+<td><code>boolean</code></td>
+<td>Require branches to be up to date before merging.</td>
+</tr>
+<tr>
+<td><code>contexts</code></td>
+<td><code>array</code></td>
+<td>The list of status checks to require in order to merge into this branch</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"include_admins"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"include_admins"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"contexts_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks/contexts"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="remove-required-status-checks-of-protected-branch" class="anchor" href="#remove-required-status-checks-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove required status checks of protected branch</h2>
+<pre><code>DELETE /repos/:owner/:repo/branches/:branch/protection/required_status_checks
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
+</code></pre>
+<h2>
+<a id="list-required-status-checks-contexts-of-protected-branch" class="anchor" href="#list-required-status-checks-contexts-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>List required status checks contexts of protected branch</h2>
+<pre><code>GET /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="replace-required-status-checks-contexts-of-protected-branch" class="anchor" href="#replace-required-status-checks-contexts-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Replace required status checks contexts of protected branch</h2>
+<pre><code>PUT /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts
+</code></pre>
+<h3>
+<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="add-required-status-checks-contexts-of-protected-branch" class="anchor" href="#add-required-status-checks-contexts-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add required status checks contexts of protected branch</h2>
+<pre><code>POST /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts
+</code></pre>
+<h3>
+<a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"continuous-integration/jenkins"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"continuous-integration/travis-ci"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"continuous-integration/jenkins"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="remove-required-status-checks-contexts-of-protected-branch" class="anchor" href="#remove-required-status-checks-contexts-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove required status checks contexts of protected branch</h2>
+<pre><code>DELETE /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts
+</code></pre>
+<h3>
+<a id="example-4" class="anchor" href="#example-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"continuous-integration/jenkins"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="get-restrictions-of-protected-branch" class="anchor" href="#get-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get restrictions of protected branch</h2>
+<div class="alert tip">
+<p>Teams and users <code>restrictions</code> are only available for organization-owned repositories.</p>
+</div>
+<pre><code>GET /repos/:owner/:repo/branches/:branch/protection/restrictions
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"users_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions/users"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"teams_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master/protection/restrictions/teams"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"teams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Justice League"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"justice-league"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great team."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"repositories_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/repos"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="remove-restrictions-of-protected-branch" class="anchor" href="#remove-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove restrictions of protected branch</h2>
+<pre><code>DELETE /repos/:owner/:repo/branches/:branch/protection/restrictions
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
+</code></pre>
+<h2>
+<a id="list-team-restrictions-of-protected-branch" class="anchor" href="#list-team-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>List team restrictions of protected branch</h2>
+<pre><code>GET /repos/:owner/:repo/branches/:branch/protection/restrictions/teams
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Justice League"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"justice-league"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great team."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repositories_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/repos"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="replace-team-restrictions-of-protected-branch" class="anchor" href="#replace-team-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Replace team restrictions of protected branch</h2>
+<pre><code>PUT /repos/:owner/:repo/branches/:branch/protection/restrictions/teams
+</code></pre>
+<h3>
+<a id="body-parameters" class="anchor" href="#body-parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Body parameters</h3>
+<p>Pass the list of team <code>slug</code>s with push access.</p>
+<div class="alert tip">
+<p>The list of users and teams in total is limited to 100 items.</p>
+</div>
+<h3>
+<a id="example-5" class="anchor" href="#example-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"justice-league"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Justice League"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"justice-league"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great team."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repositories_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/repos"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="add-team-restrictions-of-protected-branch" class="anchor" href="#add-team-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add team restrictions of protected branch</h2>
+<pre><code>POST /repos/:owner/:repo/branches/:branch/protection/restrictions/teams
+</code></pre>
+<h3>
+<a id="body-parameters-1" class="anchor" href="#body-parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Body parameters</h3>
+<p>Pass the list of team <code>slug</code>s with push access.</p>
+<div class="alert tip">
+<p>The list of users and teams in total is limited to 100 items.</p>
+</div>
+<h3>
+<a id="example-6" class="anchor" href="#example-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"justice-league"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-8" class="anchor" href="#response-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Justice League"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"justice-league"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great team."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repositories_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/repos"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="remove-team-restrictions-of-protected-branch" class="anchor" href="#remove-team-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove team restrictions of protected branch</h2>
+<pre><code>DELETE /repos/:owner/:repo/branches/:branch/protection/restrictions/teams
+</code></pre>
+<h3>
+<a id="example-7" class="anchor" href="#example-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"octocats"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Justice League"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"justice-league"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great team."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repositories_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/teams/1/repos"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="list-user-restrictions-of-protected-branch" class="anchor" href="#list-user-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>List user restrictions of protected branch</h2>
+<pre><code>GET /repos/:owner/:repo/branches/:branch/protection/restrictions/users
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="replace-user-restrictions-of-protected-branch" class="anchor" href="#replace-user-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Replace user restrictions of protected branch</h2>
+<pre><code>PUT /repos/:owner/:repo/branches/:branch/protection/restrictions/users
+</code></pre>
+<h3>
+<a id="body-parameters-2" class="anchor" href="#body-parameters-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Body parameters</h3>
+<p>Pass the list of user <code>login</code>s with push access.</p>
+<div class="alert tip">
+<p>The list of users and teams in total is limited to 100 items.</p>
+</div>
+<h3>
+<a id="example-8" class="anchor" href="#example-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"octocat"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-10" class="anchor" href="#response-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="add-user-restrictions-of-protected-branch" class="anchor" href="#add-user-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add user restrictions of protected branch</h2>
+<pre><code>POST /repos/:owner/:repo/branches/:branch/protection/restrictions/users
+</code></pre>
+<h3>
+<a id="body-parameters-3" class="anchor" href="#body-parameters-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Body parameters</h3>
+<p>Pass the list of user <code>login</code>s with push access.</p>
+<div class="alert tip">
+<p>The list of users and teams in total is limited to 100 items.</p>
+</div>
+<h3>
+<a id="example-9" class="anchor" href="#example-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"octocat"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-11" class="anchor" href="#response-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2>
+<a id="remove-user-restrictions-of-protected-branch" class="anchor" href="#remove-user-restrictions-of-protected-branch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove user restrictions of protected branch</h2>
+<pre><code>DELETE /repos/:owner/:repo/branches/:branch/protection/restrictions/users
+</code></pre>
+<h3>
+<a id="example-10" class="anchor" href="#example-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"defunkt"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="response-12" class="anchor" href="#response-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+    </div>
+    <div id="js-sidebar" class="sidebar-shell">
+  <div class="js-toggle-list sidebar-module expandable">
+    <ul>
+<li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/">Overview</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/media/">Media Types</a></li>
+          <li><a href="/enterprise/2.7/v3/oauth/">OAuth</a></li>
+          <li><a href="/enterprise/2.7/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
+          <li><a href="/enterprise/2.7/v3/auth/">Other Authentication Methods</a></li>
+          <li><a href="/enterprise/2.7/v3/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/enterprise/2.7/v3/versions/">Versions</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/activity/">Activity</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/activity/events/">Events</a></li>
+          <li><a href="/enterprise/2.7/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
+          <li><a href="/enterprise/2.7/v3/activity/feeds/">Feeds</a></li>
+          <li><a href="/enterprise/2.7/v3/activity/notifications/">Notifications</a></li>
+          <li><a href="/enterprise/2.7/v3/activity/starring/">Starring</a></li>
+          <li><a href="/enterprise/2.7/v3/activity/watching/">Watching</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/gists/">Gists</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/gists/comments/">Comments</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/git/">Git Data</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/git/blobs/">Blobs</a></li>
+          <li><a href="/enterprise/2.7/v3/git/commits/">Commits</a></li>
+          <li><a href="/enterprise/2.7/v3/git/refs/">References</a></li>
+          <li><a href="/enterprise/2.7/v3/git/tags/">Tags</a></li>
+          <li><a href="/enterprise/2.7/v3/git/trees/">Trees</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/issues/">Issues</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/issues/assignees/">Assignees</a></li>
+          <li><a href="/enterprise/2.7/v3/issues/comments/">Comments</a></li>
+          <li><a href="/enterprise/2.7/v3/issues/events/">Events</a></li>
+          <li><a href="/enterprise/2.7/v3/issues/labels/">Labels</a></li>
+          <li><a href="/enterprise/2.7/v3/issues/milestones/">Milestones</a></li>
+          <li><a href="/enterprise/2.7/v3/issues/timeline/">Timeline</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/misc/">Miscellaneous</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/emojis/">Emojis</a></li>
+          <li><a href="/enterprise/2.7/v3/gitignore/">Gitignore</a></li>
+          <li><a href="/enterprise/2.7/v3/licenses/">Licenses</a></li>
+          <li><a href="/enterprise/2.7/v3/markdown/">Markdown</a></li>
+          <li><a href="/enterprise/2.7/v3/meta/">Meta</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/orgs/">Organizations</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/orgs/members/">Members</a></li>
+          <li><a href="/enterprise/2.7/v3/orgs/teams/">Teams</a></li>
+          <li><a href="/enterprise/2.7/v3/orgs/hooks/">Webhooks</a></li>
+          <li><a href="/enterprise/2.7/v3/orgs/pre_receive_hooks/">Pre-receive Hooks (Enterprise)</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/pulls/">Pull Requests</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/reactions/">Reactions</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/reactions/#list-reactions-for-a-commit-comment">Commit Comment</a></li>
+          <li><a href="/enterprise/2.7/v3/reactions/#list-reactions-for-an-issue">Issue</a></li>
+          <li><a href="/enterprise/2.7/v3/reactions/#list-reactions-for-an-issue-comment">Issue Comment</a></li>
+          <li><a href="/enterprise/2.7/v3/reactions/#list-reactions-for-a-pull-request-review-comment">Pull Request Review Comment</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/repos/">Repositories</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/repos/branches/">Branches</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/collaborators/">Collaborators</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/comments/">Comments</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/commits/">Commits</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/contents/">Contents</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/keys/">Deploy Keys</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/deployments/">Deployments</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/downloads/">Downloads</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/forks/">Forks</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/invitations/">Invitations</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/merging/">Merging</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/pages/">Pages</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/releases/">Releases</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/statistics/">Statistics</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/statuses/">Statuses</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/hooks/">Webhooks</a></li>
+          <li><a href="/enterprise/2.7/v3/repos/pre_receive_hooks/">Pre-receive Hooks (Enterprise)</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/search/">Search</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/search/#search-repositories">Repositories</a></li>
+          <li><a href="/enterprise/2.7/v3/search/#search-code">Code</a></li>
+          <li><a href="/enterprise/2.7/v3/search/#search-issues">Issues</a></li>
+          <li><a href="/enterprise/2.7/v3/search/#search-users">Users</a></li>
+          <li><a href="/enterprise/2.7/v3/search/legacy/">Legacy Search</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/users/">Users</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/users/emails/">Emails</a></li>
+          <li><a href="/enterprise/2.7/v3/users/followers/">Followers</a></li>
+          <li><a href="/enterprise/2.7/v3/users/keys/">Git SSH Keys</a></li>
+          <li><a href="/enterprise/2.7/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.7/v3/enterprise/">Enterprise</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.7/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/enterprise/2.7/v3/enterprise/ldap/">LDAP</a></li>
+          <li><a href="/enterprise/2.7/v3/enterprise/license/">License</a></li>
+          <li><a href="/enterprise/2.7/v3/enterprise/management_console/">Management Console</a></li>
+          <li><a href="/enterprise/2.7/v3/enterprise/pre_receive_environments/">Pre-receive Environments</a></li>
+          <li><a href="/enterprise/2.7/v3/enterprise/pre_receive_hooks/">Pre-receive Hooks</a></li>
+          <li><a href="/enterprise/2.7/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/enterprise/2.7/v3/enterprise/orgs/">Organization Administration</a></li>
+        </ul>
+</li>
+    </ul>
+</div> <!-- /sidebar-module -->
+  <div class="sidebar-module notice">
+    <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+  </div>
+	<div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+</div>
+<!-- /sidebar-shell -->
+  </div>
+<!-- #wrapper -->
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+<li><a href="https://github.com/github/developer.github.com#licenses">© 2016 GitHub, Inc.</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+<span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+      <ul class="footer-cell">
+<li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+</div>
+  </div>
+<!-- /#footer -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

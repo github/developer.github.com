@@ -2,7 +2,7 @@
 title: Reactions
 ---
 
-{% if page.version == 'dotcom' %}
+{% if page.version == 'dotcom' or page.version >= 2.7 %}
 
 # Reactions
 
@@ -24,7 +24,7 @@ title: Reactions
 
 
 ## Reaction types
-  
+
   When creating a reaction, the allowed values for the `content` parameter are as follows (with the corresponding emoji for reference):
 
 content | emoji 

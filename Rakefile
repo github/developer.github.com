@@ -20,10 +20,6 @@ task :build do
   end
 end
 
-task :build_latest_ent do
-  puts sh "script/enterprise-backport #{config[:versions].first} --keep"
-end
-
 desc "Test the output"
 task :test => [:remove_tmp_dir, :remove_output_dir, :build] do
   Rake::Task['spec'].invoke
@@ -84,9 +80,6 @@ end
 namespace :assets do
   task :precompile => [:build] do
     sh 'mv output _site/'
-    Rake::Task['build_latest_ent'].invoke
-    sh "mkdir -p _site/enterprise/#{config[:versions].first}"
-    sh "mv output/* _site/enterprise/#{config[:versions].first}"
   end
 end
 

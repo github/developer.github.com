@@ -1,4 +1,3 @@
-require 'yaml'
 require 'json'
 require 'active_support/core_ext/hash'
 
@@ -9,3 +8,4 @@ end
 def symbolize_hash(hash)
   hash.deep_symbolize_keys
 end
+

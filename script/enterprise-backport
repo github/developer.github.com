@@ -52,7 +52,7 @@ data_variables:
   Nanoc::Int::SiteLoader.new.new_with_config(versioned_config).compile
 
   puts `node_modules/gulp/bin/gulp.js assets`
-  raise unless $CHILD_STATUS.to_i == 0
+  fail unless $CHILD_STATUS.to_i == 0
 
   versioned_config
 end

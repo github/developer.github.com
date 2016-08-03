@@ -80,6 +80,9 @@
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
+          <% if @item[:version].is_a?(Numeric) && @item[:version] >= 2.7 %>
+          <li><a href="/v3/orgs/pre_receive_hooks/">Pre-receive Hooks (Enterprise)</a></li>
+          <% end %>
         </ul>
       </li>
       <li class="js-topic">
@@ -116,6 +119,9 @@
           <li><a href="/v3/repos/statistics/">Statistics</a></li>
           <li><a href="/v3/repos/statuses/">Statuses</a></li>
           <li><a href="/v3/repos/hooks/">Webhooks</a></li>
+          <% if @item[:version].is_a?(Numeric) && @item[:version] >= 2.7 %>
+          <li><a href="/v3/repos/pre_receive_hooks/">Pre-receive Hooks (Enterprise)</a></li>
+          <% end %>
         </ul>
       </li>
       <li class="js-topic">
@@ -147,6 +153,10 @@
           <li><a href="/v3/enterprise/ldap/">LDAP</a></li>
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
+          <% if !@item[:version].nil? && (@item[:version] == 'dotcom' || @item[:version] >= 2.7) %>
+          <li><a href="/v3/enterprise/pre_receive_environments/">Pre-receive Environments</a></li>
+          <li><a href="/v3/enterprise/pre_receive_hooks/">Pre-receive Hooks</a></li>
+          <% end %>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
           <% if !@item[:version].nil? && (@item[:version] == 'dotcom' || @item[:version] >= 2.3) %>
           <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>

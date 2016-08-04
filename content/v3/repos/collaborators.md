@@ -19,10 +19,10 @@ collaborators list.
 
 ### Response
 
+{% if page.version != 'dotcom' and page.version > 2.3 and page.version < 2.6 %}
+
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
-
-{% if page.version != 'dotcom' and page.version > 2.3 and page.version < 2.6 %}
 
 ### Alternative response with extra repository information
 

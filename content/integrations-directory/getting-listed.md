@@ -37,11 +37,7 @@ marketing site. As your product changes, keep your Integration Directory listing
 
 ### Provide categories for your listing
 
-Help GitHub users find your integration faster with the appropriate categories. Please send us your suggested categories for the listing. We reserve the right to remove categories from a listing, but we won't add any categories without your approval. Currently, the following categories are available:
-
-* Code
-* Collaborate
-* Ship
+Help GitHub users find your integration faster with the appropriate categories. Please send us your suggested categories for the listing from those available in the [Integrations Directory](https://github.com/integrations). If you don't see a category that fits quite right, just let us know. We reserve the right to change categories associated with the listing. If we do so, we'll do our best to keep you informed.
 
 If your integration supports both GitHub.com and GitHub Enterprise, please let us know.
 

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Organization Webhooks API finalized | GitHub Developer Guide</title>
+  <title>Introducing the GitHub Pages preview API | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,46 +44,66 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-04-21-organization-hooks-api-finalized/">
+      <div class="change" id="/changes/2016-07-06-github-pages-preview-api/">
 <h2 class="title">
-  <a href="/changes/2015-04-21-organization-hooks-api-finalized/">Organization Webhooks API finalized</a>
+  <a href="/changes/2016-07-06-github-pages-preview-api/">Introducing the GitHub Pages preview API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    April 21, 2015
+    July 6, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore/>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore/>
+      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
   </li>
 </ul>
 </div>
 
 
-<p>After <a href="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">four months in preview release</a>, the <a href="/v3/orgs/hooks">Organization Webhooks API</a> is now considered stable and ready for production use.</p>
+<p>We're introducing additional preview functionality to the <a href="/v3/repos/pages/">GitHub Pages API</a> to give developers better control over their GitHub Pages site.</p>
 
-<h3>
-<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview media type no longer needed</h3>
+<h4>
+<a id="requesting-a-page-build" class="anchor" href="#requesting-a-page-build" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requesting a page build</h4>
 
-<p>During the preview period, you needed to provide a custom media type in the <code>Accept</code> header when using the Organization Webhooks API:</p>
+<p>You can now manually request a build of your GitHub Pages site without needing to push a new commit by making a <code>POST</code> request to the endpoint already available to see past builds. For example:</p>
 
-<pre><code>application/vnd.github.sersi-preview+json
+<pre class="command-line">
+curl "https://api.github.com/repos/github/developer.github.com/pages/builds" \
+  -X POST
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.mister-fantastic-preview" \
+</pre>
+
+<h4>
+<a id="retrieving-a-sites-url" class="anchor" href="#retrieving-a-sites-url" aria-hidden="true"><span class="octicon octicon-link"></span></a>Retrieving a site's URL</h4>
+
+<p>With the introduction of <a href="https://github.com/blog/2186-https-for-github-pages">HTTPS support for GitHub Pages sites</a>, it's important to know not just a site's custom domain, if it has one, but also if it has HTTPS enforcement enabled. The GitHub Pages API will now return an additional <code>html_url</code> field, which will include the computed absolute URL to the site.</p>
+
+<p>The resulting URL can be <code>https://username.github.io</code> (or <code>http://username.github.io</code>) for user sites without a custom domain, <code>https://username.gituhb.io/project</code> for project sites, or <code>http://example.com</code> for sites with custom domains, saving third-party applications the trouble of having to construct complicated URL logic based on the username, owner, and CNAME, as was previously necessary.</p>
+
+<p>For example, to request the HTML URL:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/repos/github/developer.github.com/pages" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.mister-fantastic-preview" \
+</pre>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.mister-fantastic-preview+json
 </code></pre>
 
-<p>Now that the preview  has ended, you no longer need to pass this custom
-media type, though providing an explicit <a href="/v3/media">media type</a> is recommended:</p>
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
 
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<h3>
-<a id="feedback" class="anchor" href="#feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedback</h3>
-
-<p>If you have any questions or feedback on this API, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks">get in touch</a>.</p>
+<p>For more information, take a look at <a href="/v3/repos/pages/">the docs here</a>, and if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+API+Preview">get in touch</a>.</p>
 </div>
 
     </div>

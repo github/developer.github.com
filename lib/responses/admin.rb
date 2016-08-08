@@ -67,7 +67,7 @@ module GitHub
         "seats_available" => 84,
         "kind" => "standard",
         "days_until_expiration" => 365,
-        "expire_at" => "2016/02/06 12:41:52 -0600"
+        "expire_at" => "2016-02-06T12:41:52-06:00"
       }
 
       INDEXING_SUCCESS ||= {

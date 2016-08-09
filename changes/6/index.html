@@ -44,7 +44,60 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-11-25-the-deployments-api-is-official/">
+      <div class="change" id="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">
+  <h2 class="title">
+<a id="--preview-the-new-organization-webhooks-api" class="anchor" href="#--preview-the-new-organization-webhooks-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">Preview the New Organization Webhooks API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 3, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace" data-proofer-ignore>
+      <a href="https://github.com/jdpace" data-proofer-ignore>jdpace</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Today we're very excited <a href="https://github.com/blog/1933-introducing-organization-webhooks">to announce Organization Webhooks</a>.
+Organization Webhooks allow you to subscribe to events that happen across an
+entire organization.</p>
+
+<p>In addition to being able to subscribe to the existing repository oriented
+events across an organization, we're also adding some new events which are
+exclusive to organization webhooks. The new <a href="/v3/activity/events/types/#repositoryevent"><code>repository</code>
+event</a> allows you to receive webhook payloads when a new
+repository is created. By subscribing to the <a href="/v3/activity/events/types/#membershipevent"><code>membership</code>
+event</a>, you'll be notified whenever a user is added or
+removed from a team.</p>
+
+<p>We’re making this new API for Organization Webhooks available today <a href="/v3/orgs/hooks/">for
+developers to preview</a>. The preview period will allow us to <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks">get
+your feedback</a> before declaring the Organization Webhooks API final.
+We expect the preview
+period to last for roughly 30-60 days.</p>
+
+<p>As we discover opportunities to improve the API during the preview period, we
+may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.</p>
+
+<p>At the end of preview period, the Organization Webhooks API will become an
+official component of GitHub API v3. At that point, the new Organization
+Webhooks API will be stable and suitable for production use.</p>
+
+<p>We hope you’ll take it for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks">send us your feedback</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-11-25-the-deployments-api-is-official/">
   <h2 class="title">
 <a id="--the-deployments-api-is-official" class="anchor" href="#--the-deployments-api-is-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-11-25-the-deployments-api-is-official/">The Deployments API is official</a>
@@ -568,61 +621,6 @@ and is the only reliable way to find a GitHub user's avatar.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
-  <h2 class="title">
-<a id="--accepting-organization-invitations-from-the-api" class="anchor" href="#--accepting-organization-invitations-from-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    August 28, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invite</a> new GitHub users to your organization via the API. We're expanding the API to also allow users to view their organization membership statuses and accept any invitations they've received.</p>
-
-<h3>
-<a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>The new Organization Memberships API</h3>
-
-<p>When someone <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invites</a> you to an organization, your membership with that organization begins in the "pending" state. The new <a href="/v3/orgs/members/#list-your-organization-memberships">list organization memberships</a> endpoint allows you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the <a href="/v3/orgs/members/#edit-your-organization-membership">edit organization membership</a> endpoint.</p>
-
-<h3>
-<a id="new-team-membership-api-response-attribute" class="anchor" href="#new-team-membership-api-response-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="new-team-membership-api-response-attribute" class="anchor" href="#new-team-membership-api-response-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Team Membership API response attribute</h3>
-
-<p>Previously, responses from the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> and <a href="/v3/orgs/teams/#get-team-membership">get team membership</a> endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state" for better consistency with our other API calls.</p>
-
-<p>To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until <strong>September 4th, 2014</strong>.</p>
-
-<h3>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
-
-<p>The new Organization Memberships API is available for developers to preview alongside the <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a>. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
-
-<p>While these new APIs are in their preview period, you'll need to provide the following custom media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.the-wasp-preview+json
-</code></pre>
-
-<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -753,6 +751,8 @@ and is the only reliable way to find a GitHub user's avatar.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
+
   <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-07-06-github-pages-preview-api/">Introducing the GitHub Pages preview API<br /><span class="date">July 6, 2016</span></a></li>
@@ -766,8 +766,6 @@ and is the only reliable way to find a GitHub user's avatar.</p>
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
 </ul>
 

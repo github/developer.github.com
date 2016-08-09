@@ -44,7 +44,126 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">
+      <div class="change" id="/changes/2014-05-19-deployments-api-updates/">
+  <h2 class="title">
+<a id="--new-attributes-for-the-deployments-api" class="anchor" href="#--new-attributes-for-the-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-05-19-deployments-api-updates/">New attributes for the Deployments API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 19, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
+      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We're continuing to iterate on the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>, and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and Deployment Statuses as well as a few payload changes.</p>
+
+<p><strong>This is a breaking change for Deployment Status payloads</strong>. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.</p>
+
+<h2>
+<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Changes</h2>
+
+<p>For Deployments we're introducing the concept of an <code>environment</code>. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, user acceptance testing, etc. We hope this enhancement will enable more use cases for our users that deploy to multiple environments.</p>
+
+<p>Deployments are also persisting the requested deployment <code>ref</code>. Previously we resolved a ref to the current SHA for that ref. Now we'll be keeping the ref around for historical purposes. This is especially helpful if you're deploying branches to verify them before you merge them into your default branch (e.g., "master").</p>
+
+<h2>
+<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Payload Changes</h2>
+
+<p>We're also adding a few attributes to the outbound Deployment payloads. We're now including the <code>ref</code> attribute so you know the branch or tag name that resolved to a specific SHA. The <code>environment</code> is also present.</p>
+
+<h2>
+<a id="webhook-changes" class="anchor" href="#webhook-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="webhook-changes" class="anchor" href="#webhook-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Webhook Changes</h2>
+
+<p>The Deployment Status payloads now embed the associated Deployment object. With this enhancement, Deployment Status events received via webhooks will have enough information to notify other systems, without having to call back to the GitHub API for the <code>environment</code>, <code>ref</code>, or payload that was deployed.</p>
+
+<h3>
+<a id="example-deployment-json" class="anchor" href="#example-deployment-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="example-deployment-json" class="anchor" href="#example-deployment-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Deployment JSON</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/392"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">392</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"837db83be4137ca555d9a5598d0a1ea2987ecfee"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"staging"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"fe"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"fe1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fe2"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fe3"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ship it!"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-org"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">521</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://avatars.githubusercontent.com/u/2988?"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:56:47Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:56:47Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/392/statuses"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="example-deployment-status-json" class="anchor" href="#example-deployment-status-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="example-deployment-status-json" class="anchor" href="#example-deployment-status-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Deployment Status JSON</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396/statuses/1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">392</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"837db83be4137ca555d9a5598d0a1ea2987ecfee"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"fe"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"fe1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fe2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fe3"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying to production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alysson-goldner"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:36Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:36Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396/statuses"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment succeeded"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://deploy.myorg.com/apps/my-repo/logs/420"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"deployment_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">
   <h2 class="title">
 <a id="--improved-pagination-for-the-repository-commits-api" class="anchor" href="#--improved-pagination-for-the-repository-commits-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API</a>
@@ -417,78 +536,6 @@ without granting access to your private repositories.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-03-27-combined-status-api/">
-  <h2 class="title">
-<a id="--preview-the-new-combined-status-api" class="anchor" href="#--preview-the-new-combined-status-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    March 27, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga" data-proofer-ignore>
-      <a href="https://github.com/bhuga" data-proofer-ignore>bhuga</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>What does it mean for a branch to be "green?" The <a href="/v3/repos/statuses/">Status API</a> helps
-thousands of teams answer that question. Developers use it to record the status
-of continuous integration builds, contributor license agreements, code coverage
-analysis, automated security testing, dependency management, and more.</p>
-
-<p>For many teams, a branch is considered "green" only when <em>all</em> of their various
-status checks are successful. With the new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status
-API</a>, developers can easily fetch this single, consolidated
-status for any branch, commit, or tag.</p>
-
-<h3>
-<a id="status-context" class="anchor" href="#status-context" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="status-context" class="anchor" href="#status-context" aria-hidden="true"><span class="octicon octicon-link"></span></a>Status context</h3>
-
-<p>To help multiple service providers use the Status API simultaneously, statuses
-now support a <code>context</code> field. This field allows a provider to distinguish its
-statuses from another provider's statuses. For example, your <a href="http://jenkins-ci.org/">Jenkins</a> builds
-might use a context of <code>ci/jenkins</code>, while your <a href="http://brakemanscanner.org/">Brakeman</a> checks might adopt a
-context of <code>security/brakeman</code>.</p>
-
-<p>The new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status endpoint</a> returns a single,
-combined state, as well as the latest status from each context. Systems that
-consume status updates can now get all the information they need in one place.</p>
-
-<h3>
-<a id="opt-in" class="anchor" href="#opt-in" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="opt-in" class="anchor" href="#opt-in" aria-hidden="true"><span class="octicon octicon-link"></span></a>Opt-in</h3>
-
-<p>The existing <a href="/v3/repos/statuses/#list-statuses-for-a-specific-ref">Status API</a> continues to work as it always has. The
-<code>context</code> field is entirely optional, and the <a href="https://github.com/blog/1227-commit-status-api">color of the merge button on pull
-requests</a> does not currently
-take context into account.</p>
-
-<h3>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
-
-<p>We're making this new API available today for developers to
-<a href="/v3/repos/statuses/">preview</a>. During this period, we may change aspects of the Combined
-Status API from time to time. We will announce any changes here (on the
-developer blog), but we will not provide any advance notice.</p>
-
-<p>We expect the preview period to last 30-60 days. At the end of preview period,
-the Combined Status API will become an official component of GitHub API v3. At
-that point, this new API will be stable and suitable for production use.</p>
-
-<p>We hope you'll <a href="/v3/repos/statuses/">try it out</a> and <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">send us your feedback</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -619,6 +666,8 @@ that point, this new API will be stable and suitable for production use.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
+
   <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-07-06-github-pages-preview-api/">Introducing the GitHub Pages preview API<br /><span class="date">July 6, 2016</span></a></li>
@@ -632,8 +681,6 @@ that point, this new API will be stable and suitable for production use.</p>
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
 </ul>
 

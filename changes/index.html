@@ -44,7 +44,49 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-07-12-ending-multiple-assignees-preview-period/">
+      <div class="change" id="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">
+  <h2 class="title">
+<a id="--breaking-change-removed-sensitive-fields-from-organization-api-responses-for-non-owners" class="anchor" href="#--breaking-change-removed-sensitive-fields-from-organization-api-responses-for-non-owners" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    August 9, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore>
+      <a href="https://github.com/kdaigle" data-proofer-ignore>kdaigle</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We're removing some values from <a href="https://developer.github.com/v3/orgs/">Organization API</a> responses to help protect our
+users' privacy. Previously, these fields were returned to all members of the organization.
+As of today, you must be an Organization owner to
+receive values for the following fields in Organization responses:</p>
+
+<ul>
+<li><code>private_gists</code></li>
+<li><code>disk_usage</code></li>
+<li><code>collaborators</code></li>
+<li><code>billing_email</code></li>
+</ul>
+
+<p>If you're not an organization owner, the above keys will now return <code>null</code>.
+We will continue to send these fields without their values to minimize the impact
+of this change.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removed+sensitive+fields+from+org+api">drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-07-12-ending-multiple-assignees-preview-period/">
   <h2 class="title">
 <a id="--multiple-assignees-api-is-now-official" class="anchor" href="#--multiple-assignees-api-is-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official</a>
@@ -435,57 +477,6 @@ of events from an issue or pull request timeline.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">
-  <h2 class="title">
-<a id="--source-import-api-enhancements-for-working-with-git-lfs" class="anchor" href="#--source-import-api-enhancements-for-working-with-git-lfs" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 3, 2016
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/lizzhale.png" alt="Avatar for lizzhale" data-proofer-ignore>
-      <a href="https://github.com/lizzhale" data-proofer-ignore>lizzhale</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Today we're introducing enhancements to the <a href="/v3/migration/source_imports/">Source Import API</a> to support importing repositories with files larger than 100MB.</p>
-
-<p><strong>Changes to parameters for starting an import</strong></p>
-
-<p><a href="/v3/migration/source_imports/#start-an-import">Starting an import</a> no longer requires a <code>vcs</code> parameter. Please be aware that without this parameter, the import job will take additional time to detect the vcs type before beginning the import. This detection step will be reflected in the response.</p>
-
-<p><strong>New methods</strong></p>
-
-<p>We've added 3 new methods that will enable API consumers to:</p>
-
-<ul>
-<li><p><a href="/v3/migration/source_imports/#update-existing-import">update</a> the authentication or project choice for an import. If no parameters are provided during the request, the import will be restarted. Please note that this is a <strong>breaking change</strong>. Updating authentication for the originating URL is no longer supported through the <a href="/v3/migration/source_imports/#start-an-import">start an import</a> method. Please update your applications to use the new method.</p></li>
-<li><p><a href="/v3/migration/source_imports/#set-git-lfs-preference">set their preference</a> for using Git LFS to import files larger than 100MB.</p></li>
-<li><p><a href="/v3/migration/source_imports/#get-large-files">list all the files larger than 100MB</a> that were found during the import.</p></li>
-</ul>
-
-<p><strong>New attributes for Git LFS</strong></p>
-
-<p>Several new response attributes (<code>use_lfs</code>, <code>has_large_files</code>, <code>large_files_size</code>, <code>large_files</code>) were added to provide details regarding the large files found during the import. You can read more about the attributes <a href="/v3/migration/source_imports/#git-lfs-related-fields">here</a>.</p>
-
-<p>As before, to access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.barred-rock-preview
-</code></pre>
-
-<p>For more information, see the <a href="/v3/migration/source_imports/">Source Import API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Source+Import+API">let us know</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -579,6 +570,8 @@ of events from an issue or pull request timeline.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
+
   <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-07-06-github-pages-preview-api/">Introducing the GitHub Pages preview API<br /><span class="date">July 6, 2016</span></a></li>
@@ -592,8 +585,6 @@ of events from an issue or pull request timeline.</p>
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
 </ul>
 

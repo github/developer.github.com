@@ -61,6 +61,12 @@ This method only lists *public* memberships, regardless of authentication. If yo
 
 ## Get an organization
 
+{% if page.version == 'dotcom' or page.version >= 2.8 %}
+Note: To receive values for `private_gists`, `disk_usage`, `collaborators`, and
+`billing_email` in the Organization response, the authenticated user must be an
+organization owner and have authorized the `admin:org` scope.
+{% endif %}
+
     GET /orgs/:org
 
 ### Response

@@ -228,7 +228,7 @@ Protecting a branch requires admin access.
 
 ### Parameters
 
-You can pass two objects: `required_status_checks` and `restrictions`. Both can have the value `null` for disabled.
+You must pass two objects: `required_status_checks` and `restrictions`. Both can have the value `null` for disabled.
 
 The `required_status_checks` object must have the following keys:
 

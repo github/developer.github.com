@@ -44,7 +44,65 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-07-01-feeds-api/">
+      <div class="change" id="/changes/2013-07-02-rate-limit-reset/">
+  <h2 class="title">
+<a id="--when-does-my-rate-limit-reset" class="anchor" href="#--when-does-my-rate-limit-reset" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-07-02-rate-limit-reset/">When Does My Rate Limit Reset?</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 2, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Have you ever wondered when your <a href="/v3/#rate-limiting">rate limit</a> will reset back to its maximum value?
+That information is now available in the new <code>X-RateLimit-Reset</code> response header.</p>
+
+<pre class="command-line">
+<span class="command">curl -I https://api.github.com/orgs/octokit</span>
+
+<span class="output">HTTP/1.1 200 OK</span>
+<span class="output">Status: 200 OK</span>
+<span class="output">X-RateLimit-Limit: 60</span>
+<span class="output">X-RateLimit-Remaining: 42</span>
+<span class="output">X-RateLimit-Reset: 1372700873</span>
+<span class="output">...</span>
+</pre>
+
+<p>The <code>X-RateLimit-Reset</code> header provides a <a href="http://en.wikipedia.org/wiki/Unix_time">Unix UTC timestamp</a>, letting you know the exact time that your fresh new rate limit kicks in.</p>
+
+<p>The reset timestamp is also available as part of the <code>/rate_limit</code> resource.</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/rate_limit</span>
+
+<span class="output">{</span>
+<span class="output">  "rate": {</span>
+<span class="output">    "limit": 60,</span>
+<span class="output">    "remaining": 42,</span>
+<span class="output">    "reset": 1372700873</span>
+<span class="output">  }</span>
+<span class="output">}</span>
+</pre>
+
+<p>For more information on rate limits, be sure to check out the <a href="/v3/#rate-limiting">docs</a>.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=X-RateLimit-Reset">drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-07-01-feeds-api/">
   <h2 class="title">
 <a id="--feeds-api" class="anchor" href="#--feeds-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
@@ -422,37 +480,6 @@ Stars: <code>sort</code> and <code>direction</code>.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-02-13-hookshot-load-balancer/">
-  <h2 class="title">
-<a id="--hookshot-load-balancer" class="anchor" href="#--hookshot-load-balancer" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-02-13-hookshot-load-balancer/">Hookshot Load balancer</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 13, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
-      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We had an issue with the Hookshot load balancer this morning, causing the
-majority of hooks to flow to a single node only.  This lead to massive queue
-times.  While fixing this, we're putting the old Services backend in use.</p>
-
-<p>This means the old IPs are back in use.  Use this <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">Help guide</a>
-if you already removed them from your firewall.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -546,6 +573,8 @@ if you already removed them from your firewall.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API<br /><span class="date">August 15, 2016</span></a></li>
+
   <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
 
   <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
@@ -559,8 +588,6 @@ if you already removed them from your firewall.</p>
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
-
-  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
 </ul>
 

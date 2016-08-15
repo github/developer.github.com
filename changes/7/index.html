@@ -44,7 +44,46 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
+      <div class="change" id="/changes/2014-09-05-removing-gravatar-id/">
+  <h2 class="title">
+<a id="--removing-gravatar-id-from-user-payloads" class="anchor" href="#--removing-gravatar-id-from-user-payloads" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-09-05-removing-gravatar-id/">Removing Gravatar ID from user payloads</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 5, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore>
+      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We have deprecated the <code>gravatar_id</code> attribute in the <a href="https://developer.github.com/v3/users/">user
+representation</a>. Starting September 19,
+the API will always provide an empty string as the value for this attribute.</p>
+
+<p>Users have been able to upload avatars directly to GitHub for <a href="https://github.com/blog/1803-switch-your-picture-with-ease">a while
+now</a>. If users
+haven't uploaded an avatar, we still try to fetch one from Gravatar, but that
+happens behind the scenes on GitHub's servers. As a result, the <code>gravatar_id</code>
+attribute no longer identifies a GitHub user's canonical avatar. Instead, API
+consumers should use the <code>avatar_url</code> to fetch a user's avatar. The <code>avatar_url</code>
+attribute has always been present in the <a href="/v3/users/">v3 user representation</a>
+and is the only reliable way to find a GitHub user's avatar.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+Gravatar+ID">get drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
   <h2 class="title">
 <a id="--accepting-organization-invitations-from-the-api" class="anchor" href="#--accepting-organization-invitations-from-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API</a>
@@ -410,34 +449,6 @@ count represents the number of contexts submitted for the given commit.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">
-  <h2 class="title">
-<a id="--new-attributes-for-pullrequestreviewcomment-events" class="anchor" href="#--new-attributes-for-pullrequestreviewcomment-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 9, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace" data-proofer-ignore>
-      <a href="https://github.com/jdpace" data-proofer-ignore>jdpace</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We've enhanced the <a href="https://developer.github.com/v3/activity/events/types/#pullrequestreviewcommentevent">PullRequestReviewComment events payloads</a> to include <code>action</code> and <code>pull_request</code> attributes. With the addition of the <code>pull_request</code> attribute, you now have immediate access to detailed information about the pull request without needing an additional API request.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=PullRequestReviewComment+Event+Payloads">get in touch</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -568,6 +579,8 @@ count represents the number of contexts submitted for the given commit.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API<br /><span class="date">August 15, 2016</span></a></li>
+
   <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
 
   <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
@@ -581,8 +594,6 @@ count represents the number of contexts submitted for the given commit.</p>
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
-
-  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
 </ul>
 

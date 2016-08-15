@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Feeds API | GitHub Developer Guide</title>
+  <title>Preview the Repository Traffic API | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,69 +44,36 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-07-01-feeds-api/">
+      <div class="change" id="/changes/2016-08-15-traffic-api-preview/">
 <h2 class="title">
-  <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
+  <a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    July 1, 2013
+    August 15, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore/>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+    <img height="16" width="16" src="https://github.com/shreyasjoshis.png" alt="Avatar for shreyasjoshis" data-proofer-ignore/>
+      <a href="https://github.com/shreyasjoshis" data-proofer-ignore>shreyasjoshis</a>
   </li>
 </ul>
 </div>
 
 
-<p>Today we're releasing a new <a href="/v3/activity/feeds/">Feeds API</a>, an easy way to list all the Atom
-resources available to the authenticated user.</p>
+<p>We've added an API for repository traffic, which will let you fetch details about traffic for repositories you have push access to. This data is already available in graphical form in the <a href="https://help.github.com/articles/about-repository-graphs/#traffic">Graphs section</a> on GitHub.com.</p>
 
-<pre class="command-line">
-<span class="command">curl -u defunkt https://api.github.com/feeds</span>
+<p>To access <a href="/v3/repos/traffic/">the Traffic API</a> during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
-<span class="output">{</span>
-<span class="output">  "timeline_url": "https://github.com/timeline",</span>
-<span class="output">  "user_url": "https://github.com/{user}",</span>
-<span class="output">  "current_user_public_url": "https://github.com/defunkt",</span>
-<span class="output">  "current_user_url": "https://github.com/defunkt.private?token=abc123",</span>
-<span class="output">  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",</span>
-<span class="output">  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
-<span class="output">  "_links": {</span>
-<span class="output">   "timeline": {</span>
-<span class="output">     "href": "https://github.com/timeline",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "user": {</span>
-<span class="output">     "href": "https://github.com/{user}",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user_public": {</span>
-<span class="output">     "href": "https://github.com/defunkt",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user": {</span>
-<span class="output">     "href": "https://github.com/defunkt.private?token=abc123",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user_actor": {</span>
-<span class="output">     "href": "https://github.com/defunkt.private.actor?token=abc123",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user_organization": {</span>
-<span class="output">     "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   }</span>
-<span class="output">  }</span>
-<span class="output">}</span>
-</pre>
+<pre><code>application/vnd.github.spiderman-preview
+</code></pre>
 
-<p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Traffic+API">let us know</a>!</p>
 </div>
 
     </div>

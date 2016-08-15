@@ -44,7 +44,38 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-02-13-hookshot-issues/">
+      <div class="change" id="/changes/2013-02-13-hookshot-load-balancer/">
+  <h2 class="title">
+<a id="--hookshot-load-balancer" class="anchor" href="#--hookshot-load-balancer" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-02-13-hookshot-load-balancer/">Hookshot Load balancer</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 13, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We had an issue with the Hookshot load balancer this morning, causing the
+majority of hooks to flow to a single node only.  This lead to massive queue
+times.  While fixing this, we're putting the old Services backend in use.</p>
+
+<p>This means the old IPs are back in use.  Use this <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">Help guide</a>
+if you already removed them from your firewall.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-02-13-hookshot-issues/">
   <h2 class="title">
 <a id="--some-hookshot-issues" class="anchor" href="#--some-hookshot-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-02-13-hookshot-issues/">Some Hookshot Issues</a>
@@ -437,81 +468,6 @@ Comments for a repository.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2012-11-29-gitignore-templates/">
-  <h2 class="title">
-<a id="--gitignore-templates-api" class="anchor" href="#--gitignore-templates-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2012-11-29-gitignore-templates/">Gitignore Templates API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    November 29, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We recently <a href="/changes/2012-09-28-auto-init-for-repositories/">made it easy</a> to initialize a repository when you create
-it <a href="/v3/repos/#create">via the API</a>. One of the options you can pass when creating a
-repository is <code>gitignore_template</code>. This value is the name of one of the
-templates from the public <a href="https://github.com/github/gitignore">GitHub .gitignore repository</a>.</p>
-
-<p>The <a href="/v3/gitignore/">Gitignore Templates API</a> makes it easy to list those templates:</p>
-
-<pre class="command-line">
-<span class="command">curl https://api.github.com/gitignore/templates</span>
-
-<span class="output">HTTP/1.1 200 OK</span>
-
-<span class="output">[</span>
-<span class="output">  "Actionscript",</span>
-<span class="output">  "Android",</span>
-<span class="output">  "AppceleratorTitanium",</span>
-<span class="output">  "Autotools",</span>
-<span class="output">  "Bancha",</span>
-<span class="output">  "C",</span>
-<span class="output">  "C++",</span>
-<span class="output">  ...</span>
-</pre>
-
-<p>If you'd like to view the source, you can also fetch a single template.</p>
-
-<pre class="command-line">
-<span class="command">curl -H 'Accept: application/vnd.github.raw' \</span>
-<span class="command">     https://api.github.com/gitignore/templates/Objective-C</span>
-
-<span class="output">HTTP/1.1 200 OK</span>
-
-<span class="comment"># Xcode</span>
-<span class="output">.DS_Store</span>
-<span class="output">build/</span>
-<span class="output">*.pbxuser</span>
-<span class="output">!default.pbxuser</span>
-<span class="output">*.mode1v3</span>
-<span class="output">!default.mode1v3</span>
-<span class="output">*.mode2v3</span>
-<span class="output">!default.mode2v3</span>
-<span class="output">*.perspectivev3</span>
-<span class="output">!default.perspectivev3</span>
-<span class="output">*.xcworkspace</span>
-<span class="output">!default.xcworkspace</span>
-<span class="output">xcuserdata</span>
-<span class="output">profile</span>
-<span class="output">*.moved-aside</span>
-<span class="output">DerivedData</span>
-<span class="output">.idea/</span>
-</pre>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -594,6 +550,8 @@ templates from the public <a href="https://github.com/github/gitignore">GitHub .
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API<br /><span class="date">August 15, 2016</span></a></li>
+
   <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
 
   <li><a href="/changes/2016-07-12-ending-multiple-assignees-preview-period/">Multiple Assignees API is now official<br /><span class="date">July 12, 2016</span></a></li>
@@ -607,8 +565,6 @@ templates from the public <a href="https://github.com/github/gitignore">GitHub .
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
-
-  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
 </ul>
 

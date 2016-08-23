@@ -44,7 +44,66 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+      <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
+  <h2 class="title">
+<a id="--finer-grained-oauth-scopes-for-ssh-keys" class="anchor" href="#--finer-grained-oauth-scopes-for-ssh-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>As <a href="https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys">we announced</a>, we've made some important changes to the way that API consumers manage SSH keys.</p>
+
+<h2>
+<a id="finer-grained-oauth-scopes" class="anchor" href="#finer-grained-oauth-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="finer-grained-oauth-scopes" class="anchor" href="#finer-grained-oauth-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finer-grained OAuth scopes</h2>
+
+<p>To help third party applications request only permissions that they need, the API now supports three new <a href="/v3/oauth/#scopes">scopes</a> for working with a user's public SSH keys.</p>
+
+<ul>
+<li>
+<code>read:public_key</code> provides read access to the user's SSH keys</li>
+<li>
+<code>write:public_key</code> allows an app to read existing keys and create new ones</li>
+<li>
+<code>admin:public_key</code> enables an app to read, write, and delete keys</li>
+</ul>
+
+<h2>
+<a id="changes-to-user-scope" class="anchor" href="#changes-to-user-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="changes-to-user-scope" class="anchor" href="#changes-to-user-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes to <code>user</code> scope</h2>
+
+<p>Historically, <code>user</code> scope has provided full access to manage a user's SSH keys. Now that we have dedicated scopes for managing a user's SSH keys, we have removed those permissions from the <code>user</code> scope. Now <code>user</code> scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.</p>
+
+<h2>
+<a id="keys-are-now-immutable" class="anchor" href="#keys-are-now-immutable" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="keys-are-now-immutable" class="anchor" href="#keys-are-now-immutable" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keys are now immutable</h2>
+
+<p>To simplify the security audit trail for SSH keys, we're making keys immutable. API consumers can continue to create keys and delete keys as needed, but keys can no longer be changed. To change an existing key, API consumers should delete the existing key and create a new one with the desired attributes. This change applies both to a <a href="/v3/users/keys/">user's SSH keys</a> and a <a href="/v3/repos/keys/">repository's deploy keys</a>.</p>
+
+<h2>
+<a id="deleting-keys-when-revoking-a-token" class="anchor" href="#deleting-keys-when-revoking-a-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="deleting-keys-when-revoking-a-token" class="anchor" href="#deleting-keys-when-revoking-a-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deleting keys when revoking a token</h2>
+
+<p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
+
+<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
   <h2 class="title">
 <a id="--wildcard-event-for-webhooks" class="anchor" href="#--wildcard-event-for-webhooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
@@ -467,40 +526,6 @@ stable and suitable for production use.</p>
 <p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we'll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
 
 <p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We'll be happy to help.</p>
-</div>
-
-<div class="change" id="/changes/2013-12-13-paginating-org-members/">
-  <h2 class="title">
-<a id="--paginated-results-for-organization-members" class="anchor" href="#--paginated-results-for-organization-members" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-12-13-paginating-org-members/">Paginated results for organization members</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    December 13, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The <a href="http://developer.github.com/v3/orgs/members/#members-list">organization members</a> and [organization public members]<a href="http://developer.github.com/v3/orgs/members/#public-members-list">public
-members</a> methods will soon return paginated results by default. Beginning
-today, these methods will paginate if you include <code>page</code> or <code>per_page</code> query
-parameters. Starting January 15th, 2014, these methods will <em>always</em> return paginated
-results.</p>
-
-<p>As always, be sure and follow those <a href="http://developer.github.com/v3/#pagination">Link headers</a> to get
-subsequent results. If you have any questions or run into trouble, feel free to
-<a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Paginating+org+members">get in touch</a>.</p>
-
-<p>Happy paginating.</p>
 
 <p></p>
 </div>
@@ -620,6 +645,8 @@ subsequent results. If you have any questions or run into trouble, feel free to
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-23-change-base/">API changes for changing the base branch on Pull Requests<br /><span class="date">August 23, 2016</span></a></li>
+
   <li><a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API<br /><span class="date">August 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
@@ -633,8 +660,6 @@ subsequent results. If you have any questions or run into trouble, feel free to
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
-
-  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
 </ul>
 

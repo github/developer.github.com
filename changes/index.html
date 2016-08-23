@@ -44,7 +44,47 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-08-15-traffic-api-preview/">
+      <div class="change" id="/changes/2016-08-23-change-base/">
+  <h2 class="title">
+<a id="--api-changes-for-changing-the-base-branch-on-pull-requests" class="anchor" href="#--api-changes-for-changing-the-base-branch-on-pull-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-08-23-change-base/">API changes for changing the base branch on Pull Requests</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    August 23, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/scottjg.png" alt="Avatar for scottjg" data-proofer-ignore>
+      <a href="https://github.com/scottjg" data-proofer-ignore>scottjg</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>GitHub recently added the ability to <a href="https://github.com/blog/2224-change-the-base-branch-of-a-pull-request">change the base branch</a> on a Pull Request after it's created. Now we're updating the Pull Request API to enable the new functionality.</p>
+
+<p>For example:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/repos/github/hubot/pulls/123" \
+  -H 'Authorization: token TOKEN' \
+  -d '{ "base": "master" }'
+</pre>
+
+<p>The Pull Request base will be updated to point to the master branch.</p>
+
+<p>You can learn more about the new responses and endpoints in the updated <a href="/v3/pulls">Pull Request</a> documentation.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Change+base+on+Pull+Requests">let us know</a>!</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-08-15-traffic-api-preview/">
   <h2 class="title">
 <a id="--preview-the-repository-traffic-api" class="anchor" href="#--preview-the-repository-traffic-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API</a>
@@ -426,42 +466,6 @@ curl "https://api.github.com/repos/github/hubot/issues" \
 <p></p>
 </div>
 
-<div class="change" id="/changes/2016-05-23-timeline-preview-api/">
-  <h2 class="title">
-<a id="--preview-the-timeline-api" class="anchor" href="#--preview-the-timeline-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 23, 2016
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/nickh.png" alt="Avatar for nickh" data-proofer-ignore>
-      <a href="https://github.com/nickh" data-proofer-ignore>nickh</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We've added an API for issue timelines, which will let you fetch a list
-of events from an issue or pull request timeline.</p>
-
-<p>To access <a href="/v3/issues/timeline/">the Timeline API</a> during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.mockingbird-preview
-</code></pre>
-
-<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Timeline+API">let us know</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -555,6 +559,8 @@ of events from an issue or pull request timeline.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-23-change-base/">API changes for changing the base branch on Pull Requests<br /><span class="date">August 23, 2016</span></a></li>
+
   <li><a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API<br /><span class="date">August 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
@@ -568,8 +574,6 @@ of events from an issue or pull request timeline.</p>
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
-
-  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
 </ul>
 

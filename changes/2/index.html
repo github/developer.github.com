@@ -44,7 +44,41 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-05-12-reactions-api-preview/">
+      <div class="change" id="/changes/2016-05-23-timeline-preview-api/">
+  <h2 class="title">
+<a id="--preview-the-timeline-api" class="anchor" href="#--preview-the-timeline-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 23, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/nickh.png" alt="Avatar for nickh" data-proofer-ignore>
+      <a href="https://github.com/nickh" data-proofer-ignore>nickh</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've added an API for issue timelines, which will let you fetch a list
+of events from an issue or pull request timeline.</p>
+
+<p>To access <a href="/v3/issues/timeline/">the Timeline API</a> during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.mockingbird-preview
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Timeline+API">let us know</a>!</p>
+</div>
+
+<div class="change" id="/changes/2016-05-12-reactions-api-preview/">
   <h2 class="title">
 <a id="--preview-support-for-reactions-api" class="anchor" href="#--preview-support-for-reactions-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API</a>
@@ -64,8 +98,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>GitHub recently added <a href="https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments">Reactions to Pull Requests, Issues, and Comments</a> to help people express their feelings more simply and effectively in conversations. We are adding endpoints for Reactions so that you can now react and unreact via the API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+  <p>GitHub recently added <a href="https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments">Reactions to Pull Requests, Issues, and Comments</a> to help people express their feelings more simply and effectively in conversations. We are adding endpoints for Reactions so that you can now react and unreact via the API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
 <pre><code>application/vnd.github.squirrel-girl-preview
 </code></pre>
@@ -521,80 +554,6 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 <p></p>
 </div>
 
-<div class="change" id="/changes/2016-03-15-new-webhook-actions/">
-  <h2 class="title">
-<a id="--new-webhook-event-actions-are-coming" class="anchor" href="#--new-webhook-event-actions-are-coming" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    March 15, 2016
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/davidcelis.png" alt="Avatar for davidcelis" data-proofer-ignore>
-      <a href="https://github.com/davidcelis" data-proofer-ignore>davidcelis</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We will soon begin introducing new <code>action</code> values for several existing webhook events. If you currently subscribe to webhooks but do not check the payload's <code>action</code> value, you may end up incorrectly processing events after this change is released. To ensure that your webhook processing is not affected by these new <code>action</code> values, <strong>you should audit your webhook processing logic by April 15th, 2016</strong>.</p>
-
-<p>We are providing an advance notice to warn of these changes. In the future, we may continue adding new actions without providing further warning.</p>
-
-<h3>
-<a id="a-brief-overview-of-github-webhook-actions" class="anchor" href="#a-brief-overview-of-github-webhook-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="a-brief-overview-of-github-webhook-actions" class="anchor" href="#a-brief-overview-of-github-webhook-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>A brief overview of GitHub webhook actions</h3>
-
-<p>Webhook events can have multiple actions. For example, the <a href="https://developer.github.com/v3/activity/events/types/#issuesevent"><code>IssuesEvent</code></a> has several possible actions. These include <code>opened</code> when the issue is created, <code>closed</code> when the issue is closed, and <code>assigned</code> when the issue is assigned to someone. Historically, we haven't added new actions to webhook events that have only one action. However, as GitHub's feature set grows, we may occasionally add new actions to existing event types. We encourage you to take some time and ensure that your application explicitly checks the action before doing any processing.</p>
-
-<h3>
-<a id="what-to-avoid-when-working-with-event-actions" class="anchor" href="#what-to-avoid-when-working-with-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="what-to-avoid-when-working-with-event-actions" class="anchor" href="#what-to-avoid-when-working-with-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>What to avoid when working with event actions</h3>
-
-<p>Here's an example of functionality that <strong>will not work</strong> when attempting to process an <code>IssuesEvent</code>. In this example, the <code>process_closed</code> method will be called for any event action which is not <code>opened</code> or <code>assigned</code>. This means that the <code>process_closed</code> method will be called for events with the <code>closed</code> action, but also other events with actions other than <code>opened</code> or <code>assigned</code> that are delivered to the webhook.</p>
-
-<pre class="highlight highlight-ruby"><code><span class="c1"># The following is not future-proof!</span>
-<span class="k">case</span> <span class="n">action</span>
-<span class="k">when</span> <span class="s2">"opened"</span>
-  <span class="n">process_opened</span>
-<span class="k">when</span> <span class="s2">"assigned"</span>
-  <span class="n">process_assigned</span>
-<span class="k">else</span>
-  <span class="n">process_closed</span>
-<span class="k">end</span>
-</code></pre>
-
-<h3>
-<a id="how-to-work-with-new-event-actions" class="anchor" href="#how-to-work-with-new-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="how-to-work-with-new-event-actions" class="anchor" href="#how-to-work-with-new-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to work with new event actions</h3>
-
-<p>We suggest that you explicitly check event actions and act accordingly. In this example, the <code>closed</code> action is checked first before calling the <code>process_closed</code> method. Additionally, for unknown actions, we log that something new was encountered:</p>
-
-<pre class="highlight highlight-ruby"><code><span class="c1"># The following is recommended</span>
-<span class="k">case</span> <span class="n">action</span>
-<span class="k">when</span> <span class="s2">"opened"</span>
-  <span class="n">process_opened</span>
-<span class="k">when</span> <span class="s2">"assigned"</span>
-  <span class="n">process_assigned</span>
-<span class="k">when</span> <span class="s2">"closed"</span>
-  <span class="n">process_closed</span>
-<span class="k">else</span>
-  <span class="nb">puts</span> <span class="s2">"Ooohh, something new from GitHub!"</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>We may also add new webhook event types from time to time. If your webhook is configured to "Send me <strong>everything</strong>", your code should also explicitly check for the event type in a similar way as we have done with checking for the action type above. Take a look at our <a href="https://developer.github.com/guides/best-practices-for-integrators/">integrators best practices guide</a> for more tips.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Actions">get in touch</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -699,6 +658,8 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-08-23-change-base/">API changes for changing the base branch on Pull Requests<br /><span class="date">August 23, 2016</span></a></li>
+
   <li><a href="/changes/2016-08-15-traffic-api-preview/">Preview the Repository Traffic API<br /><span class="date">August 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-08-09-breaking-change-removed-sensitive-fields-from-organization-api-responses-for-owner/">Breaking change: Removed sensitive fields from Organization API responses for non-owners<br /><span class="date">August 9, 2016</span></a></li>
@@ -712,8 +673,6 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
   <li><a href="/changes/2016-06-22-issue-locking-api-is-now-official/">Issue locking and unlocking APIs are now official<br /><span class="date">June 22, 2016</span></a></li>
 
   <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
-
-  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
 </ul>
 

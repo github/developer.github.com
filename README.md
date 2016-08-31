@@ -3,7 +3,7 @@
 
 This is a GitHub API resource built with [Nanoc][nanoc].
 
-All submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](http://help.github.com/send-pull-requests/).
+All submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](https://help.github.com/articles/creating-a-pull-request/).
 
 ## Development
 

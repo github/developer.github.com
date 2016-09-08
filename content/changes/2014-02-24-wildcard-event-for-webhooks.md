@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Wildcard Event for Webhooks
-created_at: 2014-2-24
 author_name: kdaigle
 ---
 

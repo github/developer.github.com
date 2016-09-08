@@ -1,7 +1,5 @@
 ---
-kind: change
 title: More flexible options for listing repositories
-created_at: 2015-07-22
 author_name: jakeboxer
 ---
 

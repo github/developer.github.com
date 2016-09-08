@@ -1,16 +1,26 @@
 ---
-title: Authorizations | GitHub API
+title: Authorizations
 ---
 
-# OAuth Authorizations API
+{% if page.version == 'dotcom' or page.version > 2.6 %}
 
-* TOC
-{:toc}
+{{#tip}}
 
-You can use this API to manage your OAuth applications. You can only access this API via [Basic Authentication](/v3/auth#basic-authentication) using your username and password, not tokens.
+  <a name="preview-period"></a>
 
-Make sure you understand how to [work with two-factor authentication](/v3/auth/#working-with-two-factor-authentication) if you or your users have two-factor authentication enabled.
+  APIs for managing OAuth grants are currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-04-21-oauth-authorizations-grants-api-preview) for full details.
 
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.damage-preview
+
+{{/tip}}
+
+{% endif %}
+
+<br>
 <div class="alert">
   <h3 id="deprecation-notice">Deprecation Notice</h3>
 
@@ -23,10 +33,13 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
     <li><a href="#list-your-authorizations">List your authorizations</a></li>
     <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
     <li><a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> - <code>token</code> is still returned for "create" </li>
+    {% if page.version == 'dotcom' or page.version > 2.2 %}
     <li><a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a> - <code>token</code> is still returned for "create" </li>
+    {% endif %}
     <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   </ul>
 
+  {% if page.version == 'dotcom' or page.version > 2.2 %}
   <p>
     To reduce the impact of removing the <code>token</code> value,
     the OAuth Authorizations API now includes a new request attribute
@@ -35,11 +48,61 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
     <code>fingerprint</code>), and
     <a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new endpoint</a>.
   </p>
-
+  {% else %}
+  <p>
+    To reduce the impact of removing the <code>token</code> value,
+    the OAuth Authorizations API now includes a new request attribute
+    (<code>fingerprint</code>) and three new response attributes
+    (<code>token_last_eight</code>, <code>hashed_token</code>, and
+    <code>fingerprint</code>).
+  </p>
+  {% endif %}
   <p>
     This functionality became the default for all requests on April 20, 2015. Please see <a href="/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/">the blog post</a> for full details.
   </p>
 </div>
+
+# OAuth Authorizations API
+
+{:toc}
+
+You can use this API to manage the access OAuth applications have to your account. You can only access this API via [Basic Authentication](/v3/auth#basic-authentication) using your username and password, not tokens.
+
+Make sure you understand how to [work with two-factor authentication](/v3/auth/#working-with-two-factor-authentication) if you or your users have two-factor authentication enabled.
+
+{% if page.version == 'dotcom' or page.version > 2.6 %}
+
+## List your grants
+
+You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](/v3/oauth_authorizations/#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub][authorized-application-listing]. The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `["repo", "user"]`.
+
+    GET /applications/grants
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:oauth_authorization) { |h| [h] } %>
+
+## Get a single grant
+
+    GET /applications/grants/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json(:oauth_authorization) %>
+
+## Delete a grant
+
+Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for your user. Once deleted, the application has no access to your account and is no longer listed on [the application authorizations settings screen within GitHub][authorized-application-listing].
+
+    DELETE /applications/grants/:id
+
+### Response
+
+<%= headers 204 %>
+
+{% endif %}
 
 ## List your authorizations
 
@@ -108,7 +171,7 @@ Name | Type | Description
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
-`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).
+{% if page.version == 'dotcom' or page.version > 2.2 %}`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).{% endif %}
 
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
@@ -122,6 +185,8 @@ Name | Type | Description
 
 <%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "", "fingerprint" => "") } %>
+
+{% if page.version == 'dotcom' or page.version > 2.2 %}
 
 ## Get-or-create an authorization for a specific app and fingerprint
 
@@ -156,6 +221,8 @@ Name | Type | Description
 
 <%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "") } %>
+
+{% endif %}
 
 ## Update an existing authorization
 
@@ -222,20 +289,6 @@ the username is the OAuth application `client_id` and the password is its
 <%= headers 200 %>
 <%= json(:oauth_access_with_user) %>
 
-## Revoke all authorizations for an application
-
-OAuth application owners can revoke every token for an OAuth application. You
-must use [Basic Authentication](/v3/auth#basic-authentication) when calling
-this method. The username is the OAuth application `client_id` and the password
-is its `client_secret`. Tokens are revoked via a background job, and it might
-take a few minutes for the process to complete.
-
-    DELETE /applications/:client_id/tokens
-
-### Response
-
-<%= headers 204 %>
-
 ## Revoke an authorization for an application
 
 OAuth application owners can also revoke a single token for an OAuth
@@ -267,4 +320,5 @@ links that might be of help:
 
 [app-listing]: https://github.com/settings/developers
 [tokens-listing]: https://github.com/settings/tokens
+[authorized-application-listing]: https://github.com/settings/applications#authorized
 [basics auth guide]: /guides/basics-of-authentication/

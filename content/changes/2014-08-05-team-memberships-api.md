@@ -1,7 +1,5 @@
 ---
-kind: change
 title: We're changing the way you add new members to your organization
-created_at: 2014-08-05
 author_name: jakeboxer
 ---
 
@@ -30,11 +28,11 @@ We expect the preview period to last 30-60 days. At the end of the preview perio
 If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Team+Memberships+API
-[org-invitations]: https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization
+[org-invitations]: https://help.github.com/articles/adding-organization-members-to-a-team
 [add-team-member]: /v3/orgs/teams/#add-team-member
 [add-team-membership]: /v3/orgs/teams/#add-team-membership
 [get-team-member]: /v3/orgs/teams/#get-team-member
 [get-team-membership]: /v3/orgs/teams/#get-team-membership
 [remove-team-member]: /v3/orgs/teams/#remove-team-member
-[remove-team-member]: /v3/orgs/teams/#remove-team-membership
+[remove-team-membership]: /v3/orgs/teams/#remove-team-membership
 [team-add-event]: /v3/activity/events/types/#teamaddevent

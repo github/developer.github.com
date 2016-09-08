@@ -1,5 +1,5 @@
 ---
-title: Libraries | GitHub API
+title: Libraries
 layout: libraries
 ---
 
@@ -12,7 +12,7 @@ many flavors</h1>
     <li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
     <li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
   </ul>
-  <img src="/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
+  <img src="/assets/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
 </div>
 
 # Third-party libraries
@@ -134,7 +134,7 @@ covers the entire API.
 * [Github Nette Extension][kdyby-github]
 * [GitHub API Easy Access][milo-github-api]
 * [GitHub bridge for Laravel][github-laravel]
-* [GitHub API v3 wrapper][github-api-v3-wrapper]
+* [PHP5.6|PHP7 Client & WebHook wrapper][flexyproject-githubapi]
 
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
@@ -144,7 +144,7 @@ covers the entire API.
 [kdyby-github]: https://github.com/kdyby/github
 [milo-github-api]: https://github.com/milo/github-api
 [github-laravel]: https://github.com/GrahamCampbell/Laravel-GitHub
-[github-api-v3-wrapper]: https://github.com/Scion-Framework/GitHubAPI
+[flexyproject-githubapi]: https://github.com/FlexyProject/GitHubAPI
 
 ## Python
 

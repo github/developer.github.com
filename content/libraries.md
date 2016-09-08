@@ -1,5 +1,5 @@
 ---
-title: Libraries | GitHub API
+title: Libraries
 layout: libraries
 ---
 
@@ -12,10 +12,16 @@ many flavors</h1>
     <li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
     <li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
   </ul>
-  <img src="/shared/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
+  <img src="/assets/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
 </div>
 
 # Third-party libraries
+
+## Android
+
+* [GithubAndroidSDK][githubandroidsdk]
+
+[githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk
 
 ## .NET
 
@@ -27,17 +33,17 @@ many flavors</h1>
 [csharp]: https://github.com/sgrassie/csharp-github-api
 [fsharp]: https://github.com/saxonmatt/FSharp.GitHubApi
 
-## ActionScript
-
-* [ActionScript GitHub API][as3]
-
-[as3]: https://github.com/cbrammer/api-github-as3
-
 ## Clojure
 
 * [Tentacles][tentacles]
 
 [tentacles]: https://github.com/Raynes/tentacles
+
+## Dart
+
+* [github.dart][github.dart]
+
+[github.dart]: https://github.com/DirectMyFile/github.dart
 
 ## Emacs Lisp
 
@@ -48,8 +54,10 @@ many flavors</h1>
 ## Erlang
 
 * [Erlang GitHub API][erlang]
+* [octo.erl][octo-erl]
 
 [erlang]: https://github.com/onlyshk/erlang-github-api
+[octo-erl]: https://github.com/sdepold/octo.erl
 
 ## Go
 
@@ -88,6 +96,12 @@ covers the entire API.
 [github]: https://github.com/michael/github
 [github-client]: https://github.com/philschatz/github-client
 
+## Julia
+
+* [GitHub.jl][github.jl]
+
+[github.jl]: https://github.com/WestleyArgentum/GitHub.jl
+
 ## Objective-C
 
 * [UAGithubEngine][uagithubengine]
@@ -98,7 +112,7 @@ covers the entire API.
 
 * [ocaml-github][ocaml-github]
 
-[ocaml-github]: https://github.com/avsm/ocaml-github
+[ocaml-github]: https://github.com/mirage/ocaml-github
 
 ## Perl
 
@@ -117,12 +131,20 @@ covers the entire API.
 * [GitHub API][github-api]
 * [GitHub Kohana Module][kohana]
 * [GitHub Joomla! Package][joomla]
+* [Github Nette Extension][kdyby-github]
+* [GitHub API Easy Access][milo-github-api]
+* [GitHub bridge for Laravel][github-laravel]
+* [PHP5.6|PHP7 Client & WebHook wrapper][flexyproject-githubapi]
 
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api
 [kohana]: https://github.com/acoulton/github_v3_api
-[joomla]: https://github.com/joomla/joomla-framework
+[joomla]: https://github.com/joomla-framework/github-api
+[kdyby-github]: https://github.com/kdyby/github
+[milo-github-api]: https://github.com/milo/github-api
+[github-laravel]: https://github.com/GrahamCampbell/Laravel-GitHub
+[flexyproject-githubapi]: https://github.com/FlexyProject/GitHubAPI
 
 ## Python
 
@@ -145,18 +167,16 @@ covers the entire API.
 [agithub]: https://github.com/jpaugh/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
 [octohub]: https://github.com/turnkeylinux/octohub
-[github-flask]: https://github-flask.readthedocs.org
+[github-flask]: http://github-flask.readthedocs.org
 [torngithub]: https://github.com/jkeylu/torngithub
 
 ## Ruby
 
 * [GitHub API Gem][ghapi]
-* [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
 * [Ghee][ghee]
 
-[herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api
 [ruby2]: https://github.com/okonski/github-api-client
@@ -166,6 +186,14 @@ covers the entire API.
 
 * [Dispatch GitHub][dispatchgithub]
 * [Hubcat][hubcat]
+* [Buhtig][buhtig]
 
 [dispatchgithub]: https://github.com/andreazevedo/dispatch-github
 [hubcat]: https://github.com/softprops/hubcat
+[buhtig]: https://github.com/mdread/buhtig
+
+## Shell
+
+* [ok.sh][ok.sh]
+
+[ok.sh]: https://github.com/whiteinge/ok.sh

@@ -1,136 +1,176 @@
-IyBkZXZlbG9wZXIuZ2l0aHViLmNvbQoKKipOT1RFOiBUaGUgZGV2ZWxvcGVy
-LmdpdGh1Yi5jb20gd2Vic2l0ZSBpcyBubyBsb25nZXIgb3Blbi1zb3VyY2Uu
-KioKCldlIGhhdmUgbW92ZWQgdGhpcyByZXBvc2l0b3J5IGludG8gW291ciBn
-aXRodWItYXJjaGl2ZSBvcmdhbml6YXRpb25dKGh0dHBzOi8vZ2l0aHViLmNv
-bS9naXRodWItYXJjaGl2ZSkgdG8gc2lnbmlmeSB0aGF0IHdlIGFyZSBubyBs
-b25nZXIgYWNjZXB0aW5nIG9wZW4tc291cmNlIGNvbnRyaWJ1dGlvbnMgdG8g
-dGhpcyByZXBvc2l0b3J5LiBXZSB3YW50IHRvIHRoYW5rIHRoZSBodW5kcmVk
-cyBvZiBjb250cmlidXRvcnMgZm9yIHRoZWlyIGFzc2lzdGFuY2Ugb3ZlciB0
-aGUgeWVhcnMuCgpUaGUgZGVjaXNpb24gdG8gY2xvc2Utc291cmNlIHRoZSBz
-aXRlIHN0ZW1zIGZyb20gYSB2YXJpZXR5IG9mIHJlYXNvbnM6CgoxLiBXZSBh
-Y3R1YWxseSBhbHJlYWR5IF9oYXZlXyBhIGNsb3NlLXNvdXJjZWQgc2l0ZSwg
-d2hpY2ggaXMgd2hlcmUgd2Ugd3JvdGUgZG9jdW1lbnRhdGlvbiBmb3IgdW5y
-ZWxlYXNlZCBmZWF0dXJlcy4gV2UgZGVzaWduZWQgYWRkaXRpb25hbCB0b29s
-aW5nIHRvIHN1cHBvcnQgdGhpcyB3b3JrZmxvdywgYnV0IHVwZGF0aW5nIHRo
-ZSBkb2N1bWVudGF0aW9uIGlzIGEgcHJvY2VzcyB3ZSdkIGxpa2UgdG8gc2lt
-cGxpZnkuCjIuIFdlIGJlbGlldmUgdGhhdCBhbnkgb3Blbi1zb3VyY2UgcHJv
-amVjdOKAlGJlIGl0IGRvY3VtZW50YXRpb24gb3Igc29mdHdhcmXigJRvdWdo
-dCB0byBoYXZlIGRlZGljYXRlZCBtYWludGFpbmVycy4gSXQgYmVjYW1lIGRp
-ZmZpY3VsdCB0byBrZWVwIHRoaXMgcmVwb3NpdG9yeSBvcGVuLXNvdXJjZSBi
-ZWNhdXNlIGl0IHdhcyBtYWludGFpbmVkIGJ5IHRoZSBiZXN0IGVmZm9ydHMg
-b2YgYSBzbWFsbCBncm91cCBvZiBwZW9wbGUuIENsb3NpbmcgdGhlIHNpdGUg
-YWxsb3dzIHVzIHRvIGZvY3VzIG9uIHdoYXQncyBpbXBvcnRhbnQsIHdpdGhv
-dXQgZmVlbGluZyBndWlsdHkgYXQgbWlzc2luZyByZXZpZXdzIGZyb20gb3Bl
-bi1zb3VyY2UgY29udHJpYnV0b3JzLgoKV2UgdGhpbmsgdGhhdCB0aGUgdG9v
-bGluZyB3ZSB1c2VkIHRvIGJ1aWxkIHRoaXMgc2l0ZSBpcyBwcmV0dHkgaW50
-ZXJlc3RpbmcsIHNvIHdlJ3JlIG5vdCBnZXR0aW5nIHJpZCBvZiBldmVyeXRo
-aW5nLiBXZSBob3BlIHRoYXQgd2hhdCByZW1haW5zIGNhbiBiZSB1c2VkIGFz
-IGEgc291cmNlIG9mIGluc3BpcmF0aW9uIGZvciB5b3VyIG93biBzdGF0aWMg
-c2l0ZS4KCklmIHlvdSBmaW5kIHNvbWV0aGluZyB0aGF0IG5lZWRzIHRvIGJl
-IGZpeGVkLCB5b3UgY2FuIGFsd2F5cyBbY29udGFjdCBvdXIgdGVycmlmaWMg
-U3VwcG9ydCB0ZWFtXShodHRwczovL2dpdGh1Yi5jb20vY29udGFjdD9mb3Jt
-JTVCc3ViamVjdCU1RD1Nb3ZpbmcrZGV2ZWxvcGVyLmdpdGh1Yi5jb20rdG8r
-Z2l0aHViLWFyY2hpdmUpLgoKVGhhbmsgeW91IQoKKiAqICoKClRoaXMgd2Fz
-IHRoZSBHaXRIdWIgQVBJIGRvY3VtZW50YXRpb24sIGJ1aWx0IHdpdGggW05h
-bm9jXVtuYW5vY10uCgojIyBEZXZlbG9wbWVudAoKWW91IGNhbiBmZXRjaCB0
-aGUgbGF0ZXN0IGRlcGVuZGVuY2llcyBieSBvcGVuaW5nIHRoZSBjb21tYW5k
-IGxpbmUgYW5kIHJ1bm5pbmcgYHNjcmlwdC9ib290c3RyYXBgOgoKYGBgIHNo
-CiQgc2NyaXB0L2Jvb3RzdHJhcAo9PT4gSW5zdGFsbGluZyBnZW0gZGVwZW5k
-ZW5jaWVz4oCmCj09PiBJbnN0YWxsaW5nIG5wbSBkZXBlbmRlbmNpZXPigKYK
-YGBgCgpZb3UnbGwgbmVlZCBSdWJ5IGFuZCBOb2RlIGluc3RhbGxlZCBvbiB5
-b3VyIHN5c3RlbS4gVGhlIHJlcXVpcmVkIHZlcnNpb25zIGZvciBlYWNoIG9m
-IHRoZXNlIGxhbmd1YWdlcyBjYW4gYmUgZm91bmQgaW4gdGhlICoucnVieS12
-ZXJzaW9uKiBhbmQgKnBhY2thZ2UuanNvbiogZmlsZXMsIHJlc3BlY3RpdmVs
-eS4KCllvdSBjYW4gcnVuIGBidW5kbGUgZXhlYyByYWtlIGJ1aWxkYCB0byBn
-ZW5lcmF0ZSB0aGUgc2l0ZSwgYnV0IGl0J3Mgb2Z0ZW4gbW9yZSB1c2VmdWwK
-dG8gc2ltcGx5IGJ1aWxkIHRoZSBzZXJ2ZXIgKmFuZCogc3RhcnQgdGhlIHNp
-dGUgYXQgdGhlIHNhbWUgdGltZS4KCk5hbm9jIGNvbXBpbGVzIHRoZSBzaXRl
-IGludG8gc3RhdGljIGZpbGVzIGxpdmluZyBpbiBgb3V0cHV0YC4gIEl0J3MK
-c21hcnQgZW5vdWdoIG5vdCB0byB0cnkgdG8gY29tcGlsZSB1bmNoYW5nZWQg
-ZmlsZXMuCgpZb3UgY2FuIHN0YXJ0IHRoZSBzaXRlIHdpdGggYHNjcmlwdC9z
-ZXJ2ZXJgOgoKYGBgIHNoCiQgc2NyaXB0L3NlcnZlcgpMb2FkaW5nIHNpdGUg
-ZGF0YS4uLgpDb21waWxpbmcgc2l0ZS4uLgogICBjcmVhdGUgICAgIFswLjI4
-c10gIG91dHB1dC9pbmRleC5odG1sCiAgIGNyZWF0ZSAgICAgWzEuMzFzXSAg
-b3V0cHV0L3YzL2dpc3RzL2NvbW1lbnRzL2luZGV4Lmh0bWwKICAgaWRlbnRp
-Y2FsICBbMS45MnNdICBvdXRwdXQvdjMvZ2lzdHMvaW5kZXguaHRtbAogICBp
-ZGVudGljYWwgIFswLjI1c10gIG91dHB1dC92My9pc3N1ZXMvY29tbWVudHMv
-aW5kZXguaHRtbAogICB1cGRhdGUgICAgIFswLjk5c10gIG91dHB1dC92My9p
-c3N1ZXMvbGFiZWxzL2luZGV4Lmh0bWwKICAgdXBkYXRlICAgICBbMC4wNXNd
-ICBvdXRwdXQvdjMvaW5kZXguaHRtbAogICDigKYKClNpdGUgY29tcGlsZWQg
-aW4gNS44MXMuCmBgYAoKVGhlIHNpdGUgaXMgaG9zdGVkIGF0IGBodHRwOi8v
-bG9jYWxob3N0OjQwMDBgLgoKTmFub2MgaGFzIFtzb21lIG5pY2UgZG9jdW1l
-bnRhdGlvbl0oaHR0cDovL25hbm9jLndzL2RvY3MvdHV0b3JpYWwvKSB0byBn
-ZXQgeW91IHN0YXJ0ZWQuICBUaG91Z2ggaWYgeW91J3JlIG1haW5seSBjb25j
-ZXJuZWQgd2l0aCBlZGl0aW5nIG9yIGFkZGluZyBjb250ZW50LCB5b3Ugd29u
-J3QgbmVlZCB0byBrbm93IG11Y2ggYWJvdXQgTmFub2MuCgpbbmFub2NdOiBo
-dHRwOi8vbmFub2Mud3MvCgojIyMgRW50ZXJwcmlzZQoKVG8gZ2VuZXJhdGUg
-dGhlIGAvZW50ZXJwcmlzZWAgdmVyc2lvbnMsIHBhc3MgaW4gdGhlIEVudGVy
-cHJpc2UgdmVyc2lvbiB0byBgc2NyaXB0L3NlcnZlcmAuIEZvciBleGFtcGxl
-OgoKYGBgIHNoCiQgc2NyaXB0L3NlcnZlciAyLjYKYGBgCgpOb3RlIHRoYXQg
-bGl2ZSByZWxvYWRpbmcgaXMgbm90IGF2YWlsYWJsZSBmb3IgRW50ZXJwcmlz
-ZSBkb2N1bWVudGF0aW9uLgoKIyMgU3R5bGVndWlkZQoKTm90IHN1cmUgaG93
-IHRvIHN0cnVjdHVyZSB0aGUgZG9jcz8gIEhlcmUncyB3aGF0IHRoZSBzdHJ1
-Y3R1cmUgb2YgdGhlCkFQSSBkb2NzIHNob3VsZCBsb29rIGxpa2U6CgogICAg
-IyBBUEkgdGl0bGUKCiAgICB7OnRvY30KCiAgICAjIyBBUEkgZW5kcG9pbnQg
-dGl0bGUKCiAgICAgICAgW1ZFUkJdIC9wYXRoL3RvL2VuZHBvaW50CgogICAg
-IyMjIFBhcmFtZXRlcnMKCiAgICBOYW1lIHwgVHlwZSB8IERlc2NyaXB0aW9u
-CiAgICAtLS0tLXwtLS0tLS18LS0tLS0tLS0tLS0tLS0KICAgIGBuYW1lYHxg
-dHlwZWAgfCBEZXNjcmlwdGlvbi4KCiAgICAjIyMgSW5wdXQgKHJlcXVlc3Qg
-SlNPTiBib2R5KQoKICAgIE5hbWUgfCBUeXBlIHwgRGVzY3JpcHRpb24KICAg
-IC0tLS0tfC0tLS0tLXwtLS0tLS0tLS0tLS0tLQogICAgYG5hbWVgfGB0eXBl
-YCB8IERlc2NyaXB0aW9uLgoKICAgICMjIyBSZXNwb25zZQoKICAgIDwlPSBo
-ZWFkZXJzIDIwMCwgOnBhZ2luYXRpb24gPT4gZGVmYXVsdF9wYWdpbmF0aW9u
-X3JlbHMsICdYLUN1c3RvbS1IZWFkZXInID0+ICJ2YWx1ZSIgJT4KICAgIDwl
-PSBqc29uIDpyZXNvdXJjZV9uYW1lICU+CgoqKk5vdGUqKjogV2UncmUgdXNp
-bmcgW0tyYW1kb3duIE1hcmtkb3duIGV4dGVuc2lvbnNdKGh0dHA6Ly9rcmFt
-ZG93bi5nZXR0YWxvbmcub3JnL3N5bnRheC5odG1sKSwgc3VjaCBhcyBkZWZp
-bml0aW9uIGxpc3RzLgoKIyMjIEpTT04gUmVzcG9uc2VzCgpXZSBzcGVjaWZ5
-IHRoZSBKU09OIHJlc3BvbnNlcyBpbiBSdWJ5IHNvIHRoYXQgd2UgZG9uJ3Qg
-aGF2ZSB0byB3cml0ZQp0aGVtIGJ5IGhhbmQgYWxsIG92ZXIgdGhlIGRvY3Mu
-ICBZb3UgY2FuIHJlbmRlciB0aGUgSlNPTiBmb3IgYSByZXNvdXJjZQpsaWtl
-IHRoaXM6CgpgYGBlcmIKPCU9IGpzb24gOmlzc3VlICU+CmBgYAoKVGhpcyBs
-b29rcyB1cCBgR2l0SHViOjpSZXNvdXJjZXM6OklTU1VFYCBpbiBgbGliL3Jl
-c291cmNlcy5yYmAuCgpTb21lIGFjdGlvbnMgcmV0dXJuIGFycmF5cy4gIFlv
-dSBjYW4gbW9kaWZ5IHRoZSBKU09OIGJ5IHBhc3NpbmcgYSBibG9jazoKCmBg
-YGVyYgo8JT0ganNvbig6aXNzdWUpIHsgfGhhc2h8IFtoYXNoXSB9ICU+CmBg
-YAoKVGhlcmUgaXMgYWxzbyBhIHJha2UgdGFzayBmb3IgZ2VuZXJhdGluZyBK
-U09OIGZpbGVzIGZyb20gdGhlIHNhbXBsZSByZXNwb25zZXMgaW4gdGhlIGRv
-Y3VtZW50YXRpb246CgpgYGAgc2gKJCByYWtlIGdlbmVyYXRlX2pzb25fZnJv
-bV9yZXNwb25zZXMKYGBgCgpUaGUgZ2VuZXJhdGVkIGZpbGVzIHdpbGwgZW5k
-IHVwIGluICpqc29uLWR1bXAvKi4KCiMjIyBUZXJtaW5hbCBibG9ja3MKCllv
-dSBjYW4gc3BlY2lmeSB0ZXJtaW5hbCBibG9ja3MgYnkgdXNpbmcgdGhlIGBj
-b21tYW5kLWxpbmVgIHN5bnRheCBoaWdobGlnaHRpbmcuCgogICAgYGBgIGNv
-bW1hbmQtbGluZQogICAgJCBjdXJsIGZvb2JhcgogICAgYGBgCgpZb3UgY2Fu
-IHVzZSBjZXJ0YWluIGNoYXJhY3RlcnMsIGxpa2UgYCRgIGFuZCBgI2AsIHRv
-IGVtcGhhc2l6ZSBkaWZmZXJlbnQgcGFydHMKb2YgY29tbWFuZHMuCgogICAg
-YGBgIGNvbW1hbmQtbGluZQogICAgIyBjYWxsIGZvb2JhcgogICAgJCBjdXJs
-IDxlbT5mb29iYXI8ZW0+CiAgICAuLi4uCiAgICBgYGAKCkZvciBtb3JlIGlu
-Zm9ybWF0aW9uLCBzZWUgW3RoZSByZWZlcmVuY2UgZG9jdW1lbnRhdGlvbl0o
-aHR0cHM6Ly9naXRodWIuY29tL2dqdG9yaWtpYW4vZXh0ZW5kZWQtbWFya2Rv
-d24tZmlsdGVyI2NvbW1hbmQtbGluZS1oaWdobGlnaHRpbmcpLgoKIyMgTGlj
-ZW5zZXMKClRoZSBjb2RlIHRvIGdlbmVyYXRlIHRoZSBzaXRlIChldmVyeXRo
-aW5nIGV4Y2x1ZGluZyB0aGUgYXNzZXRzLCBjb250ZW50LAphbmQgbGF5b3V0
-cyBkaXJlY3RvcmllcykgYXMgd2VsbCBhcyB0aGUgY29kZSBzYW1wbGVzIG9u
-IHRoZSBzaXRlIGFyZQpsaWNlbnNlZCB1bmRlcgpbQ0MwLTEuMF0oaHR0cHM6
-Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL3B1YmxpY2RvbWFpbi96ZXJvLzEuMC9s
-ZWdhbGNvZGUpLgpDQzAgd2FpdmVzIGFsbCBjb3B5cmlnaHQgcmVzdHJpY3Rp
-b25zIGJ1dCBkb2VzIG5vdCBncmFudCB5b3UgYW55IHRyYWRlbWFyawpwZXJt
-aXNzaW9ucy4KClNpdGUgY29udGVudCAoZXZlcnl0aGluZyBpbiB0aGUgYXNz
-ZXRzLCBjb250ZW50LCBhbmQgbGF5b3V0cyBkaXJlY3RvcmllcywKZXhjbHVk
-aW5nIGZpbGVzIHVuZGVyIG9wZW4gc291cmNlIGxpY2Vuc2VzIGluZGl2aWR1
-YWxseSBtYXJrZWQpIGlzIGxpY2Vuc2VkCnVuZGVyIFtDQy1CWS00LjBdKGh0
-dHBzOi8vY3JlYXRpdmVjb21tb25zLm9yZy9saWNlbnNlcy9ieS80LjAvKS4g
-Q0MtQlktNC4wCmdpdmVzIHlvdSBwZXJtaXNzaW9uIHRvIHVzZSBjb250ZW50
-IGZvciBhbG1vc3QgYW55IHB1cnBvc2UgYnV0IGRvZXMgbm90IGdyYW50Cnlv
-dSBhbnkgdHJhZGVtYXJrIHBlcm1pc3Npb25zLCBzbyBsb25nIGFzIHlvdSBu
-b3RlIHRoZSBsaWNlbnNlIGFuZCBnaXZlIGNyZWRpdCwKc3VjaCBhcyBmb2xs
-b3dzOgoKPiBDb250ZW50IGJhc2VkIG9uCj4gPGEgaHJlZj0iaHR0cHM6Ly9n
-aXRodWIuY29tL2dpdGh1Yi9kZXZlbG9wZXIuZ2l0aHViLmNvbSI+ZGV2ZWxv
-cGVyLmdpdGh1Yi5jb208L2E+Cj4gdXNlZCB1bmRlciB0aGUKPiA8YSBocmVm
-PSJodHRwczovL2NyZWF0aXZlY29tbW9ucy5vcmcvbGljZW5zZXMvYnkvNC4w
-LyI+Q0MtQlktNC4wPC9hPgo+IGxpY2Vuc2UuPC9hPgoKVGhpcyBtZWFucyB5
-b3UgY2FuIHVzZSB0aGUgY29kZSBhbmQgY29udGVudCBpbiB0aGlzIHJlcG9z
-aXRvcnkgZXhjZXB0IGZvcgpHaXRIdWIgdHJhZGVtYXJrcyBpbiB5b3VyIG93
-biBwcm9qZWN0cy4KCldoZW4geW91IGNvbnRyaWJ1dGUgdG8gdGhpcyByZXBv
-c2l0b3J5IHlvdSBhcmUgZG9pbmcgc28gdW5kZXIgdGhlIGFib3ZlCmxpY2Vu
-c2VzLgo=
+# developer.github.com
+
+**NOTE: The developer.github.com website is no longer open-source.**
+
+We have moved this repository into [our github-archive organization](https://github.com/github-archive) to signify that we are no longer accepting open-source contributions to this repository. We want to thank the hundreds of contributors for their assistance over the years.
+
+The decision to close-source the site stems from a variety of reasons:
+
+1. We actually already _have_ a close-sourced site, which is where we wrote documentation for unreleased features. We designed additional tooling to support this workflow, but updating the documentation is a process we'd like to simplify.
+2. We believe that any open-source project—be it documentation or software—ought to have dedicated maintainers. It became difficult to keep this repository open-source because it was maintained by the best efforts of a small group of people. Closing the site allows us to focus on what's important, without feeling guilty at missing reviews from open-source contributors.
+
+We think that the tooling we used to build this site is pretty interesting, so we're not getting rid of everything. We hope that what remains can be used as a source of inspiration for your own static site.
+
+If you find something that needs to be fixed, you can always [contact our terrific Support team](https://github.com/contact?form%5Bsubject%5D=Moving+developer.github.com+to+github-archive).
+
+Thank you!
+
+* * *
+
+This was the GitHub API documentation, built with [Nanoc][nanoc].
+
+## Development
+
+You can fetch the latest dependencies by opening the command line and running `script/bootstrap`:
+
+``` sh
+$ script/bootstrap
+==> Installing gem dependencies…
+==> Installing npm dependencies…
+```
+
+You'll need Ruby and Node installed on your system. The required versions for each of these languages can be found in the *.ruby-version* and *package.json* files, respectively.
+
+You can run `bundle exec rake build` to generate the site, but it's often more useful
+to simply build the server *and* start the site at the same time.
+
+Nanoc compiles the site into static files living in `output`.  It's
+smart enough not to try to compile unchanged files.
+
+You can start the site with `script/server`:
+
+``` sh
+$ script/server
+Loading site data...
+Compiling site...
+   create     [0.28s]  output/index.html
+   create     [1.31s]  output/v3/gists/comments/index.html
+   identical  [1.92s]  output/v3/gists/index.html
+   identical  [0.25s]  output/v3/issues/comments/index.html
+   update     [0.99s]  output/v3/issues/labels/index.html
+   update     [0.05s]  output/v3/index.html
+   …
+
+Site compiled in 5.81s.
+```
+
+The site is hosted at `http://localhost:4000`.
+
+Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about Nanoc.
+
+[nanoc]: http://nanoc.ws/
+
+### Enterprise
+
+To generate the `/enterprise` versions, pass in the Enterprise version to `script/server`. For example:
+
+``` sh
+$ script/server 2.6
+```
+
+Note that live reloading is not available for Enterprise documentation.
+
+## Styleguide
+
+Not sure how to structure the docs?  Here's what the structure of the
+API docs should look like:
+
+    # API title
+
+    {:toc}
+
+    ## API endpoint title
+
+        [VERB] /path/to/endpoint
+
+    ### Parameters
+
+    Name | Type | Description
+    -----|------|--------------
+    `name`|`type` | Description.
+
+    ### Input (request JSON body)
+
+    Name | Type | Description
+    -----|------|--------------
+    `name`|`type` | Description.
+
+    ### Response
+
+    <%= headers 200, :pagination => default_pagination_rels, 'X-Custom-Header' => "value" %>
+    <%= json :resource_name %>
+
+**Note**: We're using [Kramdown Markdown extensions](http://kramdown.gettalong.org/syntax.html), such as definition lists.
+
+### JSON Responses
+
+We specify the JSON responses in Ruby so that we don't have to write
+them by hand all over the docs.  You can render the JSON for a resource
+like this:
+
+```erb
+<%= json :issue %>
+```
+
+This looks up `GitHub::Resources::ISSUE` in `lib/resources.rb`.
+
+Some actions return arrays.  You can modify the JSON by passing a block:
+
+```erb
+<%= json(:issue) { |hash| [hash] } %>
+```
+
+There is also a rake task for generating JSON files from the sample responses in the documentation:
+
+``` sh
+$ rake generate_json_from_responses
+```
+
+The generated files will end up in *json-dump/*.
+
+### Terminal blocks
+
+You can specify terminal blocks by using the `command-line` syntax highlighting.
+
+    ``` command-line
+    $ curl foobar
+    ```
+
+You can use certain characters, like `$` and `#`, to emphasize different parts
+of commands.
+
+    ``` command-line
+    # call foobar
+    $ curl <em>foobar<em>
+    ....
+    ```
+
+For more information, see [the reference documentation](https://github.com/gjtorikian/extended-markdown-filter#command-line-highlighting).
+
+## Licenses
+
+The code to generate the site (everything excluding the assets, content,
+and layouts directories) as well as the code samples on the site are
+licensed under
+[CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+CC0 waives all copyright restrictions but does not grant you any trademark
+permissions.
+
+Site content (everything in the assets, content, and layouts directories,
+excluding files under open source licenses individually marked) is licensed
+under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/). CC-BY-4.0
+gives you permission to use content for almost any purpose but does not grant
+you any trademark permissions, so long as you note the license and give credit,
+such as follows:
+
+> Content based on
+> <a href="https://github.com/github/developer.github.com">developer.github.com</a>
+> used under the
+> <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+> license.</a>
+
+This means you can use the code and content in this repository except for
+GitHub trademarks in your own projects.
+
+When you contribute to this repository you are doing so under the above
+licenses.

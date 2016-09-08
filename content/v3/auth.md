@@ -10,7 +10,7 @@ While the API provides multiple methods for authentication, we strongly
 recommend using [OAuth](/v3/oauth/) for production applications. The other
 methods provided are intended to be used for scripts or testing (i.e., cases
 where full OAuth would be overkill). Third party applications that rely on
-GitHub for authentication should not ask for or collect GitHub credentials.
+{{ site.data.variables.product.product_name }} for authentication should not ask for or collect {{ site.data.variables.product.product_name }} credentials.
 Instead, they should use the [OAuth web flow](/v3/oauth).
 
 ## Basic Authentication
@@ -19,21 +19,21 @@ The API supports Basic Authentication as defined in
 [RFC2617](http://www.ietf.org/rfc/rfc2617.txt) with a few slight differences.
 The main difference is that the RFC requires unauthenticated requests to be
 answered with `401 Unauthorized` responses. In many places, this would disclose
-the existence of user data. Instead, the GitHub API responds with `404 Not Found`.
+the existence of user data. Instead, the {{ site.data.variables.product.product_name }} API responds with `404 Not Found`.
 This may cause problems for HTTP libraries that assume a `401 Unauthorized`
 response. The solution is to manually craft the `Authorization` header.
 
 ### Via Username and Password
 
-To use Basic Authentication with the GitHub API, simply send the username and
+To use Basic Authentication with the {{ site.data.variables.product.product_name }} API, simply send the username and
 password associated with the account.
 
 For example, if you're accessing the API via [cURL][curl], the following command
-would authenticate you if you replace `<username>` with your GitHub username.
+would authenticate you if you replace `<username>` with your {{ site.data.variables.product.product_name }} username.
 (cURL will prompt you to enter the password.)
 
 ``` command-line
-$ curl -u <em>username</em> https://api.github.com/user
+$ curl -u <em>username</em> {{ site.data.variables.product.api_url_pre }}/user
 ```
 
 ### Via OAuth Tokens
@@ -42,7 +42,7 @@ Alternatively, you can use [personal access
 tokens][personal-access-tokens] or OAuth tokens instead of your password.
 
 ``` command-line
-$ curl -u <em>username</em>:<em>token</em> https://api.github.com/user
+$ curl -u <em>username</em>:<em>token</em> {{ site.data.variables.product.api_url_pre }}/user
 ```
 
 This approach is useful if your tools only support Basic Authentication but you

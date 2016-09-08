@@ -56,7 +56,7 @@ Name | Type | Description
 
 {{#tip}}
 
-Each time the pull request receives new commits, GitHub creates a merge commit
+Each time the pull request receives new commits, {{ site.data.variables.product.product_name }} creates a merge commit
 to _test_ whether the pull request can be automatically merged into the base
 branch. (This _test_ commit is not added to the base branch or the head branch.)
 The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;
@@ -87,7 +87,7 @@ Name | Type | Description
 -----|------|-------------
 `title`|`string` | **Required**. The title of the pull request.
 `head`|`string` | **Required**. The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace `head` with a user like this: `username:branch`.
-`base`|`string` | **Required**. The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.
+`base`|`string` | **Required**. The name of the branch you want the changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.
 `body`|`string` | The contents of the pull request.
 
 
@@ -132,14 +132,18 @@ Name | Type | Description
 -----|------|--------------
 `title`|`string` | The title of the pull request.
 `body`|`string` | The contents of the pull request.
-`state`|`string` | State of this Pull Request. Either `open` or `closed`.
+`state`|`string` | State of this Pull Request. Either `open` or `closed`.{% if page.version == 'dotcom' or page.version >= 2.8 %}
+`base`|`string` | The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository.
+{% endif %}
 
 #### Example
 
 <%= json \
   :title     => "new title",
   :body      => "updated body",
-  :state     => "open"
+  :state     => "open"{% if page.version == 'dotcom' or page.version >= 2.8 %},
+  :base      => "master"
+{% endif %}
 %>
 
 ### Response
@@ -187,9 +191,26 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 Name | Type | Description
 -----|------|-------------
+{% if page.version == 'dotcom' or page.version >= 2.6 %}`commit_title`|`string`| Title for the automatic commit message.{% endif %}
 `commit_message`|`string`| Extra detail to append to automatic commit message.
 `sha`|`string`| SHA that pull request head must match to allow merge
+{% if page.version == 'dotcom' or page.version >= 2.6 %}`squash`|`boolean`| Commit a single commit to the head branch.{% endif %}
 
+{% if page.version == 'dotcom' or page.version >= 2.6 %}
+
+{{#tip}}
+ 
+The `commit_title` and `squash` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-01-squash-api-preview) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.polaris-preview+json
+```
+
+{{/tip}}
+ 
+{% endif %}
 
 ### Response if merge was successful
 
@@ -216,7 +237,7 @@ Name | Type | Description
   :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
 
-### Labels, assignees, and milestones
+## Labels, assignees, and milestones
 
 Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within [the Issues API](/v3/issues).
 

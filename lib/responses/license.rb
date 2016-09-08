@@ -2,21 +2,21 @@ module GitHub
   module Resources
     module Responses
       LICENSES ||= [
-        {"key"=>"agpl-3.0", "name"=>"GNU Affero GPL v3.0", "url"=>"https://api.github.com/licenses/agpl-3.0"},
-        {"key"=>"apache-2.0", "name"=>"Apache License 2.0", "url"=>"https://api.github.com/licenses/apache-2.0"},
-        {"key"=>"artistic-2.0", "name"=>"Artistic License 2.0", "url"=>"https://api.github.com/licenses/artistic-2.0"},
-        {"key"=>"bsd-2-clause", "name"=>"Simplified BSD", "url"=>"https://api.github.com/licenses/bsd-2-clause"},
-        {"key"=>"bsd-3-clause", "name"=>"New BSD", "url"=>"https://api.github.com/licenses/bsd-3-clause"},
-        {"key"=>"cc0", "name"=>"CC0 1.0 Universal", "url"=>"https://api.github.com/licenses/cc0"},
-        {"key"=>"epl-1.0", "name"=>"Eclipse Public License v1.0", "url"=>"https://api.github.com/licenses/epl-1.0"},
-        {"key"=>"gpl-2.0", "name"=>"GNU GPL v2.0", "url"=>"https://api.github.com/licenses/gpl-2.0"},
-        {"key"=>"gpl-3.0", "name"=>"GNU GPL v3.0", "url"=>"https://api.github.com/licenses/gpl-3.0"},
-        {"key"=>"isc", "name"=>"ISC license", "url"=>"https://api.github.com/licenses/isc"},
-        {"key"=>"lgpl-2.1", "name"=>"GNU LGPL v2.1", "url"=>"https://api.github.com/licenses/lgpl-2.1"},
-        {"key"=>"lgpl-3.0", "name"=>"GNU LGPL v3.0", "url"=>"https://api.github.com/licenses/lgpl-3.0"},
-        {"key"=>"mit", "name"=>"MIT License", "url"=>"https://api.github.com/licenses/mit"},
-        {"key"=>"mpl-2.0", "name"=>"Mozilla Public License 2.0", "url"=>"https://api.github.com/licenses/mpl-2.0"},
-        {"key"=>"unlicense", "name"=>"Public Domain (Unlicense)", "url"=>"https://api.github.com/licenses/unlicense"}
+        {"key"=>"mit", "name"=>"MIT License", "url"=>"https://api.github.com/licenses/mit", "featured"=>true},
+        {"key"=>"mpl-2.0", "name"=>"Mozilla Public License 2.0", "url"=>"https://api.github.com/licenses/mpl-2.0", "featured"=>false},
+        {"key"=>"gpl-3.0", "name"=>"GNU General Public License v3.0", "url"=>"https://api.github.com/licenses/gpl-3.0", "featured"=>true},
+        {"key"=>"lgpl-3.0", "name"=>"GNU Lesser General Public License v3.0", "url"=>"https://api.github.com/licenses/lgpl-3.0", "featured"=>false},
+        {"key"=>"unlicense", "name"=>"The Unlicense", "url"=>"https://api.github.com/licenses/unlicense", "featured"=>false},
+        {"key"=>"bsd-2-clause", "name"=>"BSD 2-clause \"Simplified\" License", "url"=>"https://api.github.com/licenses/bsd-2-clause", "featured"=>false},
+        {"key"=>"isc", "name"=>"ISC License", "url"=>"https://api.github.com/licenses/isc", "featured"=>false},
+        {"key"=>"lgpl-2.1", "name"=>"GNU Lesser General Public License v2.1", "url"=>"https://api.github.com/licenses/lgpl-2.1", "featured"=>false},
+        {"key"=>"gpl-2.0", "name"=>"GNU General Public License v2.0", "url"=>"https://api.github.com/licenses/gpl-2.0", "featured"=>false},
+        {"key"=>"apache-2.0", "name"=>"Apache License 2.0", "url"=>"https://api.github.com/licenses/apache-2.0", "featured"=>true},
+        {"key"=>"cc0-1.0", "name"=>"Creative Commons Zero v1.0 Universal", "url"=>"https://api.github.com/licenses/cc0-1.0", "featured"=>false},
+        {"key"=>"artistic-2.0", "name"=>"Artistic License 2.0", "url"=>"https://api.github.com/licenses/artistic-2.0", "featured"=>false},
+        {"key"=>"bsd-3-clause", "name"=>"BSD 3-clause \"New\" or \"Revised\" License", "url"=>"https://api.github.com/licenses/bsd-3-clause", "featured"=>false},
+        {"key"=>"agpl-3.0", "name"=>"GNU Affero General Public License v3.0", "url"=>"https://api.github.com/licenses/agpl-3.0", "featured"=>false},
+        {"key"=>"epl-1.0", "name"=>"Eclipse Public License 1.0", "url"=>"https://api.github.com/licenses/epl-1.0", "featured"=>false}
       ]
 
       MIT ||= {
@@ -26,12 +26,11 @@ module GitHub
         "html_url"=>"http://choosealicense.com/licenses/mit/",
         "featured"=>true,
         "description"=>"A permissive license that is short and to the point. It lets people do anything with your code with proper attribution and without warranty.",
-        "category"=>"MIT",
         "implementation"=>
         "Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file. Replace [year] with the current year and [fullname] with the name (or names) of the copyright holders.",
-        "required"=>["include-copyright"],
-        "permitted"=>["commercial-use", "modifications", "distribution", "sublicense", "private-use"],
-        "forbidden"=>["no-liability"],
+        "permissions"=>["commercial-use", "modifications", "distribution", "sublicense", "private-use"],
+        "conditions"=>["include-copyright"],
+        "limitations"=>["no-liability"],
         "body"=>
         "\n\nThe MIT License (MIT)\n\nCopyright (c) [year] [fullname]\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
       }

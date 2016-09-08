@@ -20,7 +20,7 @@ To troubleshoot, ensure [you're authenticating correctly](/guides/getting-starte
 
 ## Why am I not seeing all my results?
 
-Most API calls accessing a list of resources (_e.g._, users, issues, _e.t.c._) support
+Most API calls accessing a list of resources (_e.g._, users, issues, _etc._) support
 pagination. If you're making requests and receiving an incomplete set of results, you're
 probably only seeing the first page. You'll need to request the remaining pages
 in order to get more results.
@@ -29,9 +29,11 @@ It's important to *not* try and guess the format of the pagination URL. Not ever
 API call uses the same structure. Instead, extract the pagination information from
 [the Link Header](/v3/#pagination), which is sent with every request.
 
+{% if page.version == 'dotcom' %}
+
 ## Can I get my rate limits bumped?
 
-The GitHub API has a pretty lenient quota for rate limits, for your enjoyment and
+The {{ site.data.variables.product.product_name }} API has a pretty lenient quota for rate limits, for your enjoyment and
 our safety. You can read more about it [here](/v3/#rate-limiting).
 
 If you're using OAuth or Basic Authentication and are hitting your rate limits,
@@ -40,5 +42,7 @@ you might be able to fix the issue by either caching our results, or [using cond
 In certain exceptional cases, we may temporarily bump your rate limit higher. You
 should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest
 dreams with the current rate limit (but don't worry, we'll help you out).
+
+{% endif %}
 
 [oap-guide]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/

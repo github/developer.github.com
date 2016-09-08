@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Upcoming Change to Default Media Type
-created_at: 2014-01-07
 author_name: jasonrudolph
 ---
 

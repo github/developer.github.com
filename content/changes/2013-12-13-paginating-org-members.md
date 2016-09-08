@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Paginated results for organization members
-created_at: 2013-12-13
 author_name: pengwynn
 ---
 

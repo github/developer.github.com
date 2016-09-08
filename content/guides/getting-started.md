@@ -22,7 +22,7 @@ Let's start by testing our setup. Open up a command prompt and enter the
 following command:
 
 ``` command-line
-$ curl https://api.github.com/zen
+$ curl {{ site.data.variables.product.api_url_pre }}/zen
 
 > Keep it logically awesome.
 ```
@@ -33,12 +33,12 @@ Next, let's `GET` [Chris Wanstrath's][defunkt github] [GitHub profile][users api
 
 ``` command-line
 # GET /users/defunkt
-$ curl https://api.github.com/users/defunkt
+$ curl {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > {
 >   "login": "defunkt",
 >   "id": 2,
->   "url": "https://api.github.com/users/defunkt",
+>   "url": "{{ site.data.variables.product.api_url_pre }}/users/defunkt",
 >   "html_url": "https://github.com/defunkt",
 >   ...
 > }
@@ -47,7 +47,7 @@ $ curl https://api.github.com/users/defunkt
 Mmmmm, tastes like [JSON][json]. Let's add the `-i` flag to include headers:
 
 ``` command-line
-$ curl -i https://api.github.com/users/defunkt
+$ curl -i {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > HTTP/1.1 200 OK
 > Server: GitHub.com
@@ -69,7 +69,7 @@ $ curl -i https://api.github.com/users/defunkt
 > {
 >   "login": "defunkt",
 >   "id": 2,
->   "url": "https://api.github.com/users/defunkt",
+>   "url": "{{ site.data.variables.product.api_url_pre }}/users/defunkt",
 >   "html_url": "https://github.com/defunkt",
 >   ...
 > }
@@ -92,16 +92,16 @@ client has already spent.
 ## Authentication
 
 Unauthenticated clients can make 60 requests per hour. To get more, we'll need to
-_authenticate_. In fact, doing anything interesting with the GitHub API requires
+_authenticate_. In fact, doing anything interesting with the {{ site.data.variables.product.product_name }} API requires
 [authentication][authentication].
 
 ### Basic
 
-The easiest way to authenticate with the GitHub API is by simply using your GitHub
+The easiest way to authenticate with the {{ site.data.variables.product.product_name }} API is by simply using your {{ site.data.variables.product.product_name }}
 username and password via Basic Authentication.
 
 ``` command-line
-$ curl -i -u <em>your_username</em> https://api.github.com/users/defunkt
+$ curl -i -u <em>your_username</em> {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > Enter host password for user <em>your_username</em>:
 ```
@@ -121,7 +121,7 @@ If you have [two-factor authentication][2fa] enabled, the API will return a
 `401 Unauthorized` error code for the above request (and every other API request):
 
 ``` command-line
-$ curl -i -u <em>your_username</em> https://api.github.com/users/defunkt
+$ curl -i -u <em>your_username</em> {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > Enter host password for user <em>your_username</em>:
 
@@ -141,11 +141,11 @@ OAuth authentication instead of Basic Authentication. See the
 ### Get your own user profile
 
 When properly authenticated, you can take advantage of the permissions
-associated with your GitHub account. For example, try getting
+associated with your {{ site.data.variables.product.product_name }} account. For example, try getting
 [your own user profile][auth user api]:
 
 ``` command-line
-$ curl -i -u <em>your_username</em> https://api.github.com/user
+$ curl -i -u <em>your_username</em> {{ site.data.variables.product.api_url_pre }}/user
 
 > {
 >   ...
@@ -162,11 +162,11 @@ $ curl -i -u <em>your_username</em> https://api.github.com/user
 This time, in addition to the same set of public information we
 retrieved for [@defunkt][defunkt github] earlier, you should also see the non-public
 information for your user profile. For example, you'll see a `plan` object
-in the response which gives details about the GitHub plan for the account.
+in the response which gives details about the {{ site.data.variables.product.product_name }} plan for the account.
 
 ### OAuth
 
-While convenient, Basic Authentication isn't ideal because you shouldn't give your GitHub
+While convenient, Basic Authentication isn't ideal because you shouldn't give your {{ site.data.variables.product.product_name }}
 username and password to anyone. Applications that need to read or write
 private information using the API on behalf of another user should use [OAuth][oauth].
 
@@ -178,9 +178,9 @@ features:
   will provide before authorizing a third party app
 
 Normally, tokens are created via a [web flow][webflow]. An application
-sends users to GitHub to log in. GitHub then presents a dialog
+sends users to {{ site.data.variables.product.product_name }} to log in. {{ site.data.variables.product.product_name }} then presents a dialog
 indicating the name of the app, as well as the level of access the app
-has once it's authorized by the user. After a user authorizes access, GitHub
+has once it's authorized by the user. After a user authorizes access, {{ site.data.variables.product.product_name }}
 redirects the user back to the application:
 
 ![GitHub's OAuth Prompt](/assets/images/oauth_prompt.png)
@@ -196,10 +196,10 @@ to create an OAuth token. Try pasting and running the following command:
 
 ``` command-line
 $ curl -i -u <em>your_username</em> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
-$    https://api.github.com/authorizations
+$    {{ site.data.variables.product.api_url_pre }}/authorizations
 
 > HTTP/1.1 201 Created
-> Location: https://api.github.com/authorizations/2
+> Location: {{ site.data.variables.product.api_url_pre }}/authorizations/2
 > Content-Length: 384
 
 > {
@@ -209,7 +209,7 @@ $    https://api.github.com/authorizations
 >  ],
 >  "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
 >  "updated_at": "2012-11-14T14:04:24Z",
->  "url": "https://api.github.com/authorizations/2",
+>  "url": "{{ site.data.variables.product.api_url_pre }}/authorizations/2",
 >  "app": {
 >    "url": "https://developer.github.com/v3/oauth/#oauth-authorizations-api",
 >    "name": "GitHub API"
@@ -224,7 +224,7 @@ $    https://api.github.com/authorizations
 There's a lot going on in this one little call, so let's break it down. First,
 the `-d` flag indicates we're doing a `POST`, using the
 `application/x-www-form-urlencoded` content type (as opposed to `GET`). All `POST`
-requests to the GitHub API should be in JSON.
+requests to the {{ site.data.variables.product.product_name }} API should be in JSON.
 
 Next, let's look at the `scopes` we're sending over in this call. When creating
 a new token, we include an optional array of [_scopes_][scopes], or access
@@ -246,7 +246,7 @@ in the [X-GitHub-OTP request header][2fa header]:
 ``` command-line
 $ curl -i -u <em>your_username</em> -H "X-GitHub-OTP: <em>your_2fa_OTP_code</em>" \
     -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
-    https://api.github.com/authorizations
+    {{ site.data.variables.product.api_url_pre }}/authorizations
 ```
 
 If you enabled 2FA with a mobile application, go ahead and get an OTP code from
@@ -259,7 +259,7 @@ in the rest of our examples. Let's grab our own user info again, using OAuth thi
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://api.github.com/user
+    {{ site.data.variables.product.api_url_pre }}/user
 ```
 
 **Treat OAuth tokens like passwords!** Don't share them with other users or store
@@ -271,31 +271,31 @@ the [Repositories API][repos-api].
 
 ## Repositories
 
-Almost any meaningful use of the GitHub API will involve some level of Repository
+Almost any meaningful use of the {{ site.data.variables.product.product_name }} API will involve some level of Repository
 information. We can [`GET` repository details][get repo] in the same way we fetched user
 details earlier:
 
 ``` command-line
-$ curl -i https://api.github.com/repos/twbs/bootstrap
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/twbs/bootstrap
 ```
 
 In the same way, we can [view repositories for the authenticated user][user repos api]:
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://api.github.com/user/repos
+    {{ site.data.variables.product.api_url_pre }}/user/repos
 ```
 
 Or, we can [list repositories for another user][other user repos api]:
 
 ``` command-line
-$ curl -i https://api.github.com/users/technoweenie/repos
+$ curl -i {{ site.data.variables.product.api_url_pre }}/users/technoweenie/repos
 ```
 
 Or, we can [list repositories for an organization][org repos api]:
 
 ``` command-line
-$ curl -i https://api.github.com/orgs/mozilla/repos
+$ curl -i {{ site.data.variables.product.api_url_pre }}/orgs/mozilla/repos
 ```
 
 The information returned from these calls will depend on how we authenticate:
@@ -311,7 +311,7 @@ for the repository. In this way, we can fetch only directly-owned repositories,
 organization repositories, or repositories the user collaborates on via a team.
 
 ``` command-line
-$ curl -i "https://api.github.com/users/technoweenie/repos?type=owner"
+$ curl -i "{{ site.data.variables.product.api_url_pre }}/users/technoweenie/repos?type=owner"
 ```
 
 In this example, we grab only those repositories that technoweenie owns, not the
@@ -322,7 +322,7 @@ query string.
 ### Create a repository
 
 Fetching information for existing repositories is a common use case, but the
-GitHub API supports creating new repositories as well. To [create a repository][create repo],
+{{ site.data.variables.product.product_name }} API supports creating new repositories as well. To [create a repository][create repo],
 we need to `POST` some JSON containing the details and configuration options.
 
 ``` command-line
@@ -333,14 +333,13 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
         "private": true, \
         "gitignore_template": "nanoc" \
       }' \
-    https://api.github.com/user/repos
+    {{ site.data.variables.product.api_url_pre }}/user/repos
 ```
 
 In this minimal example, we create a new repository for our blog (to be served
 on [GitHub Pages][pages], perhaps). Though the blog will be public, we've made
 the repository private. In this single step, we'll also initialize it with
-a README and a [nanoc][nanoc]-flavored [.gitignore template][gitignore
-templates].
+a README and a [nanoc][nanoc]-flavored [.gitignore template][gitignore templates].
 
 The resulting repository will be found at `https://github.com/<your_username>/blog`.
 To create a repository under an organization for which you're
@@ -349,7 +348,7 @@ an owner, just change the API method from `/user/repos` to `/orgs/<org_name>/rep
 Next, let's fetch our newly created repository:
 
 ``` command-line
-$ curl -i https://api.github.com/repos/pengwynn/blog
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/pengwynn/blog
 
 > HTTP/1.1 404 Not Found
 
@@ -361,13 +360,13 @@ $ curl -i https://api.github.com/repos/pengwynn/blog
 Oh noes! Where did it go? Since we created the repository as _private_, we need
 to authenticate in order to see it. If you're a grizzled HTTP user, you might
 expect a `403` instead. Since we don't want to leak information about private
-repositories, the GitHub API returns a `404` in this case, as if to say "we can
+repositories, the {{ site.data.variables.product.product_name }} API returns a `404` in this case, as if to say "we can
 neither confirm nor deny the existence of this repository."
 
 ## Issues
 
-The UI for Issues on GitHub aims to provide 'just enough' workflow while
-staying out of your way. With the GitHub [Issues API][issues-api], you can pull
+The UI for Issues on {{ site.data.variables.product.product_name }} aims to provide 'just enough' workflow while
+staying out of your way. With the {{ site.data.variables.product.product_name }} [Issues API][issues-api], you can pull
 data out or create issues from other tools to create a workflow that works for
 your team.
 
@@ -376,21 +375,21 @@ authenticated user. To [see all your issues][get issues api], call `GET /issues`
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://api.github.com/issues
+    {{ site.data.variables.product.api_url_pre }}/issues
 ```
 
-To get only the [issues under one of your GitHub organizations][get issues api], call `GET
+To get only the [issues under one of your {{ site.data.variables.product.product_name }} organizations][get issues api], call `GET
 /orgs/<org>/issues`:
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://api.github.com/orgs/rails/issues
+    {{ site.data.variables.product.api_url_pre }}/orgs/rails/issues
 ```
 
 We can also get [all the issues under a single repository][repo issues api]:
 
 ``` command-line
-$ curl -i https://api.github.com/repos/rails/rails/issues
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/rails/rails/issues
 ```
 
 ### Pagination
@@ -400,12 +399,12 @@ making multiple API calls to get the data. Let's repeat that last call, this
 time taking note of the response headers:
 
 ``` command-line
-$ curl -i https://api.github.com/repos/rails/rails/issues
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/rails/rails/issues
 
 > HTTP/1.1 200 OK
 
 > ...
-> Link: &lt;https://api.github.com/repositories/8514/issues?page=2&gt;; rel="next", &lt;https://api.github.com/repositories/8514/issues?page=30&gt;; rel="last"
+> Link: &lt;{{ site.data.variables.product.api_url_pre }}/repositories/8514/issues?page=2&gt;; rel="next", &lt;{{ site.data.variables.product.api_url_pre }}/repositories/8514/issues?page=30&gt;; rel="last"
 > ...
 ```
 
@@ -431,10 +430,10 @@ $         "title": "New logo", \
 $         "body": "We should have one", \
 $         "labels": ["design"] \
 $       }' \
-$    https://api.github.com/repos/pengwynn/api-sandbox/issues
+$    {{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues
 
 > HTTP/1.1 201 Created
-> Location: https://api.github.com/repos/pengwynn/api-sandbox/issues/17
+> Location: {{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues/17
 > X-RateLimit-Limit: 5000
 
 > {
@@ -453,7 +452,7 @@ $    https://api.github.com/repos/pengwynn/api-sandbox/issues
 >     "gravatar_id": "7e19cd5486b5d6dc1ef90e671ba52ae0",
 >     "avatar_url": "https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
 >     "id": 865,
->     "url": "https://api.github.com/users/pengwynn"
+>     "url": "{{ site.data.variables.product.api_url_pre }}/users/pengwynn"
 >   },
 >   "closed_at": null,
 >   "updated_at": "2012-11-14T15:25:33Z",
@@ -464,13 +463,13 @@ $    https://api.github.com/repos/pengwynn/api-sandbox/issues
 >     {
 >       "color": "ededed",
 >       "name": "design",
->       "url": "https://api.github.com/repos/pengwynn/api-sandbox/labels/design"
+>       "url": "{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/labels/design"
 >     }
 >   ],
 >   "id": 8356941,
 >   "assignee": null,
 >   "state": "open",
->   "url": "https://api.github.com/repos/pengwynn/api-sandbox/issues/17"
+>   "url": "{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues/17"
 > }
 ```
 
@@ -485,7 +484,7 @@ requests][conditional-requests] and helps you do the right thing. Consider the
 first call we made to get defunkt's profile:
 
 ``` command-line
-$ curl -i https://api.github.com/users/defunkt
+$ curl -i {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > HTTP/1.1 200 OK
 > ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
@@ -498,7 +497,7 @@ we can tell the API to give us the resource again, only if it has changed:
 
 ``` command-line
 $ curl -i -H 'If-None-Match: "bfd85cbf23ac0b0c8a29bee02e7117c6"' \
-$    https://api.github.com/users/defunkt
+$    {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > HTTP/1.1 304 Not Modified
 ```
@@ -507,7 +506,7 @@ The `304` status indicates that the resource hasn't changed since the last time
 we asked for it and the response will contain no body. As a bonus, `304`
 responses don't count against your [rate limit][rate-limiting].
 
-Woot! Now you know the basics of the GitHub API!
+Woot! Now you know the basics of the {{ site.data.variables.product.product_name }} API!
 
 * Basic & OAuth authentication
 * Fetching and creating repositories and issues

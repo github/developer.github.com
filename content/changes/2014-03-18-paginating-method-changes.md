@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Pagination changes for some resource lists
-created_at: 2014-03-18
 author_name: pengwynn
 ---
 
@@ -121,7 +119,7 @@ Here's the complete list of updated methods:
 [Pull Request files]: /v3/pulls/#list-pull-requests-files
 [Release assets]: /v3/repos/releases/#list-assets-for-a-release
 [Repository contributors]: /v3/repos/#list-contributors
-[Repository branches]: /v3/repos/#list-branches
+[Repository branches]: /v3/repos/branches/#list-branches
 [Repository tags]: /v3/repos/#list-tags
 [Repository teams]: /v3/repos/#list-teams
 [Team members]: /v3/orgs/teams/#list-team-members

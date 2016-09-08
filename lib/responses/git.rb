@@ -1,4 +1,5 @@
 require_relative 'user'
+require_relative 'reactions'
 
 module GitHub
   module Resources
@@ -19,25 +20,11 @@ module GitHub
           "commit" => {
             "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
             "url" => "https://api.github.com/repos/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
-          },
-          "protection" => {
-            "enabled" => false,
-            "required_status_checks" => {
-              "enforcement_level" => "off",
-              "contexts" => []
-            }
           }
         }
       ]
 
       BRANCH ||= {"name"=>"master",
-        "protection" => {
-          "enabled" => false,
-          "required_status_checks" => {
-            "enforcement_level" => "off",
-            "contexts" => []
-          }
-        },
       "commit"=>
       {"sha"=>"7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
       "commit"=>
@@ -206,6 +193,14 @@ module GitHub
         }]
       })
 
+      SIGNED_COMMIT ||= COMMIT.dup
+      SIGNED_COMMIT["commit"]["verification"] ||= {
+        "verified" => true,
+        "reason" => "valid",
+        "signature" => "-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----",
+        "payload" => "tree 6dcb09b5b57875f334f61aebed695e2e4193db5e\n..."
+      }
+
       COMMIT_COMMENT ||= {
         "html_url"   => "https://github.com/octocat/Hello-World/commit/6dcb09b5b57875f334f61aebed695e2e4193db5e#commitcomment-1",
         "url"        => "https://api.github.com/repos/octocat/Hello-World/comments/1",
@@ -340,6 +335,13 @@ module GitHub
         ]
       }
 
+      SIGNED_GIT_COMMIT ||= GIT_COMMIT.merge("verification" => {
+        "verified" => true,
+        "reason" => "valid",
+        "signature" => "-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----",
+        "payload" => "tree 691272480426f78a0138979dd3ce63b77f706feb\n..."
+      })
+
       NEW_COMMIT ||= {
         "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
@@ -383,6 +385,13 @@ module GitHub
         }
       }
 
+      SIGNED_GITTAG ||= GITTAG.merge("verification" => {
+        "verified" => true,
+        "reason" => "valid",
+        "signature" => "-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----",
+        "payload" => "object c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c\n..."
+      })
+
       REF ||= {
         "ref" => "refs/heads/featureA",
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA",
@@ -422,6 +431,42 @@ module GitHub
           }
         }
       ]
+
+      REFS_MATCHING ||= [
+        {
+          "ref" => "refs/heads/feature-a",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/feature-a",
+          "object" => {
+            "type" => "commit",
+            "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
+            "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"
+          }
+        },
+        {
+          "ref" => "refs/heads/feature-b",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/feature-b",
+          "object" => {
+            "type" => "commit",
+            "sha" => "612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac",
+            "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"
+          }
+        }
+      ]
+
+      REFS_NOT_FOUND ||= {
+        "message" => "Not Found",
+        "documentation_url" => "https://developer.github.com/v3"
+      }
+
+
+      PULL_COMMENT_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => PULL_COMMENT["url"] + "/reactions"
+      })
+
+      COMMIT_COMMENT_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => COMMIT_COMMENT["url"] + "/reactions"
+      })
+
     end
   end
 end

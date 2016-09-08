@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Replace older SSH keys created by your application
-created_at: 2014-12-12
 author_name: jasonrudolph
 ---
 Back in February, we [improved the security audit trail for SSH keys](/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable). Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on [deploy keys](/guides/managing-deploy-keys/#deploy-keys) or [user keys](/v3/users/keys/) for repository access, we recommend replacing any keys created before February 24, 2014.

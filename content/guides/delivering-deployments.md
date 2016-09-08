@@ -6,7 +6,7 @@ title: Delivering deployments
 
 {:toc}
 
-The [Deployments API][deploy API] provides your projects hosted on GitHub with
+The [Deployments API][deploy API] provides your projects hosted on {{ site.data.variables.product.product_name }} with
 the capability to launch them on a server that you own. Combined with
 [the Status API][status API], you'll be able to coordinate your deployments
 the moment your code lands on `master`.
@@ -14,9 +14,9 @@ the moment your code lands on `master`.
 This guide will use that API to demonstrate a setup that you can use.
 In our scenario, we will:
 
-* Merge a Pull Request
-* When the CI is finished, we'll set the Pull Request's status accordingly.
-* When the Pull Request is merged, we'll run our deployment to our server.
+* Merge a pull request
+* When the CI is finished, we'll set the pull request's status accordingly.
+* When the pull request is merged, we'll run our deployment to our server.
 
 Our CI system and host server will be figments of our imagination. They could be
 Heroku, Amazon, or something else entirely. The crux of this guide will be setting up
@@ -50,7 +50,7 @@ Start this server up. By default, Sinatra starts on port `4567`, so you'll want
 to configure ngrok to start listening for that, too.
 
 In order for this server to work, we'll need to set a repository up with a webhook.
-The webhook should be configured to fire whenever a Pull Request is created, or merged.
+The webhook should be configured to fire whenever a pull request is created, or merged.
 Go ahead and create a repository you're comfortable playing around in. Might we
 suggest [@octocat's Spoon/Knife repository](https://github.com/octocat/Spoon-Knife)?
 After that, you'll create a new webhook in your repository, feeding it the URL
@@ -66,8 +66,8 @@ Great! Click on **Let me select individual events.**, and select the following:
 * Deployment status
 * Pull Request
 
-These are the events GitHub will send to our server whenever the relevant action
-occurs. We'll configure our server to *just* handle when Pull Requests are merged
+These are the events {{ site.data.variables.product.product_name }} will send to our server whenever the relevant action
+occurs. We'll configure our server to *just* handle when pull requests are merged
 right now:
 
 ``` ruby
@@ -83,7 +83,7 @@ post '/event_handler' do
 end
 ```
 
-What's going on? Every event that GitHub sends out attached a `X-GitHub-Event`
+What's going on? Every event that {{ site.data.variables.product.product_name }} sends out attached a `X-GitHub-Event`
 HTTP header. We'll only care about the PR events for now. When a pull request is
 merged (its state is `closed`, and `merged` is `true`), we'll kick off a deployment.
 
@@ -125,7 +125,7 @@ Deployments can have some metadata attached to them, in the form of a `payload`
 and a `description`. Although these values are optional, it's helpful to use
 for logging and representing information.
 
-When a new deployment is created, a completely separate event is trigged. That's
+When a new deployment is created, a completely separate event is triggered. That's
 why we have a new `switch` case in the event handler for `deployment`. You can
 use this information to be notified when a deployment has been triggered.
 
@@ -138,7 +138,7 @@ the output. First, let's complete our `process_deployment` method:
 ``` ruby
 def process_deployment
   payload = JSON.parse(@payload['payload'])
-  # you can send this information to your chat room, monitor, pager, e.t.c.
+  # you can send this information to your chat room, monitor, pager, etc.
   puts "Processing '#{@payload['description']}' for #{payload['deploy_user']} to #{payload['environment']}"
   sleep 2 # simulate work
   @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'pending')
@@ -161,8 +161,7 @@ to simulate work that's going on. During that processing, we also make a call to
 `create_deployment_status`, which lets a receiver know what's going on, as we
 switch the status to `pending`.
 
-After the deployment is finished, we set the status to `success`. You'll notice
-that this pattern is the exact same as when we you your CI statuses.
+After the deployment is finished, we set the status to `success`.
 
 ## Conclusion
 
@@ -176,7 +175,7 @@ server we've built above. At GitHub, we:
 * In the meantime, Heaven also notifies everyone about the build, via [Hubot][hubot] sitting in our chat rooms
 
 That's it! You don't need to build your own deployment setup to use this example.
-You can always rely on [third-party services][integrations].
+You can always rely on [GitHub integrations][integrations].
 
 [deploy API]: /v3/repos/deployments/
 [status API]: /guides/building-a-ci-server

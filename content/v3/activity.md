@@ -9,7 +9,7 @@ notifications, subscriptions, and timelines.
 ## [Events][]
 
 The [Events API][Events] is a read-only interface to all the [event
-types][types] that power the various activity streams on GitHub.
+types][types] that power the various activity streams on {{ site.data.variables.product.product_name }}.
 
 ## [Feeds][]
 

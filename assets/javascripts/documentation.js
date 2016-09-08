@@ -4,7 +4,7 @@ $(function() {
       helpList = $('#js-sidebar .js-topic'),
       firstOccurance = true,
       styleTOC = function() {
-        var pathRegEx = /\/\/[^\/]+([A-Za-z0-9-_/]+)/g,
+        var pathRegEx = /\/\/[^\/]+([A-Za-z0-9-_./]+)/g,
             docUrl = pathRegEx.exec(window.location.toString())
         if (docUrl){
           $('#js-sidebar .js-topic a').each(function(){

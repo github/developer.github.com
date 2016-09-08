@@ -31,9 +31,16 @@ module GitHub
       }
 
       DefaultTimeFormat ||= "%B %-d, %Y".freeze
+      DATE_REGEXP = Regexp.compile(/(\d{4}-\d{1,2}-\d{1,2})/)
 
       def post_date(item)
         strftime item[:created_at]
+      end
+
+      def date_from_filename(filename)
+        date = DATE_REGEXP.match(filename)
+        return nil if date.nil?
+        date[1]
       end
 
       def strftime(time, format = DefaultTimeFormat)
@@ -60,8 +67,10 @@ module GitHub
           end
         end
 
-        lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
-        lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
+        unless @config[:version] != 'dotcom'
+          lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
+          lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
+        end
 
         %(``` headers\n#{lines.join("\n")}\n```\n)
       end

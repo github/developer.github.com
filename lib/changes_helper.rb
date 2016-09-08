@@ -1,7 +1,22 @@
 module ChangesHelper
-  PER_PAGE = 10
+  PER_PAGE = 10.0
+
+  def add_created_at_attribute
+    @items.each do |item|
+      date = date_from_filename(item[:filename])
+      item[:created_at] = date unless date.nil?
+    end
+  end
+
+  def add_kind_attribute
+    @items.each do |item|
+      next unless item[:filename].to_s.starts_with?('content/changes/2')
+      item[:kind] = 'change'
+    end
+  end
 
   MimeFormat ||= "application/vnd.github.%s+json".freeze
+
   # Public: Filters the change items out.  If a version is given, show only the
   # items related to that version.
   #
@@ -17,7 +32,7 @@ module ChangesHelper
     else
       changes
     end.sort! do |x, y|
-      attribute_to_time(y[:created_at]) <=> attribute_to_time(x[:created_at])
+      [attribute_to_time(y[:created_at]), x[:title]] <=> [attribute_to_time(x[:created_at]), y[:title]]
     end
   end
 
@@ -27,7 +42,7 @@ module ChangesHelper
   end
 
   def total_pages(version = nil)
-    (api_changes(version).length / PER_PAGE).floor + 1
+    (api_changes(version).length / PER_PAGE).ceil
   end
 
   # Public

@@ -48,16 +48,16 @@ Name | Description
 [`deployment_status`][event-types-deployment_status] | Any time a deployment for a Repository has a status update from the API.
 [`fork`][event-types-fork] | Any time a Repository is forked.
 [`gollum`][event-types-gollum] | Any time a Wiki page is updated.
-[`issue_comment`][event-types-issue_comment] | Any time an Issue or Pull Request is [commented](/v3/issues/comments/) on.
-[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.
-[`member`][event-types-member] | Any time a User is added as a collaborator to a non-Organization Repository.
+[`issue_comment`][event-types-issue_comment] | {% if page.version == 'dotcom' or page.version > 2.6 %}Any time a [comment on an issue](/v3/issues/comments/) is created, edited, or deleted.{% else %}Any time an [issue is commented on](/v3/issues/comments).{% endif %}
+[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, or reopened.
+[`member`][event-types-member] | Any time a User is added as a collaborator to a Repository.
 [`membership`][event-types-membership] | Any time a User is added or removed from a team. **Organization hooks only**.
 [`page_build`][event-types-page_build] | Any time a Pages site is built or results in a failed build.
 [`public`][event-types-public] | Any time a Repository changes from private to public.
-[`pull_request_review_comment`][event-types-pull_request_review_comment] | Any time a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request (the Files Changed tab).
-[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+[`pull_request_review_comment`][event-types-pull_request_review_comment] | {% if page.version == 'dotcom' or page.version > 2.6 %}Any time a [comment on a Pull Request's unified diff](/v3/pulls/comments)  is created, edited, or deleted{% else %}Any time a [Pull Request's unified diff is commented on](/v3/pulls/comments){% endif %} (in the Files Changed tab).
+[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
 [`push`][event-types-push] | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
-[`repository`][event-types-repository] | Any time a Repository is created. **Organization hooks only**.
+[`repository`][event-types-repository] | Any time a Repository is created{% if page.version == 'dotcom' or page.version > 2.6 %}, deleted, made public, or made private{% else %}. **Organization hooks only**{% endif %}.
 [`release`][event-types-release] | Any time a Release is published in a Repository.
 [`status`][event-types-status] | Any time a Repository has a status update from the API
 [`team_add`][event-types-team_add] | Any time a team is added or modified on a Repository.
@@ -83,6 +83,12 @@ payloads include the user who performed the event (`sender`) as well as the
 organization (`organization`) and/or repository (`repository`) which the event
 occurred on.
 
+{{#tip}}
+
+**Note:** Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a `create` event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.
+
+{{/tip}}
+
 ### Delivery headers
 
 HTTP requests made to your webhook's configured URL endpoint will contain
@@ -90,9 +96,9 @@ several special headers:
 
 Header | Description
 -------|-------------|
-`X-Github-Event`| Name of the [event][events-section] that triggered this delivery.
+`X-GitHub-Event`| Name of the [event][events-section] that triggered this delivery.
 `X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`][repo-hooks-create] as the key (if configured).
-`X-Github-Delivery`| Unique ID for this delivery.
+`X-GitHub-Delivery`| Unique ID for this delivery.
 
 Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 
@@ -106,7 +112,7 @@ Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 > User-Agent: GitHub-Hookshot/044aadd
 > Content-Type: application/json
 > Content-Length: 6615
-> X-Github-Event: issues
+> X-GitHub-Event: issues
 
 > {
 >   "action": "opened",
@@ -148,42 +154,10 @@ zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
 hook | The [webhook configuration][repo-hooks-show] |
 
-
-## Service Hooks
-
-In addition to webhooks, we also offer the ability to install pre-rolled
-integrations for a variety of existing services. These services [are contributed
-and maintained by the Open Source community][github-services].
-
-Service hooks are installed and configured in a similar fashion as webhooks.
-When [creating a hook][webhooks-guide-create], just set the `:name` parameter to
-a service name instead of "web" (for webhook). The main differences to keep in
-mind between webhooks and service hooks are:
-
-- Service hooks cannot be installed on organizations, only repositories.
-- You can only install a one service per integrator for a repository, whereas
-  multiple webhooks can be installed on each organization/repository.
-- Each service hook only supports a specific set of events, depending on the
-  services implementation.
-- Each service has its own unique set of configuration options.
-
-To see a full list of available services, their supported events, and
-configuration options, check out <a href='https://api.github.com/hooks'
-data-proofer-ignore>https://api.github.com/hooks</a>. Documentation for all
-service hooks can be found in the [docs directory][github-services-docs] of the
-github-services repository.
-
-**Note:** If you are building a new integration, you should build it as webhook.
-We suggest creating an [OAuth application][oauth-applications] to automatically
-install and manage your users' webhooks. We will no longer be accepting new
-services to the [github-services repository][github-services].
-
-
 [service-hooks-section]: #service-hooks
 [events-section]: #events
 [wildcard-section]: #wildcard-event
 [payloads-section]: #payloads
-[webhooks-guide-create]: /webhooks/creating/
 [org-hooks]: /v3/orgs/hooks/
 [repo-hooks]: /v3/repos/hooks/
 [repo-hooks-show]: /v3/repos/hooks/#get-single-hook
@@ -212,6 +186,3 @@ services to the [github-services repository][github-services].
 [event-types-status]: /v3/activity/events/types/#statusevent
 [event-types-team_add]: /v3/activity/events/types/#teamaddevent
 [event-types-watch]: /v3/activity/events/types/#watchevent
-[github-services]: https://github.com/github/github-services
-[github-services-docs]: https://github.com/github/github-services/tree/master/docs
-[oauth-applications]: /v3/oauth/

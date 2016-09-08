@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Repository Statistics
-created_at: 2013-05-06
 author_name: Caged
 ---
 

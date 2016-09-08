@@ -6,7 +6,7 @@ title: Statistics
 
 {:toc}
 
-The Repository Statistics API allows you to fetch the data that GitHub uses for visualizing different
+The Repository Statistics API allows you to fetch the data that {{ site.data.variables.product.product_name }} uses for visualizing different
 types of repository activity.
 
 ### A word about caching

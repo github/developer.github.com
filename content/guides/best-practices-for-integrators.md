@@ -10,7 +10,7 @@ Interested in integrating with the GitHub platform? [You're in good company](htt
 
 ## Secure payloads delivered from GitHub
 
-It's very important that you secure [the payloads sent from GitHub](/v3/activity/events/types/). Although no personal information (like passwords) is ever transmitted in a payload, leaking *any* information is not good. Some information that might be sensitive include committer email address or the names of private repositories.
+It's very important that you secure [the payloads sent from GitHub][event-types]. Although no personal information (like passwords) is ever transmitted in a payload, leaking *any* information is not good. Some information that might be sensitive include committer email address or the names of private repositories.
 
 There are three steps you can take to secure receipt of payloads delivered by GitHub:
 
@@ -54,6 +54,76 @@ For the stability of your app, you shouldn't try to parse this data or try to gu
 
 For example, when working with paginated results, it's often tempting to construct URLs that append `?page=<number>` to the end. Avoid that temptation. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on dependably following paginated results.
 
+## Check the event type and action before processing the event
+
+There are multiple [webhook event types][event-types], and each event can have multiple actions. As GitHub's feature set grows, we will occasionally add new event types or add new actions to existing event types. Ensure that your application explicitly checks the type and action of an event before doing any webhook processing. The `X-GitHub-Event` request header can be used to know which event has been received so that processing can be handled appropriately. Similarly, the payload has a top-level `action` key that can be used to know which action was taken on the relevant object.
+
+For example, if you have configured a GitHub webhook to "Send me **everything**", your application will begin receiving new event types and actions as they are added. It is therefore **not recommended to use any sort of catch-all else clause**. Take the following code example:  
+
+```ruby
+# Not recommended: a catch-all else clause
+def receive
+  event_type = request.headers["X-GitHub-Event"]
+  payload    = request.body
+
+  case event_type
+  when "repository"
+    process_repository(payload)
+  when "issues"
+    process_issues(payload)
+  else
+    process_pull_requests
+  end
+end
+```
+
+In this code example, the `process_repository` and `process_issues` methods will be correctly called if a `repository` or `issues` event was received. However, any other event type would result in `process_pull_requests` being called. As new event types are added, this would result in incorrect behavior and new event types would be processed in the same way that a `pull_request` event would be processed.
+
+Instead, we suggest explicitly checking event types and acting accordingly. In the following code example, we explicitly check for a `pull_request` event and the `else` clause simply logs that we've received a new event type:
+
+```ruby
+# Recommended: explicitly check each event type
+def receive
+  event_type = request.headers["X-GitHub-Event"]
+  payload    = JSON.parse(request.body)
+
+  case event_type
+  when "repository"
+    process_repository(payload)
+  when "issues"
+    process_issue(payload)
+  when "pull_request"
+    process_pull_requests(payload)
+  else
+    puts "Oooh, something new from GitHub: #{event_type}"
+  end
+end
+```
+
+Because each event can also have multiple actions, it's recommended that actions are checked similarly. For example, the [`IssuesEvent`](https://developer.github.com/v3/activity/events/types/#issuesevent) has several possible actions. These include `opened` when the issue is created, `closed` when the issue is closed, and `assigned` when the issue is assigned to someone.
+
+As with adding event types, we may add new actions to existing events. It is therefore again **not recommended to use any sort of catch-all else clause** when checking an event's action. Instead, we suggest explicitly checking event actions as we did with the event type. An example of this looks very similar to what we suggested for event types above:
+
+```ruby
+# Recommended: explicitly check each action
+def process_issue(payload)
+  case payload["action"]
+  when "opened"
+    process_issue_opened(payload)
+  when "assigned"
+    process_issue_assigned(payload)
+  when "closed"
+    process_issue_closed(payload)
+  else
+    puts "Oooh, something new from GitHub: #{payload["action"]}"
+  end
+end
+```
+
+In this example the `closed` action is checked first before calling the `process_closed` method. Any unidentified actions are logged for future reference.
+
+{% if page.version == 'dotcom' %}
+
 ## Dealing with rate limits
 
 The GitHub API [rate limit](/v3/#rate-limiting) ensures that the API is fast and available for everyone.
@@ -79,6 +149,8 @@ To avoid hitting this limit, you should ensure your application follows the guid
 
 We reserve the right to change these guidelines as needed to ensure availability.
 
+{% endif %}
+
 ## Dealing with API errors
 
 Although your code would never introduce a bug, you may find that you've encountered successive errors when trying to access the API.
@@ -86,3 +158,5 @@ Although your code would never introduce a bug, you may find that you've encount
 Rather than ignore repeated `4xx` and `5xx` status codes, you should ensure that you're correctly interacting with the API. For example, if an endpoint requests a string and you're passing it a numeric value, you're going to receive a `5xx` validation error, and your call won't succeed. Similarly, attempting to access an unauthorized or nonexistent endpoint will result in a `4xx` error.
 
 Intentionally ignoring repeated validation errors may result in the suspension of your app for abuse.
+
+[event-types]: /v3/activity/events/types/

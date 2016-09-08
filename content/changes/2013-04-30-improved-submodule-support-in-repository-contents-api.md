@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Improved Support for Submodules in the Repository Contents API
-created_at: 2013-04-30
 author_name: jasonrudolph
 ---
 

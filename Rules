@@ -6,8 +6,13 @@
 #   rule is applied.
 
 preprocess do
+  add_created_at_attribute
+  add_kind_attribute
   create_individual_blog_pages
   generate_redirects(config[:redirects])
+  @items.each do |item|
+    ConrefFS.apply_attributes(@config, item, :default)
+  end
 end
 
 passthrough '/CNAME'

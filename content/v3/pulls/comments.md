@@ -24,6 +24,27 @@ types](#custom-media-types). You can read more about the use of media types in t
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull_comment) { |h| [h] } %>
 
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-pull-comments"></a>
+
+  An additional `reactions` object in the review comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :pull_comment_reaction_summary %>
+{% endif %}
+
 ## List comments in a repository
 
     GET /repos/:owner/:repo/pulls/comments
@@ -44,6 +65,27 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull_comment) { |h| [h] } %>
 
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-pulls-comments"></a>
+
+  An additional `reactions` object in the review comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :pull_comment_reaction_summary %>
+{% endif %}
+
 ## Get a single comment
 
     GET /repos/:owner/:repo/pulls/comments/:id
@@ -52,6 +94,27 @@ Name | Type | Description
 
 <%= headers 200 %>
 <%= json :pull_comment %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-pull-comment"></a>
+
+  An additional `reactions` object in the review comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :pull_comment_reaction_summary %>
+{% endif %}
 
 ## Create a comment
 
@@ -66,6 +129,13 @@ Name | Type | Description
 `path`|`string` | **Required**. The relative path of the file to comment on.
 `position`|`integer` | **Required**. The line index in the diff to comment on.
 
+{{#tip}}
+
+When passing the `commit_id`, use the SHA of the latest commit in the pull request or your comment may appear as "outdated" if the specified `position` has been modified in a subsequent commit.
+
+To comment on a specific line in a file, you will need to first determine the position in the diff. GitHub offers a `application/vnd.github.v3.diff` media type which you can use in a preceding request to view the pull request's diff. The diff needs to be [interpreted](https://en.wikipedia.org/wiki/Diff_utility#Unified_format) to translate from the *line in the file* to a *position in the diff*. The `position` value is the number of lines down from the first "@@" hunk header in the file you would like to comment on. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the file's diff continues to increase through lines of whitespace and additional hunks until a new file is reached.
+
+{{/tip}}
 
 #### Example
 

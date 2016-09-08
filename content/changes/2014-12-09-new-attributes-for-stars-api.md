@@ -1,7 +1,5 @@
 ---
-kind: change
 title: New Attributes for Starring API
-created_at: 2014-12-09
 author_name: arfon
 ---
 

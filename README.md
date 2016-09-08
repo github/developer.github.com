@@ -1,8 +1,23 @@
 # developer.github.com
 
-This is a GitHub API resource built with [Nanoc][nanoc].
+**NOTE: The developer.github.com website is no longer open-source.**
 
-All submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](http://help.github.com/send-pull-requests/).
+We have moved this repository into [our github-archive organization](https://github.com/github-archive) to signify that we are no longer accepting open-source contributions to this repository. We want to thank the hundreds of contributors for their assistance over the years.
+
+The decision to close-source the site stems from a variety of reasons:
+
+1. We actually already _have_ a close-sourced site, which is where we wrote documentation for unreleased features. We designed additional tooling to support this workflow, but updating the documentation is a process we'd like to simplify.
+2. We believe that any open-source project—be it documentation or software—ought to have dedicated maintainers. It became difficult to keep this repository open-source because it was maintained by the best efforts of a small group of people. Closing the site allows us to focus on what's important, without feeling guilty at missing reviews from open-source contributors.
+
+We think that the tooling we used to build this site is pretty interesting, so we're not getting rid of everything. We hope that what remains can be used as a source of inspiration for your own static site.
+
+If you find something that needs to be fixed, you can always [contact our terrific Support team](https://github.com/contact?form%5Bsubject%5D=Moving+developer.github.com+to+github-archive).
+
+Thank you!
+
+* * *
+
+This was the GitHub API documentation, built with [Nanoc][nanoc].
 
 ## Development
 
@@ -44,6 +59,16 @@ The site is hosted at `http://localhost:4000`.
 Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about Nanoc.
 
 [nanoc]: http://nanoc.ws/
+
+### Enterprise
+
+To generate the `/enterprise` versions, pass in the Enterprise version to `script/server`. For example:
+
+``` sh
+$ script/server 2.6
+```
+
+Note that live reloading is not available for Enterprise documentation.
 
 ## Styleguide
 
@@ -95,6 +120,14 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 <%= json(:issue) { |hash| [hash] } %>
 ```
 
+There is also a rake task for generating JSON files from the sample responses in the documentation:
+
+``` sh
+$ rake generate_json_from_responses
+```
+
+The generated files will end up in *json-dump/*.
+
 ### Terminal blocks
 
 You can specify terminal blocks by using the `command-line` syntax highlighting.
@@ -113,12 +146,6 @@ of commands.
     ```
 
 For more information, see [the reference documentation](https://github.com/gjtorikian/extended-markdown-filter#command-line-highlighting).
-
-## Deploy
-
-```sh
-$ bundle exec rake publish
-```
 
 ## Licenses
 

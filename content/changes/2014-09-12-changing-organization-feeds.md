@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Changing organization feeds in the Feeds API
-created_at: 2014-09-12
 author_name: mastahyeti
 ---
 

@@ -3,4 +3,12 @@
 ulimit -n 2048
 
 script/bootstrap
-DEV_MODE=true npm run gulp
+
+if [ -z "$1" ]
+  then
+    DEV_MODE=true npm run gulp
+  else
+    script/enterprise-backport $1
+    mv -f enterprise output
+    npm run gulp server
+fi

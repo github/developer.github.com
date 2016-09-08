@@ -1,7 +1,5 @@
 ---
-kind: change
 title: List all organizations
-created_at: 2015-06-17
 author_name: keavy
 ---
 

@@ -35,15 +35,19 @@ end
 
 desc "Run the HTML-Proofer"
 task :run_proofer do
-  require 'html/proofer'
-  ignored_links = [%r{www.w3.org}]
-  latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
+  require 'html-proofer'
+  ignored_links = [%r{www.w3.org}, /api\.github\.com/, /import\.github\.com/]
   # swap versionless Enterprise articles with versioned paths
-  href_swap = {
-    %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",
-    %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{config[:versions][0]}/user/"
+  url_swap = {
+    %r{help.github.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",
+    %r{help.github.com/enterprise/user/} => "help.github.com/enterprise/#{config[:versions][0]}/user/"
   }
-  HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
+  proofer_opts = {
+                    :url_ignore => ignored_links,
+                    :url_swap => url_swap,
+                    :parallel => { :in_processes => 5 }
+                 }
+  HTMLProofer.check_directory("./output", proofer_opts).run
 end
 
 desc "Remove the tmp dir"
@@ -93,4 +97,15 @@ task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :build]
     system 'git push origin gh-pages --force'
     system 'git checkout master'
   end
+end
+
+desc "Generate JSON from the sample responses"
+task :generate_json_from_responses do
+  Dir[File.join(File.dirname(__FILE__), 'lib', 'responses', '*.rb')].each { |file| load file }
+  FileUtils.mkdir_p(File.join(File.dirname(__FILE__), 'json-dump'))
+  GitHub::Resources::Responses.constants.each { |constant|
+    File.open('json-dump/' + constant.to_s + '.json', 'w') { |file|
+      file.write(JSON.pretty_generate(GitHub::Resources::Helpers.get_resource(constant)))
+    }
+  }
 end

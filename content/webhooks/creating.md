@@ -14,12 +14,12 @@ listing out how popular our repository is, based on the number of Issues it
 receives per day.
 
 Creating a webhook is a two-step process. You'll first need to set up how you want
-your webhook to behave through GitHub--what events should it listen to. After that,
+your webhook to behave through {{ site.data.variables.product.product_name }}--what events should it listen to. After that,
 you'll set up your server to receive and manage the payload.
 
 ## Setting up a Webhook
 
-To set up a repository webhook on GitHub, head over to the **Settings** page of
+To set up a repository webhook on {{ site.data.variables.product.product_name }}, head over to the **Settings** page of
 your repository, and click on **Webhooks & services**. After that, click on
 **Add webhook**.
 

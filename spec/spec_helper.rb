@@ -11,6 +11,21 @@ require 'selenium/webdriver'
 
 Dir.glob('tasks/*.rake').each { |r| load r}
 
+# All the blog posts we're interested in checking. This means we're looking at
+# files that have changed on this particular branch we're on.
+#
+# Returns an Array of String filenames.
+def posts
+  return @posts if defined? @posts
+
+  diffable_files = `git diff -z --name-only --diff-filter=ACRTUXB origin/master -- content/changes/`.split("\0")
+
+  @posts = diffable_files.select do |filename|
+    ext = File.extname(filename)
+    ext == ".md" || ext == ".html"
+  end
+end
+
 # this does the file serving
 class ImplictIndex
   def initialize(root)

@@ -3,7 +3,7 @@ title: Configuring your server
 layout: webhooks
 ---
 
-# Configuring Your Server
+# Configuring Your Server!
 
 {:toc}
 

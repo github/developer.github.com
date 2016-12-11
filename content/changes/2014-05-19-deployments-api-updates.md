@@ -25,68 +25,70 @@ The Deployment Status payloads now embed the associated Deployment object. With 
 
 ### Example Deployment JSON
 
-    #!javascript
-    {
-      "url": "https://api.github.com/repos/my-org/my-repo/deployments/392",
-      "id": 392,
-      "sha": "837db83be4137ca555d9a5598d0a1ea2987ecfee",
-      "ref": "master",
-      "environment": "staging",
-      "payload": {
-        "fe": [
-          "fe1",
-          "fe2",
-          "fe3"
-        ]
-      },
-      "description": "ship it!",
-      "creator": {
-        "login": "my-org",
-        "id": 521,
-        "avatar_url": "https://avatars.githubusercontent.com/u/2988?",
-        "type": "User"
-      },
-      "created_at": "2014-05-09T19:56:47Z",
-      "updated_at": "2014-05-09T19:56:47Z",
-      "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/392/statuses"
-    }
+``` json
+{
+  "url": "https://api.github.com/repos/my-org/my-repo/deployments/392",
+  "id": 392,
+  "sha": "837db83be4137ca555d9a5598d0a1ea2987ecfee",
+  "ref": "master",
+  "environment": "staging",
+  "payload": {
+    "fe": [
+      "fe1",
+      "fe2",
+      "fe3"
+    ]
+  },
+  "description": "ship it!",
+  "creator": {
+    "login": "my-org",
+    "id": 521,
+    "avatar_url": "https://avatars.githubusercontent.com/u/2988?",
+    "type": "User"
+  },
+  "created_at": "2014-05-09T19:56:47Z",
+  "updated_at": "2014-05-09T19:56:47Z",
+  "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/392/statuses"
+}
+```
 
 ### Example Deployment Status JSON
 
-    #!javascript
-    {
-      "url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses/1",
-      "id": 1,
-      "state": "success",
-      "deployment": {
-        "url": "https://api.github.com/repos/my-org/my-repo/deployments/396",
-        "id": 392,
-        "sha": "837db83be4137ca555d9a5598d0a1ea2987ecfee",
-        "ref": "master",
-        "payload": {
-          "fe": [
-            "fe1",
-            "fe2",
-            "fe3"
-          ]
-        },
-        "environment": "production",
-        "description": "Deploying to production",
-        "creator": {
-          "login": "alysson-goldner",
-          "id": 540,
-          "type": "User"
-        },
-        "created_at": "2014-05-09T19:59:36Z",
-        "updated_at": "2014-05-09T19:59:36Z",
-        "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses"
-      },
-      "description": "Deployment succeeded",
-      "target_url": "https://deploy.myorg.com/apps/my-repo/logs/420",
-      "created_at": "2014-05-09T19:59:39Z",
-      "updated_at": "2014-05-09T19:59:39Z",
-      "deployment_url": "https://api.github.com/repos/my-org/my-repo/deployments/396"
-    }
+``` json
+{
+  "url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses/1",
+  "id": 1,
+  "state": "success",
+  "deployment": {
+    "url": "https://api.github.com/repos/my-org/my-repo/deployments/396",
+    "id": 392,
+    "sha": "837db83be4137ca555d9a5598d0a1ea2987ecfee",
+    "ref": "master",
+    "payload": {
+      "fe": [
+        "fe1",
+        "fe2",
+        "fe3"
+      ]
+    },
+    "environment": "production",
+    "description": "Deploying to production",
+    "creator": {
+      "login": "alysson-goldner",
+      "id": 540,
+      "type": "User"
+    },
+    "created_at": "2014-05-09T19:59:36Z",
+    "updated_at": "2014-05-09T19:59:36Z",
+    "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses"
+  },
+  "description": "Deployment succeeded",
+  "target_url": "https://deploy.myorg.com/apps/my-repo/logs/420",
+  "created_at": "2014-05-09T19:59:39Z",
+  "updated_at": "2014-05-09T19:59:39Z",
+  "deployment_url": "https://api.github.com/repos/my-org/my-repo/deployments/396"
+}
+```
 
 If you have any questions or feedback, please [get in touch][contact].
 

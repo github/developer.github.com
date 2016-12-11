@@ -1,10 +1,9 @@
 ---
-title: Releases | GitHub API
+title: Releases
 ---
 
 # Releases
 
-* TOC
 {:toc}
 
 ## List releases for a repository
@@ -156,8 +155,8 @@ Users with push access to the repository can delete a release.
 
 This endpoint makes use of [a Hypermedia relation](/v3/#hypermedia) to determine which URL to access.
 This endpoint is provided by a URI template in [the release's API response](#get-a-single-release).
-<span class="not-enterprise">You need to use an HTTP client which supports
-<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a> to make calls to this endpoint.</span>
+{% if page.version == 'dotcom' %}You need to use an HTTP client which supports
+<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a> to make calls to this endpoint.{% endif %}
 
 The asset data is expected in its raw binary form, rather than JSON.
 Everything else about the endpoint is the same as the rest of the API. For example, you'll still need to pass your authentication to be able to upload an asset.

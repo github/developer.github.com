@@ -1,10 +1,9 @@
 ---
-title: Organization Members | GitHub API
+title: Organization Members
 ---
 
 # Members
 
-* TOC
 {:toc}
 
 ## Members list
@@ -15,25 +14,16 @@ be returned.
 
     GET /orgs/:org/members
 
-### Parameters {#audit-two-factor-auth}
+<a id="audit-two-factor-auth">
+
+### Parameters
 
 Name    | Type    | Description
 --------|---------|--------------
-`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization owners.<br/>* `all`: All organization members.<br/><br/>Default: `all`
-`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `all`: All members of the organization, regardless of role.<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members. **This option requires a custom media type to be specified. Please see more in the alert below.**<br/><br/>Default: `all`
+`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization owners.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
+`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `all`: All members of the organization, regardless of role.<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members.<br/><br/>Default: `all`
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
-
-<div class="alert">
-  <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.ironman-preview+json</pre>
-  </p>
-</div>
 
 ### Response
 

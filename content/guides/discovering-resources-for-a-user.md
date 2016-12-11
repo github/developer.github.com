@@ -1,10 +1,9 @@
 ---
-title: Discovering resources for a user | GitHub API
+title: Discovering resources for a user
 ---
 
 # Discovering resources for a user
 
-* TOC
 {:toc}
 
 When making authenticated requests to the GitHub API, applications often need to fetch the current user's repositories and organizations. In this guide, we'll explain how to reliably discover those resources.
@@ -23,33 +22,36 @@ In addition to having their own personal repositories, a user may be a collabora
 
 As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. Then we'll configure Octokit.rb to automatically handle [pagination][pagination] for us.
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    Octokit.auto_paginate = true
+Octokit.auto_paginate = true
+```
 
 Next, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
 
-    #!ruby
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below.
-    client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
+``` ruby
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below.
+client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
+```
 
 Then, we're ready to fetch the [repositories that our application can access for the user][list-repositories-for-current-user]:
 
-    #!ruby
-    client.repositories.each do |repository|
-      full_name = repository[:full_name]
-      has_push_access = repository[:permissions][:push]
+``` ruby
+client.repositories.each do |repository|
+  full_name = repository[:full_name]
+  has_push_access = repository[:permissions][:push]
 
-      access_type = if has_push_access
-                      "write"
-                    else
-                      "read-only"
-                    end
+  access_type = if has_push_access
+                  "write"
+                else
+                  "read-only"
+                end
 
-      puts "User has #{access_type} access to #{full_name}."
-    end
+  puts "User has #{access_type} access to #{full_name}."
+end
+```
 
 ## Discover the organizations that your app can access for a user
 
@@ -57,24 +59,27 @@ Applications can perform all sorts of organization-related tasks for a user. To 
 
 Just as we did when discovering repositories above, we'll start by requiring [GitHub's Octokit.rb][octokit.rb] Ruby library and configuring it to take care of [pagination][pagination] for us:
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    Octokit.auto_paginate = true
+Octokit.auto_paginate = true
+```
 
 Next, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user] to initialize our API client:
 
-    #!ruby
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below.
-    client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
+``` ruby
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below.
+client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
+```
 
 Then, we can [list the organizations that our application can access for the user][list-orgs-for-current-user]:
 
-    #!ruby
-    client.organizations.each do |organization|
-      puts "User belongs to the #{organization[:login]} organization."
-    end
+``` ruby
+client.organizations.each do |organization|
+  puts "User belongs to the #{organization[:login]} organization."
+end
+```
 
 ### Don’t rely on public organizations
 

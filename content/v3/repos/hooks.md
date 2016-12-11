@@ -1,10 +1,9 @@
 ---
-title: Repository Webhooks | GitHub API
+title: Repository Webhooks
 ---
 
 # Webhooks
 
-* TOC
 {:toc}
 
 The Repository Webhooks API allows repository admins to manage the post-receive
@@ -183,17 +182,18 @@ Callback URLs can use either the `http://` protocol, or `github://`.
 
 ### Subscribing
 
-The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.
-(GitHub Enterprise users should use http://yourhost/api/v3/hub as the
+The GitHub PubSubHubbub endpoint is: `https://api.github.com/hub`.
+(GitHub Enterprise users should use `http://yourhost/api/v3/hub` as the
 PubSubHubbub endpoint, but not change the `hub.topic` URI format.) A
 successful request with curl looks like:
 
-{:.terminal}
-    curl -u "user" -i \
-      https://api.github.com/hub \
-      -F "hub.mode=subscribe" \
-      -F "hub.topic=https://github.com/:owner/:repo/events/push" \
-      -F "hub.callback=http://postbin.org/123"
+``` command-line
+curl -u "user" -i \
+  https://api.github.com/hub \
+  -F "hub.mode=subscribe" \
+  -F "hub.topic=https://github.com/:owner/:repo/events/push" \
+  -F "hub.callback=http://postbin.org/123"
+```
 
 PubSubHubbub requests can be sent multiple times.  If the hook already
 exists, it will be modified according to the request.

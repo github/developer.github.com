@@ -1,5 +1,5 @@
 ---
-title: Git Data | GitHub API
+title: Git Data
 ---
 
 # Git Data

@@ -1,10 +1,9 @@
 ---
-title: Gitignore | GitHub API
+title: Gitignore
 ---
 
 # Gitignore
 
-* TOC
 {:toc}
 
 When you create a new GitHub repository via the API, you can specify a

@@ -1,10 +1,9 @@
 ---
-title: Starring | GitHub API
+title: Starring
 ---
 
 # Starring
 
-* TOC
 {:toc}
 
 Repository Starring is a feature that lets users bookmark repositories.  Stars

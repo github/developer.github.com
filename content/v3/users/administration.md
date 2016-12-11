@@ -1,19 +1,20 @@
 ---
-title: User Administration | GitHub API
+title: User Administration
 ---
 
 # Administration (Enterprise)
 
-* TOC
 {:toc}
 
 The User Administration API allows you to promote, demote, suspend, and unsuspend users on a GitHub Enterprise appliance. *It is only available to [authenticated](/v3/#authentication) site administrators.* Normal users will receive a `403` response if they try to access it.
 
 Prefix all the endpoints for this API with the following URL:
 
-<pre class="terminal">
+``` command-line
 http(s)://<em>hostname</em>/api/v3
-</pre>
+```
+
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
 
 ## Create a new user
 
@@ -85,6 +86,8 @@ Name | Type | Description
 
 <%= headers 204 %>
 
+{% endif %}
+
 ## Promote an ordinary user to a site administrator
 
     PUT /users/:username/site_admin
@@ -137,6 +140,8 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
 
 <%= headers 204 %>
 
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
+
 ## List all public keys
 
    GET /admin/keys
@@ -147,6 +152,8 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
 <%= json(:all_keys) { |public_key, deploy_key| \
   [public_key, deploy_key.merge("id" => "2", "url" => "https://api.github.com/repos/octocat/Hello-World/keys/2")] \
 } %>
+
+{% if page.version != 'dotcom' and page.version >= 2.4 %}
 
 ## Delete a user
 
@@ -164,6 +171,8 @@ You can delete any user account except your own.
 
 <%= headers 204 %>
 
+{% endif %}
+
 ## Delete a public key
 
   DELETE /admin/keys/1
@@ -171,3 +180,5 @@ You can delete any user account except your own.
 ### Response
 
 <%= headers 204 %>
+
+{% endif %}

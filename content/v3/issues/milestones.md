@@ -1,10 +1,9 @@
 ---
-title: Issue Milestones | GitHub API
+title: Issue Milestones
 ---
 
 # Milestones
 
-* TOC
 {:toc}
 
 ## List milestones for a repository

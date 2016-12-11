@@ -1,10 +1,9 @@
 ---
-title: Troubleshooting | GitHub API
+title: Troubleshooting
 ---
 
 # Troubleshooting
 
-* TOC
 {:toc}
 
 If you're encountering some oddities in the API, here's a list of resolutions to

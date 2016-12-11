@@ -1,10 +1,9 @@
 ---
-title: Git Trees | GitHub API
+title: Git Trees
 ---
 
 # Trees
 
-* TOC
 {:toc}
 
 ## Get a Tree

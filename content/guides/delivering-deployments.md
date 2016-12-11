@@ -1,10 +1,9 @@
 ---
-title: Delivering deployments | GitHub API
+title: Delivering deployments
 ---
 
 # Delivering deployments
 
-* TOC
 {:toc}
 
 The [Deployments API][deploy API] provides your projects hosted on GitHub with
@@ -35,15 +34,15 @@ Note: you can download the complete source code for this project
 We'll write a quick Sinatra app to prove that our local connections are working.
 Let's start with this:
 
-    #!ruby
-    require 'sinatra'
-    require 'json'
+``` ruby
+require 'sinatra'
+require 'json'
 
-    post '/event_handler' do
-      payload = JSON.parse(params[:payload])
-      "Well, it worked!"
-    end
-
+post '/event_handler' do
+  payload = JSON.parse(params[:payload])
+  "Well, it worked!"
+end
+```
 
 (If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra].)
 
@@ -58,7 +57,7 @@ After that, you'll create a new webhook in your repository, feeding it the URL
 that ngrok gave you, and choosing `application/x-www-form-urlencoded` as the
 content type:
 
-![A new ngrok URL](/images/webhook_sample_url.png)
+![A new ngrok URL](/assets/images/webhook_sample_url.png)
 
 Click **Update webhook**. You should see a body response of `Well, it worked!`.
 Great! Click on **Let me select individual events.**, and select the following:
@@ -71,17 +70,18 @@ These are the events GitHub will send to our server whenever the relevant action
 occurs. We'll configure our server to *just* handle when Pull Requests are merged
 right now:
 
-    #!ruby
-    post '/event_handler' do
-      @payload = JSON.parse(params[:payload])
+``` ruby
+post '/event_handler' do
+  @payload = JSON.parse(params[:payload])
 
-      case request.env['HTTP_X_GITHUB_EVENT']
-      when "pull_request"
-        if @payload["action"] == "closed" && @payload["pull_request"]["merged"]
-          puts "A pull request was merged! A deployment should start now..."
-        end
-      end
+  case request.env['HTTP_X_GITHUB_EVENT']
+  when "pull_request"
+    if @payload["action"] == "closed" && @payload["pull_request"]["merged"]
+      puts "A pull request was merged! A deployment should start now..."
     end
+  end
+end
+```
 
 What's going on? Every event that GitHub sends out attached a `X-GitHub-Event`
 HTTP header. We'll only care about the PR events for now. When a pull request is
@@ -98,26 +98,28 @@ merged, we want our project to be deployed.
 We'll start by modifying our event listener to process pull requests when they're
 merged, and start paying attention to deployments:
 
-    #!ruby
-    when "pull_request"
-      if @payload["action"] == "closed" && @payload["pull_request"]["merged"]
-        start_deployment(@payload["pull_request"])
-      end
-    when "deployment"
-      process_deployment(@payload)
-    when "deployment_status"
-      update_deployment_status
-    end
+``` ruby
+when "pull_request"
+  if @payload["action"] == "closed" && @payload["pull_request"]["merged"]
+    start_deployment(@payload["pull_request"])
+  end
+when "deployment"
+  process_deployment(@payload)
+when "deployment_status"
+  update_deployment_status
+end
+```
 
 Based on the information from the pull request, we'll start by filling out the
 `start_deployment` method:
 
-    #!ruby
-    def start_deployment(pull_request)
-      user = pull_request['user']['login']
-      payload = JSON.generate(:environment => 'production', :deploy_user => user)
-      @client.create_deployment(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], {:payload => payload, :description => "Deploying my sweet branch"})
-    end
+``` ruby
+def start_deployment(pull_request)
+  user = pull_request['user']['login']
+  payload = JSON.generate(:environment => 'production', :deploy_user => user)
+  @client.create_deployment(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], {:payload => payload, :description => "Deploying my sweet branch"})
+end
+```
 
 Deployments can have some metadata attached to them, in the form of a `payload`
 and a `description`. Although these values are optional, it's helpful to use
@@ -133,23 +135,25 @@ such as when the deployment was created, and what state it's in.
 Let's simulate a deployment that does some work, and notice the effect it has on
 the output. First, let's complete our `process_deployment` method:
 
-    #!ruby
-    def process_deployment
-      payload = JSON.parse(@payload['payload'])
-      # you can send this information to your chat room, monitor, pager, e.t.c.
-      puts "Processing '#{@payload['description']}' for #{payload['deploy_user']} to #{payload['environment']}"
-      sleep 2 # simulate work
-      @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'pending')
-      sleep 2 # simulate work
-      @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'success')
-    end
+``` ruby
+def process_deployment
+  payload = JSON.parse(@payload['payload'])
+  # you can send this information to your chat room, monitor, pager, e.t.c.
+  puts "Processing '#{@payload['description']}' for #{payload['deploy_user']} to #{payload['environment']}"
+  sleep 2 # simulate work
+  @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'pending')
+  sleep 2 # simulate work
+  @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'success')
+end
+```
 
 Finally, we'll simulate storing the status information as console output:
 
-    #!ruby
-    def update_deployment_status
-      puts "Deployment status for #{@payload['id']} is #{@payload['state']}"
-    end
+``` ruby
+def update_deployment_status
+  puts "Deployment status for #{@payload['id']} is #{@payload['state']}"
+end
+```
 
 Let's break down what's going on. A new deployment is created by `start_deployment`,
 which triggers the `deployment` event. From there, we call `process_deployment`

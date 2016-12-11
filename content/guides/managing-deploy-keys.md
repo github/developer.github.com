@@ -1,10 +1,9 @@
 ---
-title: Managing deploy keys | GitHub API
+title: Managing deploy keys
 ---
 
 # Managing Deploy Keys
 
-* TOC
 {:toc}
 
 There are four ways to manage SSH keys on your servers when automating deployment scripts:
@@ -82,7 +81,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 4. In your repository's right sidebar, click **Settings**.
    ![Settings tab](https://github-images.s3.amazonaws.com/help/repository/repo-actions-settings.png)
 3. In the sidebar, click **Deploy Keys**.
-   ![Deploy Keys section](/images/deploy-keys.png)
+   ![Deploy Keys section](/assets/images/deploy-keys.png)
 3. Click **Add deploy key**. Paste your public key in and submit.
    ![Add Deploy Key button](https://github-images.s3.amazonaws.com/help/repository/repo-deploy-key.png)
 
@@ -90,11 +89,11 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
 
-<div class="alert">
-<p>
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
-</p>
-</div>
+{{#tip}}
+
+**Tip:** Our [terms of service](https://help.github.com/articles/github-terms-of-service) do mention that *'Accounts registered by "bots" or other automated methods are not permitted.'* and that *'One person or legal entity may not maintain more than one free account.'*  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
+
+{{/tip}}
 
 #### Pros
 

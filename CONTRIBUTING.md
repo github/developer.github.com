@@ -5,12 +5,7 @@ Use this repository to:
 - Report bugs in the documentation.
 - Propose minor updates to content such as typo fixes or clarifications.
 
-If you have a specific question or issues with the API, please [let us know by contacing GitHub Support](https://github.com/contact).
-
-## API Reference Style Guide
-
-The API reference refers to most of the content under <https://developer.github.com/v3/>. The format of these pages is consistent:
-
+If you have a specific question or issues with the API, please [let us know by contacing GitHub Support](https://github.=
 - Endpoints are introduced with an `h2` that describes the API.
 
    For example: `## List issues for a repository`

@@ -5,7 +5,7 @@ This is a GitHub API resource built with [Nanoc][nanoc].
 
 ## Development in progress
 
-You can fetch the latest dependencies by opening the command line and running `script/bootstrap`:
+You can fetch the latest dependencies by opening the command line and running `script/bootstrap`: I am making an edit to this file and committing to the master branch.
 
 ``` sh
 $ script/bootstrap

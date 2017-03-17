@@ -429,7 +429,7 @@ The Events API `PushEvent` payload is described in the table below. The example 
 Key | Type | Description
 ----|------|-------------
 `ref`|`string` | The full Git ref that was pushed. Example: `"refs/heads/master"`.
-`head`|`string` | The SHA of the most recent commit on `ref` after the push.
+`after`|`string` | The SHA of the most recent commit on `ref` after the push.
 `before`|`string` | The SHA of the most recent commit on `ref` before the push.
 `size`|`integer` | The number of commits in the push.
 `distinct_size`|`integer` | The number of distinct commits in the push.

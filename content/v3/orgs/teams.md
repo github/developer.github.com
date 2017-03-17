@@ -262,7 +262,7 @@ In order to get if a user is a member of a team, the authenticated user must be 
 
 ## Add team member
 
-### Deprecation notice
+### Deprecation notice (Not for GitHub Enterprise)
 
 {{#tip}}
 

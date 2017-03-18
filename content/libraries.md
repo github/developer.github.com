@@ -126,6 +126,7 @@ covers the entire API.
 
 ## PHP
 
+* [GitHub OAuth2 PHP Client][github-oauth2-php-client]
 * [GitHub PHP Client][github-php-client]
 * [PHP GitHub API][php-github-api]
 * [GitHub API][github-api]
@@ -136,6 +137,7 @@ covers the entire API.
 * [GitHub bridge for Laravel][github-laravel]
 * [PHP5.6|PHP7 Client & WebHook wrapper][flexyproject-githubapi]
 
+[github-oauth2-php-client]: https://github.com/thephpleague/oauth2-github
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api

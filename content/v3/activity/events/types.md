@@ -263,7 +263,7 @@ Key | Type | Description
 
 <%= webhook_payload "issue_comment" %>
 
-## IssuesEvent
+## IssueEvent
 
 Triggered when an [issue](/v3/issues) is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, or reopened.
 

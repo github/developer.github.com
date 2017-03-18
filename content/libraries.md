@@ -84,6 +84,7 @@ covers the entire API.
 
 ## JavaScript
 
+* [octokit.js][https://github.com/philschatz/octokit.js]
 * [Node-GitHub][mikedeboer-node-github]
 * [NodeJS GitHub library][octonode]
 * [gh3 client-side API v3 wrapper][gh3]

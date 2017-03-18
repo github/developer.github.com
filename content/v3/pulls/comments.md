@@ -10,6 +10,8 @@ Pull Request Review Comments are comments on a portion of the unified
 diff.  These are separate from Commit Comments (which are applied
 directly to a commit, outside of the Pull Request view), and Issue
 Comments (which do not reference a portion of the unified diff).
+Pull Request Review Comments will never share an `id` value with
+any other comment, regardless of type.
 
 Pull Request Review Comments use [these custom media
 types](#custom-media-types). You can read more about the use of media types in the API

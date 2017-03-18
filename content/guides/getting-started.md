@@ -286,13 +286,13 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
     {{ site.data.variables.product.api_url_pre }}/user/repos
 ```
 
-Or, we can [list repositories for another user][other user repos api]:
+Or, we can [list public repositories for another user][other user repos api]:
 
 ``` command-line
 $ curl -i {{ site.data.variables.product.api_url_pre }}/users/technoweenie/repos
 ```
 
-Or, we can [list repositories for an organization][org repos api]:
+Or, we can [list public repositories for an organization][org repos api]:
 
 ``` command-line
 $ curl -i {{ site.data.variables.product.api_url_pre }}/orgs/mozilla/repos

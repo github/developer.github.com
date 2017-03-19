@@ -62,7 +62,9 @@ branch. (This _test_ commit is not added to the base branch or the head branch.)
 The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;
 however, this attribute is [deprecated](/v3/versions/#v3-deprecations) and is scheduled for
 removal in the next version of the API. The Boolean `mergeable` attribute will
-remain to indicate whether the pull request can be automatically merged.
+remain to indicate whether the pull request can be automatically merged. `mergeable`
+will only be included in individual pulls and not in pull listings since it's
+expensive to compute.
 
 The value of the `mergeable` attribute can be `true`, `false`, or `null`. If
 the value is `null`, this means that the mergeability hasn't been computed yet,

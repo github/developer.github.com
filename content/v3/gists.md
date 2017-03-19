@@ -219,6 +219,9 @@ The keys in the `files` object are the `string` filename. The value is another `
 
 {{/tip}}
 
+_Note_: You cannot fork your own gists
+
+
 ### Response
 
 <%= headers 201, :Location => get_resource(:gist)['url'] %>

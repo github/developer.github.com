@@ -1,9 +1,23 @@
-# developer.github.com [![Build Status](https://travis-ci.org/github/developer.github.com.svg?branch=master)](https://travis-ci.org/github/developer.github.com)
+# developer.github.com
 
+**NOTE: The developer.github.com website is no longer open-source.**
 
-This is a GitHub API resource built with [Nanoc][nanoc].
+We have moved this repository into [our github-archive organization](https://github.com/github-archive) to signify that we are no longer accepting open-source contributions to this repository. We want to thank the hundreds of contributors for their assistance over the years.
 
-All submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](https://help.github.com/articles/creating-a-pull-request/).
+The decision to close-source the site stems from a variety of reasons:
+
+1. We actually already _have_ a close-sourced site, which is where we wrote documentation for unreleased features. We designed additional tooling to support this workflow, but updating the documentation is a process we'd like to simplify.
+2. We believe that any open-source project—be it documentation or software—ought to have dedicated maintainers. It became difficult to keep this repository open-source because it was maintained by the best efforts of a small group of people. Closing the site allows us to focus on what's important, without feeling guilty at missing reviews from open-source contributors.
+
+We think that the tooling we used to build this site is pretty interesting, so we're not getting rid of everything. We hope that what remains can be used as a source of inspiration for your own static site.
+
+If you find something that needs to be fixed, you can always [contact our terrific Support team](https://github.com/contact?form%5Bsubject%5D=Moving+developer.github.com+to+github-archive).
+
+Thank you!
+
+* * *
+
+This was the GitHub API documentation, built with [Nanoc][nanoc].
 
 ## Development
 
@@ -132,10 +146,6 @@ of commands.
     ```
 
 For more information, see [the reference documentation](https://github.com/gjtorikian/extended-markdown-filter#command-line-highlighting).
-
-## Deploy
-
-Deployments happen automatically once a PR is merged into `master`. A tool called [Publisher](https://github.com/gjtorikian/publisher) takes the `master` branch, builds it using Nanoc, and publishes the content to `gh-pages`. Thus, any commit to `master` is automatically sent over to `gh-pages`, where it's picked up and served by GitHub Pages.
 
 ## Licenses
 

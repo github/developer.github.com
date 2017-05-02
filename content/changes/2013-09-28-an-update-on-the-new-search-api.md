@@ -1,7 +1,5 @@
 ---
-kind: change
 title: An Update on the New Search API
-created_at: 2013-09-28
 author_name: jasonrudolph
 ---
 

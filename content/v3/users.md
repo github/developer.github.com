@@ -1,10 +1,9 @@
 ---
-title: Users | GitHub API
+title: Users
 ---
 
 # Users
 
-* TOC
 {:toc}
 
 Many of the resources on the users API provide a shortcut for getting
@@ -69,7 +68,7 @@ Name | Type | Description
 
 ## Get all users
 
-Lists all users, in the order that they signed up on GitHub.
+Lists all users, in the order that they signed up on {{ site.data.variables.product.product_name }}. This list includes personal user accounts and organization accounts.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of

@@ -1,0 +1,146 @@
+pipeline_config:
+  pipeline:
+    - :ExtendedMarkdownFilter
+    - :HTTPSFilter
+    - :TableOfContentsfilter
+    - :RougeFilter
+    - :EmojiFilter
+    - :PageTocFilter
+  gfm: false
+  http_url: https://github.com
+  base_url: /
+  asset_root: https://a248.e.akamai.net/assets.github.com/images/icons
+
+versions:
+  - &latest_enterprise_version 2.7
+  - 2.6
+  - 2.5
+  - 2.4
+  - 2.3
+  - 2.2
+  - 2.1
+  - 2.0
+
+latest_enterprise_version: *latest_enterprise_version
+
+data_variables:
+  -
+    scope:
+      path: ""
+      reps:
+        - :default
+    values:
+      version: "dotcom"
+  -
+    scope:
+      path: "enterprise-(?!backports)"
+      reps:
+        - :default
+    values:
+      version: *latest_enterprise_version
+
+page_variables:
+  -
+    scope:
+      path: ''
+      reps:
+        - :default
+    values:
+      version: 'dotcom'
+  -
+    scope:
+      path: 'changes'
+      reps:
+        - :default
+    # exclude all blog posts from search
+    values:
+      hide_from_search: true
+  -
+    scope:
+      path: 'integrations-directory'
+      reps:
+        - :default
+    # exclude integrations-directory from search
+    values:
+      hide_from_search: true
+  -
+    scope:
+      path: "enterprise/."
+      reps:
+        - :default
+    values:
+      version: *latest_enterprise_version
+      is_enterprise_help: "true"
+
+# For the atom feed.
+base_url: http://developer.github.com
+
+# Array of [version, released_at] Array tuples.
+api_versions:
+  -
+    - beta
+    - 2011-4-27
+  -
+    - v3
+
+redirects:
+  - /changes/2012-9-5-watcher-api/: /changes/2012-09-05-watcher-api/
+  - /changes/2012-9-28-auto-init-for-repositories/: /changes/2012-09-28-auto-init-for-repositories/
+  - /changes/2013-2-5-changes-to-services/: /changes/2013-02-05-changes-to-services/
+  - /changes/2013-2-13-hookshot-issues/: /changes/2013-02-13-hookshot-issues/
+  - /changes/2013-2-13-hookshot-load-balancer/: /changes/2013-02-13-hookshot-load-balancer/
+  - /changes/2013-2-13-sortable-stars/: /changes/2013-02-14-sortable-stars/
+  - /changes/2013-3-1-new-hookshot-coming/: /changes/2013-03-01-new-hookshot-coming/
+  - /changes/2014-2-10-ping-event-for-webhooks/: /changes/2014-02-10-ping-event-for-webhooks/
+  - /v3/orgs/migrations/: /v3/migration/migrations/
+
+
+# The syntax to use for patterns in the Rules file. Can be either `"glob"`
+# (default) or `"legacy"`. The former will enable glob patterns, which behave
+# like Ruby’s File.fnmatch. The latter will enable Nanoc 3.x-style patterns.
+string_pattern_type: glob
+
+# A list of file extensions that Nanoc will consider to be textual rather than
+# binary. If an item with an extension not in this list is found,  the file
+# will be considered as binary.
+text_extensions: [ 'coffee', 'css', 'erb', 'haml', 'handlebars', 'hb', 'htm', 'html', 'js', 'less', 'markdown', 'md', 'ms', 'mustache', 'php', 'rb', 'rdoc', 'sass', 'scss', 'slim', 'txt', 'xhtml', 'xml', 'json', 'atom' ]
+
+# The path to the directory where all generated files will be written to. This
+# can be an absolute path starting with a slash, but it can also be path
+# relative to the site directory.
+output_dir: output
+
+# A list of index filenames, i.e. names of files that will be served by a web
+# server when a directory is requested. Usually, index files are named
+# “index.hml”, but depending on the web server, this may be something else,
+# such as “default.htm”. This list is used by nanoc to generate pretty URLs.
+index_filenames: [ 'index.html' ]
+
+# Whether or not to generate a diff of the compiled content when compiling a
+# site. The diff will contain the differences between the compiled content
+# before and after the last site compilation.
+enable_output_diff: false
+
+prune:
+  # Whether to automatically remove files not managed by Nanoc from the output
+  # directory.
+  auto_prune: true
+
+  # Which files and directories you want to exclude from pruning. If you version
+  # your output directory, you should probably exclude VCS directories such as
+  # .git, .svn etc.
+  exclude: [ '.git', 'assets', 'enterprise' ]
+
+# The data sources where nanoc loads its data from. This is an array of
+# hashes; each array element represents a single data source. By default,
+# there is only a single data source that reads data from the “content/” and
+# “layout/” directories in the site directory.
+data_sources:
+  -
+    type: conref-fs
+    items_root: /
+    layouts_root: /
+    encoding: utf-8
+    identifier_type: full
+    reps:
+      - :default

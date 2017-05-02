@@ -1,21 +1,31 @@
 ---
-title: User Administration | GitHub API
+title: User Administration
 ---
 
 # Administration (Enterprise)
 
-* TOC
 {:toc}
 
 The User Administration API allows you to promote, demote, suspend, and unsuspend users on a GitHub Enterprise appliance. *It is only available to [authenticated](/v3/#authentication) site administrators.* Normal users will receive a `403` response if they try to access it.
 
 Prefix all the endpoints for this API with the following URL:
 
-<pre class="terminal">
+``` command-line
 http(s)://<em>hostname</em>/api/v3
-</pre>
+```
+
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
 
 ## Create a new user
+
+{{#warning}}
+
+If an external authentication mechanism is used, the login name should match the
+login name in the external system. If you are using LDAP authentication, you should also 
+[update the LDAP mapping](/v3/enterprise/ldap/#update-ldap-mapping-for-a-user) 
+for the user.
+
+{{/warning}}
 
     POST /admin/users
 
@@ -25,6 +35,12 @@ Name | Type | Description
 -----|------|--------------
 `login`|`string` | **Required.** The user's username.
 `email`|`string` | **Required.** The user's email address.
+
+The login name will be normalized to only contain alphanumeric characters or
+single hyphens. For example, if you send `"octo_cat"` as the login, a user named
+`"octo-cat"` will be created.
+
+If the login name or email address is already associated with an account, the server will return a `422` response.
 
 #### Example
 
@@ -40,7 +56,7 @@ Name | Type | Description
 
 ## Rename an existing user
 
-    PATCH /admin/users/:user_id
+    PATCH /admin/users/:username
 
 ### Parameters
 
@@ -64,7 +80,7 @@ Name | Type | Description
 
 ## Create an impersonation OAuth token
 
-    POST /admin/users/:user_id/authorizations
+    POST /admin/users/:username/authorizations
 
 ### Parameters
 
@@ -79,11 +95,13 @@ Name | Type | Description
 
 ## Delete an impersonation OAuth token
 
-    DELETE /admin/users/:user_id/authorizations
+    DELETE /admin/users/:username/authorizations
 
 ### Response
 
 <%= headers 204 %>
+
+{% endif %}
 
 ## Promote an ordinary user to a site administrator
 
@@ -109,7 +127,7 @@ You can demote any user account except your own.
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be suspended via the API.
+If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be suspended via the API.
 
 {{/warning}}
 
@@ -127,7 +145,7 @@ You can suspend any user account except your own.
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be unsuspended via the API.
+If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be unsuspended via the API.
 
 {{/warning}}
 
@@ -136,6 +154,8 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
 ### Response
 
 <%= headers 204 %>
+
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
 
 ## List all public keys
 
@@ -148,6 +168,25 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
   [public_key, deploy_key.merge("id" => "2", "url" => "https://api.github.com/repos/octocat/Hello-World/keys/2")] \
 } %>
 
+{% if page.version != 'dotcom' and page.version >= 2.4 %}
+
+## Delete a user
+
+{{#warning}}
+
+Deleting a user will delete all their repositories, gists, applications, and personal settings. [Suspending a user](/v3/users/administration/#suspend-a-user) is often a better option.
+
+{{/warning}}
+
+    DELETE /admin/users/:username
+
+You can delete any user account except your own.
+
+### Response
+
+<%= headers 204 %>
+
+{% endif %}
 
 ## Delete a public key
 
@@ -156,3 +195,5 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
 ### Response
 
 <%= headers 204 %>
+
+{% endif %}

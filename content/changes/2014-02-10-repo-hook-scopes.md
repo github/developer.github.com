@@ -1,7 +1,5 @@
 ---
-kind: change
 title: New scopes for managing repository hooks
-created_at: 2014-02-10
 author_name: pengwynn
 ---
 

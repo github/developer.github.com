@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Licenses API
-created_at: 2015-03-09
 author_name: benbalter
 ---
 

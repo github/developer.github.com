@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Preview the New Search API
-created_at: 2013-07-19
 author_name: jasonrudolph
 ---
 

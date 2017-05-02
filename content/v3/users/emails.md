@@ -1,10 +1,9 @@
 ---
-title: User Emails | GitHub API
+title: User Emails
 ---
 
 # Emails
 
-* TOC
 {:toc}
 
 Management of email addresses via the API requires that you are
@@ -23,15 +22,15 @@ This endpoint is accessible with the user:email scope.
 
 ## Add email address(es)
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an email address via the API with these options enabled.
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an email address via the API with these options enabled.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     POST /user/emails
 
@@ -59,15 +58,15 @@ You can post a single email address or an array of addresses:
 
 ## Delete email address(es)
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to remove an email address via the API with these options enabled.
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to remove an email address via the API with these options enabled.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     DELETE /user/emails
 

@@ -1,10 +1,9 @@
 ---
-title: Repositories | GitHub API
+title: Repositories
 ---
 
 # Repositories
 
-* TOC
 {:toc}
 
 ## List your repositories
@@ -68,7 +67,7 @@ Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of
 repositories.
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
 
 If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
 you will be able to list all repositories including private repositories.
@@ -79,7 +78,7 @@ Name | Type | Description
 -----|------|--------------
 `visibility`|`string`| To include private repositories as well set to `all`. Default: `public`
 
-{{/enterprise-only}}
+{% endif %}
 
     GET /repositories
 
@@ -250,24 +249,6 @@ List languages for the specified repository. The value on the right of a languag
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:tag) { |h| [h] } %>
-
-## List Branches
-
-    GET /repos/:owner/:repo/branches
-
-### Response
-
-<%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:branches) %>
-
-## Get Branch
-
-    GET /repos/:owner/:repo/branches/:branch
-
-### Response
-
-<%= headers 200 %>
-<%= json(:branch) %>
 
 ## Delete a Repository
 

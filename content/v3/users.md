@@ -16,6 +16,10 @@ information](/v3/#authentication) with your request).
 
     GET /users/:username
 
+or by id:
+
+    GET /user/:id
+
 ### Response
 
 Note: The returned email is the user's publicly visible email address

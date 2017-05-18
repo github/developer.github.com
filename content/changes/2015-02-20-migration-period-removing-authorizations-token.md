@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Breaking changes to Authorizations API responses on April 20
-created_at: 2015-02-19
 author_name: ptoomey3
 ---
 

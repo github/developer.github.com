@@ -1,13 +1,14 @@
 ---
-title: Deploy Keys | GitHub API
+title: Deploy Keys
 ---
 
 # Deploy Keys
 
-* TOC
 {:toc}
 
-## List deploy keys {#list}
+<a id="list" />
+
+## List deploy keys
 
     GET /repos/:owner/:repo/keys
 
@@ -16,7 +17,9 @@ title: Deploy Keys | GitHub API
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deploy_key) { |h| [h] } %>
 
-## Get a deploy key {#get}
+<a id="get" />
+
+## Get a deploy key
 
     GET /repos/:owner/:repo/keys/:id
 
@@ -25,7 +28,9 @@ title: Deploy Keys | GitHub API
 <%= headers 200 %>
 <%= json :deploy_key %>
 
-## Add a new deploy key {#create}
+<a id="create" />
+
+## Add a new deploy key
 
     POST /repos/:owner/:repo/keys
 
@@ -48,12 +53,16 @@ Here's how you can create a read-only deploy key:
 <%= headers 201, :Location => get_resource(:deploy_key)['url'] %>
 <%= json :deploy_key %>
 
-## Edit a deploy key {#edit}
+<a id="edit" />
+
+## Edit a deploy key
 
 Deploy keys are immutable. If you need to update a key, [remove the
-key](#delete) and [create a new one](#create) instead.
+key](#remove-a-deploy-key) and [create a new one](#add-a-new-deploy-key) instead.
 
-## Remove a deploy key {#delete}
+<a id="delete" />
+
+## Remove a deploy key
 
     DELETE /repos/:owner/:repo/keys/:id
 

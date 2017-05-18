@@ -1,10 +1,9 @@
 ---
-title: Legacy Search | GitHub API
+title: Legacy Search
 ---
 
 # Legacy Search
 
-* TOC
 {:toc}
 
 This is a listing of the Legacy Search API features from API v2 that have been ported to API
@@ -83,7 +82,7 @@ Name | Type | Description
 This API call is added for compatibility reasons only. There's no guarantee
 that full email searches will always be available. The `@` character in the
 address must be left unencoded. Searches only against public email addresses
-(as configured on the user's GitHub profile).
+(as configured on the user's {{ site.data.variables.product.product_name }} profile).
 
     GET /legacy/user/email/:email
 

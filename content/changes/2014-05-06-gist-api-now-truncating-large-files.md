@@ -1,7 +1,5 @@
 ---
-kind: change
 title: "Changes to Gist API response for large files"
-created_at: 2014-05-06
 author_name: leongersing
 ---
 

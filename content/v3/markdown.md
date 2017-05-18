@@ -1,10 +1,9 @@
 ---
-title: Markdown | GitHub API
+title: Markdown
 ---
 
 # Markdown
 
-* TOC
 {:toc}
 
 ## Render an arbitrary Markdown document
@@ -13,7 +12,7 @@ title: Markdown | GitHub API
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|---------------
 `text`|`string` | **Required**.The Markdown text to render
 `mode`|`string` | The rendering mode. Can be either:<br/>* `markdown` to render a document as plain Markdown, just like README files are rendered. <br/>* `gfm` to render a document as user-content, _e.g._ like user comments or issues are rendered. In GFM mode, hard line breaks are always taken into account, and issue and user mentions are linked accordingly.<br/> Default: `markdown`

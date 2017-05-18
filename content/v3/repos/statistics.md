@@ -1,13 +1,12 @@
 ---
-title: Statistics | GitHub API
+title: Statistics
 ---
 
 # Statistics
 
-* TOC
 {:toc}
 
-The Repository Statistics API allows you to fetch the data that GitHub uses for visualizing different
+The Repository Statistics API allows you to fetch the data that {{ site.data.variables.product.product_name }} uses for visualizing different
 types of repository activity.
 
 ### A word about caching
@@ -22,7 +21,8 @@ then submit the request again. If the job has completed, that request will recei
 Repository statistics are cached by the SHA of the repository's default branch,
 which is usually master; pushing to the default branch resets the statistics cache.
 
-## Get contributors list with additions, deletions, and commit counts {#contributors}
+<a id="contributors">
+## Get contributors list with additions, deletions, and commit counts
 
     GET /repos/:owner/:repo/stats/contributors
 
@@ -40,7 +40,9 @@ Weekly Hash (`weeks` array):
 <%= headers 200 %>
 <%= json(:repo_stats_contributors) %>
 
-## Get the last year of commit activity data {#commit-activity}
+<a id="commit-activity">
+
+## Get the last year of commit activity data
 
 Returns the last year of commit activity grouped by week.  The `days` array
 is a group of commits per day, starting on `Sunday`.
@@ -52,7 +54,9 @@ is a group of commits per day, starting on `Sunday`.
 <%= headers 200 %>
 <%= json(:repo_stats_commit_activity) %>
 
-## Get the number of additions and deletions per week {#code-frequency}
+<a id="code-frequency">
+
+## Get the number of additions and deletions per week
 
     GET /repos/:owner/:repo/stats/code_frequency
 
@@ -64,7 +68,9 @@ to a repository.
 <%= headers 200 %>
 <%= json(:repo_stats_code_frequency) %>
 
-## Get the weekly commit count for the repository owner and everyone else {#participation}
+<a id="participation">
+
+## Get the weekly commit count for the repository owner and everyone else
 
     GET /repos/:owner/:repo/stats/participation
 
@@ -79,7 +85,9 @@ The array order is oldest week (index 0) to most recent week.
 <%= headers 200 %>
 <%= json(:repo_stats_participation) %>
 
-## Get the number of commits per hour in each day {#punch-card}
+<a id="punch-card">
+
+## Get the number of commits per hour in each day
 
     GET /repos/:owner/:repo/stats/punch_card
 

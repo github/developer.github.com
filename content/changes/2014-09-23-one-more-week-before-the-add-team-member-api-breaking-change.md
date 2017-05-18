@@ -1,7 +1,5 @@
 ---
-kind: change
 title: One more week before the "Add team member" API breaking change
-created_at: 2014-09-23
 author_name: jakeboxer
 ---
 

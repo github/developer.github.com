@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Preview the New Deployments API
-created_at: 2014-01-09
 author_name: atmos
 ---
 

@@ -1,10 +1,9 @@
 ---
-title: Issue Assignees | GitHub API
+title: Issue Assignees
 ---
 
 # Assignees
 
-* TOC
 {:toc}
 
 ## List assignees
@@ -36,3 +35,33 @@ Otherwise a `404` status code is returned.
 <%= headers 404 %>
 
 [available assignees]: https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/
+
+## Add assignees to an Issue
+
+This call adds the users passed in the `assignees` key (as their logins) to the issue.
+
+    POST /repos/:owner/:repo/issues/:number/assignees
+
+### Input
+
+<%= json({"assignees" => %w(hubot other_assignee)}) %>
+
+### Response
+
+<%= headers 201 %>
+<%= json :issue_with_assignees %>
+
+## Remove assignees from an Issue
+
+This call removes the users passed in the `assignees` key (as their logins) from the issue.
+
+    DELETE /repos/:owner/:repo/issues/:number/assignees
+
+### Input
+
+<%= json({"assignees" => %w(hubot other_assignee)}) %>
+
+### Response
+
+<%= headers 200 %>
+<%= json :issue_with_assignees %>

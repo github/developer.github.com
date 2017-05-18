@@ -1,11 +1,9 @@
 ---
-kind: change
 title: Organization Webhooks API finalized
-created_at: 2015-04-21
 author_name: pengwynn
 ---
 
-After [four months in preview release][ann], the [Organization Webhooks API][docs] is now considered stable and ready for production use. 
+After [four months in preview release][ann], the [Organization Webhooks API][docs] is now considered stable and ready for production use.
 
 ### Preview media type no longer needed
 

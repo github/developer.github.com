@@ -1,10 +1,9 @@
 ---
-title: Gists | GitHub API
+title: Gists
 ---
 
 # Gists
 
-* TOC
 {:toc}
 
 ## Authentication
@@ -17,13 +16,15 @@ The API will return a 401 "Bad credentials" response if the gists scope was give
 
 ## Truncation
 
-The Gist API provides up to one megabyte of content for each file in the gist. Every call to retrieve a gist through the API has a key called `truncated`. If `truncated` is `true`, the file is too large and only a portion of the contents were returned in `content`.
+The Gist API provides up to one megabyte of content for each file in the gist. Each file returned for a gist through the API has a key called `truncated`. If `truncated` is `true`, the file is too large and only a portion of the contents were returned in `content`.
 
 If you need the full contents of the file, you can make a `GET` request to the URL specified by `raw_url`. Be aware that for files larger than ten megabytes, you'll need to clone the gist via the URL provided by `git_pull_url`.
 
-## List gists
+In addition to a specific file's contents being truncated, the entire files list may be truncated if the total number exceeds 300 files. If the top level `truncated` key is `true`, only the first 300 files have been returned in the files list. If you need to fetch all of the gist's files, you'll need to clone the gist via the URL provided by `git_pull_url`.
 
-List a user's gists:
+## List a user's gists
+
+List public gists for the specified user:
 
     GET /users/:username/gists
 
@@ -32,9 +33,37 @@ return all public gists:
 
     GET /gists
 
-List all public gists:
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:gist) { |h| [h] } %>
+
+## List all public gists
+
+List all public gists sorted by most recently updated to least recently updated.
+
+Note: With [pagination](/v3/#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
 
     GET /gists/public
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:gist) { |h| [h] } %>
+
+## List starred gists
 
 List the authenticated user's starred gists:
 
@@ -55,7 +84,9 @@ Name | Type | Description
 
     GET /gists/:id
 
-### Response {#detailed-gist-representation}
+<a id="detailed-gist-representation">
+
+### Response
 
 <%= headers 200 %>
 <%= json :full_gist %>
@@ -91,11 +122,11 @@ The keys in the `files` object are the `string` filename, and the value is anoth
   }
 %>
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally.
-	</p>
-</div>
+{{#tip}}
+
+**Note:** Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally.
+
+{{/tip}}
 
 ### Response
 
@@ -129,7 +160,7 @@ The keys in the `files` object are the `string` filename. The value is another `
 {{#tip}}
 
 <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the object. Deletes can be performed by including the filename with a <code>null</code> object.
-	
+
 {{/tip}}
 
 
@@ -182,11 +213,11 @@ The keys in the `files` object are the `string` filename. The value is another `
 
     POST /gists/:id/forks
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: This was previously <code>/gists/:id/fork</code>
-	</p>
-</div>
+{{#tip}}
+
+**Note**: This was previously `/gists/:id/fork`.
+
+{{/tip}}
 
 ### Response
 

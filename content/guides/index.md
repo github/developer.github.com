@@ -1,12 +1,12 @@
 ---
-title: Development Guides | GitHub API
+title: Development Guides
 layout: guides
 ---
 
 # Development Guides
 
 This section of the documentation is intended to get you up-and-running with
-real-world GitHub API applications. We'll cover everything you need to know, from
+real-world {{ site.data.variables.product.product_name }} API applications. We'll cover everything you need to know, from
 authentication, to manipulating results, to combining results with other services.
 
 Every tutorial here will have a project, and every project will be
@@ -15,4 +15,4 @@ stored and documented in our public
 
 Feel free to fork, clone, and improve these guides.
 
-![The Professorcat](/images/electrocat.png)
+![The Professorcat](/assets/images/electrocat.png)

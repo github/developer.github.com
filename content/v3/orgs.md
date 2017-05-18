@@ -1,10 +1,9 @@
 ---
-title: Organizations | GitHub API
+title: Organizations
 ---
 
 # Organizations
 
-* TOC
 {:toc}
 
 ## List your organizations
@@ -22,9 +21,11 @@ This only lists organizations that your authorization allows you to operate on i
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org) { |h| [h] } %>
 
+{% if page.version == 'dotcom' or page.version >= 2.3 %}
+
 ## List all organizations
 
-Lists all organizations, in the order that they were created on GitHub.
+Lists all organizations, in the order that they were created on {{ site.data.variables.product.product_name }}.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of
@@ -43,6 +44,8 @@ Name | Type | Description
 <%= headers 200, :pagination => { :next => 'https://api.github.com/organizations?since=135' } %>
 <%= json(:org) {|h| [h] } %>
 
+{% endif %}
+
 ## List user organizations
 
 List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
@@ -57,6 +60,12 @@ This method only lists *public* memberships, regardless of authentication. If yo
 <%= json(:org) { |h| [h] } %>
 
 ## Get an organization
+
+{% if page.version == 'dotcom' or page.version >= 2.8 %}
+Note: To receive values for `private_gists`, `disk_usage`, `collaborators`, and
+`billing_email` in the Organization response, the authenticated user must be an
+organization owner and have authorized the `admin:org` scope.
+{% endif %}
 
     GET /orgs/:org
 

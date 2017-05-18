@@ -1,10 +1,9 @@
 ---
-title: Watching | GitHub API
+title: Watching
 ---
 
 # Watching
 
-* TOC
 {:toc}
 
 Watching a Repository registers the user to receive notifications on new

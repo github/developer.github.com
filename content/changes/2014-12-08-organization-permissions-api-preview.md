@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Preview the upcoming organization permission changes
-created_at: 2014-12-08
 author_name: jakeboxer
 ---
 **UPDATE (2014-12-12):** The [List your organizations][list-your-organizations] API is now included in this preview as well.

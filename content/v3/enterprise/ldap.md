@@ -4,7 +4,6 @@ title: LDAP
 
 # LDAP
 
-* TOC
 {:toc}
 
 You can use the LDAP API to update account relationships between a GitHub Enterprise user or team and its linked LDAP entry or queue a new synchronization.
@@ -21,8 +20,9 @@ Pass a JSON payload with the new LDAP Distinguished Name.
 
 #### Example
 
-    #!javascript
-    '{"ldap_dn": "uid=asdf,ou=users,dc=github,dc=com"}'
+``` json
+'{"ldap_dn": "uid=asdf,ou=users,dc=github,dc=com"}'
+```
 
 ### Response
 
@@ -54,8 +54,9 @@ Pass a JSON payload with the new LDAP Distinguished Name.
 
 #### Example
 
-    #!javascript
-    '{"ldap_dn": "cn=Enterprise Ops,ou=teams,dc=github,dc=com"}'
+``` json
+'{"ldap_dn": "cn=Enterprise Ops,ou=teams,dc=github,dc=com"}'
+```
 
 ### Response
 

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Gist comment URIs
-created_at: 2012-10-31
 author_name: pezra
 ---
 

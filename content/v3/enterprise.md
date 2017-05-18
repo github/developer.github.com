@@ -1,10 +1,9 @@
 ---
-title: Enterprise | GitHub API
+title: Enterprise
 ---
 
-# Enterprise <%= fetch_content(:latest_enterprise_version) %>
+# Enterprise <%= config[:latest_enterprise_version] %>
 
-* TOC
 {:toc}
 
 [GitHub Enterprise](https://enterprise.github.com/) supports the same powerful API available on GitHub.com as well as its own set of API endpoints. You can find a list of these endpoints on the sidebar, with the exception of the [User Administration][] API, which is within its own section.
@@ -13,15 +12,15 @@ title: Enterprise | GitHub API
 
 All API endpoints—except [Management Console][] API endpoints—are prefixed with the following URL:
 
-<pre class="terminal">
+``` command-line
 http(s)://<em>hostname</em>/api/v3/
-</pre>
+```
 
 [Management Console][] API endpoints are only prefixed with a hostname:
 
-<pre class="terminal">
+``` command-line
 http(s)://<em>hostname</em>/
-</pre>
+```
 
 ## Authentication
 
@@ -34,16 +33,14 @@ Every Enterprise API endpoint is only accessible to GitHub Enterprise site admin
 [basic authentication]: /v3/#basic-authentication
 [Management Console]: /v3/enterprise/management_console/
 [User Administration]: /v3/users/administration/
-[Management Console password]: https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/
+[Management Console password]: https://help.github.com/enterprise/admin/articles/accessing-the-management-console/
 
-## Past Releases
+## Releases
 
-The latest release for GitHub Enterprise is <%= fetch_content(:latest_enterprise_version) %>. The GitHub APIs available to this release are located at <https://developer.github.com/enterprise/<%= fetch_content(:latest_enterprise_version) %>/>.
+The latest release for GitHub Enterprise is <%= config[:versions][0] %>. The GitHub APIs available to this release are located at <https://developer.github.com/enterprise/<%= config[:versions][0] %>/>.
 
-Documentation for the API that's bundled with your GitHub Enterprise appliance is available for past releases:
+Documentation for the API that's bundled with the GitHub Enterprise appliance is available for the following releases:
 
-* [API documentation for 2.3](https://developer.github.com/enterprise/2.3/)
-* [API documentation for 2.2](https://developer.github.com/enterprise/2.2/)
-* [API documentation for 2.1](https://developer.github.com/enterprise/2.1/)
-* [API documentation for 2.0](https://developer.github.com/enterprise/2.0/)
-* [API documentation for 11.10.340](https://developer.github.com/enterprise/11.10.340/)
+<% config[:versions][1..-1].each do |version| %>
+* [API documentation for <%= version %>](https://developer.github.com/enterprise/<%= version %>/)
+<% end %>

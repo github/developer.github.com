@@ -5,7 +5,7 @@ layout: libraries
 
 <div class="feature">
   <h1>Octokit comes in<br />
-many flavors</h1>
+many flavors and tastes</h1>
   <p class="intro">Use the official Octokit library, or choose between any of the available third party libraries.</p>
   <ul class="library-links">
     <li><span>Ruby</span><a href="https://github.com/octokit/octokit.rb">octokit.rb</a></li>

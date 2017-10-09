@@ -8,7 +8,7 @@ title: Basics of Authentication
 
 In this section, we're going to focus on the basics of authentication. Specifically,
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements
-the [web flow][webflow] of an application in several different ways.
+the [web flow][webflow] of an application in several different ways to easily automate.
 
 {{#tip}}
 

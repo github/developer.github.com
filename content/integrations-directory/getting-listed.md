@@ -1,8 +1,8 @@
 ---
-title: Getting listed in the Integrations Directory
+title: Getting listed in the Integrations Directory is easy to do
 ---
 
-# Getting your integration listed
+# Getting your integration listed 
 
 {:toc}
 
